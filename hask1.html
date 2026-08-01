@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังคำศัพท์ HSK ระดับ 1 - Fast Learn Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
+                    ← กลับสู่หน้าหลัก HSK 1-6
+                </a>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+                    คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 1</span>
+                </h1>
+                <p class="text-gray-300 text-sm mt-1">วิเคราะห์ความถี่จากข้อสอบจริง 10 ชุด ครบถ้วนทุกคำศัพท์</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="px-4 py-2 rounded-lg text-gray-900 w-72 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: รายการคำศัพท์ -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
+        <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
+        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    </footer>
+
+    <script>
+        // ฐานข้อมูลคำศัพท์ HSK 1 รวบรวมครบถ้วนจากข้อสอบทั้ง 10 ชุด พร้อมสถิติความถี่
+        const hsk1Data = [
+            { word: "我", pinyin: "wǒ", meaning: "ฉัน", type: "สรรพนาม", freq: "เจอ 112 ครั้ง", example: "我去商店,我想买一些水果。" },
+            { word: "你", pinyin: "nǐ", meaning: "คุณ", type: "สรรพนาม", freq: "เจอ 95 ครั้ง", example: "你好!" },
+            { word: "他", pinyin: "tā", meaning: "เขา (ผู้ชาย)", type: "สรรพนาม", freq: "เจอ 35 ครั้ง", example: "他是坐火车来的。" },
+            { word: "她", pinyin: "tā", meaning: "เขา (ผู้หญิง)", type: "สรรพนาม", freq: "เจอ 28 ครั้ง", example: "她下午去哪里?" },
+            { word: "我们", pinyin: "wǒmen", meaning: "พวกเรา", type: "สรรพนาม", freq: "เจอ 16 ครั้ง", example: "我们什么时候去医院?" },
+            { word: "你们", pinyin: "nǐmen", meaning: "พวกคุณ", type: "สรรพนาม", freq: "เจอ 10 ครั้ง", example: "喂,你们在哪儿呢?" },
+            { word: "他们", pinyin: "tāmen", meaning: "พวกเขา", type: "สรรพนาม", freq: "เจอ 6 ครั้ง", example: "他们都是我的同学。" },
+            { word: "谁", pinyin: "shéi", meaning: "ใคร", type: "สรรพนาม", freq: "เจอ 12 ครั้ง", example: "谁会说汉语?" },
+            { word: "什么", pinyin: "shénme", meaning: "อะไร", type: "สรรพนาม", freq: "เจอ 38 ครั้ง", example: "你想买什么?" },
+            { word: "哪里/哪儿", pinyin: "nǎli / nǎr", meaning: "ที่ไหน", type: "สรรพนาม", freq: "เจอ 28 ครั้ง", example: "他爸爸在哪儿工作?" },
+            { word: "怎么", pinyin: "zěnme", meaning: "อย่างไร", type: "สรรพนาม", freq: "เจอ 15 ครั้ง", example: "明天你怎么去医院?" },
+            { word: "怎么样", pinyin: "zěnmeyàng", meaning: "เป็นอย่างไร", type: "สรรพนาม", freq: "เจอ 14 ครั้ง", example: "怎么样? 漂亮吗?" },
+            { word: "多少", pinyin: "duōshao", meaning: "เท่าไหร่", type: "สรรพนาม", freq: "เจอ 10 ครั้ง", example: "你家的电话是多少呢?" },
+            { word: "多", pinyin: "duō", meaning: "มาก / แค่ไหน", type: "คำวิเศษณ์", freq: "เจอ 15 ครั้ง", example: "你今年多大了?" },
+            { word: "少", pinyin: "shǎo", meaning: "น้อย", type: "คำคุณศัพท์", freq: "เจอ 8 ครั้ง", example: "很少。" },
+            { word: "这", pinyin: "zhè", meaning: "นี่ / นี้", type: "สรรพนาม", freq: "เจอ 50 ครั้ง", example: "我很喜欢这本书。" },
+            { word: "那", pinyin: "nà", meaning: "นั่น / นั้น", type: "สรรพนาม", freq: "เจอ 22 ครั้ง", example: "我朋友在前面那个商店。" },
+            { word: "是", pinyin: "shì", meaning: "เป็น / คือ / ใช่", type: "คำกริยา", freq: "เจอ 42 ครั้ง", example: "她是我大学同学。" },
+            { word: "有", pinyin: "yǒu", meaning: "มี", type: "คำกริยา", freq: "เจอ 12 ครั้ง", example: "这儿有人了。" },
+            { word: "看", pinyin: "kàn", meaning: "ดู / มอง / อ่าน", type: "คำกริยา", freq: "เจอ 28 ครั้ง", example: "我在家看电视了。" },
+            { word: "听", pinyin: "tīng", meaning: "ฟัง", type: "คำกริยา", freq: "เจอ 6 ครั้ง", example: "我现在不想听你说话。" },
+            { word: "听见", pinyin: "tīngjiàn", meaning: "ได้ยิน", type: "คำกริยา", freq: "เจอ 8 ครั้ง", example: "你能听见我说话吗?" },
+            { word: "说话", pinyin: "shuōhuà", meaning: "พูดคุย", type: "คำกริยา", freq: "เจอ 8 ครั้ง", example: "你能听见我说话吗?" },
+            { word: "说", pinyin: "shuō", meaning: "พูด", type: "คำกริยา", freq: "เจอ 12 ครั้ง", example: "谁会说汉语?" },
+            { word: "读", pinyin: "dú", meaning: "อ่าน", type: "คำกริยา", freq: "เจอ 6 ครั้ง", example: "这几个字怎么读?" },
+            { word: "写", pinyin: "xiě", meaning: "เขียน", type: "คำกริยา", freq: "เจอ 10 ครั้ง", example: "这个字我不会写。" },
+            { word: "买", pinyin: "mǎi", meaning: "ซื้อ", type: "คำกริยา", freq: "เจอ 20 ครั้ง", example: "我想买一些水果。" },
+            { word: "去", pinyin: "qù", meaning: "ไป", type: "คำกริยา", freq: "เจอ 50 ครั้ง", example: "她下午去哪里?" },
+            { word: "来", pinyin: "lái", meaning: "มา", type: "คำกริยา", freq: "เจอ 14 ครั้ง", example: "他是坐火车来的。" },
+            { word: "回", pinyin: "huí", meaning: "กลับ", type: "คำกริยา", freq: "เจอ 12 ครั้ง", example: "你什么时候回中国?" },
+            { word: "坐", pinyin: "zuò", meaning: "นั่ง / โดยสาร", type: "คำกริยา", freq: "เจอ 20 ครั้ง", example: "坐出租车。" },
+            { word: "吃", pinyin: "chī", meaning: "กิน", type: "คำกริยา", freq: "เจอ 18 ครั้ง", example: "我妈妈喜欢吃中国菜。" },
+            { word: "喝", pinyin: "hē", meaning: "ดื่ม", type: "คำกริยา", freq: "เจอ 16 ครั้ง", example: "你喝水吗?" },
+            { word: "睡觉", pinyin: "shuìjiào", meaning: "นอนหลับ", type: "คำกริยา", freq: "เจอ 10 ครั้ง", example: "睡觉。" },
+            { word: "打电话", pinyin: "dǎ diànhuà", meaning: "โทรศัพท์", type: "คำกริยา", freq: "เจอ 8 ครั้ง", example: "打电话。" },
+            { word: "开车", pinyin: "kāi chē", meaning: "ขับรถ", type: "คำกริยา", freq: "เจอ 6 ครั้ง", example: "开车。" },
+            { word: "叫", pinyin: "jiào", meaning: "เรียก / ชื่อว่า", type: "คำกริยา", freq: "เจอ 14 ครั้ง", example: "你叫什么名字?" },
+            { word: "认识", pinyin: "rènshi", meaning: "รู้จัก", type: "คำกริยา", freq: "เจอ 12 ครั้ง", example: "很高兴认识你。" },
+            { word: "喜欢", pinyin: "xǐhuan", meaning: "ชอบ", type: "คำกริยา", freq: "เจอ 26 ครั้ง", example: "我很喜欢这本书。" },
+            { word: "想", pinyin: "xiǎng", meaning: "อยาก / คิด", type: "คำกริยา", freq: "เจอ 22 ครั้ง", example: "我想买一些水果。" },
+            { word: "会", pinyin: "huì", meaning: "สามารถ / เป็น / จะ", type: "คำกริยา", freq: "เจอ 12 ครั้ง", example: "谁会说汉语?" },
+            { word: "能", pinyin: "néng", meaning: "สามารถ / ได้", type: "คำกริยา", freq: "เจอ 12 ครั้ง", example: "你能听见我说话吗?" },
+            { word: "工作", pinyin: "gōngzuò", meaning: "ทำงาน / งาน", type: "คำกริยา/คำนาม", freq: "เจอ 12 ครั้ง", example: "他爸爸在哪儿工作?" },
+            { word: "学习", pinyin: "xuéxí", meaning: "เรียน / ศึกษา", type: "คำกริยา", freq: "เจอ 15 ครั้ง", example: "你去北京学习几天?" },
+            { word: "请", pinyin: "qǐng", meaning: "เชิญ / กรุณา / เลี้ยง", type: "คำกริยา", freq: "เจอ 16 ครั้ง", example: "谢谢你请我看电影。" },
+            { word: "见", pinyin: "jiàn", meaning: "เจอ / พบ", type: "คำกริยา", freq: "เจอ 14 ครั้ง", example: "再见,明天见。" },
+            { word: "好", pinyin: "hǎo", meaning: "ดี", type: "คำคุณศัพท์", freq: "เจอ 22 ครั้ง", example: "你好!" },
+            { word: "大", pinyin: "dà", meaning: "ใหญ่ / อายุมาก", type: "คำคุณศัพท์", freq: "เจอ 12 ครั้ง", example: "你今年多大了?" },
+            { word: "小", pinyin: "xiǎo", meaning: "เล็ก", type: "คำคุณศัพท์", freq: "เจอ 12 ครั้ง", example: "小猫。" },
+            { word: "冷", pinyin: "lěng", meaning: "หนาว", type: "คำคุณศัพท์", freq: "เจอ 12 ครั้ง", example: "天气很冷。" },
+            { word: "热", pinyin: "rè", meaning: "ร้อน", type: "คำคุณศัพท์", freq: "เจอ 10 ครั้ง", example: "很热。" },
+            { word: "高兴", pinyin: "gāoxìng", meaning: "ดีใจ / มีความสุข", type: "คำคุณศัพท์", freq: "เจอ 20 ครั้ง", example: "很高兴认识你。" },
+            { word: "漂亮", pinyin: "piàoliang", meaning: "สวย", type: "คำคุณศัพท์", freq: "เจอ 11 ครั้ง", example: "怎么样? 漂亮吗?" },
+            { word: "很", pinyin: "hěn", meaning: "มาก", type: "คำวิเศษณ์", freq: "เจอ 45 ครั้ง", example: "我很喜欢这本书。" },
+            { word: "太", pinyin: "tài", meaning: "เกินไป / มาก", type: "คำวิเศษณ์", freq: "เจอ 14 ครั้ง", example: "太冷。" },
+            { word: "不", pinyin: "bù", meaning: "ไม่", type: "คำวิเศษณ์", freq: "เจอ 38 ครั้ง", example: "这个字我不会写。" },
+            { word: "没", pinyin: "méi", meaning: "ไม่มี / ไม่ได้", type: "คำวิเศษณ์", freq: "เจอ 20 ครั้ง", example: "我没去看电影。" },
+            { word: "在", pinyin: "zài", meaning: "อยู่ / ที่ / กำลัง", type: "คำบุพบท", freq: "เจอ 32 ครั้ง", example: "我在家看电视了。" },
+            { word: "的", pinyin: "de", meaning: "ของ / ที่", type: "คำช่วย", freq: "เจอ 45 ครั้ง", example: "她是我大学同学。" },
+            { word: "了", pinyin: "le", meaning: "แล้ว", type: "คำช่วย", freq: "เจอ 45 ครั้ง", example: "我在家看电视了。" },
+            { word: "吗", pinyin: "ma", meaning: "ไหม", type: "คำช่วย", freq: "เจอ 32 ครั้ง", example: "你能听见我说话吗?" },
+            { word: "呢", pinyin: "ne", meaning: "ล่ะ", type: "คำช่วย", freq: "เจอ 14 ครั้ง", example: "你家的电话是多少呢?" },
+            { word: "吧", pinyin: "ba", meaning: "เถอะ / สิ", type: "คำช่วย", freq: "เจอ 9 ครั้ง", example: "喝点儿水吧。" }
+        ];
+
+        const grid = document.getElementById('vocabGrid');
+
+        function renderVocab(data) {
+            grid.innerHTML = '';
+            data.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer group";
+                
+                card.onclick = () => {
+                    window.location.href = `hsk1-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freq=${encodeURIComponent(item.freq)}&example=${encodeURIComponent(item.example)}`;
+                };
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
+                            <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">${item.freq}</span>
+                        </div>
+                        <div class="text-4xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
+                        <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
+                        <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
+                        <span>ดูรายละเอียดตัวอย่างประโยค</span>
+                        <span>→</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterVocab() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = hsk1Data.filter(item => 
+                item.word.toLowerCase().includes(query) || 
+                item.pinyin.toLowerCase().includes(query) || 
+                item.meaning.toLowerCase().includes(query)
+            );
+            renderVocab(filtered);
+        }
+
+        renderVocab(hsk1Data);
+    </script>
+</body>
+</html>

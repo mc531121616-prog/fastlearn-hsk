@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังคำศัพท์ HSK ระดับ 1 - Fast Learn Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
+                    ← กลับสู่หน้าหลัก HSK 1-6
+                </a>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+                    คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 1</span> (115 คำ)
+                </h1>
+                <p class="text-gray-300 text-sm mt-1">วิเคราะห์ความถี่และชุดข้อสอบจริง 10 ชุด (H11006 - H11223)</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="px-4 py-2 rounded-lg text-gray-900 w-72 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: รายการคำศัพท์ -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
+        <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
+        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    </footer>
+
+    <script>
+        // ฐานข้อมูลคำศัพท์ HSK 1 ทั้ง 115 คำ พร้อมตัวอย่างประโยคจากข้อสอบจริง
+        const hsk1Data = [
+            { id: 1, word: "我", pinyin: "wǒ", meaning: "ฉัน", type: "สรรพนาม", freqTotal: 118, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我去商店,我想买一些水果。 (Wǒ qù shāngdiàn, wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันไปร้านค้า ฉันอยากซื้อผลไม้)" },
+            { id: 2, word: "你", pinyin: "nǐ", meaning: "คุณ", type: "สรรพนาม", freqTotal: 100, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你好! (Nǐ hǎo! - สวัสดี!)" },
+            { id: 3, word: "他", pinyin: "tā", meaning: "เขา (ผู้ชาย)", type: "สรรพนาม", freqTotal: 37, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "他爸爸在哪儿工作? (Tā bàba zài nǎr gōngzuò? - พ่อของเขาทำงานอยู่ที่ไหน?)" },
+            { id: 4, word: "她", pinyin: "tā", meaning: "เขา (ผู้หญิง)", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她下午去哪里? (Tā xiàwǔ qù nǎlǐ? - ช่วงบ่ายเธอไปไหน?)" },
+            { id: 5, word: "我们", pinyin: "wǒmen", meaning: "พวกเรา", type: "สรรพนาม", freqTotal: 16, setsFound: "H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我们什么时候去医院? (Wǒmen shénme shíhou qù yīyuàn? - พวกเราจะไปโรงพยาบาลตอนไหน?)" },
+            { id: 6, word: "你们", pinyin: "nǐmen", meaning: "พวกคุณ", type: "สรรพนาม", freqTotal: 9, setsFound: "H11112, H11113, H11220, H11221, H11222, H11223", example: "喂,你们在哪儿呢? (Wèi, nǐmen zài nǎr ne? - ฮัลโหล พวกคุณอยู่ที่ไหนกัน?)" },
+            { id: 7, word: "他们", pinyin: "tāmen", meaning: "พวกเขา", type: "สรรพนาม", freqTotal: 2, setsFound: "H11007, H11112", example: "他们都是我的同学。(Tāmen dōu shì wǒ de tóngxué. - พวกเขาล้วนเป็นเพื่อนร่วมชั้นของฉัน)" },
+            { id: 8, word: "谁", pinyin: "shéi", meaning: "ใคร", type: "สรรพนาม", freqTotal: 13, setsFound: "H11006, H11008, H11112, H11113, H11220, H11221, H11222, H11223", example: "谁会说汉语? (Shéi huì shuō Hànyǔ? - ใครพูดภาษาจีนได้?)" },
+            { id: 9, word: "什么", pinyin: "shénme", meaning: "อะไร", type: "สรรพนาม", freqTotal: 29, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你想买什么? (Nǐ xiǎng mǎi shénme? - คุณอยากซื้ออะไร?)" },
+            { id: 10, word: "哪里/哪儿", pinyin: "nǎli / nǎr", meaning: "ที่ไหน", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你去哪儿? (Nǐ qù nǎr? - คุณไปไหน?)" },
+            { id: 11, word: "怎么", pinyin: "zěnme", meaning: "อย่างไร", type: "สรรพนาม", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221, H11223", example: "明天你怎么去医院? (Míngtiān nǐ zěnme qù yīyuàn? - พรุ่งนี้คุณไปโรงพยาบาลอย่างไร?)" },
+            { id: 12, word: "怎么样", pinyin: "zěnmeyàng", meaning: "เป็นอย่างไร", type: "สรรพนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221", example: "昨天天气怎么样? (Zuótiān tiānqì zěnmeyàng? - อากาศเมื่อวานนี้เป็นอย่างไร?)" },
+            { id: 13, word: "多少", pinyin: "duōshao", meaning: "เท่าไหร่", type: "สรรพนาม", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009, H11112, H11221", example: "这个菜多少钱? (Zhège cài duōshao qián? - กับข้าวนี้ราคาเท่าไหร่?)" },
+            { id: 14, word: "多", pinyin: "duō", meaning: "มาก / แค่ไหน", type: "คำวิเศษณ์", freqTotal: 11, setsFound: "H11006, H11008, H11009, H11112, H11220, H11221, H11223", example: "你今年多大了? (Nǐ jīnnián duō dà le? - ปีนี้คุณอายุเท่าไหร่แล้ว?)" },
+            { id: 15, word: "少", pinyin: "shǎo", meaning: "น้อย", type: "คำคุณศัพท์", freqTotal: 5, setsFound: "H11007, H11008, H11009, H11113, H11223", example: "我的东西不多,很少。(Wǒ de dōngxi bù duō, hěn shǎo. - ของของฉันมีไม่มาก น้อยมาก)" },
+            { id: 16, word: "这/这儿", pinyin: "zhè / zhèr", meaning: "นี่ / ที่นี่", type: "สรรพนาม", freqTotal: 50, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
+            { id: 17, word: "那/那儿", pinyin: "nà / nàr", meaning: "นั่น / ที่นั่น", type: "สรรพนาม", freqTotal: 22, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我朋友在那个商店。(Wǒ péngyou zài nàge shāngdiàn. - เพื่อนของฉันอยู่ที่ร้านค้านั้น)" },
+            { id: 18, word: "是", pinyin: "shì", meaning: "เป็น / คือ / ใช่", type: "คำกริยา", freqTotal: 39, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她是我大学同学。(Tā shì wǒ dàxué tóngxué. - เธอเป็นเพื่อนร่วมมหาวิทยาลัยของฉัน)" },
+            { id: 19, word: "有", pinyin: "yǒu", meaning: "มี", type: "คำกริยา", freqTotal: 6, setsFound: "H11112, H11113, H11220, H11221, H11222, H11223", example: "这儿有人了。(Zhèr yǒu rén le. - ที่นี่มีคนแล้ว)" },
+            { id: 20, word: "看", pinyin: "kàn", meaning: "ดู / มอง / อ่าน", type: "คำกริยา", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
+            { id: 21, word: "听", pinyin: "tīng", meaning: "ฟัง", type: "คำกริยา", freqTotal: 3, setsFound: "H11009, H11112, H11220", example: "我现在不想听你说话。(Wǒ xiànzài bù xiǎng tīng nǐ shuōhuà. - ตอนนี้ฉันไม่อยากฟังคุณพูด)" },
+            { id: 22, word: "听见", pinyin: "tīngjiàn", meaning: "ได้ยิน", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008, H11112, H11113", example: "你能听见我说话吗? (Nǐ néng tīngjiàn wǒ shuōhuà ma? - คุณได้ยินที่ฉันพูดไหม?)" },
+            { id: 23, word: "说话", pinyin: "shuōhuà", meaning: "พูดคุย", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008, H11112, H11221", example: "我现在不想听你说话。(Wǒ xiànzài bù xiǎng tīng nǐ shuōhuà. - ตอนนี้ฉันไม่อยากฟังคุณพูด)" },
+            { id: 24, word: "说", pinyin: "shuō", meaning: "พูด", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11112, H11113, H11221, H11223", example: "王小姐怎么说? (Wáng xiǎojiě zěnme shuō? - คุณผู้หญิงหวังว่าอย่างไร?)" },
+            { id: 25, word: "读", pinyin: "dú", meaning: "อ่าน", type: "คำกริยา", freqTotal: 5, setsFound: "H11008, H11009, H11112, H11113, H11223", example: "这几个字怎么读? (Zhè jǐ ge zì zěnme dú? - ตัวอักษรเหล่านี้อ่านอย่างไร?)" },
+            { id: 26, word: "写", pinyin: "xiě", meaning: "เขียน", type: "คำกริยา", freqTotal: 8, setsFound: "H11006, H11008, H11009, H11112, H11113, H11222, H11223", example: "这个字我不会写。(Zhège zì wǒ bú huì xiě. - ตัวอักษรนี้ฉันเขียนไม่เป็น)" },
+            { id: 27, word: "买", pinyin: "mǎi", meaning: "ซื้อ", type: "คำกริยา", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
+            { id: 28, word: "去", pinyin: "qù", meaning: "ไป", type: "คำกริยา", freqTotal: 47, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她下午去哪里? (Tā xiàwǔ qù nǎlǐ? - ช่วงบ่ายเธอไปไหน?)" },
+            { id: 29, word: "来", pinyin: "lái", meaning: "มา", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "他是坐火车来的。(Tā shì zuò huǒchē lái de. - เขามาโดยรถไฟ)" },
+            { id: 30, word: "回/回家", pinyin: "huí / huíjiā", meaning: "กลับ / กลับบ้าน", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11113, H11221, H11222, H11223", example: "你什么时候回中国? (Nǐ shénme shíhou huí Zhōngguó? - คุณจะกลับประเทศจีนเมื่อไหร่?)" },
+            { id: 31, word: "坐", pinyin: "zuò", meaning: "นั่ง / โดยสาร", type: "คำกริยา", freqTotal: 21, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "明天你怎么去医院?坐出租车。(Míngtiān nǐ zěnme qù yīyuàn? Zuò chūzūchē. - พรุ่งนี้คุณไปโรงพยาบาลอย่างไร? นั่งแท็กซี่ไป)" },
+            { id: 32, word: "住", pinyin: "zhù", meaning: "พัก / อาศัย", type: "คำกริยา", freqTotal: 7, setsFound: "H11008, H11009, H11112, H11113, H11220, H11221", example: "你们现在住哪儿? (Nǐmen xiànzài zhù nǎr? - ตอนนี้พวกคุณพักอยู่ที่ไหน?)" },
+            { id: 33, word: "喝", pinyin: "hē", meaning: "ดื่ม", type: "คำกริยา", freqTotal: 15, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你喝水吗? (Nǐ hē shuǐ ma? - คุณดื่มน้ำไหม?)" },
+            { id: 34, word: "吃", pinyin: "chī", meaning: "กิน", type: "คำกริยา", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我们今天吃米饭怎么样? (Wǒmen jīntiān chī mǐfàn zěnmeyàng? - พวกเรากินข้าวสวยกันวันนี้เป็นอย่างไร?)" },
+            { id: 35, word: "睡觉", pinyin: "shuìjiào", meaning: "นอนหลับ", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我想去睡觉。(Wǒ xiǎng qù shuìjiào. - ฉันอยากไปนอนหลับ)" },
+            { id: 36, word: "打电话", pinyin: "dǎ diànhuà", meaning: "โทรศัพท์", type: "คำกริยา", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11112, H11220, H11221", example: "打电话 (dǎ diànhuà - โทรศัพท์)" },
+            { id: 37, word: "开车", pinyin: "kāichē", meaning: "ขับรถ", type: "คำกริยา", freqTotal: 5, setsFound: "H11006, H11008, H11009, H11220, H11221", example: "你开车去那儿? (Nǐ kāichē qù nàr? - คุณขับรถไปที่นั่นเหรอ?)" },
+            { id: 38, word: "做", pinyin: "zuò", meaning: "ทำ", type: "คำกริยา", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221", example: "我做的菜怎么样? (Wǒ zuò de cài zěnmeyàng? - กับข้าวที่ฉันทำเป็นอย่างไรบ้าง?)" },
+            { id: 39, word: "叫", pinyin: "jiào", meaning: "เรียก / ชื่อว่า", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你叫什么名字? (Nǐ jiào shénme míngzi? - คุณชื่ออะไร?)" },
+            { id: 40, word: "认识", pinyin: "rènshi", meaning: "รู้จัก", type: "คำกริยา", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "很高兴认识你。(Hěn gāoxìng rènshi nǐ. - ยินดีที่ได้รู้จักคุณ)" },
+            { id: 41, word: "喜欢", pinyin: "xǐhuan", meaning: "ชอบ", type: "คำกริยา", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
+            { id: 42, word: "想", pinyin: "xiǎng", meaning: "อยาก / คิด", type: "คำกริยา", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
+            { id: 43, word: "爱", pinyin: "ài", meaning: "รัก / ชอบ", type: "คำกริยา", freqTotal: 5, setsFound: "H11008, H11112, H11221, H11223", example: "你爱吃苹果吗? (Nǐ ài chī píngguǒ ma? - คุณชอบกินแอปเปิ้ลไหม?)" },
+            { id: 44, word: "会", pinyin: "huì", meaning: "สามารถ / เป็น / จะ", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11223", example: "谁会说汉语? (Shéi huì shuō Hànyǔ? - ใครพูดภาษาจีนได้?)" },
+            { id: 45, word: "能", pinyin: "néng", meaning: "สามารถ / ได้", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "你能听见我说话吗? (Nǐ néng tīngjiàn wǒ shuōhuà ma? - คุณได้ยินที่ฉันพูดไหม?)" },
+            { id: 46, word: "工作", pinyin: "gōngzuò", meaning: "ทำงาน / งาน", type: "คำกริยา/คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11222, H11223", example: "他爸爸在哪儿工作? (Tā bàba zài nǎr gōngzuò? - พ่อของเขาทำงานอยู่ที่ไหน?)" },
+            { id: 47, word: "学习", pinyin: "xuéxí", meaning: "เรียน / ศึกษา", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11009, H11112, H11113, H11220, H11221, H11223", example: "你去北京学习几天? (Nǐ qù Běijīng xuéxí jǐ tiān? - คุณไปเรียนที่ปักกิ่งกี่วัน?)" },
+            { id: 48, word: "请", pinyin: "qǐng", meaning: "เชิญ / กรุณา / เลี้ยง", type: "คำกริยา", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "谢谢你请我看电影。(Xièxie nǐ qǐng wǒ kàn diànyǐng. - ขอบคุณที่คุณเลี้ยงดูภาพยนตร์ฉัน)" },
+            { id: 49, word: "见", pinyin: "jiàn", meaning: "เจอ / พบ", type: "คำกริยา", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "再见,明天见。(Zàijiàn, míngtiān jiàn. - ลาแล้ว เจอกันพรุ่งนี้)" },
+            { id: 50, word: "下雨", pinyin: "xiàyǔ", meaning: "ฝนตก", type: "คำกริยา", freqTotal: 5, setsFound: "H11007, H11220, H11221, H11222", example: "下雨了,你们冷吗? (Xiàyǔ le, nǐmen lěng ma? - ฝนตกแล้ว พวกคุณหนาวไหม?)" },
+            { id: 51, word: "好", pinyin: "hǎo", meaning: "ดี", type: "คำคุณศัพท์", freqTotal: 19, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你好! (Nǐ hǎo! - สวัสดี!)" },
+            { id: 52, word: "高", pinyin: "gāo", meaning: "สูง", type: "คำคุณศัพท์", freqTotal: 1, setsFound: "H11008", example: "很高 (Hěn gāo - สูงมาก)" },
+            { id: 53, word: "大", pinyin: "dà", meaning: "ใหญ่ / อายุมาก", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11006, H11009, H11112, H11220, H11222, H11223", example: "你今年多大了? (Nǐ jīnnián duō dà le? - ปีนี้คุณอายุเท่าไหร่แล้ว?)" },
+            { id: 54, word: "小", pinyin: "xiǎo", meaning: "เล็ก", type: "คำคุณศัพท์", freqTotal: 10, setsFound: "H11007, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "小猫 (Xiǎo māo - แมวตัวเล็ก)" },
+            { id: 55, word: "冷", pinyin: "lěng", meaning: "หนาว", type: "คำคุณศัพท์", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "天气很冷。(Tiānqì hěn lěng. - อากาศหนาวมาก)" },
+            { id: 56, word: "热", pinyin: "rè", meaning: "ร้อน", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11007, H11008, H11009, H11112, H11220, H11221", example: "很热。(Hěn rè. - ร้อนมาก)" },
+            { id: 57, word: "高兴", pinyin: "gāoxìng", meaning: "ดีใจ / มีความสุข", type: "คำคุณศัพท์", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "很高兴认识你。(Hěn gāoxìng rènshi nǐ. - ยินดีที่ได้รู้จักคุณ)" },
+            { id: 58, word: "漂亮", pinyin: "piàoliang", meaning: "สวย", type: "คำคุณศัพท์", freqTotal: 9, setsFound: "H11006, H11008, H11009, H11112, H11113, H11221", example: "怎么样?漂亮吗? (Zěnmeyàng? Piàoliang ma? - เป็นอย่างไร? สวยไหม?)" },
+            { id: 59, word: "客气", pinyin: "kèqi", meaning: "เกรงใจ", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11008, H11009, H11112, H11113, H11220, H11221", example: "不客气。(Bú kèqi. - ด้วยความยินดี)" },
+            { id: 60, word: "很", pinyin: "hěn", meaning: "มาก", type: "คำวิเศษณ์", freqTotal: 39, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
+            { id: 61, word: "太", pinyin: "tài", meaning: "เกินไป / มาก", type: "คำวิเศษณ์", freqTotal: 8, setsFound: "H11007, H11008, H11009, H11112, H11113, H11220, H11221", example: "太冷,请坐前面。(Tài lěng, qǐng zuò qiánmiàn. - หนาวเกินไป เชิญนั่งด้านหน้า)" },
+            { id: 62, word: "都", pinyin: "dōu", meaning: "ล้วน / ทั้งหมด", type: "คำวิเศษณ์", freqTotal: 2, setsFound: "H11112", example: "我们都坐飞机去。(Wǒmen dōu zuò fēijī qù. - พวกเราล้วนโดยสารเครื่องบินไป)" },
+            { id: 63, word: "不", pinyin: "bù", meaning: "ไม่", type: "คำวิเศษณ์", freqTotal: 32, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "这个字我不会写。(Zhège zì wǒ bú huì xiě. - ตัวอักษรนี้ฉันเขียนไม่เป็น)" },
+            { id: 64, word: "没 / 没有", pinyin: "méi / méiyǒu", meaning: "ไม่มี / ไม่ได้", type: "คำวิเศษณ์", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222, H11223", example: "我没去看电影。(Wǒ méi qù kàn diànyǐng. - ฉันไม่ได้ไปดูภาพยนตร์)" },
+            { id: 65, word: "在", pinyin: "zài", meaning: "อยู่ / ที่ / กำลัง", type: "คำบุพบท/คำวิเศษณ์", freqTotal: 22, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221, H11223", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
+            { id: 66, word: "和", pinyin: "hé", meaning: "และ / กับ", type: "คำสันธาน", freqTotal: 5, setsFound: "H11008, H11112, H11113, H11222", example: "下个月,她和朋友去。(Xià gè yuè, tā hé péngyou qù. - เดือนหน้า เธอและเพื่อนจะไป)" },
+            { id: 67, word: "的", pinyin: "de", meaning: "ของ / ที่", type: "คำช่วย", freqTotal: 43, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她是我大学同学。(Tā shì wǒ dàxué tóngxué. - เธอเป็นเพื่อนร่วมมหาวิทยาลัยของฉัน)" },
+            { id: 68, word: "了", pinyin: "le", meaning: "แล้ว", type: "คำช่วย", freqTotal: 35, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
+            { id: 69, word: "吗", pinyin: "ma", meaning: "ไหม", type: "คำช่วย", freqTotal: 28, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你能听见我说话吗? (Nǐ néng tīngjiàn wǒ shuōhuà ma? - คุณได้ยินที่ฉันพูดไหม?)" },
+            { id: 70, word: "呢", pinyin: "ne", meaning: "ล่ะ", type: "คำช่วย", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "你家的电话是多少呢? (Nǐ jiā de diànhuà shì duōshao ne? - เบอร์โทรศัพท์บ้านของคุณคือเบอร์อะไรล่ะ?)" },
+            { id: 71, word: "吧", pinyin: "ba", meaning: "เถอะ / สิ", type: "คำช่วย", freqTotal: 5, setsFound: "H11006, H11007, H11008, H11009, H11113", example: "喝点儿水吧。(Hē diǎnr shuǐ ba. - ดื่มน้ำหน่อยเถอะ)" },
+            { id: 72, word: "人", pinyin: "rén", meaning: "คน", type: "คำนาม", freqTotal: 7, setsFound: "H11008, H11009, H11112, H11113, H11220, H11222", example: "买椅子的那个人是谁? (Mǎi yǐzi de nà gè rén shì shéi? - คนที่ซื้อเก้าอี้คือนั้นใคร?)" },
+            { id: 73, word: "爸爸", pinyin: "bàba", meaning: "พ่อ", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "他爸爸在哪儿工作? (Tā bàba zài nǎr gōngzuò? - พ่อของเขาทำงานอยู่ที่ไหน?)" },
+            { id: 74, word: "妈妈", pinyin: "māma", meaning: "แม่", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "她是我妈妈的朋友。(Tā shì wǒ māma de péngyou. - เธอเป็นเพื่อนของแม่ฉัน)" },
+            { id: 75, word: "儿子", pinyin: "érzi", meaning: "ลูกชาย", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "儿子的老师 (Érzi de lǎoshī - คุณครูของลูกชาย)" },
+            { id: 76, word: "女儿", pinyin: "nǚ'ér", meaning: "ลูกสาว", type: "คำนาม", freqTotal: 6, setsFound: "H11008, H11009, H11112, H11113, H11220", example: "他的女儿现在在火车站。(Tā de nǚ'ér xiànzài zài huǒchēzhàn. - ลูกสาวของเขาตอนนี้อยู่ที่สถานีรถไฟ)" },
+            { id: 77, word: "朋友", pinyin: "péngyou", meaning: "เพื่อน", type: "คำนาม", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "她是我is妈妈的朋友。(Tā shì wǒ māma de péngyou. - เธอเป็นเพื่อนของแม่ฉัน)" },
+            { id: 78, word: "先生", pinyin: "xiānsheng", meaning: "คุณผู้ชาย", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009, H11113, H11222", example: "钱先生 (Qián xiānsheng - คุณเฉียน)" },
+            { id: 79, word: "小姐", pinyin: "xiǎojiě", meaning: "คุณผู้หญิง", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11113, H11221", example: "王小姐 (Wáng xiǎojiě - คุณผู้หญิงหวัง)" },
+            { id: 80, word: "老师", pinyin: "lǎoshī", meaning: "ครู", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11009, H11113, H11220, H11221, H11222", example: "儿子的老师 (Érzi de lǎoshī - คุณครูของลูกชาย)" },
+            { id: 81, word: "学生", pinyin: "xuésheng", meaning: "นักเรียน", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221", example: "有学生在后面叫她。(Yǒu xuésheng zài hòumiàn jiào tā. - มีนักเรียนเรียกเธออยู่ข้างหลัง)" },
+            { id: 82, word: "同学", pinyin: "tóngxué", meaning: "เพื่อนนักเรียน", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "她是我大学同学。(Tā shì wǒ dàxué tóngxué. - เธอเป็นเพื่อนร่วมมหาวิทยาลัยของฉัน)" },
+            { id: 83, word: "医生", pinyin: "yīshēng", meaning: "หมอ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11222", example: "我妈妈是医生。(Wǒ māma shì yīshēng. - แม่ของฉันเป็นหมอ)" },
+            { id: 84, word: "水", pinyin: "shuǐ", meaning: "น้ำ", type: "คำนาม", freqTotal: 16, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "喝点儿水吧。(Hē diǎnr shuǐ ba. - ดื่มน้ำหน่อยเถอะ)" },
+            { id: 85, word: "菜", pinyin: "cài", meaning: "กับข้าว / ผัก", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11113, H11220, H11221, H11222", example: "我妈妈喜欢吃中国菜。(Wǒ māma xǐhuan chī Zhōngguó cài. - แม่ของฉันชอบกินอาหารจีน)" },
+            { id: 86, word: "水果", pinyin: "shuǐguǒ", meaning: "ผลไม้", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
+            { id: 87, word: "苹果", pinyin: "píngguǒ", meaning: "แอปเปิ้ล", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11008, H11009, H11112, H11113, H11221", example: "爸爸吃苹果。(Bàba chī píngguǒ. - คุณพ่อกินแอปเปิ้ล)" },
+            { id: 88, word: "米饭", pinyin: "mǐfàn", meaning: "ข้าวสวย", type: "คำนาม", freqTotal: 8, setsFound: "H11007, H11008, H11009, H11112, H11113, H11221, H11223", example: "米饭在桌子上。(Mǐfàn zài zhuōzi shàng. - ข้าวสวยอยู่บนโต๊ะ)" },
+            { id: 89, word: "茶", pinyin: "chá", meaning: "ชา", type: "คำนาม", freqTotal: 3, setsFound: "H11221, H11223", example: "喝茶 (hē chá - ดื่มชา)" },
+            { id: 90, word: "杯子", pinyin: "bēizi", meaning: "แก้ว", type: "คำนาม", freqTotal: 4, setsFound: "H11006, H11220, H11221, H11222", example: "这个杯子里没有水。(Zhège bēizi lǐ méiyǒu shuǐ. - ในแก้วนี้ไม่มีน้ำ)" },
+            { id: 91, word: "衣服", pinyin: "yīfu", meaning: "เสื้อผ้า", type: "คำนาม", freqTotal: 4, setsFound: "H11008, H11009, H11112, H11221", example: "椅子上的衣服是你的吗? (Yǐzi shàng de yīfu shì nǐ de ma? - เสื้อผ้าบนเก้าอี้เป็นของคุณเหรอ?)" },
+            { id: 92, word: "书", pinyin: "shū", meaning: "หนังสือ", type: "คำนาม", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
+            { id: 93, word: "电视", pinyin: "diànshì", meaning: "โทรทัศน์", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
+            { id: 94, word: "电影", pinyin: "diànyǐng", meaning: "ภาพยนตร์", type: "คำนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "谢谢你请我看电影。(Xièxie nǐ qǐng wǒ kàn diànyǐng. - ขอบคุณที่คุณเลี้ยงดูภาพยนตร์ฉัน)" },
+            { id: 95, word: "电脑", pinyin: "diànnǎo", meaning: "คอมพิวเตอร์", type: "คำนาม", freqTotal: 5, setsFound: "H11113, H11220, H11221, H11222", example: "买电脑?你和谁去? (Mǎi diànnǎo? Nǐ hé shéi qù? - ซื้อคอมพิวเตอร์เหรอ? คุณไปกับใคร?)" },
+            { id: 96, word: "电话", pinyin: "diànhuà", meaning: "โทรศัพท์", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11112, H11113, H11221", example: "你家的电话是多少呢? (Nǐ jiā de diànhuà shì duōshao ne? - เบอร์โทรศัพท์บ้านของคุณคือเบอร์อะไรล่ะ?)" },
+            { id: 97, word: "桌子", pinyin: "zhuōzi", meaning: "โต๊ะ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "米饭在桌子上。(Mǐfàn zài zhuōzi shàng. - ข้าวสวยอยู่บนโต๊ะ)" },
+            { id: 98, word: "椅子", pinyin: "yīzi", meaning: "เก้าอี้", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11112, H11113, H11221, H11222", example: "小狗在椅子后面。(Xiǎogōu zài yīzi hòumiàn. - สุนัขตัวน้อยอยู่ด้านหลังเก้าอี้)" },
+            { id: 99, word: "名字", pinyin: "míngzi", meaning: "ชื่อ", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221, H11222", example: "你叫什么名字? (Nǐ jiào shénme míngzi? - คุณชื่ออะไร?)" },
+            { id: 100, word: "汉语", pinyin: "Hànyǔ", meaning: "ภาษาจีน", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11113, H11221, H11222", example: "谁会说汉语? (Shéi huì shuō Hànyǔ? - ใครพูดภาษาจีนได้?)" },
+            { id: 101, word: "汉字", pinyin: "Hànzì", meaning: "อักษรจีน", type: "คำนาม", freqTotal: 1, setsFound: "H11008", example: "你会写多少个汉字? (Nǐ huì xiě duōshao gè Hànzì? - คุณเขียนอักษรจีนได้กี่ตัว?)" },
+            { id: 102, word: "字", pinyin: "zì", meaning: "ตัวอักษร", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11009, H11112, H11113, H11221", example: "这个字我不会写。(Zhège zì wǒ bú huì xiě. - ตัวอักษรนี้ฉันเขียนไม่เป็น)" },
+            { id: 103, word: "东西", pinyin: "dōngxi", meaning: "สิ่งของ", type: "คำนาม", freqTotal: 6, setsFound: "H11009, H11112, H11113, H11220, H11223", example: "她们买了很多东西。(Tāmen mǎile hěn duō dōngxi. - พวกเธอซื้อสิ่งของไว้มากมาย)" },
+            { id: 104, word: "钱", pinyin: "qián", meaning: "เงิน", type: "คำนาม", freqTotal: 2, setsFound: "H11113, H11223", example: "这本书多少钱? (Zhè běn shū duōshao qián? - หนังสือเล่มนี้ราคาเท่าไหร่?)" },
+            { id: 105, word: "学校", pinyin: "xuéxiào", meaning: "โรงเรียน", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "我现在去学校。(Wǒ xiànzài qù xuéxiào. - ตอนนี้ฉันไปโรงเรียน)" },
+            { id: 106, word: "大学", pinyin: "dàxué", meaning: "มหาวิทยาลัย", type: "คำนาม", freqTotal: 5, setsFound: "H11006, H11007, H11008, H11009, H11113", example: "大学同学 (Dàxué tóngxué - เพื่อนร่วมมหาวิทยาลัย)" },
+            { id: 107, word: "医院", pinyin: "yīyuàn", meaning: "โรงพยาบาล", type: "คำนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11223", example: "明天你怎么去医院? (Míngtiān nǐ zěnme qù yīyuàn? - พรุ่งนี้คุณไปโรงพยาบาลอย่างไร?)" },
+            { id: 108, word: "饭馆儿", pinyin: "fànguǎnr", meaning: "ร้านอาหาร", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11112, H11220, H11221", example: "饭馆儿 (fànguǎnr - ร้านอาหาร)" },
+            { id: 109, word: "商店", pinyin: "shāngdiàn", meaning: "ร้านค้า", type: "คำนาม", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "我去商店,我想买一些水果。(Wǒ qù shāngdiàn, wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันไปร้านค้า ฉันอยากซื้อผลไม้)" },
+            { id: 110, word: "火车站 / 车站", pinyin: "huǒchēzhàn", meaning: "สถานีรถไฟ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221", example: "他的女儿现在在火车站。(Tā de nǚ'ér xiànzài zài huǒchēzhàn. - ลูกสาวของเขาตอนนี้อยู่ที่สถานีรถไฟ)" },
+            { id: 111, word: "时候", pinyin: "shíhou", meaning: "ตอนที่ / เวลา", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "你什么时候回中国? (Nǐ shénme shíhou huí Zhōngguó? - คุณจะกลับประเทศจีนเมื่อไหร่?)" },
+            { id: 112, word: "个", pinyin: "gè", meaning: "คน / อัน / ชิ้น", type: "ลักษณนาม", freqTotal: 20, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你会写多少个汉字? (Nǐ huì xiě duōshao gè Hànzì? - คุณเขียนอักษรจีนได้กี่ตัว?)" },
+            { id: 113, word: "本", pinyin: "běn", meaning: "เล่ม", type: "ลักษณนาม", freqTotal: 16, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
+            { id: 114, word: "些", pinyin: "xiē", meaning: "บ้าง / จำนวนหนึ่ง", type: "ลักษณนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
+            { id: 115, word: "岁", pinyin: "suì", meaning: "ขวบ / ปี (อายุ)", type: "ลักษณนาม", freqTotal: 21, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我24岁。(Wǒ 24 suì. - ฉันอายุ 24 ปี)" }
+        ];
+
+        const grid = document.getElementById('vocabGrid');
+
+        function renderVocab(data) {
+            grid.innerHTML = '';
+            data.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer group";
+                
+                card.onclick = () => {
+                    window.location.href = `hsk1-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(item.freqTotal)}&setsFound=${encodeURIComponent(item.setsFound)}&example=${encodeURIComponent(item.example)}`;
+                };
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
+                            <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">ความถี่รวม: ${item.freqTotal} ครั้ง</span>
+                        </div>
+                        <div class="text-4xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
+                        <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
+                        <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
+                        <span>ดูสถิติและตัวอย่างประโยค</span>
+                        <span>→</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterVocab() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = hsk1Data.filter(item => 
+                item.word.toLowerCase().includes(query) || 
+                item.pinyin.toLowerCase().includes(query) || 
+                item.meaning.toLowerCase().includes(query)
+            );
+            renderVocab(filtered);
+        }
+
+        renderVocab(hsk1Data);
+    </script>
+</body>
+</html>

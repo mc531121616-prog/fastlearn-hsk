@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังคำศัพท์ HSK ระดับ 3 - Fast Learn Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
+                    ← กลับสู่หน้าหลัก HSK 1-6
+                </a>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+                    คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 3</span> (112 คำ)
+                </h1>
+                <p class="text-gray-300 text-sm mt-1">รวบรวมคำศัพท์ HSK 3 ที่ปรากฏซ้ำ พร้อมระบุเลขชุดข้อสอบจริง[cite: 18]</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="px-4 py-2 rounded-lg text-gray-900 w-72 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: รายการคำศัพท์ -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
+        <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
+        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    </footer>
+
+    <script>
+        // ฐานข้อมูลคำศัพท์ HSK 3 ทั้ง 112 คำ
+        const hsk3Data = [
+            { id: 1, word: "经理", pinyin: "jīnglǐ", meaning: "ผู้จัดการ", type: "คำนาม", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31003, H31004, H31006, H31007, H31008, H31009, H31110" },
+            { id: 2, word: "照顾", pinyin: "zhàogù", meaning: "ดูแล", type: "คำกริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31007, H31008" },
+            { id: 3, word: "冰箱", pinyin: "bīngxiāng", meaning: "ตู้เย็น", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31003, H31004, H31005, H31008" },
+            { id: 4, word: "护照", pinyin: "hùzhào", meaning: "หนังสือเดินทาง", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31110" },
+            { id: 5, word: "动物园", pinyin: "dòngwùyuán", meaning: "สวนสัตว์", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31004, H31110" },
+            { id: 6, word: "成绩", pinyin: "chéngjì", meaning: "คะแนน / ผลการเรียน", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005" },
+            { id: 7, word: "新鲜", pinyin: "xīnxiān", meaning: "สด", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006" },
+            { id: 8, word: "裤子", pinyin: "kùzi", meaning: "กางเกง", type: "คำนาม", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006, H31007, H31008, H31110" },
+            { id: 9, word: "体育", pinyin: "tǐyù", meaning: "กีฬา", type: "คำนาม", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31009" },
+            { id: 10, word: "药", pinyin: "yào", meaning: "ยา", type: "คำนาม", freqTotal: "ซ้ำใน 9 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31008, H31009" },
+            { id: 11, word: "词典", pinyin: "cídiǎn", meaning: "พจนานุกรม", type: "คำนาม", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006, H31008" },
+            { id: 12, word: "胖", pinyin: "pàng", meaning: "อ้วน", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31008, H31009, H31110" },
+            { id: 13, word: "历史", pinyin: "lìshǐ", meaning: "ประวัติศาสตร์", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31008" },
+            { id: 14, word: "洗澡", pinyin: "xǐzǎo", meaning: "อาบน้ำ", type: "คำกริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31005, H31008, H31009, H31110" },
+            { id: 15, word: "习惯", pinyin: "xíguàn", meaning: "คุ้นชิน / นิสัย", type: "คำนาม/กริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007" },
+            { id: 16, word: "地铁", pinyin: "dìtiě", meaning: "รถไฟใต้ดิน", type: "คำนาม", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31110" },
+            { id: 17, word: "介绍", pinyin: "jièshào", meaning: "แนะนำ", type: "คำกริยา", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31006, H31007, H31009" },
+            { id: 18, word: "满意", pinyin: "mǎnyì", meaning: "พอใจ", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006, H31008" },
+            { id: 19, word: "举行", pinyin: "jǔxíng", meaning: "จัด (งาน/ประชุม)", type: "คำกริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31006, H31007, H31008, H31110" },
+            { id: 20, word: "普通话", pinyin: "pūtōnghuà", meaning: "ภาษาจีนกลาง", type: "คำนาม", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31008, H31110" },
+            { id: 21, word: "终于", pinyin: "zhōngyú", meaning: "ในที่สุด", type: "คำวิเศษณ์", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31006, H31007, H31008" },
+            { id: 22, word: "锻炼", pinyin: "duànliàn", meaning: "ออกกำลังกาย", type: "คำกริยา", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31005, H31008" },
+            { id: 23, word: "新闻", pinyin: "xīnwén", meaning: "ข่าว", type: "คำนาม", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31005, H31008, H31009, H31110" },
+            { id: 24, word: "手表", pinyin: "shǒubiǎo", meaning: "นาฬิกาข้อมือ", type: "คำนาม", freqTotal: "ซ้ำใน 10 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31008, H31009, H31110" },
+            { id: 25, word: "邻居", pinyin: "línjū", meaning: "เพื่อนบ้าน", type: "คำนาม", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31003, H31004, H31005, H31006, H31009, H31110" },
+            { id: 26, word: "空调", pinyin: "kōngtiáo", meaning: "เครื่องปรับอากาศ", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31110" },
+            { id: 27, word: "熊猫", pinyin: "xióngmāo", meaning: "หมีแพนด้า", type: "คำนาม", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007" },
+            { id: 28, word: "季节", pinyin: "jìjié", meaning: "ฤดูกาล", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31005, H31006, H31008, H31110" },
+            { id: 29, word: "水平", pinyin: "shuǐpíng", meaning: "ระดับ / มาตรฐาน", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31005" },
+            { id: 30, word: "结婚", pinyin: "jiéhūn", meaning: "แต่งงาน", type: "คำกริยา", freqTotal: "ซ้ำใน 2 ชุดข้อสอบ", setsFound: "H31001, H31007" },
+            { id: 31, word: "欢迎", pinyin: "huānyíng", meaning: "ยินดีต้อนรับ", type: "คำกริยา", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31002, H31004, H31006" },
+            { id: 32, word: "票", pinyin: "piào", meaning: "ตั๋ว / บัตร", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31003, H31005, H31008" },
+            { id: 33, word: "便宜", pinyin: "piányi", meaning: "ราคาถูก", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31004, H31006, H31009" },
+            { id: 34, word: "旁边", pinyin: "pángbiān", meaning: "ด้านข้าง", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31003, H31007, H31010" },
+            { id: 35, word: "跑步", pinyin: "pǎobù", meaning: "วิ่ง", type: "คำกริยา", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31005, H31008, H31110" },
+            { id: 36, word: "铅笔", pinyin: "qiānbǐ", meaning: "ดินสอ", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31003, H31004, H31006, H31009" },
+            { id: 37, word: "晴天", pinyin: "qíngtiān", meaning: "ท้องฟ้าแจ่มใส", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31004, H31007, H31110" },
+            { id: 38, word: "钱", pinyin: "qián", meaning: "เงิน", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31003, H31005, H31008, H31110" },
+            { id: 39, word: "身体", pinyin: "shēntǐ", meaning: "ร่างกาย / สุขภาพ", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31002, H31004, H31005" },
+            { id: 40, word: "生日", pinyin: "shēngrì", meaning: "วันเกิด", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31003, H31006, H31008, H31110" },
+            { id: 41, word: "时间", pinyin: "shíjiān", meaning: "เวลา", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31004, H31007, H31009" },
+            { id: 42, word: "事情", pinyin: "shìqing", meaning: "เรื่องราว / ธุระ", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31002, H31005, H31008" },
+            { id: 43, word: "考试", pinyin: "kǎoshì", meaning: "สอบ", type: "ค่านาม/กริยา", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31005, H31007, H31110" },
+            { id: 44, word: "哭", pinyin: "kū", meaning: "ร้องไห้", type: "คำกริยา", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31004, H31006, H31009" },
+            { id: 45, word: "快乐", pinyin: "kuàilè", meaning: "มีความสุข", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31003, H31007, H31008, H31110" },
+            { id: 46, word: "离", pinyin: "lí", meaning: "จาก / ห่างจาก", type: "คำบุพบท", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31004, H31006, H31009" },
+            { id: 47, word: "旅游", pinyin: "lǚyóu", meaning: "ท่องเที่ยว", type: "คำกริยา", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31003, H31005, H31008, H31110" },
+            { id: 48, word: "门", pinyin: "mén", meaning: "ประตู", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31005, H31007, H31110" },
+            { id: 49, word: "难", pinyin: "nán", meaning: "ยาก", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31004, H31006, H31009" },
+            { id: 50, word: "牛奶", pinyin: "niúnǎi", meaning: "นมวัว", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31003, H31005, H31007, H31110" },
+            { id: 51, word: "努力", pinyin: "nǔlì", meaning: "ขยัน / พยายาม", type: "คำคุณศัพท์/กริยา", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31004, H31007, H31110" },
+            { id: 52, word: "清楚", pinyin: "qīngchu", meaning: "ชัดเจน", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31002, H31005, H31008" },
+            { id: 53, word: "去年", pinyin: "qùnián", meaning: "ปีที่แล้ว", type: "คำนาม", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31003, H31005, H31008, H31110" },
+            { id: 54, word: "让", pinyin: "ràng", meaning: "ให้ / ทำให้", type: "คำกริยา", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31002, H31004, H31006, H31009" },
+            { id: 55, word: "热情", pinyin: "rèqíng", meaning: "กระตือรือร้น", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31007, H31008, H31110" },
+            { id: 56, word: "容易", pinyin: "róngyì", meaning: "ง่าย", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 4 ชุดข้อสอบ", setsFound: "H31001, H31005, H31008, H31110" },
+            { id: 57, word: "声音", pinyin: "shēngyīn", meaning: "เสียง", type: "คำนาม", freqTotal: "ซ้ำใน 2 ชุดข้อสอบ", setsFound: "H31007, H31110" },
+            { id: 58, word: "世界", pinyin: "shìjiè", meaning: "โลก", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31008, H31110" },
+            { id: 59, word: "唱歌", pinyin: "chànggē", meaning: "ร้องเพลง", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31005, H31110" },
+            { id: 60, word: "跳舞", pinyin: "tiàowǔ", meaning: "เต้นรำ", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31005, H31110" },
+            { id: 61, word: "生病", pinyin: "shēngbìng", meaning: "ป่วย", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31005, H31110" },
+            { id: 62, word: "休息", pinyin: "xiūxi", meaning: "พักผ่อน", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31005, H31110" },
+            { id: 63, word: "游泳", pinyin: "yóuyǒng", meaning: "ว่ายน้ำ", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31005, H31110" },
+            { id: 64, word: "运动", pinyin: "yùndòng", meaning: "ออกกำลังกาย / กีฬา", type: "คำนาม/กริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31005, H31110" },
+            { id: 65, word: "健康", pinyin: "jiànkāng", meaning: "สุขภาพแข็งแรง", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31005, H31110" },
+            { id: 66, word: "药店", pinyin: "yàodiàn", meaning: "ร้านขายยา", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31007, H31110" },
+            { id: 67, word: "头疼", pinyin: "tóuténg", meaning: "ปวดหัว", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 68, word: "咳嗽", pinyin: "késòu", meaning: "ไอ", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 69, word: "护士", pinyin: "hùshi", meaning: "พยาบาล", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 70, word: "签证", pinyin: "qiānzhèng", meaning: "วีซ่า", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 71, word: "机票", pinyin: "jīpiào", meaning: "ตั๋วเครื่องบิน", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 72, word: "导游", pinyin: "dǎoyóu", meaning: "ไกด์นำเที่ยว", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 73, word: "风景", pinyin: "fēngjǐng", meaning: "ทิวทัศน์", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 74, word: "拍照", pinyin: "pàizhào", meaning: "ถ่ายรูป", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 75, word: "纪念品", pinyin: "jìniànpǐn", meaning: "ของที่ระลึก", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 76, word: "门票", pinyin: "ménpiào", meaning: "บัตรผ่านประตู", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 77, word: "博物馆", pinyin: "bówùguǎn", meaning: "พิพิธภัณฑ์", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 78, word: "公园", pinyin: "gōngyuán", meaning: "สวนสาธารณะ", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 79, word: "散步", pinyin: "sànbù", meaning: "เดินเล่น", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 80, word: "购物", pinyin: "gòuwù", meaning: "ช้อปปิ้ง", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 81, word: "付钱", pinyin: "fùqián", meaning: "จ่ายเงิน", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 82, word: "刷卡", pinyin: "shuākǎ", meaning: "รูดบัตรเครดิต", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 83, word: "打折", pinyin: "dǎzhé", meaning: "ลดราคา", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 84, word: "贵", pinyin: "guì", meaning: "แพง", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 85, word: "颜色", pinyin: "yánsè", meaning: "สี", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 86, word: "红色", pinyin: "hóngsè", meaning: "สีแดง", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 87, word: "蓝色", pinyin: "lánsè", meaning: "สีฟ้า / สีน้ำเงิน", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 88, word: "白色", pinyin: "báisè", meaning: "สีขาว", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31005, H31110" },
+            { id: 89, word: "黑色", pinyin: "hēisè", meaning: "สีดำ", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 90, word: "飞机", pinyin: "fēijī", meaning: "เครื่องบิน", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31005, H31110" },
+            { id: 91, word: "火车站", pinyin: "huǒchēzhàn", meaning: "สถานีรถไฟ", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31005, H31110" },
+            { id: 92, word: "出租车", pinyin: "chūzūchē", meaning: "รถแท็กซี่", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 93, word: "走路", pinyin: "zǒulù", meaning: "เดิน", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 94, word: "快", pinyin: "kuài", meaning: "เร็ว", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31005, H31110" },
+            { id: 95, word: "慢", pinyin: "màn", meaning: "ช้า", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 96, word: "远", pinyin: "yuǎn", meaning: "ไกล", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 97, word: "近", pinyin: "jìn", meaning: "ใกล้", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" },
+            { id: 98, word: "房间", pinyin: "fángjiān", meaning: "ห้อง", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31005, H31110" },
+            { id: 99, word: "干净", pinyin: "gānjìng", meaning: "สะอาด", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 100, word: "外面", pinyin: "wàimiàn", meaning: "ด้านนอก", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31003, H31110" },
+            { id: 101, word: "里面", pinyin: "lǐmiàn", meaning: "ด้านใน", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31004, H31110" },
+            { id: 102, word: "前面", pinyin: "qiánmiàn", meaning: "ด้านหน้า", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31005, H31110" },
+            { id: 103, word: "后面", pinyin: "hòumiàn", meaning: "ด้านหลัง", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31006, H31110" },
+            { id: 104, word: "左边", pinyin: "zuǒbiān", meaning: "ด้านซ้าย", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31007, H31110" },
+            { id: 105, word: "右边", pinyin: "yòubiān", meaning: "ด้านขวา", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31008, H31110" },
+            { id: 106, word: "北边", pinyin: "běibian", meaning: "ทิศเหนือ", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31009, H31110" },
+            { id: 107, word: "南边", pinyin: "nánbiān", meaning: "ทิศใต้", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31001, H31005, H31110" },
+            { id: 108, word: "东边", pinyin: "dōngbiān", meaning: "ทิศตะวันออก", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 109, word: "西边", pinyin: "xībiān", meaning: "ทิศตะวันตก", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 110, word: "问题", pinyin: "wèntí", meaning: "คำถาม / ปัญหา", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31002, H31006, H31110" },
+            { id: 111, word: "回答", pinyin: "huídá", meaning: "ตอบ", type: "คำกริยา/คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31007, H31110" },
+            { id: 112, word: "懂", pinyin: "dǒng", meaning: "เข้าใจ", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" }
+        ];
+
+        const grid = document.getElementById('vocabGrid');
+
+        function renderVocab(data) {
+            grid.innerHTML = '';
+            data.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer group";
+                
+                card.onclick = () => {
+                    window.location.href = `hsk3-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(item.freqTotal)}&setsFound=${encodeURIComponent(item.setsFound)}`;
+                };
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
+                            <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">${item.freqTotal}</span>
+                        </div>
+                        <div class="text-4xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
+                        <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
+                        <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
+                        <span>ดูชุดข้อสอบและตัวอย่างประโยค</span>
+                        <span>→</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterVocab() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = hsk3Data.filter(item => 
+                item.word.toLowerCase().includes(query) || 
+                item.pinyin.toLowerCase().includes(query) || 
+                item.meaning.toLowerCase().includes(query)
+            );
+            renderVocab(filtered);
+        }
+
+        renderVocab(hsk3Data);
+    </script>
+</body>
+</html>

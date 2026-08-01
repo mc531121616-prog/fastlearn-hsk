@@ -6,125 +6,165 @@
     <title>คลังคำศัพท์ HSK ระดับ 1 - 6 | Fast Learn Academy</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Prompt', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-gray-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
-    <!-- Header Section -->
-    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
-        <div class="max-w-5xl mx-auto px-4 py-8 text-center">
-            <div class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 shadow">
-                FAST LEARN ACADEMY
+    <!-- Header Section (Modern Gradient & Glow) -->
+    <header class="bg-gradient-to-br from-black via-zinc-900 to-black text-white border-b-4 border-red-600 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#dc2626_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-6xl mx-auto px-4 py-12 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-red-600/90 text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 shadow-lg backdrop-blur-sm border border-red-500/50">
+                <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                FAST LEARN ACADEMY • CENTRAL KORAT
             </div>
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-3 tracking-wide">
-                คลังคำศัพท์สอบ <span class="text-yellow-400">HSK</span> ระดับ 1 - 6
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight leading-tight">
+                คลังคำศัพท์สอบ <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-200">HSK</span> ระดับ 1 - 6
             </h1>
-            <p class="text-gray-300 text-sm md:text-base max-w-2xl mx-auto">
-                ครบ! จบ! ทุกการเรียนรู้ ศูนย์รวมไฟล์คำศัพท์เตรียมสอบภาษาจีน วิเคราะห์จากข้อสอบจริง พร้อมพินอินและความหมาย[cite: 2]
+            <p class="text-gray-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                ศูนย์รวมไฟล์คำศัพท์เตรียมสอบภาษาจีน วิเคราะห์เจาะลึกจากข้อสอบจริง ครบถ้วนพร้อมพินอิน ตัวอย่างประโยค และสถิติความถี่[cite: 2]
             </p>
+
+            <!-- Quick Stats Badge Bar -->
+            <div class="mt-8 flex flex-wrap justify-center gap-3 sm:gap-6 text-xs font-semibold text-gray-300">
+                <div class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
+                    📚 ครบทุกระดับ <span class="text-yellow-400 font-bold">HSK 1 - 6</span>
+                </div>
+                <div class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
+                    🎯 วิเคราะห์จากข้อสอบจริง <span class="text-red-500 font-bold">10+ ชุด</span>[cite: 2]
+                </div>
+                <div class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
+                    💡 พร้อมพินอิน & เสียงอ่าน
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- Main Content: เลือกระดับ HSK -->
-    <main class="max-w-5xl mx-auto px-4 py-10 flex-grow w-full">
-        <div class="text-center mb-8">
-            <h2 class="text-xl md:text-2xl font-bold text-gray-800">กรุณาเลือกระดับ HSK ที่ต้องการติวสอบ</h2>
-            <div class="w-16 h-1 bg-yellow-400 mx-auto mt-2 rounded-full"></div>
+    <main class="max-w-6xl mx-auto px-4 py-12 flex-grow w-full">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 tracking-tight">กรุณาเลือกระดับ HSK ที่ต้องการติวสอบ</h2>
+            <p class="text-gray-500 text-sm mt-1">คลิกเลือกการ์ดระดับชั้นเพื่อเข้าสู่คลังคำศัพท์และข้อสอบย้อนหลัง</p>
+            <div class="w-20 h-1.5 bg-gradient-to-r from-red-600 to-yellow-400 mx-auto mt-3 rounded-full"></div>
         </div>
 
-        <!-- Grid เลือกระดับ HSK 1-6 -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Grid เลือกระดับ HSK 1-6 (Modern Cards) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <!-- HSK 1 -->
-            <a href="hsk1.html" class="bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <a href="hsk1.html" class="bg-white p-7 rounded-3xl border border-gray-200/80 shadow-lg shadow-gray-200/50 hover:border-red-600 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-400/10 rounded-full blur-2xl group-hover:bg-red-600/15 transition-all"></div>
                 <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">พื้นฐาน (115 คำ)</span>
-                        <span class="text-gray-300 group-hover:text-red-600 font-bold transition-colors">→</span>
+                    <div class="flex justify-between items-center mb-5">
+                        <span class="text-xs font-bold px-3 py-1.5 bg-yellow-100 text-yellow-800 rounded-full shadow-sm">พื้นฐาน (115 คำ)</span>
+                        <div class="w-9 h-9 rounded-full bg-gray-50 group-hover:bg-red-600 group-hover:text-white flex items-center justify-center font-bold text-gray-400 transition-all duration-300 shadow-sm">
+                            →
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 1</h3>
-                    <p class="text-gray-500 text-sm">วิเคราะห์ความถี่และชุดข้อสอบจริง 10 ชุด พร้อมสถิติละเอียด</p>
+                    <h3 class="text-3xl font-black text-gray-900 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 1</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">วิเคราะห์ความถี่และชุดข้อสอบจริง 10 ชุด พร้อมสถิติละเอียด</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-red-600 font-bold flex items-center gap-1">
-                    เข้าสู่คลังคำศัพท์ HSK 1
+                <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-red-600 font-extrabold flex items-center justify-between tracking-wide">
+                    <span>เข้าสู่คลังคำศัพท์</span>
+                    <span class="group-hover:translate-x-1 transition-transform">คลิกเพื่อเริ่มติว →</span>
                 </div>
             </a>
 
             <!-- HSK 2 -->
-            <a href="hsk2.html" class="bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <a href="hsk2.html" class="bg-white p-7 rounded-3xl border border-gray-200/80 shadow-lg shadow-gray-200/50 hover:border-red-600 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-400/10 rounded-full blur-2xl group-hover:bg-red-600/15 transition-all"></div>
                 <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">ยอดนิยม (165 คำ)</span>
-                        <span class="text-gray-300 group-hover:text-red-600 font-bold transition-colors">→</span>
+                    <div class="flex justify-between items-center mb-5">
+                        <span class="text-xs font-bold px-3 py-1.5 bg-red-100 text-red-700 rounded-full shadow-sm">ยอดนิยม (165 คำ)</span>
+                        <div class="w-9 h-9 rounded-full bg-gray-50 group-hover:bg-red-600 group-hover:text-white flex items-center justify-center font-bold text-gray-400 transition-all duration-300 shadow-sm">
+                            →
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 2</h3>
-                    <p class="text-gray-500 text-sm">รวบรวมคำศัพท์ที่ออกสอบซ้ำจากข้อสอบจริง 10 ชุด พร้อมตัวอย่างประโยค</p>
+                    <h3 class="text-3xl font-black text-gray-900 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 2</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">รวบรวมคำศัพท์ที่ออกสอบซ้ำจากข้อสอบจริง 10 ชุด พร้อมตัวอย่างประโยค</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-red-600 font-bold flex items-center gap-1">
-                    เข้าสู่คลังคำศัพท์ HSK 2
+                <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-red-600 font-extrabold flex items-center justify-between tracking-wide">
+                    <span>เข้าสู่คลังคำศัพท์</span>
+                    <span class="group-hover:translate-x-1 transition-transform">คลิกเพื่อเริ่มติว →</span>
                 </div>
             </a>
 
             <!-- HSK 3 -->
-            <a href="hsk3.html" class="bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <a href="hsk3.html" class="bg-white p-7 rounded-3xl border border-gray-200/80 shadow-lg shadow-gray-200/50 hover:border-red-600 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-400/10 rounded-full blur-2xl group-hover:bg-red-600/15 transition-all"></div>
                 <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">ระดับกลาง (112 คำ)</span>
-                        <span class="text-gray-300 group-hover:text-red-600 font-bold transition-colors">→</span>
+                    <div class="flex justify-between items-center mb-5">
+                        <span class="text-xs font-bold px-3 py-1.5 bg-yellow-100 text-yellow-800 rounded-full shadow-sm">ระดับกลาง (112 คำ)</span>
+                        <div class="w-9 h-9 rounded-full bg-gray-50 group-hover:bg-red-600 group-hover:text-white flex items-center justify-center font-bold text-gray-400 transition-all duration-300 shadow-sm">
+                            →
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 3</h3>
-                    <p class="text-gray-500 text-sm">รวบรวมคำศัพท์ HSK 3 ที่ปรากฏซ้ำ พร้อมระบุเลขชุดข้อสอบจริง[cite: 18]</p>
+                    <h3 class="text-3xl font-black text-gray-900 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 3</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">รวบรวมคำศัพท์ HSK 3 ที่ปรากฏซ้ำ พร้อมระบุเลขชุดข้อสอบจริง</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-red-600 font-bold flex items-center gap-1">
-                    เข้าสู่คลังคำศัพท์ HSK 3
+                <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-red-600 font-extrabold flex items-center justify-between tracking-wide">
+                    <span>เข้าสู่คลังคำศัพท์</span>
+                    <span class="group-hover:translate-x-1 transition-transform">คลิกเพื่อเริ่มติว →</span>
                 </div>
             </a>
 
             <!-- HSK 4 -->
-            <a href="hsk4.html" class="bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <a href="hsk4.html" class="bg-white p-7 rounded-3xl border border-gray-200/80 shadow-lg shadow-gray-200/50 hover:border-red-600 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-400/10 rounded-full blur-2xl group-hover:bg-red-600/15 transition-all"></div>
                 <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">ระดับกลาง-สูง (140 คำ)</span>
-                        <span class="text-gray-300 group-hover:text-red-600 font-bold transition-colors">→</span>
+                    <div class="flex justify-between items-center mb-5">
+                        <span class="text-xs font-bold px-3 py-1.5 bg-red-100 text-red-700 rounded-full shadow-sm">ระดับกลาง-สูง (140 คำ)</span>
+                        <div class="w-9 h-9 rounded-full bg-gray-50 group-hover:bg-red-600 group-hover:text-white flex items-center justify-center font-bold text-gray-400 transition-all duration-300 shadow-sm">
+                            →
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 4</h3>
-                    <p class="text-gray-500 text-sm">รวบรวมคำศัพท์ HSK 4 ที่ปรากฏซ้ำ พร้อมระบุเลขชุดข้อสอบจริง[cite: 19]</p>
+                    <h3 class="text-3xl font-black text-gray-900 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 4</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">รวบรวมคำศัพท์ HSK 4 ที่ปรากฏซ้ำ พร้อมระบุเลขชุดข้อสอบจริง</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-red-600 font-bold flex items-center gap-1">
-                    เข้าสู่คลังคำศัพท์ HSK 4
+                <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-red-600 font-extrabold flex items-center justify-between tracking-wide">
+                    <span>เข้าสู่คลังคำศัพท์</span>
+                    <span class="group-hover:translate-x-1 transition-transform">คลิกเพื่อเริ่มติว →</span>
                 </div>
             </a>
 
             <!-- HSK 5 -->
-            <a href="hsk5.html" class="bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <a href="hsk5.html" class="bg-white p-7 rounded-3xl border border-gray-200/80 shadow-lg shadow-gray-200/50 hover:border-red-600 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-400/10 rounded-full blur-2xl group-hover:bg-red-600/15 transition-all"></div>
                 <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">ระดับสูง (179 คำ)</span>
-                        <span class="text-gray-300 group-hover:text-red-600 font-bold transition-colors">→</span>
+                    <div class="flex justify-between items-center mb-5">
+                        <span class="text-xs font-bold px-3 py-1.5 bg-yellow-100 text-yellow-800 rounded-full shadow-sm">ระดับสูง (179 คำ)</span>
+                        <div class="w-9 h-9 rounded-full bg-gray-50 group-hover:bg-red-600 group-hover:text-white flex items-center justify-center font-bold text-gray-400 transition-all duration-300 shadow-sm">
+                            →
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 5</h3>
-                    <p class="text-gray-500 text-sm">รวบรวมคำศัพท์ HSK 5 พร้อมพินอิน ประเภทคำ และเลขชุดข้อสอบจริง</p>
+                    <h3 class="text-3xl font-black text-gray-900 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 5</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">รวบรวมคำศัพท์ HSK 5 พร้อมพินอิน ประเภทคำ และเลขชุดข้อสอบจริง</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-red-600 font-bold flex items-center gap-1">
-                    เข้าสู่คลังคำศัพท์ HSK 5
+                <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-red-600 font-extrabold flex items-center justify-between tracking-wide">
+                    <span>เข้าสู่คลังคำศัพท์</span>
+                    <span class="group-hover:translate-x-1 transition-transform">คลิกเพื่อเริ่มติว →</span>
                 </div>
             </a>
 
             <!-- HSK 6 -->
-            <a href="hsk6.html" class="bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <a href="hsk6.html" class="bg-white p-7 rounded-3xl border border-gray-200/80 shadow-lg shadow-gray-200/50 hover:border-red-600 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-400/10 rounded-full blur-2xl group-hover:bg-red-600/15 transition-all"></div>
                 <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">ระดับสูงสุด (167 คำ)</span>
-                        <span class="text-gray-300 group-hover:text-red-600 font-bold transition-colors">→</span>
+                    <div class="flex justify-between items-center mb-5">
+                        <span class="text-xs font-bold px-3 py-1.5 bg-red-100 text-red-700 rounded-full shadow-sm">ระดับสูงสุด (167 คำ)</span>
+                        <div class="w-9 h-9 rounded-full bg-gray-50 group-hover:bg-red-600 group-hover:text-white flex items-center justify-center font-bold text-gray-400 transition-all duration-300 shadow-sm">
+                            →
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 6</h3>
-                    <p class="text-gray-500 text-sm">รวบรวมคำศัพท์ระดับสูง HSK 6 ครบถ้วนพร้อมตัวอย่างประโยคจริง</p>
+                    <h3 class="text-3xl font-black text-gray-900 group-hover:text-red-600 transition-colors mb-2">HSK ระดับ 6</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">รวบรวมคำศัพท์ระดับสูง HSK 6 ครบถ้วนพร้อมตัวอย่างประโยคจริง</p>
                 </div>
-                <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-red-600 font-bold flex items-center gap-1">
-                    เข้าสู่คลังคำศัพท์ HSK 6
+                <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-red-600 font-extrabold flex items-center justify-between tracking-wide">
+                    <span>เข้าสู่คลังคำศัพท์</span>
+                    <span class="group-hover:translate-x-1 transition-transform">คลิกเพื่อเริ่มติว →</span>
                 </div>
             </a>
 
@@ -132,8 +172,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
-        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone[cite: 2]</p>
+    <footer class="bg-black text-white py-8 text-center text-gray-400 text-sm mt-16 border-t-2 border-red-600">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-medium text-gray-300">Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+            <p class="text-xs text-gray-500">© 2026 HSK Vocabulary Preparation Center. All rights reserved.</p>
+        </div>
     </footer>
 
 </body>

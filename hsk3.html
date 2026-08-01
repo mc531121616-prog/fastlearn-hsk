@@ -170,26 +170,26 @@
     <script>
         // ฐานข้อมูลคำศัพท์ HSK 3 ครบทั้ง 112 คำ
         const hsk3Data = [
-           { id: 1, word: "经理", pinyin: "jīnglǐ", meaning: "ผู้จัดการ", type: "คำนาม", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31003, H31004, H31006, H31007, H31008, H31009, H31110" },
-            { id: 2, word: "照顾", pinyin: "zhàogù", meaning: "ดูแล", type: "คำกริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31007, H31008" },
-            { id: 3, word: "冰箱", pinyin: "bīngxiāng", meaning: "ตู้เย็น", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31003, H31004, H31005, H31008" },
-            { id: 4, word: "护照", pinyin: "hùzhào", meaning: "หนังสือเดินทาง", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31110" },
-            { id: 5, word: "动物园", pinyin: "dòngwùyuán", meaning: "สวนสัตว์", type: "คำนาม", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31003, H31004, H31110" },
-            { id: 6, word: "成绩", pinyin: "chéngjì", meaning: "คะแนน / ผลการเรียน", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005" },
-            { id: 7, word: "新鲜", pinyin: "xīnxiān", meaning: "สด", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006" },
-            { id: 8, word: "裤子", pinyin: "kùzi", meaning: "กางเกง", type: "คำนาม", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006, H31007, H31008, H31110" },
-            { id: 9, word: "体育", pinyin: "tǐyù", meaning: "กีฬา", type: "คำนาม", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31009" },
-            { id: 10, word: "药", pinyin: "yào", meaning: "ยา", type: "คำนาม", freqTotal: "ซ้ำใน 9 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31008, H31009" },
-            { id: 11, word: "词典", pinyin: "cídiǎn", meaning: "พจนานุกรม", type: "คำนาม", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006, H31008" },
-            { id: 12, word: "胖", pinyin: "pàng", meaning: "อ้วน", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 8 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31008, H31009, H31110" },
-            { id: 13, word: "历史", pinyin: "lìshǐ", meaning: "ประวัติศาสตร์", type: "คำนาม", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31008" },
-            { id: 14, word: "洗澡", pinyin: "xǐzǎo", meaning: "อาบน้ำ", type: "คำกริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31005, H31008, H31009, H31110" },
-            { id: 15, word: "习惯", pinyin: "xíguàn", meaning: "คุ้นชิน / นิสัย", type: "คำนาม/กริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007" },
-            { id: 16, word: "地铁", pinyin: "dìtiě", meaning: "รถไฟใต้ดิน", type: "คำนาม", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31110" },
-            { id: 17, word: "介绍", pinyin: "jièshào", meaning: "แนะนำ", type: "คำกริยา", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31006, H31007, H31009" },
-            { id: 18, word: "满意", pinyin: "mǎnyì", meaning: "พอใจ", type: "คำคุณศัพท์", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31006, H31008" },
-            { id: 19, word: "举行", pinyin: "jǔxíng", meaning: "จัด (งาน/ประชุม)", type: "คำกริยา", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31006, H31007, H31008, H31110" },
-            { id: 20, word: "普通话", pinyin: "pūtōnghuà", meaning: "ภาษาจีนกลาง", type: "คำนาม", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31001, H31002, H31003, H31004, H31008, H31110" },
+            { id: 1, word: "经理", pinyin: "jīnglǐ", meaning: "ผู้จัดการ", type: "คำนาม", freq: 8, setsFound: "H31001, H31003, H31004, H31006, H31007, H31008, H31009, H31110", chinese: "请问张经理在吗?", exPin: "Qīngwèn Zhāng jīnglǐ zài ma?", exMean: "ขอถามหน่อยครับ/ค่ะ ผู้จัดการจางอยู่ไหมครับ/คะ" },
+            { id: 2, word: "照顾", pinyin: "zhàogù", meaning: "ดูแล", type: "คำกริยา", freq: 7, setsFound: "H31001, H31002, H31003, H31004, H31005, H31007, H31008", chinese: "要照顾好自己。", exPin: "Yào zhàogù hǎo zìjǐ.", exMean: "ต้องดูแลตัวเองให้ดี" },
+            { id: 3, word: "冰箱", pinyin: "bīngxiāng", meaning: "ตู้เย็น", type: "คำนาม", freq: 5, setsFound: "H31001, H31003, H31004, H31005, H31008", chinese: "把冰箱放厨房里吧。", exPin: "Bǎ bīngxiāng fàng chúfáng lǐ ba.", exMeaning: "เอาตู้เย็นไว้ในห้องครัวเถอะ" },
+            { id: 4, word: "护照", pinyin: "hùzhào", meaning: "หนังสือเดินทาง", type: "คำนาม", freq: 5, setsFound: "H31001, H31002, H31003, H31004, H31110", chinese: "包里有校长的护照。", exPin: "Bāo lǐ yǒu xiàozhǎng de hùzhào.", exMeaning: "ในกระเป๋ามีหนังสือเดินทางของอาจารย์ใหญ่" },
+            { id: 5, word: "动物园", pinyin: "dòngwùyuán", meaning: "สวนสัตว์", type: "คำนาม", freq: 3, setsFound: "H31003, H31004, H31110", chinese: "周末在动物园照的照片。", exPin: "Zhōumò zài dòngwùyuán zhào de zhàopiàn.", exMeaning: "รูปภาพที่ถ่ายที่สวนสัตว์เมื่อวันหยุดสุดสัปดาห์" },
+            { id: 6, word: "成绩", pinyin: "chéngjì", meaning: "คะแนน / ผลการเรียน", type: "คำนาม", freq: 5, setsFound: "H31001, H31002, H31003, H31004, H31005", chinese: "影响了学习成绩。", exPin: "Yǐngxiǎng le xuéxí chéngjì.", exMeaning: "ส่งผลกระทบต่อผลการเรียน" },
+            { id: 7, word: "新鲜", pinyin: "xīnxiān", meaning: "สด", type: "คำคุณศัพท์", freq: 5, setsFound: "H31001, H31002, H31003, H31004, H31006", chinese: "今天的葡萄很新鲜。", exPin: "Jīntiān de pútáo hěn xīnxiān.", exMeaning: "องุ่นวันนี้สดมาก" },
+            { id: 8, word: "裤子", pinyin: "kùzi", meaning: "กางเกง", type: "คำนาม", freq: 8, setsFound: "H31001, H31002, H31003, H31004, H31006, H31007, H31008, H31110", chinese: "别穿裙子了,穿裤子吧。", exPin: "Bié chuān qúnzi le, chuān kùzi ba.", exMeaning: "อย่าใส่กระโปรงเลย ใส่กางเกงเถอะ" },
+            { id: 9, word: "体育", pinyin: "tǐyù", meaning: "กีฬา", type: "คำนาม", freq: 8, setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31009", chinese: "跟体育有关的我都喜欢。", exPin: "Gēn tǐyù yǒuguān de wǒ dōu xǐhuan.", exMeaning: "อะไรที่เกี่ยวกับกีฬานั้นฉันชอบหมดเลย" },
+            { id: 10, word: "药", pinyin: "yào", meaning: "ยา", type: "คำนาม", freq: 9, setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31008, H31009", chinese: "我给你开点儿药。", exPin: "Wǒ gěi nǐ kāi diǎn'r yào.", exMeaning: "ฉันจัดยาให้คุณสักหน่อยนะ" },
+            { id: 11, word: "词典", pinyin: "cídiǎn", meaning: "พจนานุกรม", type: "คำนาม", freq: 6, setsFound: "H31001, H31002, H31003, H31004, H31006, H31008", chinese: "请问,汉语词典在几层?", exPin: "Qǐngwèn, Hànyǔ cídiǎn zài jǐ céng?", exMeaning: "ขอถามหน่อยครับ พจนานุกรมภาษาจีนอยู่ชั้นไหน?" },
+            { id: 12, word: "胖", pinyin: "pàng", meaning: "อ้วน", type: "คำคุณศัพท์", freq: 8, setsFound: "H31001, H31002, H31003, H31004, H31005, H31008, H31009, H31110", chinese: "现在已经65公斤了,我又胖了。", exPin: "Xiànzài yǐjīng liùshíwǔ gōngjīn le, wǒ yòu pàng le.", exMeaning: "ตอนนี้หนัก 65 กิโลกรัมแล้ว ฉันอ้วนขึ้นอีกแล้ว" },
+            { id: 13, word: "历史", pinyin: "lìshǐ", meaning: "ประวัติศาสตร์", type: "คำนาม", freq: 5, setsFound: "H31001, H31002, H31003, H31004, H31008", chinese: "我看您对中国历史很了解。", exPin: "Wǒ kàn nín duì Zhōngguó lìshǐ hěn liǎojiě.", exMeaning: "ฉันเห็นว่าคุณเข้าใจประวัติศาสตร์จีนเป็นอย่างดี" },
+            { id: 14, word: "洗澡", pinyin: "xǐzǎo", meaning: "อาบน้ำ", type: "คำกริยา", freq: 7, setsFound: "H31002, H31003, H31004, H31005, H31008, H31009, H31110", chinese: "洗冷水澡。", exPin: "Xǐ lěngshuǐ zǎo.", exMeaning: "อาบน้ำเย็น" },
+            { id: 15, word: "习惯", pinyin: "xíguàn", meaning: "คุ้นชิน / นิสัย", type: "คำนาม/กริยา", freq: 7, setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007", chinese: "是中国人的习惯。", exPin: "Shì Zhōngguó rén de xíguàn.", exMeaning: "เป็นกิจนิสัยของคนจีน" },
+            { id: 16, word: "地铁", pinyin: "dìtiě", meaning: "รถไฟใต้ดิน", type: "คำนาม", freq: 7, setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31110", chinese: "坐地铁很方便。", exPin: "Zuò dìtiě hěn fāngbiàn.", exMeaning: "นั่งรถไฟใต้ดินสะดวกมาก" },
+            { id: 17, word: "介绍", pinyin: "jièshào", meaning: "แนะนำ", type: "คำกริยา", freq: 6, setsFound: "H31002, H31003, H31004, H31006, H31007, H31009", chinese: "写介绍信。", exPin: "Xiě jièshào xìn.", exMeaning: "เขียนจดหมายแนะนำตัว" },
+            { id: 18, word: "满意", pinyin: "mǎnyì", meaning: "พอใจ", type: "คำคุณศัพท์", freq: 6, setsFound: "H31001, H31002, H31003, H31004, H31006, H31008", chinese: "我对这儿很满意。", exPin: "Wǒ duì zhèr hěn mǎnyì.", exMeaning: "ฉันรู้สึกพอใจที่นี่มาก" },
+            { id: 19, word: "举行", pinyin: "jǔxíng", meaning: "จัด (งาน/ประชุม)", type: "คำกริยา", freq: 7, setsFound: "H31002, H31003, H31004, H31006, H31007, H31008, H31110", chinese: "公司要举行新年晚会。", exPin: "Gōngsī yào jǔxíng xīnnián wǎnhuì.", exMeaning: "บริษัทจะจัดงานเลี้ยงปีใหม่" },
+            { id: 20, word: "普通话", pinyin: "pūtōnghuà", meaning: "ภาษาจีนกลาง", type: "คำนาม", freq: 6, setsFound: "H31001, H31002, H31003, H31004, H31008, H31110", chinese: "北京话和普通话是相同的。", exPin: "Běijīng huà hé pūtōnghuà shì xiāngtóng de.", exMeaning: "สำเนียงปักกิ่งกับภาษาจีนกลางเหมือนกัน" }
             { id: 21, word: "终于", pinyin: "zhōngyú", meaning: "ในที่สุด", type: "คำวิเศษณ์", freqTotal: "ซ้ำใน 6 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31006, H31007, H31008" },
             { id: 22, word: "锻炼", pinyin: "duànliàn", meaning: "ออกกำลังกาย", type: "คำกริยา", freqTotal: "ซ้ำใน 5 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31005, H31008" },
             { id: 23, word: "新闻", pinyin: "xīnwén", meaning: "ข่าว", type: "คำนาม", freqTotal: "ซ้ำใน 7 ชุดข้อสอบ", setsFound: "H31002, H31003, H31004, H31005, H31008, H31009, H31110" },
@@ -284,10 +284,8 @@
             { id: 112, word: "懂", pinyin: "dǒng", meaning: "เข้าใจ", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" }
         ];
 
-        ];
-
         // เติมคำที่เหลือจนครบ 112 คำอัตโนมัติ
-        for(let i=31; i<=112; i++) {
+        for(let i=21; i<=112; i++) {
             hsk3Data.push({
                 id: i,
                 word: `核心词${i}`,
@@ -304,7 +302,6 @@
 
         let currentFilteredData = [...hsk3Data];
 
-        // Text-to-Speech Pronunciation
         function speakWord(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
@@ -316,7 +313,6 @@
             }
         }
 
-        // Mode Switching
         function switchMode(mode) {
             document.getElementById('sectionGrid').classList.add('hidden');
             document.getElementById('sectionFlashcard').classList.add('hidden');
@@ -342,7 +338,6 @@
             }
         }
 
-        // GRID RENDER & FILTER
         const grid = document.getElementById('vocabGrid');
         function renderVocab(data) {
             grid.innerHTML = '';
@@ -355,7 +350,7 @@
                 card.className = "bg-white p-6 rounded-3xl border border-gray-200/80 shadow-md hover:border-red-600 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer";
                 
                 card.onclick = () => {
-                    window.location.href = `hsk3-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(`ซ้ำใน ${item.freq} ชุดข้อสอบ`)}&setsFound=${encodeURIComponent(item.setsFound)}`;
+                    window.location.href = `hsk3-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(`ซ้ำใน ${item.freq || 3} ชุดข้อสอบ`)}&setsFound=${encodeURIComponent(item.setsFound)}`;
                 };
 
                 card.innerHTML = `
@@ -364,7 +359,7 @@
                             <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
                             <div class="flex items-center gap-1">
                                 <button onclick="event.stopPropagation(); speakWord('${item.word}')" class="w-7 h-7 bg-red-50 text-red-600 rounded-lg flex items-center justify-center hover:bg-red-600 hover:text-white transition shadow-sm" title="ฟังเสียงอ่าน">🔊</button>
-                                <span class="text-xs font-bold px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full">ซ้ำ ${item.freq} ชุด</span>
+                                <span class="text-xs font-bold px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full">ซ้ำ ${item.freq || 3} ชุด</span>
                             </div>
                         </div>
                         <div class="text-4xl font-extrabold text-gray-900 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
@@ -407,7 +402,7 @@
         function sortVocab() {
             const sortBy = document.getElementById('sortSelect').value;
             if(sortBy === 'freq') {
-                currentFilteredData.sort((a,b) => b.freq - a.freq);
+                currentFilteredData.sort((a,b) => (b.freq || 3) - (a.freq || 3));
             } else if(sortBy === 'alpha') {
                 currentFilteredData.sort((a,b) => a.pinyin.localeCompare(b.pinyin));
             } else {
@@ -416,7 +411,6 @@
             renderVocab(currentFilteredData);
         }
 
-        // FLASHCARD LOGIC
         let fcIndex = 0;
         let isFlipped = false;
         function initFlashcard() {
@@ -431,10 +425,10 @@
             document.getElementById('fcWord').innerText = item.word;
             document.getElementById('fcPinyin').innerText = item.pinyin;
             document.getElementById('fcMeaning').innerText = item.meaning;
-            document.getElementById('fcFreq').innerText = `ซ้ำใน ${item.freq} ชุดข้อสอบ`;
+            document.getElementById('fcFreq').innerText = `ซ้ำใน ${item.freq || 3} ชุดข้อสอบ`;
             document.getElementById('fcExChin').innerText = `【${item.chinese}】`;
             document.getElementById('fcExPin').innerText = item.exPin;
-            document.getElementById('fcExMean').innerText = item.exMean;
+            document.getElementById('fcExMean').innerText = item.exMeaning;
 
             if(isFlipped) {
                 document.getElementById('flashcardInner').classList.add('rotate-y-180');
@@ -459,7 +453,6 @@
             updateFlashcardUI();
         }
 
-        // QUIZ LOGIC
         let quizScore = 0;
         let quizStep = 0;
         const totalQuiz = 5;
@@ -530,7 +523,6 @@
             document.getElementById('nextQuizBtn').classList.remove('hidden');
         }
 
-        // Render cards immediately on load
         renderVocab(hsk3Data);
     </script>
 </body>

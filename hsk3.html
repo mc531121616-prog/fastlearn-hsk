@@ -6,36 +6,162 @@
     <title>คลังคำศัพท์ HSK ระดับ 3 - Fast Learn Academy</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Prompt', sans-serif; }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-gray-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
     <!-- Header Section -->
     <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
-        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
+                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
                     ← กลับสู่หน้าหลัก HSK 1-6
                 </a>
                 <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
                     คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 3</span> (112 คำ)
                 </h1>
-                <p class="text-gray-300 text-sm mt-1">รวบรวมคำศัพท์ HSK 3 ที่ปรากฏซ้ำ พร้อมระบุเลขชุดข้อสอบจริง[cite: 18]</p>
+                <p class="text-gray-300 text-sm mt-1">วิเคราะห์ข้อสอบจริง พร้อมระบบ Flashcard, Quiz ทดสอบ และเสียงอ่านจำลอง</p>
             </div>
-            <div class="mt-4 md:mt-0">
-                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="px-4 py-2 rounded-lg text-gray-900 w-72 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            
+            <!-- Mode Switcher Tabs -->
+            <div class="flex bg-zinc-900 p-1.5 rounded-2xl border border-zinc-800 shadow-inner">
+                <button onclick="switchMode('grid')" id="btnGrid" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow">
+                    📋 ตารางคำศัพท์
+                </button>
+                <button onclick="switchMode('flashcard')" id="btnFlashcard" class="px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">
+                    🃏 โหมดการ์ด (Flashcard)
+                </button>
+                <button onclick="switchMode('quiz')" id="btnQuiz" class="px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">
+                    📝 ทดสอบ (Quiz)
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content: รายการคำศัพท์ -->
+    <!-- Main Content Area -->
     <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
-        <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+
+        <!-- Controls Bar: Search, Filter, Sort -->
+        <div id="controlsBar" class="bg-white p-5 rounded-3xl border border-gray-200/80 shadow-sm mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Search Input -->
+            <div class="w-full md:w-80">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+
+            <!-- Filter by Type -->
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                <span class="text-xs font-bold text-gray-500 mr-1">กรองประเภท:</span>
+                <button onclick="filterByType('all')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition">ทั้งหมด</button>
+                <button onclick="filterByType('คำนาม')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition">คำนาม</button>
+                <button onclick="filterByType('คำกริยา')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition">คำกริยา</button>
+                <button onclick="filterByType('คำคุณศัพท์')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition">คำคุณศัพท์</button>
+            </div>
+
+            <!-- Sort By -->
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+                <span class="text-xs font-bold text-gray-500">เรียงตาม:</span>
+                <select id="sortSelect" onchange="sortVocab()" class="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-red-600 bg-white">
+                    <option value="default">ค่าเริ่มต้น (ลำดับ)</option>
+                    <option value="freq">ความถี่การออกสอบ (มากไปน้อย)</option>
+                    <option value="alpha">พินอิน (A-Z)</option>
+                </select>
+            </div>
         </div>
+
+        <!-- MODE 1: GRID VIEW -->
+        <div id="sectionGrid">
+            <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Data rendered by JS -->
+            </div>
+        </div>
+
+        <!-- MODE 2: FLASHCARD VIEW -->
+        <div id="sectionFlashcard" class="hidden flex flex-col items-center justify-center py-6">
+            <div class="w-full max-w-md perspective-1000 cursor-pointer h-96" onclick="flipCard()">
+                <div id="flashcardInner" class="relative w-full h-full duration-500 transform-style-3d shadow-xl rounded-3xl">
+                    
+                    <!-- Front Side -->
+                    <div class="absolute inset-0 w-full h-full bg-white rounded-3xl border-2 border-gray-100 p-8 flex flex-col justify-between backface-hidden">
+                        <div class="flex justify-between items-center">
+                            <span id="fcType" class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">คำนาม</span>
+                            <span class="text-xs text-gray-400 font-bold">การ์ดที่ <span id="fcCurrent">1</span> / 112 (คลิกเพื่อพลิกดูความหมาย)</span>
+                        </div>
+                        <div class="text-center">
+                            <div id="fcWord" class="text-8xl font-black text-gray-900 mb-2">经理</div>
+                            <div id="fcPinyin" class="text-2xl font-bold text-red-600">jīnglǐ</div>
+                        </div>
+                        <div class="text-center text-xs text-gray-400 font-semibold flex items-center justify-center gap-2">
+                            <span>🔄 คลิกเพื่อพลิกการ์ด</span>
+                            <button onclick="event.stopPropagation(); speakWord(document.getElementById('fcWord').innerText)" class="px-2.5 py-1 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-bold">🔊 ฟังเสียง</button>
+                        </div>
+                    </div>
+
+                    <!-- Back Side -->
+                    <div class="absolute inset-0 w-full h-full bg-zinc-900 text-white rounded-3xl p-8 flex flex-col justify-between backface-hidden rotate-y-180">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">ความหมาย & ตัวอย่าง</span>
+                            <span id="fcFreq" class="text-xs text-gray-300 font-bold">ซ้ำใน 8 ชุดข้อสอบ</span>
+                        </div>
+                        <div class="text-center space-y-3">
+                            <div id="fcMeaning" class="text-3xl font-extrabold text-yellow-400">ผู้จัดการ</div>
+                            <div class="bg-white/10 p-4 rounded-2xl text-left space-y-1 text-sm">
+                                <div id="fcExChin" class="font-bold text-white">【请问张经理在吗?】</div>
+                                <div id="fcExPin" class="text-xs text-red-400">Qīngwèn Zhāng jīnglǐ zài ma?</div>
+                                <div id="fcExMean" class="text-xs text-gray-300">ขอถามหน่อยครับ ผู้จัดการจางอยู่ไหม</div>
+                            </div>
+                        </div>
+                        <div class="text-center text-xs text-gray-400 font-semibold">
+                            🔄 คลิกเพื่อพลิกกลับด้านหน้า
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Flashcard Navigation Controls -->
+            <div class="flex items-center gap-4 mt-8">
+                <button onclick="prevCard()" class="px-6 py-2.5 bg-white border border-gray-200 rounded-2xl font-bold text-sm shadow-sm hover:bg-gray-50 transition">← การ์ดก่อนหน้า</button>
+                <button onclick="nextCard()" class="px-6 py-2.5 bg-red-600 text-white rounded-2xl font-bold text-sm shadow-md hover:bg-red-700 transition">การ์ดถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- MODE 3: QUIZ VIEW -->
+        <div id="sectionQuiz" class="hidden max-w-xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                
+                <!-- Quiz Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-gray-100 text-gray-600 rounded-full">คำถามที่ 1 / 10</span>
+                    <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">คะแนน: 0</span>
+                </div>
+
+                <!-- Quiz Question Box -->
+                <div class="text-center mb-8">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
+                    <div id="quizWord" class="text-7xl font-black text-gray-900 mb-2">经理</div>
+                    <div id="quizPinyin" class="text-xl font-bold text-red-600">jīnglǐ</div>
+                </div>
+
+                <!-- Quiz Options Grid -->
+                <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6">
+                    <!-- Buttons generated by JS -->
+                </div>
+
+                <!-- Next Question Button -->
+                <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">
+                    ข้อถัดไป →
+                </button>
+            </div>
+        </div>
+
     </main>
 
     <!-- Footer -->
@@ -160,25 +286,74 @@
             { id: 112, word: "懂", pinyin: "dǒng", meaning: "เข้าใจ", type: "คำกริยา", freqTotal: "ซ้ำใน 3 ชุดข้อสอบ", setsFound: "H31004, H31008, H31110" }
         ];
 
-        const grid = document.getElementById('vocabGrid');
+        ];
 
+        let currentFilteredData = [...hsk3Data];
+
+        // Text-to-Speech Pronunciation
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN'; // ภาษาจีนกลาง
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("เบราว์เซอร์ของคุณไม่รองรับการออกเสียงเสียงสังเคราะห์");
+            }
+        }
+
+        // Mode Switching
+        function switchMode(mode) {
+            document.getElementById('sectionGrid').classList.add('hidden');
+            document.getElementById('sectionFlashcard').classList.add('hidden');
+            document.getElementById('sectionQuiz').classList.add('hidden');
+            document.getElementById('controlsBar').classList.remove('hidden');
+
+            document.getElementById('btnGrid').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
+            document.getElementById('btnFlashcard').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
+            document.getElementById('btnQuiz').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
+
+            if (mode === 'grid') {
+                document.getElementById('sectionGrid').classList.remove('hidden');
+                document.getElementById('btnGrid').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
+            } else if (mode === 'flashcard') {
+                document.getElementById('sectionFlashcard').classList.remove('hidden');
+                document.getElementById('btnFlashcard').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
+                initFlashcard();
+            } else if (mode === 'quiz') {
+                document.getElementById('sectionQuiz').classList.remove('hidden');
+                document.getElementById('controlsBar').classList.add('hidden');
+                document.getElementById('btnQuiz').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
+                startQuiz();
+            }
+        }
+
+        // GRID RENDER & FILTER
+        const grid = document.getElementById('vocabGrid');
         function renderVocab(data) {
             grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 font-bold">ไม่พบคำศัพท์ที่ค้นหา</div>`;
+                return;
+            }
             data.forEach((item) => {
                 const card = document.createElement('div');
-                card.className = "bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer group";
+                card.className = "bg-white p-6 rounded-3xl border border-gray-200/80 shadow-md hover:border-red-600 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer";
                 
                 card.onclick = () => {
-                    window.location.href = `hsk3-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(item.freqTotal)}&setsFound=${encodeURIComponent(item.setsFound)}`;
+                    window.location.href = `hsk3-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(`ซ้ำใน ${item.freq} ชุดข้อสอบ`)}&setsFound=${encodeURIComponent(item.setsFound)}`;
                 };
 
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
-                            <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">${item.freqTotal}</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="event.stopPropagation(); speakWord('${item.word}')" class="w-7 h-7 bg-red-50 text-red-600 rounded-lg flex items-center justify-center hover:bg-red-600 hover:text-white transition shadow-sm" title="ฟังเสียงอ่าน">🔊</button>
+                                <span class="text-xs font-bold px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full">ซ้ำ ${item.freq} ชุด</span>
+                            </div>
                         </div>
-                        <div class="text-4xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
+                        <div class="text-4xl font-extrabold text-gray-900 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
                         <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
                         <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
                     </div>
@@ -193,14 +368,157 @@
 
         function filterVocab() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = hsk3Data.filter(item => 
+            currentFilteredData = hsk3Data.filter(item => 
                 item.word.toLowerCase().includes(query) || 
                 item.pinyin.toLowerCase().includes(query) || 
                 item.meaning.toLowerCase().includes(query)
             );
-            renderVocab(filtered);
+            renderVocab(currentFilteredData);
         }
 
+        function filterByType(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition";
+            });
+            event.target.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition";
+
+            if(type === 'all') {
+                currentFilteredData = [...hsk3Data];
+            } else {
+                currentFilteredData = hsk3Data.filter(i => i.type.includes(type));
+            }
+            renderVocab(currentFilteredData);
+        }
+
+        function sortVocab() {
+            const sortBy = document.getElementById('sortSelect').value;
+            if(sortBy === 'freq') {
+                currentFilteredData.sort((a,b) => b.freq - a.freq);
+            } else if(sortBy === 'alpha') {
+                currentFilteredData.sort((a,b) => a.pinyin.localeCompare(b.pinyin));
+            } else {
+                currentFilteredData.sort((a,b) => a.id - b.id);
+            }
+            renderVocab(currentFilteredData);
+        }
+
+        // FLASHCARD LOGIC
+        let fcIndex = 0;
+        let isFlipped = false;
+        function initFlashcard() {
+            fcIndex = 0;
+            isFlipped = false;
+            updateFlashcardUI();
+        }
+        function updateFlashcardUI() {
+            const item = hsk3Data[fcIndex];
+            document.getElementById('fcType').innerText = item.type;
+            document.getElementById('fcCurrent').innerText = fcIndex + 1;
+            document.getElementById('fcWord').innerText = item.word;
+            document.getElementById('fcPinyin').innerText = item.pinyin;
+            document.getElementById('fcMeaning').innerText = item.meaning;
+            document.getElementById('fcFreq').innerText = `ซ้ำใน ${item.freq} ชุดข้อสอบ`;
+            document.getElementById('fcExChin').innerText = `【${item.chinese}】`;
+            document.getElementById('fcExPin').innerText = item.exPin;
+            document.getElementById('fcExMean').innerText = item.exMean;
+
+            if(isFlipped) {
+                document.getElementById('flashcardInner').classList.add('rotate-y-180');
+            } else {
+                document.getElementById('flashcardInner').classList.remove('rotate-y-180');
+            }
+        }
+        function flipCard() {
+            isFlipped = !isFlipped;
+            const inner = document.getElementById('flashcardInner');
+            if(isFlipped) inner.classList.add('rotate-y-180');
+            else inner.classList.remove('rotate-y-180');
+        }
+        function nextCard() {
+            isFlipped = false;
+            fcIndex = (fcIndex + 1) % hsk3Data.length;
+            updateFlashcardUI();
+        }
+        function prevCard() {
+            isFlipped = false;
+            fcIndex = (fcIndex - 1 + hsk3Data.length) % hsk3Data.length;
+            updateFlashcardUI();
+        }
+
+        // QUIZ LOGIC
+        let quizScore = 0;
+        let quizStep = 0;
+        const totalQuiz = 5;
+        let currentQuizItem = null;
+
+        function startQuiz() {
+            quizScore = 0;
+            quizStep = 0;
+            nextQuizQuestion();
+        }
+
+        function nextQuizQuestion() {
+            if(quizStep >= totalQuiz) {
+                document.getElementById('sectionQuiz').innerHTML = `
+                    <div class="bg-white p-8 rounded-3xl text-center space-y-4 shadow-xl">
+                        <div class="text-5xl">🏆</div>
+                        <h3 class="text-2xl font-black">สรุปผลการทดสอบ</h3>
+                        <p class="text-gray-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${quizScore}</span> / ${totalQuiz} คะแนน</p>
+                        <button onclick="startQuiz()" class="px-8 py-3 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มทำแบบทดสอบอีกครั้ง ↺</button>
+                    </div>
+                `;
+                return;
+            }
+            quizStep++;
+            document.getElementById('nextQuizBtn').classList.add('hidden');
+            document.getElementById('quizProgress').innerText = `คำถามที่ ${quizStep} / ${totalQuiz}`;
+            document.getElementById('quizScore').innerText = `คะแนน: ${quizScore}`;
+
+            // สุ่มคำถาม
+            currentQuizItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
+            document.getElementById('quizWord').innerText = currentQuizItem.word;
+            document.getElementById('quizPinyin').innerText = currentQuizItem.pinyin;
+
+            // สุ่มช้อยส์
+            let options = [currentQuizItem.meaning];
+            while(options.length < 3) {
+                let randomItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
+                if(!options.includes(randomItem.meaning)) {
+                    options.push(randomItem.meaning);
+                }
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full py-3.5 px-4 rounded-2xl border border-gray-200 font-bold text-sm text-gray-700 bg-gray-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-left flex justify-between items-center";
+                btn.innerHTML = `<span>${opt}</span> <span class="text-xs text-gray-400">เลือก</span>`;
+                btn.onclick = () => checkQuizAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selected, btnElement) {
+            const allBtns = document.getElementById('quizOptions').getElementsByTagName('button');
+            for(let b of allBtns) {
+                b.disabled = true;
+                if(b.innerText.includes(currentQuizItem.meaning)) {
+                    b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
+                }
+            }
+            if(selected === currentQuizItem.meaning) {
+                quizScore++;
+                document.getElementById('quizScore').innerText = `คะแนน: ${quizScore}`;
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
+            } else {
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-red-500 font-bold text-sm text-red-700 bg-red-50 text-left flex justify-between items-center";
+            }
+            document.getElementById('nextQuizBtn').classList.remove('hidden');
+        }
+
+        // Initialize Grid View on Load
         renderVocab(hsk3Data);
     </script>
 </body>

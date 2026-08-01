@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังคำศัพท์ HSK ระดับ 2 - Fast Learn Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
+                    ← กลับสู่หน้าหลัก HSK 1-6
+                </a>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+                    คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 2</span> (165 คำ)
+                </h1>
+                <p class="text-gray-300 text-sm mt-1">วิเคราะห์ความถี่และชุดข้อสอบจริง 10 ชุด ฉบับสมบูรณ์</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="px-4 py-2 rounded-lg text-gray-900 w-72 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: รายการคำศัพท์ -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
+        <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
+        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    </footer>
+
+    <script>
+        // ฐานข้อมูลคำศัพท์ HSK 2 ทั้ง 165 คำ พร้อมรายละเอียด
+        const hsk2Data = [
+            { id: 1, word: "分", pinyin: "fēn", meaning: "นาที", type: "คำนาม/คำกริยา", freqTotal: "เจอ 175 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21336, H21339, H21555801, H215550, H21555D" },
+            { id: 2, word: "个", pinyin: "gè", meaning: "คน / อัน (ลักษณนาม)", type: "ลักษณนาม", freqTotal: "เจอ 110 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555501, H21555C, H21555D" },
+            { id: 3, word: "在", pinyin: "zài", meaning: "อยู่ที่ / กำลัง", type: "คำบุพบท/คำวิเศษณ์", freqTotal: "เจอ 79 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 4, word: "很", pinyin: "hěn", meaning: "มาก", type: "คำวิเศษณ์", freqTotal: "เจอ 60 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 5, word: "看", pinyin: "kàn", meaning: "ดู / มอง / อ่าน", type: "คำกริยา", freqTotal: "เจอ 57 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 6, word: "钟", pinyin: "zhōng", meaning: "นาฬิกา / โมง", type: "คำนาม", freqTotal: "เจอ 55 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555" },
+            { id: 7, word: "点", pinyin: "diǎn", meaning: "โมง / จุด", type: "คำนาม/คำกริยา", freqTotal: "เจอ 46 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 8, word: "听", pinyin: "tīng", meaning: "ฟัง", type: "คำกริยา", freqTotal: "เจอ 39 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21336, H21339, H21555D" },
+            { id: 9, word: "写", pinyin: "xiě", meaning: "เขียน", type: "คำกริยา", freqTotal: "เจอ 39 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 10, word: "问", pinyin: "wèn", meaning: "ถาม", type: "คำกริยา", freqTotal: "เจอ 38 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 11, word: "吃", pinyin: "chī", meaning: "กิน", type: "คำกริยา", freqTotal: "เจอ 36 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 12, word: "多", pinyin: "duō", meaning: "มาก / เท่าไหร่", type: "คำวิเศษณ์/คำคุณศัพท์", freqTotal: "เจอ 32 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 13, word: "能", pinyin: "néng", meaning: "สามารถ", type: "คำกริยาช่วย", freqTotal: "เจอ 32 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 14, word: "要", pinyin: "yào", meaning: "ต้องการ / จะ", type: "คำกริยา/คำกริยาช่วย", freqTotal: "เจอ 31 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555801, H21555C, H21555D" },
+            { id: 15, word: "都", pinyin: "dōu", meaning: "ล้วน / ทั้งหมด", type: "คำวิเศษณ์", freqTotal: "เจอ 27 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 16, word: "就", pinyin: "jiù", meaning: "ก็ / ตั้งแต่", type: "คำวิเศษณ์", freqTotal: "เจอ 26 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 17, word: "会", pinyin: "huì", meaning: "เป็น / สามารถ", type: "คำกริยา/คำกริยาช่วย", freqTotal: "เจอ 25 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 18, word: "杯", pinyin: "bēi", meaning: "แก้ว (ลักษณนาม)", type: "ลักษณนาม", freqTotal: "เจอ 25 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 19, word: "读", pinyin: "dú", meaning: "อ่าน", type: "คำกริยา", freqTotal: "เจอ 24 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21336, H21339, H21555D" },
+            { id: 20, word: "说", pinyin: "shuō", meaning: "พูด / บอก", type: "คำกริยา", freqTotal: "เจอ 23 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 21, word: "水", pinyin: "shuǐ", meaning: "น้ำ", type: "คำนาม", freqTotal: "เจอ 23 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 22, word: "年", pinyin: "nián", meaning: "ปี", type: "คำนาม/ลักษณนาม", freqTotal: "เจอ 23 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 23, word: "太", pinyin: "tài", meaning: "...เหลือเกิน", type: "คำวิเศษณ์", freqTotal: "เจอ 22 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 24, word: "已经", pinyin: "yǐjīng", meaning: "...แล้ว", type: "คำวิเศษณ์", freqTotal: "เจอ 22 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 25, word: "红", pinyin: "hóng", meaning: "สีแดง", type: "คำคุณศัพท์", freqTotal: "เจอ 21 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 26, word: "今天", pinyin: "jīntiān", meaning: "วันนี้", type: "คำนาม", freqTotal: "เจอ 19 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D" },
+            { id: 27, word: "快", pinyin: "kuài", meaning: "เร็ว / จะ...อยู่แล้ว", type: "คำคุณศัพท์/คำวิเศษณ์", freqTotal: "เจอ 18 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 28, word: "想", pinyin: "xiǎng", meaning: "อยาก / คิดถึง", type: "คำกริยา", freqTotal: "เจอ 18 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 29, word: "名字", pinyin: "míngzi", meaning: "ชื่อ", type: "คำนาม", freqTotal: "เจอ 18 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 30, word: "北", pinyin: "běi", meaning: "เหนือ / ปักกิ่ง", type: "คำนาม", freqTotal: "เจอ 17 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 31, word: "号", pinyin: "hào", meaning: "วันที่ / เบอร์", type: "คำนาม", freqTotal: "เจอ 17 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 32, word: "非常", pinyin: "fēicháng", meaning: "มากๆ", type: "คำวิเศษณ์", freqTotal: "เจอ 17 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D" },
+            { id: 33, word: "买", pinyin: "mǎi", meaning: "ซื้อ", type: "คำกริยา", freqTotal: "เจอ 17 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 34, word: "汉语", pinyin: "Hànyǔ", meaning: "ภาษาจีน", type: "คำนาม", freqTotal: "เจอ 17 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 35, word: "也", pinyin: "yě", meaning: "ก็...ด้วย / เช่นกัน", type: "คำวิเศษณ์", freqTotal: "เจอ 16 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 36, word: "书", pinyin: "shū", meaning: "หนังสือ", type: "คำนาม", freqTotal: "เจอ 16 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21555C, H21555D" },
+            { id: 37, word: "房间", pinyin: "fángjiān", meaning: "ห้อง", type: "คำนาม", freqTotal: "เจอ 15 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 38, word: "教室", pinyin: "jiàoshì", meaning: "ห้องเรียน", type: "คำนาม", freqTotal: "เจอ 15 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 39, word: "完", pinyin: "wán", meaning: "เสร็จ", type: "คำกริยา", freqTotal: "เจอ 15 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 40, word: "喝", pinyin: "hē", meaning: "ดื่ม", type: "คำกริยา", freqTotal: "เจอ 15 ครั้ง", setsFound: "H21331, H21334, H21335, H21555C, H21555D" },
+            { id: 41, word: "现在", pinyin: "xiànzài", meaning: "ตอนนี้", type: "คำนาม", freqTotal: "เจอ 15 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 42, word: "跳舞", pinyin: "tiàowǔ", meaning: "เต้นรำ", type: "คำกริยา", freqTotal: "เจอ 14 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 43, word: "黑", pinyin: "hēi", meaning: "สีดำ", type: "คำคุณศัพท์", freqTotal: "เจอ 14 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 44, word: "颜色", pinyin: "yánsè", meaning: "สี", type: "คำนาม", freqTotal: "เจอ 14 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 45, word: "次", pinyin: "cì", meaning: "ครั้ง", type: "ลักษณนาม", freqTotal: "เจอ 14 ครั้ง", setsFound: "H21331, H21332, H21333, H21335, H21555C, H21555D" },
+            { id: 46, word: "给", pinyin: "gěi", meaning: "ให้ / แก่", type: "คำกริยา/คำบุพบท", freqTotal: "เจอ 14 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558" },
+            { id: 47, word: "星期", pinyin: "xīngqī", meaning: "สัปดาห์ / วันในสัปดาห์", type: "คำนาม", freqTotal: "เจอ 14 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 48, word: "同学", pinyin: "tóngxué", meaning: "เพื่อนร่วมชั้น", type: "คำนาม", freqTotal: "เจอ 14 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555D" },
+            { id: 49, word: "错", pinyin: "cuò", meaning: "ผิด", type: "คำคุณศัพท์", freqTotal: "เจอ 13 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 50, word: "白", pinyin: "bái", meaning: "สีขาว", type: "คำคุณศัพท์", freqTotal: "เจอ 13 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 51, word: "可以", pinyin: "kěyǐ", meaning: "ได้", type: "คำกริยาช่วย", freqTotal: "เจอ 13 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 52, word: "弟弟", pinyin: "dìdi", meaning: "น้องชาย", type: "คำนาม", freqTotal: "เจอ 13 ครั้ง", setsFound: "H21331, H21332, H21334, H215558, H21555C, H21555D" },
+            { id: 53, word: "左边", pinyin: "zuǒbian", meaning: "ด้านซ้าย", type: "คำนาม", freqTotal: "เจอ 12 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 54, word: "公司", pinyin: "gōngsī", meaning: "บริษัท", type: "คำนาม", freqTotal: "เจอ 12 ครั้ง", setsFound: "H21331, H21332, H21333, H21335, H21555C, H21555D" },
+            { id: 55, word: "贵", pinyin: "guì", meaning: "แพง", type: "คำคุณศัพท์", freqTotal: "เจอ 12 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 56, word: "觉得", pinyin: "juéde", meaning: "รู้สึก / คิดว่า", type: "คำกริยา", freqTotal: "เจอ 12 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C" },
+            { id: 57, word: "最", pinyin: "zuì", meaning: "ที่สุด", type: "คำวิเศษณ์", freqTotal: "เจอ 12 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 58, word: "雪", pinyin: "xuě", meaning: "หิมะ", type: "คำนาม", freqTotal: "เจอ 12 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 59, word: "明天", pinyin: "míngtiān", meaning: "พรุ่งนี้", type: "คำนาม", freqTotal: "เจอ 12 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 60, word: "医院", pinyin: "yīyuàn", meaning: "โรงพยาบาล", type: "คำนาม", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555C, H21555D" },
+            { id: 61, word: "运动", pinyin: "yùndòng", meaning: "กีฬา / ออกกำลังกาย", type: "คำนาม/คำกริยา", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H215558, H21555D" },
+            { id: 62, word: "对", pinyin: "duì", meaning: "ถูกต้อง / กับ", type: "คำคุณศัพท์/คำบุพบท", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 63, word: "找", pinyin: "zhǎo", meaning: "หา", type: "คำกริยา", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21333, H21555C, H21555D" },
+            { id: 64, word: "比", pinyin: "bǐ", meaning: "กว่า (เปรียบเทียบ)", type: "คำบุพบท", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21334, H21555C, H21555D" },
+            { id: 65, word: "高", pinyin: "gāo", meaning: "สูง", type: "คำคุณศัพท์", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21555C" },
+            { id: 66, word: "月", pinyin: "yuè", meaning: "เดือน", type: "คำนาม", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21334, H215558, H21555C, H21555D" },
+            { id: 67, word: "时候", pinyin: "shíhou", meaning: "ตอน / เวลา", type: "คำนาม", freqTotal: "เจอ 11 ครั้ง", setsFound: "H21331, H21332, H21334, H21335, H21555C, H21555D" },
+            { id: 68, word: "火车", pinyin: "huǒchē", meaning: "รถไฟ", type: "คำนาม", freqTotal: "เจอ 10 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 69, word: "洗", pinyin: "xǐ", meaning: "ซัก / ล้าง", type: "คำกริยา", freqTotal: "เจอ 10 ครั้ง", setsFound: "H21332, H21333, H21334, H21335, H21555C" },
+            { id: 70, word: "别", pinyin: "bié", meaning: "อย่า", type: "คำวิเศษณ์", freqTotal: "เจอ 10 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 71, word: "羊肉", pinyin: "yángròu", meaning: "เนื้อแกะ", type: "คำนาม", freqTotal: "เจอ 10 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 72, word: "衣服", pinyin: "yīfu", meaning: "เสื้อผ้า", type: "คำนาม", freqTotal: "เจอ 10 ครั้ง", setsFound: "H21332, H21333, H21334, H21335, H21555C" },
+            { id: 73, word: "朋友", pinyin: "péngyou", meaning: "เพื่อน", type: "คำนาม", freqTotal: "เจอ 10 ครั้ง", setsFound: "H21331, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 74, word: "远", pinyin: "yuǎn", meaning: "ไกล", type: "คำคุณศัพท์", freqTotal: "เจอ 9 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335" },
+            { id: 75, word: "游泳", pinyin: "yóuyǒng", meaning: "ว่ายน้ำ", type: "คำกริยา", freqTotal: "เจอ 9 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 76, word: "岁", pinyin: "suì", meaning: "ขวบ / ปี (อายุ)", type: "ลักษณนาม", freqTotal: "เจอ 9 ครั้ง", setsFound: "H21331, H21332, H21334, H21335, H21555C, H21555D" },
+            { id: 77, word: "雨", pinyin: "yǔ", meaning: "ฝน", type: "คำนาม", freqTotal: "เจอ 9 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 78, word: "去年", pinyin: "qùnián", meaning: "ปีที่แล้ว", type: "คำนาม", freqTotal: "เจอ 9 ครั้ง", setsFound: "H21331, H21332, H21334, H21335, H21555C, H21555D" },
+            { id: 79, word: "机场", pinyin: "jīchǎng", meaning: "สนามบิน", type: "คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C" },
+            { id: 80, word: "火车站", pinyin: "huǒchēzhàn", meaning: "สถานีรถไฟ", type: "คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 81, word: "西", pinyin: "xī", meaning: "ตะวันตก", type: "คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21333, H21334, H21555C, H21555D" },
+            { id: 82, word: "南", pinyin: "nán", meaning: "ใต้", type: "คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 83, word: "踢足球", pinyin: "tī zúqiú", meaning: "เตะฟุตบอล", type: "คำกริยา", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 84, word: "打篮球", pinyin: "dǎ lánqiú", meaning: "เล่นบาสเกตบอล", type: "คำกริยา", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 85, word: "意思", pinyin: "yìsi", meaning: "ความหมาย / สนุก", type: "คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332, H21333, H21334" },
+            { id: 86, word: "少", pinyin: "shǎo", meaning: "น้อย", type: "คำคุณศัพท์", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332, H21334, H21335, H21555D" },
+            { id: 87, word: "回答", pinyin: "huídá", meaning: "ตอบ", type: "คำกริยา/คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 88, word: "换", pinyin: "huàn", meaning: "เปลี่ยน", type: "คำกริยา", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 89, word: "哭", pinyin: "kū", meaning: "ร้องไห้", type: "คำกริยา", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 90, word: "才", pinyin: "cái", meaning: "เพิ่ง", type: "คำวิเศษณ์", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 91, word: "向", pinyin: "xiàng", meaning: "ทาง / ไปยัง", type: "คำบุพบท", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332" },
+            { id: 92, word: "椅子", pinyin: "yǐzi", meaning: "เก้าอี้", type: "คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D" },
+            { id: 93, word: "老师", pinyin: "lǎoshī", meaning: "คุณครู / อาจารย์", type: "คำนาม", freqTotal: "เจอ 8 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21555C, H21555D" },
+            { id: 94, word: "出租车", pinyin: "chūzūchē", meaning: "แท็กซี่", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 95, word: "离", pinyin: "lí", meaning: "ห่างจาก", type: "คำบุพบท", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335" },
+            { id: 96, word: "前面", pinyin: "qiánmiàn", meaning: "ข้างหน้า", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C" },
+            { id: 97, word: "右边", pinyin: "yòubian", meaning: "ด้านขวา", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21332, H21333, H21334, H21555C, H21555D" },
+            { id: 98, word: "宾馆", pinyin: "bīnguǎn", meaning: "โรงแรม", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335" },
+            { id: 99, word: "真", pinyin: "zhēn", meaning: "จริง", type: "คำวิเศษณ์", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21334, H21335, H21555D" },
+            { id: 100, word: "懂", pinyin: "dǒng", meaning: "เข้าใจ", type: "คำกริยา", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21334, H21335, H21555C" },
+            { id: 101, word: "帮助", pinyin: "bāngzhù", meaning: "ช่วยเหลือ", type: "คำกริยา/คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335" },
+            { id: 102, word: "从", pinyin: "cóng", meaning: "จาก", type: "คำบุพบท", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21332, H21333, H21555C, H21555D" },
+            { id: 103, word: "件", pinyin: "jiàn", meaning: "ตัว / ชิ้น (ลักษณนามเสื้อผ้า)", type: "ลักษณนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21332, H21333, H21334, H21335" },
+            { id: 104, word: "卖", pinyin: "mài", meaning: "ขาย", type: "คำกริยา", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21555C" },
+            { id: 105, word: "茶", pinyin: "chá", meaning: "ชา", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21555C" },
+            { id: 106, word: "鸡蛋", pinyin: "jīdàn", meaning: "ไข่ไก่", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21335, H21555C, H21555D" },
+            { id: 107, word: "电脑", pinyin: "diànnǎo", meaning: "คอมพิวเตอร์", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21555C, H21555D" },
+            { id: 108, word: "冷", pinyin: "lěng", meaning: "หนาว", type: "คำคุณศัพท์", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21555C" },
+            { id: 109, word: "日", pinyin: "rì", meaning: "วัน / วันที่", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21332, H21334, H21555D" },
+            { id: 110, word: "姐姐", pinyin: "jiějie", meaning: "พี่สาว", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21332, H21333, H21335, H21555C" },
+            { id: 111, word: "丈夫", pinyin: "zhàngfu", meaning: "สามี", type: "คำนาม", freqTotal: "เจอ 7 ครั้ง", setsFound: "H21331, H21332, H21333, H21335, H21555C, H21555D" },
+            { id: 112, word: "商店", pinyin: "shāngdiàn", meaning: "ร้านค้า", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 113, word: "唱歌", pinyin: "chànggē", meaning: "ร้องเพลง", type: "คำกริยา", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21333, H21334, H21335, H21555C" },
+            { id: 114, word: "药", pinyin: "yào", meaning: "ยา", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21332, H21333, H21555C, H21555D" },
+            { id: 115, word: "身体", pinyin: "shēntǐ", meaning: "ร่างกาย / สุขภาพ", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21332, H21335, H21555C, H21555D" },
+            { id: 116, word: "慢", pinyin: "màn", meaning: "ช้า", type: "คำคุณศัพท์", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21332, H21333, H21335, H21555D" },
+            { id: 117, word: "便宜", pinyin: "piányi", meaning: "ถูก", type: "คำคุณศัพท์", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21332, H21333, H21335, H21555D" },
+            { id: 118, word: "介绍", pinyin: "jièshào", meaning: "แนะนำ", type: "คำกริยา", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21332, H21333, H21334" },
+            { id: 119, word: "穿", pinyin: "chuān", meaning: "สวมใส่", type: "คำกริยา", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21332, H21334, H21335, H215558, H21555C" },
+            { id: 120, word: "咖啡", pinyin: "kāfēi", meaning: "กาแฟ", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331" },
+            { id: 121, word: "米饭", pinyin: "mǐfàn", meaning: "ข้าวสวย", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D" },
+            { id: 122, word: "牛奶", pinyin: "niúnǎi", meaning: "นมวัว", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21334, H21335, H21555" },
+            { id: 123, word: "电话", pinyin: "diànhuà", meaning: "โทรศัพท์ / เบอร์โทร", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21335, H21555C, H21555D" },
+            { id: 124, word: "阴", pinyin: "yīn", meaning: "ครึ้ม (เมฆมาก)", type: "คำคุณศัพท์", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21334, H21335, H215558, H21555C" },
+            { id: 125, word: "热", pinyin: "rè", meaning: "ร้อน", type: "คำคุณศัพท์", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21332, H21334, H21335, H21555D" },
+            { id: 126, word: "妹妹", pinyin: "mèimei", meaning: "น้องสาว", type: "คำนาม", freqTotal: "เจอ 6 ครั้ง", setsFound: "H21331, H21333, H21334, H215558, H21555C" },
+            { id: 127, word: "飞机", pinyin: "fēijī", meaning: "เครื่องบิน", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21335, H21555D" },
+            { id: 128, word: "路", pinyin: "lù", meaning: "ถนน / ทาง", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21334, H21335" },
+            { id: 129, word: "近", pinyin: "jìn", meaning: "ใกล้", type: "คำคุณศัพท์", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21333, H21335" },
+            { id: 130, word: "后面", pinyin: "hòumiàn", meaning: "ข้างหลัง", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21335, H21555C, H21555D" },
+            { id: 131, word: "生病", pinyin: "shēngbìng", meaning: "ป่วย", type: "คำกริยา", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21333, H21334, H21335" },
+            { id: 132, word: "休息", pinyin: "xiūxi", meaning: "พักผ่อน", type: "คำกริยา", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335" },
+            { id: 133, word: "高兴", pinyin: "gāoxìng", meaning: "ดีใจ / มีความสุข", type: "คำคุณศัพท์", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21333, H21334, H21555C" },
+            { id: 134, word: "笑", pinyin: "xiào", meaning: "ยิ้ม / หัวเราะ", type: "คำกริยา", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21332, H21333, H21334, H21335, H21555D" },
+            { id: 135, word: "希望", pinyin: "xīwàng", meaning: "หวัง / หวังว่า", type: "คำกริยา/คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21332, H21333, H21334" },
+            { id: 136, word: "正在", pinyin: "zhèngzài", meaning: "กำลัง...", type: "คำวิเศษณ์", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21334, H21335, H21555C, H21555D" },
+            { id: 137, word: "鱼", pinyin: "yú", meaning: "ปลา", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21333, H21334, H21335, H21555C" },
+            { id: 138, word: "手机", pinyin: "shǒujī", meaning: "โทรศัพท์มือถือ", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21333, H21335" },
+            { id: 139, word: "手表", pinyin: "shǒubiǎo", meaning: "นาฬิกาข้อมือ", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21333, H21555D" },
+            { id: 140, word: "铅笔", pinyin: "qiānbǐ", meaning: "ดินสอ", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21555C" },
+            { id: 141, word: "报纸", pinyin: "bàozhǐ", meaning: "หนังสือพิมพ์", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21332, H21333, H21334, H21335, H21555C" },
+            { id: 142, word: "桌子", pinyin: "zhuōzi", meaning: "โต๊ะ", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21334" },
+            { id: 143, word: "晴", pinyin: "qíng", meaning: "แจ่มใส (ท้องฟ้าโปร่ง)", type: "คำคุณศัพท์", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21333, H21335" },
+            { id: 144, word: "先生", pinyin: "xiānsheng", meaning: "คุณผู้ชาย / สามี", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21333, H21334, H21335" },
+            { id: 145, word: "小姐", pinyin: "xiǎojiě", meaning: "คุณผู้หญิง / คุณหนู", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21333, H21335" },
+            { id: 146, word: "学生", pinyin: "xuésheng", meaning: "นักเรียน / นักศึกษา", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21332, H21334, H21335, H215558, H21555D" },
+            { id: 147, word: "哥哥", pinyin: "gēge", meaning: "พี่ชาย", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21335, H21555C, H21555D" },
+            { id: 148, word: "儿子", pinyin: "érzi", meaning: "ลูกชาย", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21331, H21332, H21334, H215558, H21555D" },
+            { id: 149, word: "女儿", pinyin: "nǚ'ér", meaning: "ลูกสาว", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21333, H21334, H21555D" },
+            { id: 150, word: "妻子", pinyin: "qīzi", meaning: "ภรรยา", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21332, H21335, H215558, H21555C" },
+            { id: 151, word: "妈妈", pinyin: "māma", meaning: "คุณแม่", type: "คำนาม", freqTotal: "เจอ 5 ครั้ง", setsFound: "H21332, H21333, H21335, H21555D" },
+            { id: 152, word: "东", pinyin: "dōng", meaning: "ตะวันออก", type: "คำนาม", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21331, H21334, H21555C, H21555D" },
+            { id: 153, word: "旅游", pinyin: "lùyóu", meaning: "ท่องเที่ยว", type: "คำกริยา/คำนาม", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21332, H21333, H21335, H21555D" },
+            { id: 154, word: "累", pinyin: "lèi", meaning: "เหนื่อย", type: "คำคุณศัพท์", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21331, H21332, H21334" },
+            { id: 155, word: "往", pinyin: "wǎng", meaning: "ไปทาง", type: "คำบุพบท", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21332, H21333, H21335" },
+            { id: 156, word: "张", pinyin: "zhāng", meaning: "แผ่น / ใบ (ลักษณนาม)", type: "ลักษณนาม", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21331, H21332, H21555D" },
+            { id: 157, word: "苹果", pinyin: "píngguǒ", meaning: "แอปเปิ้ล", type: "คำนาม", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21332, H21334, H21335, H21555D" },
+            { id: 158, word: "西瓜", pinyin: "xīguā", meaning: "แตงโม", type: "คำนาม", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21331, H21333, H215558" },
+            { id: 159, word: "天气", pinyin: "tiānqì", meaning: "สภาพอากาศ", type: "คำนาม", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21332, H21333, H21334, H21335" },
+            { id: 160, word: "昨天", pinyin: "zuótiān", meaning: "เมื่อวานนี้", type: "คำนาม", freqTotal: "เจอ 4 ครั้ง", setsFound: "H21333, H21334, H21555C" },
+            { id: 161, word: "公共汽车", pinyin: "gōnggòng qìchē", meaning: "รถประจำทาง", type: "คำนาม", freqTotal: "เจอ 3 ครั้ง", setsFound: "H21331, H21333, H215558" },
+            { id: 162, word: "跑步", pinyin: "pǎobù", meaning: "วิ่ง", type: "คำกริยา", freqTotal: "เจอ 3 ครั้ง", setsFound: "H21333, H21335, H215558" },
+            { id: 163, word: "面条儿", pinyin: "miàntiáor", meaning: "บะหมี่", type: "คำนาม", freqTotal: "เจอ 3 ครั้ง", setsFound: "H21331, H21332, H21333" },
+            { id: 164, word: "爸爸", pinyin: "bàba", meaning: "คุณพ่อ", type: "คำนาม", freqTotal: "เจอ 3 ครั้ง", setsFound: "H21334, H21555C" },
+            { id: 165, word: "汉字", pinyin: "Hànzì", meaning: "ตัวอักษรจีน", type: "คำนาม", freqTotal: "เจอ 1 ครั้ง", setsFound: "H21334" }
+        ];
+
+        const grid = document.getElementById('vocabGrid');
+
+        function renderVocab(data) {
+            grid.innerHTML = '';
+            data.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer group";
+                
+                card.onclick = () => {
+                    window.location.href = `hsk2-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(item.freqTotal)}&setsFound=${encodeURIComponent(item.setsFound)}`;
+                };
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
+                            <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">${item.freqTotal}</span>
+                        </div>
+                        <div class="text-4xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
+                        <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
+                        <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
+                        <span>ดูสถิติและตัวอย่างประโยค</span>
+                        <span>→</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterVocab() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = hsk2Data.filter(item => 
+                item.word.toLowerCase().includes(query) || 
+                item.pinyin.toLowerCase().includes(query) || 
+                item.meaning.toLowerCase().includes(query)
+            );
+            renderVocab(filtered);
+        }
+
+        renderVocab(hsk2Data);
+    </script>
+</body>
+</html>

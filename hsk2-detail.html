@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดคำศัพท์ HSK 2 - Fast Learn Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
+        <div class="max-w-4xl mx-auto px-4 py-8 text-center">
+            <div class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow">
+                FAST LEARN ACADEMY
+            </div>
+            <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide">
+                รายละเอียดคำศัพท์ <span class="text-yellow-400">HSK ระดับ 2</span>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content: รายละเอียด -->
+    <main class="max-w-2xl mx-auto px-4 py-12 flex-grow w-full">
+        <div class="bg-white rounded-3xl border-2 border-gray-100 shadow-xl p-8 md:p-12 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+            
+            <!-- ตัวอักษรจีนหลักและพินอินคำศัพท์ -->
+            <div id="wordDisplay" class="text-7xl md:text-8xl font-extrabold text-gray-900 mb-2">-</div>
+            <div id="pinyinDisplay" class="text-2xl font-bold text-red-600 mb-6">-</div>
+
+            <!-- ข้อมูลรายละเอียด -->
+            <div class="bg-gray-50 rounded-2xl p-6 text-left space-y-4 mb-8 border border-gray-100">
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                    <span class="font-semibold text-gray-500">ความหมายภาษาไทย:</span>
+                    <span id="meaningDisplay" class="text-lg font-bold text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                    <span class="font-semibold text-gray-500">ประเภทคำ:</span>
+                    <span id="typeDisplay" class="font-medium text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                    <span class="font-semibold text-gray-500">ความถี่รวมทั้งหมด:</span>
+                    <span id="freqTotalDisplay" class="font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full text-sm">-</span>
+                </div>
+                <div class="space-y-1">
+                    <span class="font-semibold text-gray-500 block">ชุดข้อสอบที่พบ:</span>
+                    <span id="setsFoundDisplay" class="text-sm font-medium text-gray-700 block bg-white p-3 rounded-xl border border-gray-200">-</span>
+                </div>
+            </div>
+
+            <!-- ประโยคตัวอย่าง พร้อมพินอินและคำแปลภาษาไทย -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-xl text-left mb-8 space-y-3">
+                <h3 class="text-xs font-bold text-yellow-800 uppercase tracking-wider">ประโยคตัวอย่างจากข้อสอบ (Example)</h3>
+                <p id="exampleChinese" class="text-xl font-bold text-gray-900">-</p>
+                <p id="examplePinyin" class="text-sm font-semibold text-red-600">-</p>
+                <p id="exampleMeaning" class="text-sm font-medium text-gray-700">-</p>
+            </div>
+
+            <!-- ปุ่มย้อนกลับ -->
+            <a href="hsk2.html" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-red-600 transition shadow-lg">
+                ← กลับสู่หน้าคลังคำศัพท์ HSK 2
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
+        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    </footer>
+
+    <script>
+        // ฐานข้อมูลประโยคตัวอย่างตรงตามคำศัพท์ HSK 2 ทั้ง 165 คำ
+        const exampleDatabaseHSK2 = {
+            "分": { chinese: "他们已经游了20分钟了。", pinyin: "Tāmen yǐjīng yóule 20 fēnzhōng le.", meaning: "แปลไทย: พวกเขาว่ายน้ำไปได้ 20 นาทีแล้ว" },
+            "个": { chinese: "小王,这里有几个杯子?", pinyin: "Xiǎo Wáng, zhèli yǒu jǐ ge bēizi?", meaning: "แปลไทย: เสี่ยวหวัง ที่นี่มีแก้วกี่ใบ?" },
+            "在": { chinese: "他正在北京旅游。", pinyin: "Tā zhèngzài Běijīng lùyóu.", meaning: "แปลไทย: เขากำลังท่องเที่ยวอยู่ที่ปักกิ่ง" },
+            "很": { chinese: "这儿的羊肉很好吃。", pinyin: "Zhèr de yángròu hěn hǎochī.", meaning: "แปลไทย: เนื้อแกะที่นี่อร่อยมาก" },
+            "看": { chinese: "你知道吗?这是我第一次看见下雪。", pinyin: "Nǐ zhīdào ma? Zhè shì wǒ dì yī cì kànjiàn xiàxuě.", meaning: "แปลไทย: เธอรู้ไหม? นี่คือครั้งแรกที่ฉันเห็นหิมะตก" },
+            "钟": { chinese: "10分钟后到。", pinyin: "10 fēnzhōng hòu dào.", meaning: "แปลไทย: 10 นาทีทีหลังถึง" },
+            "点": { chinese: "现在是11点30分。", pinyin: "Xiànzài shì 11 diǎn 30 fēn.", meaning: "แปลไทย: ตอนนี้คือเวลา 11 โมง 30 นาที" },
+            "听": { chinese: "弟弟在听歌,他听不见你说话。", pinyin: "Dìdi zài tīng gē, tā tīngbújiàn nǐ shuōhuà.", meaning: "แปลไทย: น้องชายกำลังฟังเพลงอยู่ เขาไม่ได้ยินที่คุณพูด" },
+            "写": { chinese: "请在这儿写您的名字。", pinyin: "Qǐng zài zhèr xiě nín de míngzi.", meaning: "แปลไทย: โปรดเขียนชื่อของคุณตรงนี้" },
+            "问": { chinese: "你姐姐呢?我想问她几个问题。", pinyin: "Nǐ jiějie ne? Wǒ xiǎng wèn tā jǐ ge wèntí.", meaning: "แปลไทย: พี่สาวคุณล่ะ? ฉันอยากถามปัญหาเขาสักสองสามข้อ" },
+            "吃": { chinese: "吃完鸡蛋就走吧。", pinyin: "Chīwán jīdàn jiù zǒu ba.", meaning: "แปลไทย: ทานไข่ต้มเสร็จแล้วก็ไปกันเถอะ" },
+            "多": { chinese: "为什么她的比我的多?", pinyin: "Wèishénme tā de bǐ wǒ de duō?", meaning: "แปลไทย: ทำไมของเธอถึงมีมากกว่าของฉัน?" },
+            "能": { chinese: "身体怎么样?什么时候能出院?", pinyin: "Shēntǐ zěnmeyàng? Shénme shíhou néng chūyuàn?", meaning: "แปลไทย: ร่างกายเป็นอย่างไรบ้าง? เมื่อไหร่ถึงจะออกจากโรงพยาบาลได้?" },
+            "要": { chinese: "服务员,我要的是红茶。", pinyin: "Fúwùyuán, wǒ yào de shì hóngchá.", meaning: "แปลไทย: พนักงานเสิร์ฟ สิ่งที่ฉันต้องการคือชาดำ" },
+            "都": { chinese: "每个星期六,我都去打篮球。", pinyin: "Měi ge xīngqíliù, wǒ dōu qù dǎ lánqiú.", meaning: "แปลไทย: ทุกๆ วันเสาร์ ฉันไปเล่นบาสเกตบอล" },
+            "就": { chinese: "他早上6点就起床了。", pinyin: "Tā zǎoshang 6 diǎn jiù qǐchuáng le.", meaning: "แปลไทย: เขาตื่นนอนตั้งแต่ 6 โมงเช้าแล้ว" },
+            "会": { chinese: "我会跳舞,但跳得不怎么样。", pinyin: "Wǒ huì tiàowǔ, dàn tiàode bù zěnmeyàng.", meaning: "แปลไทย: ฉันเต้นรำเป็น แต่เต้นได้ไม่ค่อยดีเท่าไหร่" },
+            "杯": { chinese: "来,喝杯咖啡,休息一下。", pinyin: "Lái, hē bēi kāfēi, xiūxi yīxià.", meaning: "แปลไทย: มา ดื่มกาแฟสักแก้ว พักผ่อนสักหน่อย" },
+            "读": { chinese: "这本书你读完了?怎么样?", pinyin: "Zhè běn shū nǐ dúwán le? Zěnmeyàng?", meaning: "แปลไทย: หนังสือเล่มนี้คุณอ่านจบหรือยัง? เป็นอย่างไรบ้าง?" },
+            "说": { chinese: "请在这儿写您的名字。", pinyin: "Qǐng zài zhèr xiě nín de míngzi.", meaning: "แปลไทย: โปรดเขียนชื่อของคุณตรงนี้" },
+            "水": { chinese: "喝水对身体非常好。", pinyin: "Hē shuǐ duì shēntǐ fēicháng hǎo.", meaning: "แปลไทย: การดื่มน้ำดีต่อร่างกายมากๆ" },
+            "年": { chinese: "我来北京好几年了。", pinyin: "Wǒ lái Běijīng hǎo jǐ nián le.", meaning: "แปลไทย: ฉันมาปักกิ่งตั้งหลายปีแล้ว" },
+            "太": { chinese: "这儿太漂亮了。", pinyin: "Zhèr tài piàoliang le.", meaning: "แปลไทย: ที่นี่สวยงามเหลือเกิน" },
+            "已经": { chinese: "他们已经游了20分钟了。", pinyin: "Tāmen yǐjīng yóule 20 fēnzhōng le.", meaning: "แปลไทย: พวกเขาว่ายน้ำไปได้ 20 นาทีแล้ว" },
+            "红": { chinese: "左边那个红色的是我的。", pinyin: "Zuǒbian nàge hóngsè de shì wǒ de.", meaning: "แปลไทย: อันสีแดงทางซ้ายนั้นคือของฉัน" },
+            "今天": { chinese: "你今天怎么没来上班?", pinyin: "Nǐ jīntiān zěnme méi lái shàngbān?", meaning: "แปลไทย: ทำไมวันนี้คุณถึงไม่มาทำงาน?" },
+            "快": { chinese: "都快11点了,儿子可能已经睡了。", pinyin: "Dōu kuài 11 diǎn le, érzi kěnéng yǐjīng shuì le.", meaning: "แปลไทย: ก็จะ 11 โมงแล้ว ลูกชายอาจจะหลับไปแล้ว" },
+            "想": { chinese: "我想问她几个问题。", pinyin: "Wǒ xiǎng wèn tā jǐ ge wèntí.", meaning: "แปลไทย: ฉันอยากจะถามปัญหาเขาสักสองสามข้อ" },
+            "名字": { chinese: "请在这儿写您的名字。", pinyin: "Qǐng zài zhèr xiě nín de míngzi.", meaning: "แปลไทย: โปรดเขียนชื่อของคุณตรงนี้" },
+            "北": { chinese: "9月是北京天气最好的时候。", pinyin: "9 yuè shì Běijīng tiānqì zuì hǎo de shíhou.", meaning: "แปลไทย: เดือนกันยายนคือช่วงเวลาที่อากาศที่ปักกิ่งดีที่สุด" },
+            "号": { chinese: "给你票,6号的。", pinyin: "Gěi nǐ piào, 6 hào de.", meaning: "แปลไทย: ให้ตั๋วคุณ ของวันที่ 6" },
+            "非常": { chinese: "这几个颜色我都非常喜欢。", pinyin: "Zhè jǐ ge yánsè wǒ dōu fēicháng xǐhuan.", meaning: "แปลไทย: สีเหล่านี้ฉันชอบมากๆ ทั้งหมดเลย" },
+            "买": { chinese: "前面卖西瓜,很便宜。", pinyin: "Qiánmiàn mài xīguā, hěn piányi.", meaning: "แปลไทย: ข้างหน้าขายแตงโม ราคาถูกมาก" },
+            "汉语": { chinese: "你的汉语说得很好。", pinyin: "Nǐ de Hànyǔ shuōde hěn hǎo.", meaning: "แปลไทย: ภาษาจีนของคุณพูดได้ดีมาก" },
+            "也": { chinese: "我也想学跳舞,可以吗?", pinyin: "Wǒ yě xiǎng xué tiàowǔ, kěyǐ ma?", meaning: "แปลไทย: ฉันก็อยากเรียนเต้นรำด้วย ได้ไหม?" },
+            "书": { chinese: "这本书你读完了?", pinyin: "Zhè běn shū nǐ dúwán le?", meaning: "แปลไทย: หนังสือเล่มนี้คุณอ่านจบหรือยัง?" },
+            "房间": { chinese: "房间里的东西都是你的吗?", pinyin: "Fángjiān lǐ de dōngxi dōu shì nǐ de ma?", meaning: "แปลไทย: ข้าวของในห้องเป็นของคุณทั้งหมดเลยใช่ไหม?" },
+            "教室": { chinese: "他还在教室里学习。", pinyin: "Tā hái zài jiàoshì lǐ xuéxí.", meaning: "แปลไทย: เธอยังคงเรียนหนังสืออยู่ในห้องเรียน" },
+            "完": { chinese: "等我写完后,我就去公司找你。", pinyin: "Děng wǒ xiěwán hòu, wǒ jiù qù gōngsī zhǎo nǐ.", meaning: "แปลไทย: รอฉันเขียนเสร็จก่อน แล้วฉันจะไปหาคุณที่บริษัท" },
+            "喝": { chinese: "来,喝杯咖啡,休息一下。", pinyin: "Lái, hē bēi kāfēi, xiūxi yīxià.", meaning: "แปลไทย: มา ดื่มกาแฟสักแก้ว พักผ่อนสักหน่อย" },
+            "现在": { chinese: "现在是11点30分。", pinyin: "Xiànzài shì 11 diǎn 30 fēn.", meaning: "แปลไทย: ตอนนี้คือเวลา 11 โมง 30 นาที" },
+            "跳舞": { chinese: "我会跳舞,但跳得不怎么样。", pinyin: "Wǒ huì tiàowǔ, dàn tiàode bù zěnmeyàng.", meaning: "แปลไทย: ฉันเต้นรำเป็น แต่เต้นได้ไม่ค่อยดีเท่าไหร่" },
+            "黑": { chinese: "黑色的很便宜。", pinyin: "Hēisè de hěn piányi.", meaning: "แปลไทย: สีดำราคาถูกมาก" },
+            "颜色": { chinese: "小王的杯子是什么颜色的?", pinyin: "Xiǎo Wáng de bēizi shì shénme yánsè de?", meaning: "แปลไทย: แก้วน้ำของเสี่ยวหวังคือสีอะไร?" },
+            "次": { chinese: "这是我第一次看见下雪。", pinyin: "Zhè shì wǒ dì yī cì kànjiàn xiàxuě.", meaning: "แปลไทย: นี่คือครั้งแรกที่ฉันเห็นหิมะตก" },
+            "给": { chinese: "服务员,请给我一杯咖啡。", pinyin: "Fúwùyuán, qǐng gěi wǒ yì bēi kāfēi.", meaning: "แปลไทย: พนักงานเสิร์ฟ กรุณาให้กาแฟฉันหนึ่งแก้ว" },
+            "星期": { chinese: "每个星期六,我都去打篮球。", pinyin: "Měi ge xīngqíliù, wǒ dōu qù dǎ lánqiú.", meaning: "แปลไทย: ทุกๆ วันเสาร์ ฉันไปเล่นบาสเกตบอล" },
+            "同学": { chinese: "你和他是同学?", pinyin: "Nǐ hé tā shì tóngxué?", meaning: "แปลไทย: คุณกับเขาเป็นเพื่อนร่วมชั้นกันเหรอ?" },
+            "错": { chinese: "错了,左边的是哥哥,右边这个是弟弟。", pinyin: "Cuò le, zuǒbian shì gēge, yòubian zhège shì dìdi.", meaning: "แปลไทย: ผิดแล้ว ด้านซ้ายคือพี่ชาย ด้านขวานี้คือน้องชาย" },
+            "白": { chinese: "小白是个医生。", pinyin: "Xiǎo Bái shì ge yīshēng.", meaning: "แปลไทย: เสี่ยวไป๋เป็นคุณหมอ" },
+            "可以": { chinese: "下课后可以来问我。", pinyin: "Xiàkè hòu kěyǐ lái wèn wǒ.", meaning: "แปลไทย: หลังเลิกเรียนสามารถมาถามฉันได้" },
+            "弟弟": { chinese: "我弟弟在一家电脑公司找了个工作。", pinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", meaning: "แปลไทย: น้องชายฉันหาได้งานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่ง" },
+            "左边": { chinese: "左边是“女”字,右边是“生”字。", pinyin: "Zuǒbian shì 'nǚ' zì, yòubian shì 'shēng' zì.", meaning: "แปลไทย: ด้านซ้ายคืออักษร 'นวี่', ด้านขวาคืออักษร 'เซิง'" },
+            "公司": { chinese: "我弟弟在一家电脑公司找了个工作。", pinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", meaning: "แปลไทย: น้องชายฉันหาได้งานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่ง" },
+            "贵": { chinese: "这儿的羊肉很好吃,也很贵。", pinyin: "Zhèr de yángròu hěn hǎochī, yě hěn guì.", meaning: "แปลไทย: เนื้อแกะที่นี่อร่อยมาก และก็แพงมากด้วย" },
+            "觉得": { chinese: "我觉得这件就很不错。", pinyin: "Wǒ juéde zhè jiàn jiù hěn búcuò.", meaning: "แปลไทย: ฉันรู้สึกว่าตัวนี้ก็ไม่เลวเลย" },
+            "最": { chinese: "我最喜欢踢足球。", pinyin: "Wǒ zuì xǐhuan tī zúqiú.", meaning: "แปลไทย: ฉันชอบเตะฟุตบอลมากที่สุด" },
+            "雪": { chinese: "这是我第一次看见下雪。", pinyin: "Zhè shì wǒ dì yī cì kànjiàn xiàxuě.", meaning: "แปลไทย: นี่คือครั้งแรกที่ฉันเห็นหิมะตก" },
+            "明天": { chinese: "明天天气怎么样?", pinyin: "Míngtiān tiānqì zěnmeyàng?", meaning: "แปลไทย: พรุ่งนี้สภาพอากาศเป็นอย่างไรบ้าง?" },
+            "医院": { chinese: "听说她孩子生病了,她去医院了。", pinyin: "Tīngshuō tā háizi shēngbìng le, tā qù yīyuàn le.", meaning: "แปลไทย: ได้ยินว่าลูกของเธอป่วย เธอไปโรงพยาบาลแล้ว" },
+            "运动": { chinese: "你喜欢什么运动?", pinyin: "Nǐ xǐhuan shénme yùndòng?", meaning: "แปลไทย: คุณชอบกีฬาอะไร?" },
+            "对": { chinese: "没关系,我知道你很忙。", pinyin: "Méiguānxi, wǒ zhīdào nǐ hěn máng.", meaning: "แปลไทย: ไม่เป็นไร ฉันรู้ว่าคุณยุ่งมาก" },
+            "找": { chinese: "我弟弟在一家电脑公司找了个工作。", pinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", meaning: "แปลไทย: น้องชายของฉันหาได้งานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่ง" },
+            "比": { chinese: "今年比去年热得早。", pinyin: "Jīnnián bǐ qùnián rède zǎo.", meaning: "แปลไทย: ปีนี้ร้อนเร็วกว่าปีที่แล้ว" },
+            "高": { chinese: "弟弟比我高。", pinyin: "Dìdi bǐ wǒ gāo.", meaning: "แปลไทย: น้องชายสูงกว่าฉัน" },
+            "月": { chinese: "去年8月开始学习汉语", pinyin: "Qùnián 8 yuè kāishǐ xuéxí Hànyǔ", meaning: "แปลไทย: เริ่มเรียนภาษาจีนเดือนสิงหาคมปีที่แล้ว" },
+            "时候": { chinese: "我还在火车上的时候...", pinyin: "Wǒ hái zài huǒchē shàng de shíhou...", meaning: "แปลไทย: ตอนที่ฉันยังอยู่บนรถไฟ..." },
+            "火车": { chinese: "我明天要早起去火车站。", pinyin: "Wǒ míngtiān yào zǎo qǐ qù huǒchēzhàn.", meaning: "แปลไทย: พรุ่งนี้ฉันต้องตื่นเช้าไปสถานีรถไฟ" },
+            "洗": { chinese: "妻子这几天很忙,所以我洗衣服。", pinyin: "Qīzi zhè jǐ tiān hěn máng, suǒyǐ wǒ xǐ yīfu.", meaning: "แปลไทย: ช่วงนี้ภรรยายุ่งมาก ดังนั้นฉันจึงซักผ้าเอง" },
+            "别": { chinese: "这些事,你别告诉妈,好吗?", pinyin: "Zhèxiē shì, nǐ bié gàosu mā, hǎo ma?", meaning: "แปลไทย: เรื่องเหล่านี้คุณอย่าไปบอกคุณแม่นะ ตกลงไหม?" },
+            "羊肉": { chinese: "这儿的羊肉很好吃。", pinyin: "Zhèr de yángròu hěn hǎochī.", meaning: "แปลไทย: เนื้อแกะที่นี่อร่อยมาก" },
+            "衣服": { chinese: "你的衣服还没穿好呢。", pinyin: "Nǐ de yīfu hái méi chuānhǎo ne.", meaning: "แปลไทย: เสื้อผ้าของคุณยังสวมใส่ไม่เรียบร้อยเลย" },
+            "朋友": { chinese: "我和朋友去看电影。", pinyin: "Wǒ hé péngyou qù kàn diànyǐng.", meaning: "แปลไทย: ฉันไปดูหนังกับเพื่อน" },
+            "远": { chinese: "你家离学校远吗?", pinyin: "Nǐ jiā lí xuéxiào yuǎn ma?", meaning: "แปลไทย: บ้านคุณอยู่ห่างจากโรงเรียนไกลไหม?" },
+            "游泳": { chinese: "他们11点10分开始游泳", pinyin: "Tāmen 11 diǎn 10 fēn kāishǐ yóuyǒng", meaning: "แปลไทย: พวกเขา 11 โมง 10 นาที เริ่มว่ายน้ำ" },
+            "岁": { chinese: "我今年已经25了,比你大一岁。", pinyin: "Wǒ jīnnián yǐjīng 25 le, bǐ nǐ dà yī suì.", meaning: "แปลไทย: ปีนี้ฉันอายุ 25 ปีแล้ว แก่กว่าคุณหนึ่งปี" },
+            "雨": { chinese: "外面下雨了。", pinyin: "Wàimián xiàyǔ le.", meaning: "แปลไทย: ข้างนอกฝนตกแล้ว" },
+            "去年": { chinese: "我去年8月开始", pinyin: "Wǒ cóng qùnián 8 yuè kāishǐ", meaning: "แปลไทย: ฉันเริ่มตั้งแต่เดือนสิงหาคมปีที่แล้ว" },
+            "机场": { chinese: "王先生住的宾馆离机场不远。", pinyin: "Wáng xiānsheng zhù de bīnguǎn lí jīchǎng bù yuǎn.", meaning: "แปลไทย: โรงแรมที่คุณหวังพักอยู่ไม่ไกลจากสนามบิน" },
+            "火车站": { chinese: "我去问问到火车站怎么走。", pinyin: "Wǒ qù wènwen dào huǒchēzhàn zěnme zǒu.", meaning: "แปลไทย: ฉันไปถามทางไปสถานีรถไฟหน่อย" },
+            "西": { chinese: "西瓜不贵。", pinyin: "Xīguā bú guì.", meaning: "แปลไทย: แตงโมไม่แพง" },
+            "南": { chinese: "白老师今天怎么没来上班?", pinyin: "Bái lǎoshì jīntiān zěnme méi lái shàngbān?", meaning: "แปลไทย: ทำไมอาจารย์ไปวันนี้ถึงไม่มาทำงาน?" },
+            "踢足球": { chinese: "我最喜欢踢足球。", pinyin: "Wǒ zuì xǐhuan tī zúqiú.", meaning: "แปลไทย: ฉันชอบเตะฟุตบอลมากที่สุด" },
+            "打篮球": { chinese: "每个星期六,我都去打篮球。", pinyin: "Měi ge xīngqíliù, wǒ dōu qù dǎ lánqiú.", meaning: "แปลไทย: ทุกๆ วันเสาร์ ฉันไปเล่นบาสเกตบอล" },
+            "意思": { chinese: "这本书很有意思,你也看看。", pinyin: "Zhè běn shū hěn yǒuyìsi, nǐ yě kànkan.", meaning: "แปลไทย: หนังสือเล่มนี้น่าสนุกน่าสนใจมาก คุณก็ลองอ่านดู" },
+            "少": { chinese: "你怎么穿这么少?", pinyin: "Nǐ zěnme chuān zhème shǎo?", meaning: "แปลไทย: ทำไมคุณถึงสวมใส่น้อยจัง / บางจัง?" },
+            "回答": { chinese: "她笑着说:“我知道了。“", pinyin: "Tā xiàozhe shuō: 'Wǒ zhīdào le.'", meaning: "แปลไทย: เธอยิ้มแล้วพูดว่า: 'ฉันรู้แล้ว'" },
+            "换": { chinese: "我们再来个羊肉?", pinyin: "Wǒmen zài lái ge yángròu?", meaning: "แปลไทย: พวกเราสั่งเนื้อแกะเพิ่มอีกจานไหม?" },
+            "哭": { chinese: "她很忙,你别去找她。", pinyin: "Tā hěn máng, nǐ bié qù zhǎo tā.", meaning: "แปลไทย: เธอยุ่งมาก คุณอย่าไปหาเธอเลย" },
+            "才": { chinese: "我们在这儿一块儿去。", pinyin: "Wǒmen zài zhèr yíkuàir qù.", meaning: "แปลไทย: พวกเราไปพร้อมกันที่นี่" },
+            "向": { chinese: "喂,你往右看...", pinyin: "Wéi, nǐ wǎng yòu kàn...", meaning: "แปลไทย: ฮัลโหล คุณมองไปทางขวา..." },
+            "椅子": { chinese: "服务员,我们这桌少两个椅子。", pinyin: "Fúwùyuán, wǒmen zhè zhuō shǎo liǎng ge yīzi.", meaning: "แปลไทย: พนักงานเสิร์ฟ โต๊ะพวกเราขาดเก้าอี้สองตัว" },
+            "老师": { chinese: "白老师今天怎么没来上班?", pinyin: "Bái lǎoshì jīntiān zěnme méi lái shàngbān?", meaning: "แปลไทย: ทำไมอาจารย์ไปวันนี้ถึงไม่มาทำงาน?" },
+            "出租车": { chinese: "我在出租车上,就快到学校了!", pinyin: "Wǒ zài chūzūchē shàng, jiù kuài dào xuéxiào le!", meaning: "แปลไทย: ฉันอยู่บนแท็กซี่แล้ว ใกล้จะถึงโรงเรียนแล้ว!" },
+            "离": { chinese: "我家就在学校旁边。", pinyin: "Wǒ jiā jiù zài xuéxiào pángbiàn.", meaning: "แปลไทย: บ้านฉันอยู่ข้างโรงเรียน" },
+            "前面": { chinese: "前面卖西瓜,很便宜...", pinyin: "Qiánmiàn mài xīguā, hěn piányi...", meaning: "แปลไทย: ข้างหน้าขายแตงโม ราคาถูกมาก..." },
+            "右边": { chinese: "你往右看,我的车就在你的右边。", pinyin: "Nǐ wǎng yòu kàn, wǒ de chē jiù zài nǐ de yòubian.", meaning: "แปลไทย: คุณมองไปทางขวา รถของฉันอยู่ทางขวาของคุณเลย" },
+            "宾馆": { chinese: "我住的宾馆离你们公司很近。", pinyin: "Wǒ zhù de bīnguǎn lí nǐmen gōngsī hěn jìn.", meaning: "แปลไทย: โรงแรมที่ฉันพักอยู่ใกล้กับบริษัทพวกคุณมาก" },
+            "真": { chinese: "住得这么近,真好!", pinyin: "Zhù de zhème jìn, zhēn hǎo!", meaning: "แปลไทย: พักอยู่ใกล้ขนาดนี้ จริงๆ!" },
+            "懂": { chinese: "爸爸,您说得太快,我没听懂。", pinyin: "Bàba, nín shuōde tài kuài, wǒ méi tīngdǒng.", meaning: "แปลไทย: คุณพ่อครับ คุณพูดเร็วเกินไป ฉันฟังไม่เข้าใจ" },
+            "帮助": { chinese: "小李帮助了他们。", pinyin: "Xiǎo Lǐ bāngzhùle tāmen.", meaning: "แปลไทย: เสี่ยวหลี่ได้ช่วยเหลือพวกเขา" },
+            "从": { chinese: "我从11岁开始踢足球。", pinyin: "Wǒ cóng 11 suì kāishǐ tī zúqiú.", meaning: "แปลไทย: ฉันเริ่มเตะฟุตบอลตั้งแต่อายุ 11 ขวบ" },
+            "件": { chinese: "这件衣服不错,新买的?", pinyin: "Zhè jiàn yīfu búcuò, xīn mǎi de?", meaning: "แปลไทย: เสื้อตัวนี้ไม่เลวเลย ซื้อใหม่เหรอ?" },
+            "卖": { chinese: "前面的商店在卖水果。", pinyin: "Qiánmiàn de shāngdiàn zài mài shuǐguǒ.", meaning: "แปลไทย: ร้านค้าข้างหน้ากำลังขายผลไม้" },
+            "茶": { chinese: "我们去那个茶馆儿喝杯茶好不好?", pinyin: "Wǒmen qù nàge cháguǎnr hē bēi chá hǎobuhǎo?", meaning: "แปลไทย: พวกเราไปดื่มชาที่ร้านน้ำชานั้นกันดีไหม?" },
+            "鸡蛋": { chinese: "有米饭、鸡蛋,还有牛奶。", pinyin: "Yǒu mǐfàn, jīdàn, hái yǒu niúnǎi.", meaning: "แปลไทย: ข้าวสวย ไข่ต้ม และกินนมด้วย" },
+            "电脑": { chinese: "我弟弟在一家电脑公司找了个工作。", pinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", meaning: "แปลไทย: น้องชายฉันหาได้งานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่ง" },
+            "冷": { chinese: "电视上说今天非常冷。", pinyin: "Diànshì shàng shuō jīntiān fēicháng lěng.", meaning: "แปลไทย: ในทีวีบอกว่าวันนี้หนาวมากๆ" },
+            "日": { chinese: "12日 13日 18日", pinyin: "12 rì, 13 rì, 18 rì", meaning: "แปลไทย: วันที่ 12, วันที่ 13, วันที่ 18" },
+            "姐姐": { chinese: "你姐姐呢?我想问她几个问题。", pinyin: "Nǐ jiějie ne? Wǒ xiǎng wèn tā jǐ ge wèntí.", meaning: "แปลไทย: พี่สาวคุณล่ะ? ฉันอยากถามปัญหาเขาสักสองสามข้อ" },
+            "丈夫": { chinese: "我和我丈夫20年前去那儿。", pinyin: "Wǒ hé wǒ zhàngfu 20 nián qián qù nàr.", meaning: "แปลไทย: ฉันกับสามีไปที่นั่นเมื่อ 20 ปีที่แล้ว" },
+            "商店": { chinese: "我去前面那家商店,很近。", pinyin: "Wǒ qù qiánmiàn nà jiā shāngdiàn, hěn jìn.", meaning: "แปลไทย: ฉันไปร้านค้าที่อยู่ข้างหน้านั้น ใกล้มาก" },
+            "唱歌": { chinese: "对不起,我下午有事,不能和你去唱歌了。", pinyin: "Duìbuqǐ, wǒ xiàwǔ yǒu shì, bù néng hé nǐ qù chànggē le.", meaning: "แปลไทย: ขอโทษด้วย ช่วงบ่ายฉันมีธุระ ไม่สามารถไปร้องเพลงกับคุณได้แล้ว" },
+            "药": { chinese: "这个药饭后吃,一天两次。", pinyin: "Zhège yào fàn hòu chī, yì tiān liǎng cì.", meaning: "แปลไทย: ยานี้กินหลังอาหาร วันละสองครั้ง" },
+            "身体": { chinese: "医生说这样对身体好。", pinyin: "Yīshēng shuō zhèyàng duì shēntǐ hǎo.", meaning: "แปลไทย: คุณหมอบอกว่าทำแบบนี้ดีต่อร่างกาย" },
+            "慢": { chinese: "慢一点儿,你走得太快了。", pinyin: "Màn yīdiǎnr, nǐ zǒude tài kuài le.", meaning: "แปลไทย: ช้าๆ หน่อย คุณเดินเร็วเกินไปแล้ว" },
+            "便宜": { chinese: "前面卖西瓜,很便宜,也很好吃。", pinyin: "Qiánmiàn mài xīguā, hěn piányi, yě hěn hǎochī.", meaning: "แปลไทย: ข้างหน้าขายแตงโม ราคาถูกมากและก็อร่อยด้วย" },
+            "介绍": { chinese: "给你介绍一下,这是我妻子。", pinyin: "Gěi nǐ jièshào yíxià, zhè shì wǒ qīzi.", meaning: "แปลไทย: แนะนำให้รู้จักหน่อย นี่คือภรรยาของฉัน" },
+            "穿": { chinese: "你的衣服还没穿好呢。", pinyin: "Nǐ de yīfu hái méi chuānhǎo ne.", meaning: "แปลไทย: เสื้อผ้าของคุณยังสวมใส่ไม่เรียบร้อยเลย" },
+            "咖啡": { chinese: "服务员,请给我一杯咖啡。", pinyin: "Fúwùyuán, qǐng gěi wǒ yì bēi kāfēi.", meaning: "แปลไทย: พนักงานเสิร์ฟ กรุณาให้กาแฟฉันหนึ่งแก้ว" },
+            "米饭": { chinese: "米饭做好了,快来吃饭吧。", pinyin: "Mǐfàn zuòhǎo le, kuài lái chī fàn ba.", meaning: "แปลไทย: ข้าวทำเสร็จแล้ว รีบมาทานข้าวกันเถอะ" },
+            "牛奶": { chinese: "她喝完牛奶就睡觉了。", pinyin: "Tā hēwán niúnǎi jiù shuìjiào le.", meaning: "แปลไทย: เธอ ดื่มนมเสร็จก็เข้านอนเลย" },
+            "电话": { chinese: "我已经帮你打电话问了。", pinyin: "Wǒ yǐjīng bāng nǐ dǎ diànhuà wèn le.", meaning: "แปลไทย: ฉันช่วยคุณโทรศัพท์ไปถามแล้ว" },
+            "阴": { chinese: "天阴了。", pinyin: "Tiān yīn le.", meaning: "แปลไทย: ท้องฟ้าครึ้มแล้ว" },
+            "热": { chinese: "今年比去年热得早。", pinyin: "Jīnnián bǐ qùnián rède zǎo.", meaning: "แปลไทย: ปีนี้ร้อนเร็วกว่าปีที่แล้ว" },
+            "妹妹": { chinese: "我妹妹明天有考试。", pinyin: "Wǒ mèimei míngtiān yǒu kǎoshì.", meaning: "แปลไทย: น้องสาวฉันพรุ่งนี้มีสอบ" },
+            "飞机": { chinese: "我已经下飞机了,现在正往家里走呢。", pinyin: "Wǒ yǐjīng xià fēijī le, xiànzài zhèng wàng jiā lǐ zǒu ne.", meaning: "แปลไทย: ฉันลงจากเครื่องบินแล้ว ตอนนี้กำลังเดินกลับบ้านอยู่" },
+            "路": { chinese: "他不知道去火车站的路。", pinyin: "Tā bù zhīdào qù huǒchēzhàn de lù.", meaning: "แปลไทย: เขาไม่รู้เส้นทางไปสถานีรถไฟ" },
+            "近": { chinese: "住得这么近,真好!", pinyin: "Zhù de zhème jìn, zhēn hǎo!", meaning: "แปลไทย: พักอยู่ใกล้ขนาดนี้ จริงๆ!" },
+            "后面": { chinese: "左边的是哥哥,右边这个是弟弟。", pinyin: "Zuǒbian shì gēge, yòubian zhège shì dìdi.", meaning: "แปลไทย: ด้านซ้ายคือพี่ชาย ด้านขวานี้คือน้องชาย" },
+            "生病": { chinese: "我昨天因为生病了,所以没来上课。", pinyin: "Wǒ zuótiān yīnwèi shēngbìng le, suǒyǐ méi lái shàngkè.", meaning: "แปลไทย: เมื่อวานนี้ฉันเพราะว่าป่วย จึงไม่ได้มาเข้าเรียน" },
+            "休息": { chinese: "来,喝杯咖啡,休息一下。", pinyin: "Lái, hē bēi kāfēi, xiūxi yīxià.", meaning: "แปลไทย: มา ดื่มกาแฟสักแก้ว พักผ่อนสักหน่อย" },
+            "高兴": { chinese: "你们这次在中国玩儿得很高兴!", pinyin: "Nǐmen zhè cì zài Zhōngguó wánrde hěn gāoxìng!", meaning: "แปลไทย: พวกคุณเที่ยวที่ประเทศจีนครั้งนี้สนุกมีความสุขมาก!" },
+            "笑": { chinese: "大家看我这儿,笑一笑。", pinyin: "Dàjiā kàn wǒ zhèr, xiàoyíxiào.", meaning: "แปลไทย: ทุกคนมองมาที่ฉันตรงนี้ ยิ้มหน่อย" },
+            "希望": { chinese: "真希望我们能多住几天再走。", pinyin: "Zhēn xīwàng wǒmen néng duō zhù jǐ tiān zài zǒu.", meaning: "แปลไทย: หวังจริงๆ ว่าพวกเราจะสามารถพักอยู่ต่ออีกสักสองสามวันแล้วค่อยไป" },
+            "正在": { chinese: "他正在北京旅游。", pinyin: "Tā zhèngzài Běijīng lùyóu.", meaning: "แปลไทย: เขากำลังท่องเที่ยวอยู่ที่ปักกิ่ง" },
+            "鱼": { chinese: "右边的鱼比左边的多。", pinyin: "Yòubian de yú bǐ zuǒbian de duō.", meaning: "แปลไทย: ปลาทางขวามีมากกว่าทางซ้าย" },
+            "手机": { chinese: "这个手机还能便宜些吗?", pinyin: "Zhège shǒujī hái néng piányi xiē ma?", meaning: "แปลไทย: โทรศัพท์มือถือเครื่องนี้ยังสามารถลดราคาลงอีกหน่อยได้ไหม?" },
+            "手表": { chinese: "我的手表怎么不走了?", pinyin: "Wǒ de shǒubiǎo zěnme bù zǒu le?", meaning: "แปลไทย: นาฬิกาข้อมือของฉันทำไมไม่เดินแล้ว?" },
+            "铅笔": { chinese: "哥,你那儿有黄色的铅笔吗?", pinyin: "Gē, nǐ nàr yǒu huángsè de qiānbǐ ma?", meaning: "แปลไทย: พี่ครับ ที่พี่มีดินสอสีเหลืองไหม?" },
+            "报纸": { chinese: "我想看看汉语报纸。", pinyin: "Wǒ xiǎng kànkan Hànyǔ bàozhǐ.", meaning: "แปลไทย: ฉันอยากอ่านหนังสือพิมพ์ภาษาจีน" },
+            "桌子": { chinese: "服务员,还有大点儿的桌子吗?", pinyin: "Fúwùyuán, hái yǒu dà diǎnr de zhuōzi ma?", meaning: "แปลไทย: พนักงานเสิร์ฟ ยังมีโต๊ะที่ใหญ่กว่านี้หน่อยไหม?" },
+            "晴": { chinese: "天已经晴了。", pinyin: "Tiān yǐjīng qíng le.", meaning: "แปลไทย: ท้องฟ้าแจ่มใสโปร่งแล้ว" },
+            "先生": { chinese: "有个姓钱的先生找你。", pinyin: "Yǒu gè xìng Qián de xiānsheng zhǎo nǐ.", meaning: "แปลไทย: มีคุณผู้ชายแซ่เฉียนมาหาคุณ" },
+            "小姐": { chinese: "刘小姐生病了。", pinyin: "Liú xiǎojiě shēngbìng le.", meaning: "แปลไทย: คุณหลิวป่วยแล้ว" },
+            "学生": { chinese: "他是我的学生。", pinyin: "Tā shì wǒ de xuésheng.", meaning: "แปลไทย: เขาคือนักเรียนของฉัน" },
+            "哥哥": { chinese: "左边的是哥哥,右边这个是弟弟。", pinyin: "Zuǒbian shì gēge, yòubian zhège shì dìdi.", meaning: "แปลไทย: ด้านซ้ายคือพี่ชาย ด้านขวานี้คือน้องชาย" },
+            "儿子": { chinese: "都快11点了,儿子可能已经睡了。", pinyin: "Dōu kuài 11 diǎn le, érzi kěnéng yǐjīng shuì le.", meaning: "แปลไทย: ก็จะ 11 โมงแล้ว ลูกชายอาจจะหลับไปแล้ว" },
+            "女儿": { chinese: "女儿呢?还在看书吗?", pinyin: "Nǚ'ér ne? Hái zài kàn shū ma?", meaning: "แปลไทย: ลูกสาวล่ะ? ยังอ่านหนังสืออยู่ไหม?" },
+            "妻子": { chinese: "妻子这几天很忙,所以我洗衣服。", pinyin: "Qīzi zhè jǐ tiān hěn máng, suǒyǐ wǒ xǐ yīfu.", meaning: "แปลไทย: ช่วงนี้ภรรยายุ่งมาก ดังนั้นฉันจึงซักผ้าเอง" },
+            "妈妈": { chinese: "妈妈做了很多菜。", pinyin: "Māma zuòle hěn duō cài.", meaning: "แปลไทย: คุณแม่ทำกับข้าวไว้เยอะมาก" },
+            "东": { chinese: "我们在这儿一块儿去。", pinyin: "Wǒmen zài zhèr yíkuàir qù.", meaning: "แปลไทย: พวกเราไปพร้อมกับที่นี่" },
+            "旅游": { chinese: "他正在北京旅游。", pinyin: "Tā zhèngzài Běijīng lùyóu.", meaning: "แปลไทย: เขากำลังท่องเที่ยวอยู่ที่ปักกิ่ง" },
+            "累": { chinese: "我太累了,让我再睡几分钟。", pinyin: "Wǒ tài lèi le, ràng wǒ zài shuì jǐ fēnzhōng.", meaning: "แปลไทย: ฉันเหนื่อยมาก ปล่อยให้ฉันนอนต่ออีกสักสองสามนาทีเถอะ" },
+            "往": { chinese: "我已经下飞机了,现在正往家里走呢。", pinyin: "Wǒ yǐjīng xià fēijī le, xiànzài zhèng wàng jiā lǐ zǒu ne.", meaning: "แปลไทย: ฉันลงจากเครื่องบินแล้ว ตอนนี้กำลังเดินกลับบ้านอยู่" },
+            "张": { chinese: "给你票,6号的。", pinyin: "Gěi nǐ piào, 6 hào de.", meaning: "แปลไทย: ให้ตั๋วคุณ ของวันที่ 6" },
+            "苹果": { chinese: "买些苹果", pinyin: "Mǎi xiē píngguǒ", meaning: "แปลไทย: ซื้อแอปเปิ้ลสักหน่อย" },
+            "西瓜": { chinese: "前面卖西瓜,很便宜。", pinyin: "Qiánmiàn mài xīguā, hěn piányi.", meaning: "แปลไทย: ข้างหน้าขายแตงโม ราคาถูกมาก" },
+            "天气": { chinese: "9月是北京天气最好的时候。", pinyin: "9 yuè shì Běijīng tiānqì zuì hǎo de shíhou.", meaning: "แปลไทย: เดือนกันยายนคือช่วงเวลาที่อากาศที่ปักกิ่งดีที่สุด" },
+            "昨天": { chinese: "我昨天踢了一下午球。", pinyin: "Wǒ zuótiān tīle yī xiàwù qiú.", meaning: "แปลไทย: เมื่อวานนี้ฉันเตะบอลไปทั้งช่วงบ่าย" },
+            "公共汽车": { chinese: "坐公共汽车15分钟就到了。", pinyin: "Zuò gōnggòng qìchē 15 fēnzhōng jiù dào le.", meaning: "แปลไทย: นั่งรถประจำทาง 15 นาทีก็ถึงแล้ว" },
+            "跑步": { chinese: "我姐姐不在家,她跑步去了。", pinyin: "Wǒ jiějie bú zài jiā, tā pǎobù qù le.", meaning: "แปลไทย: พี่สาวฉันไม่อยู่บ้าน เธอไปวิ่งออกกำลังกายแล้ว" },
+            "面条儿": { chinese: "面条儿还很热。", pinyin: "Miàntiáor hái hěn rè.", meaning: "แปลไทย: บะหมี่ยังร้อนอยู่" },
+            "爸爸": { chinese: "爸爸,起床吧,我们去跑步。", pinyin: "Bàba, qǐchuáng ba, wǒmen qù pǎobù.", meaning: "แปลไทย: คุณพ่อตื่นนอนเถอะ พวกเราไปวิ่งกัน" },
+            "汉字": { chinese: " 오늘의 汉字课就到这里", pinyin: "Jīntiān de Hànzì kè jiù dào zhèli.", meaning: "แปลไทย: คาบเรียนอักษรจีนวันนี้พอแค่นี้" }
+        };
+
+        // ดึงค่าพารามิเตอร์จาก URL
+        const params = new URLSearchParams(window.location.search);
+        
+        const word = params.get('word') || 'ไม่พบข้อมูล';
+        const pinyin = params.get('pinyin') || '-';
+        const meaning = params.get('meaning') || '-';
+        const type = params.get('type') || '-';
+        const freqTotal = (params.get('freqTotal') || '0');
+        const setsFound = params.get('setsFound') || '-';
+
+        document.getElementById('wordDisplay').innerText = word;
+        document.getElementById('pinyinDisplay').innerText = pinyin;
+        document.getElementById('meaningDisplay').innerText = meaning;
+        document.getElementById('typeDisplay').innerText = type;
+        document.getElementById('freqTotalDisplay').innerText = freqTotal;
+        document.getElementById('setsFoundDisplay').innerText = setsFound;
+
+        // ดึงข้อมูลตัวอย่างประโยคตรงจากฐานข้อมูลภายในตามคำศัพท์
+        if (exampleDatabaseHSK2[word]) {
+            document.getElementById('exampleChinese').innerText = exampleDatabaseHSK2[word].chinese;
+            document.getElementById('examplePinyin').innerText = exampleDatabaseHSK2[word].pinyin;
+            document.getElementById('exampleMeaning').innerText = exampleDatabaseHSK2[word].meaning;
+        } else {
+            document.getElementById('exampleChinese').innerText = "暂ไม่มีตัวอย่างประโยคในระบบ";
+            document.getElementById('examplePinyin').innerText = "-";
+            document.getElementById('exampleMeaning').innerText = "-";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดคำศัพท์ HSK 4 - Fast Learn Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
+        <div class="max-w-4xl mx-auto px-4 py-8 text-center">
+            <div class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow">
+                FAST LEARN ACADEMY
+            </div>
+            <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide">
+                รายละเอียดคำศัพท์ <span class="text-yellow-400">HSK ระดับ 4</span>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content: รายละเอียด -->
+    <main class="max-w-2xl mx-auto px-4 py-12 flex-grow w-full">
+        <div class="bg-white rounded-3xl border-2 border-gray-100 shadow-xl p-8 md:p-12 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+            
+            <!-- ตัวอักษรจีนหลักและพินอินคำศัพท์ -->
+            <div id="wordDisplay" class="text-7xl md:text-8xl font-extrabold text-gray-900 mb-2">-</div>
+            <div id="pinyinDisplay" class="text-2xl font-bold text-red-600 mb-6">-</div>
+
+            <!-- ข้อมูลรายละเอียด -->
+            <div class="bg-gray-50 rounded-2xl p-6 text-left space-y-4 mb-8 border border-gray-100">
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                    <span class="font-semibold text-gray-500">ความหมายภาษาไทย:</span>
+                    <span id="meaningDisplay" class="text-lg font-bold text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                    <span class="font-semibold text-gray-500">ประเภทคำ:</span>
+                    <span id="typeDisplay" class="font-medium text-gray-800">-</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                    <span class="font-semibold text-gray-500">สถิติการออกข้อสอบ:</span>
+                    <span id="freqTotalDisplay" class="font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full text-sm">-</span>
+                </div>
+                <div class="space-y-1">
+                    <span class="font-semibold text-gray-500 block">เลขชุดข้อสอบที่พบซ้ำ:</span>
+                    <span id="setsFoundDisplay" class="text-sm font-medium text-gray-700 block bg-white p-3 rounded-xl border border-gray-200">-</span>
+                </div>
+            </div>
+
+            <!-- ประโยคตัวอย่าง พร้อมพินอินและคำแปลภาษาไทย -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-xl text-left mb-8 space-y-3">
+                <h3 class="text-xs font-bold text-yellow-800 uppercase tracking-wider">ประโยคตัวอย่างจากข้อสอบ (Example)</h3>
+                <p id="exampleChinese" class="text-xl font-bold text-gray-900">-</p>
+                <p id="examplePinyin" class="text-sm font-semibold text-red-600">-</p>
+                <p id="exampleMeaning" class="text-sm font-medium text-gray-700">-</p>
+            </div>
+
+            <!-- ปุ่มย้อนกลับ -->
+            <a href="hsk4.html" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-red-600 transition shadow-lg">
+                ← กลับสู่หน้าคลังคำศัพท์ HSK 4
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
+        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    </footer>
+
+    <script>
+        // ฐานข้อมูลประโยคตัวอย่างตรงตามคำศัพท์ HSK 4
+        const exampleDatabaseHSK4 = {
+            "坚持": { chinese: "走路上下班,所以身体一直很不错。", pinyin: "Zǒulù shàng xiàbān, suǒyǐ shēntǐ yīzhí hěn búcuò.", meaning: "แปลไทย: เดินไปกลับทำงาน ดังนั้นร่างกายจึงค่อนข้างดีมาตลอด" },
+            "温度": { chinese: "白天最高温度才2℃。", pinyin: "Báitiān zuìgāo wèndù cái èr dù.", meaning: "แปลไทย: อุณหภูมิสูงสุดตอนกลางวันแค่ 2 องศาเซลเซียสเท่านั้น" },
+            "收拾": { chinese: "行李收拾好了吗?", pinyin: "Xíngli shōushi hǎo le ma?", meaning: "แปลไทย: เก็บกระเป๋าเดินทางเรียบร้อยแล้วหรือยัง" },
+            "偶尔": { chinese: "我只是偶尔来一趟。", pinyin: "Wǒ zhǐshì ǒu'ěr lái yī tàng.", meaning: "แปลไทย: ฉันแค่มาเที่ยวเป็นครั้งคราวเท่านั้น" },
+            "国际": { chinese: "这是全世界儿童的节日。", pinyin: "Zhè shì quán shìjiè értóng de jiérì.", meaning: "แปลไทย: นี่คือวันหยุดเทศกาลของเด็กๆ ทั่วโลก" },
+            "校长": { chinese: "那篇报道引起了校长的重视。", pinyin: "Nà piān bàodào yǐnqǐ le xiǎozhǎng de zhòngshì.", meaning: "แปลไทย: รายงานข่าวชิ้นนั้นได้ดึงดูดความสำคัญของอธิการบดี" },
+            "经验": { chinese: "弟弟在工作中积累了丰富的经验。", pinyin: "Dìdi zài gōngzuò zhōng jǐlěi le fēngfú de jīngyàn.", meaning: "แปลไทย: น้องชายได้สะสมประสบการณ์ที่อุดมสมบูรณ์ในการทำงาน" },
+            "联系": { chinese: "你和那位记者还有联系吗?", pinyin: "Nǐ hé nà wèi jìzhě hái yǒu liánxì ma?", meaning: "แปลไทย: คุณกับผู้สื่อข่าวท่านนั้นยังมีการติดต่อกันอยู่ไหม" },
+            "顺利": { chinese: "一切都进行得很顺利。", pinyin: "Yīqiè dōu jìnxíng de hěn shùnlì.", meaning: "แปลไทย: ทุกอย่างดำเนินไปอย่างราบรื่นมาก" },
+            "盒子": { chinese: "这个盒子里是巧克力吗?", pinyin: "Zhège hézi lǐ shì qiáokèlì ma?", meaning: "แปลไทย: ในกล่องนี้คือช็อกโกแลตใช่ไหม" },
+            "味道": { chinese: "时间越长,味道越好。", pinyin: "Shíjiān yuè cháng, wèidao yuè hǎo.", meaning: "แปลไทย: ยิ่งเวลานาน รสชาติยิ่งดีขึ้น" },
+            "怀疑": { chinese: "我不禁怀疑起他的动机。", pinyin: "Wǒ bùjìn huáiyí qǐ tā de dòngjī.", meaning: "แปลไทย: ฉันอดไม่ได้ที่จะสงสัยแรงจูงใจของเขา" },
+            "灵活": { chinese: "方法要灵活。", pinyin: "Fāngfǎ yào línghuo.", meaning: "แปลไทย: วิธีการต้องมีความยืดหยุ่น" },
+            "印象": { chinese: "那位导游给我留下了很深的印象。", pinyin: "Nà wèi dǎyóu gěi wǒ liú xià le hěn shēn de yìnxiàng.", meaning: "แปลไทย: ไกด์นำเที่ยวท่านนั้นได้ทิ้งความประทับใจไว้อย่างลึกซึ้งแก่ฉัน" },
+            "区别": { chinese: "你们俩的看法没什么区别。", pinyin: "Nǐmen liǎ de kànfǎ méishénme qūbié.", meaning: "แปลไทย: มุมมองของพวกคุณสองคนไม่มีความแตกต่างกันเท่าไหร่" },
+            "害羞": { chinese: "她有点儿害羞。", pinyin: "Tā yǒudiǎnr hàixiū.", meaning: "แปลไทย: เธอมีความเขินอายเล็กน้อย" },
+            "稍微": { chinese: "有个地方我还要稍微改一下。", pinyin: "Yǒu gè dìfang wǒ hái yào shāowēi gǎi yīxià.", meaning: "แปลไทย: มีบางจุดที่ฉันยังต้องขอแก้ไขเล็กน้อย" },
+            "提前": { chinese: "你最好提前15分钟出发。", pinyin: "Nǐ zuìhǎo tíqián shíwǔ fēnzhōng chūfā.", meaning: "แปลไทย: คุณทางที่ดีควรออกเดินทางล่วงหน้า 15 นาที" },
+            "效果": { chinese: "这个方法效果很好。", pinyin: "Zhège fāngfǎ xiàoguǒ hěn hǎo.", meaning: "แปลไทย: วิธีนี้ให้ผลลัพธ์ที่ดีมาก" },
+            "任务": { chinese: "一定按时完成任务。", pinyin: "Yīdìng ànshí wánchéng rènwu.", meaning: "แปลไทย: ต้องปฏิบัติภารกิจให้เสร็จตามกำหนดเวลาอย่างแน่นอน" },
+            "仔细": { chinese: "她仔细地看了看说明书。", pinyin: "Tā zīxì de kàn le kàn shuōmíngshū.", meaning: "แปลไทย: เธออ่านคู่มือการใช้งานอย่างละเอียดถี่ถ้วน" },
+            "窄": { chinese: "市场前面那条路太窄了。", pinyin: "Shìchăng qiánmiàn nà tiáo lù tài zhǎi le.", meaning: "แปลไทย: ถนนเส้นด้านหน้าตลาดแคบเกินไปแล้ว" },
+            "钥匙": { chinese: "忘带钥匙了?", pinyin: "Wàng dài yàoshi le?", meaning: "แปลไทย: ลืมพกพากุญแจมาเหรอ?" },
+            "参观": { chinese: "参观博物馆。", pinyin: "Cānguān bówùguǎn.", meaning: "แปลไทย: เยี่ยมชมพิพิธภัณฑ์" },
+            "丰富": { chinese: "积累了丰富的经验。", pinyin: "Jǐlěi le fēngfú de jīngyàn.", meaning: "แปลไทย: สะสมประสบการณ์ที่อุดมสมบูรณ์" },
+            "诚实": { chinese: "诚实的人值得我们尊重。", pinyin: "Chéngshí de rén zhídé wǒmen zūnzhòng.", meaning: "แปลไทย: คนที่มีความซื่อสัตย์คู่ควรแก่การเคารพยกย่องจากพวกเรา" },
+            "勇敢": { chinese: "做一个勇敢的人。", pinyin: "Zuò yī gè yǒnggǎn de rén.", meaning: "แปลไทย: จงเป็นคนที่กล้าหาญ" },
+            "幽默": { chinese: "那个幽默的导游。", pinyin: "Nà gè yōumò de dǎyóu.", meaning: "แปลไทย: ไกด์นำเที่ยวที่มีอารมณ์ขันคนนั้น" },
+            "暂时": { chinese: "困难只是暂时的。", pinyin: "Kùnnan zhǐshì zànshí de.", meaning: "แปลไทย: อุปสรรคเป็นเพียงแค่ชั่วคราวเท่านั้น" },
+            "导游": { chinese: "导游很热情。", pinyin: "Dǎoyóu hěn rèqíng.", meaning: "แปลไทย: ไกด์นำเที่ยวเป็นกันเองและกระตือรือร้นมาก" },
+            "凉快": { chinese: "房间里开着空调,凉快多了。", pinyin: "Fángjiān lǐ kāizhe kōngtiáo, liángkuai duō le.", meaning: "แปลไทย: ในห้องเปิดแอร์อยู่ เย็นสบายขึ้นเยอะเลย" },
+            "推迟": { chinese: "会议又推迟了。", pinyin: "Huìyì yòu tuīchí le.", meaning: "แปลไทย: การประชุมถูกเลื่อนเวลาออกไปอีกแล้ว" },
+            "安排": { chinese: "一切都安排得很好。", pinyin: "Yīqiè dōu ānpái de hěn hǎo.", meaning: "แปลไทย: ทุกอย่างถูกจัดเตรียมไว้เป็นอย่างดีแล้ว" },
+            "羡慕": { chinese: "真让人羡慕。", pinyin: "Zhēn ràng rén xiànmù.", meaning: "แปลไทย: ช่างน่าอิจฉาจริงๆ" },
+            "文章": { chinese: "那篇文章引起了很多人的注意。", pinyin: "Nà piān wénzhāng yǐnqǐ le hěn duō rén de zhùyì.", meaning: "แปลไทย: บทความชิ้นนั้นได้ดึงดูดความสนใจของผู้คนจำนวนมาก" },
+            "狮子": { chinese: "森林里住着一群狮子。", pinyin: "Sēnlín lǐ zhùzhe yī qún shīzi.", meaning: "แปลไทย: ในป่ามีสิงโตอาศัยอยู่ฝูงหนึ่ง" },
+            "垃圾桶": { chinese: "请把香蕉皮扔进垃圾桶里。", pinyin: "Qǐng bǎ xiāngjiāo pí rēng jìn lājītōng lǐ.", meaning: "แปลไทย: กรุณาทิ้งเปลือกกล้วยลงในถังขยะด้วย" },
+            "知识": { chinese: "知识是需要慢慢积累的。", pinyin: "Zhīshi shì xūyào mànman jǐlěi de.", meaning: "แปลไทย: ความรู้เป็นสิ่งที่ต้องค่อยๆ สะสม" },
+            "律师": { chinese: "他父亲是当地的一位律师。", pinyin: "Tā fùqīn shì dāngdì de yī wèi lǜshī.", meaning: "แปลไทย: คุณพ่อของเขาเป็นทนายความท่านหนึ่งในท้องถิ่น" },
+            "规定": { chinese: "这样做不符合宾馆的规定。", pinyin: "Zhèyàng zuò bù fúhé bīnguǎn de guīdìng.", meaning: "แปลไทย: ทำแบบนี้ไม่สอดคล้องกับระเบียบของโรงแรม" },
+            "逐渐": { chinese: "冬天到了,天气逐渐变冷了。", pinyin: "Dōngtiān dào le, tiānqì zhújiàn biàn lěng le.", meaning: "แปลไทย: ฤดูหนาวมาถึงแล้ว อากาศค่อยๆ หนาวขึ้น" },
+            "范围": { chinese: "超出这个范围就是发烧。", pinyin: "Chāochū zhège fànwéi jiù shì fāshāo.", meaning: "แปลไทย: เกินกว่าขอบเขตนี้ก็คือการเป็นไข้" },
+            "成功": { chinese: "失败是成功之母。", pinyin: "Shībài shì chénggōng zhī mǔ.", meaning: "แปลไทย: ความล้มเหลวคือมารดาแห่งความสำเร็จ" },
+            "详细": { chinese: "她又向大家详细解释了一遍。", pinyin: "Tā yòu xiàng dàjiā xiángxì jiěshì le yī biàn.", meaning: "แปลไทย: เธอได้อธิบายให้ทุกคนฟังอย่างละเอียดอีกรอบหนึ่ง" },
+            "挺": { chinese: "行李箱竟然跟我的挺一样。", pinyin: "Xínglǐxiāng jìngrán gēn wǒ de tǐng yīyàng.", meaning: "แปลไทย: กระเป๋าเดินทางกลับเหมือนกับของฉันค่อนข้างมาก" },
+            "有趣": { chinese: "这本小说很有趣。", pinyin: "Zhè běn xiǎoshuō hěn yǒuqù.", meaning: "แปลไทย: นวนิยายเล่มนี้น่าสนใจมาก" },
+            "完全": { chinese: "连颜色都完全一样。", pinyin: "Lián yánsè dōu wánquán yīyàng.", meaning: "แปลไทย: แม้กระทั่งสีก็เหมือนกันโดยสิ้นเชิง" },
+            "组成": { chinese: "这篇文章由三部分组成。", pinyin: "Zhè piān wénzhāng yóu sān bùfen zǔchéng.", meaning: "แปลไทย: บทความชิ้นนี้ประกอบด้วย 3 ส่วน" },
+            "节目": { chinese: "这个节目很受儿童欢迎。", pinyin: "Zhège jiémù hěn shòu értóng huānyíng.", meaning: "แปลไทย: รายการนี้ได้รับความนิยมจากเด็กๆ มาก" },
+            "友谊宾馆": { chinese: "友谊宾馆离大使馆远吗?", pinyin: "Yǒuyì bīnguǎn lí dàshíguān yuǎn ma?", meaning: "แปลไทย: โรงแรมมิตรภาพอยู่ห่างจากสถานทูตไหม?" },
+            "禁止": { chinese: "加油站禁止使用手机。", pinyin: "Jiāyóuzhàn jìnzhǐ shǐyòng shǒujī.", meaning: "แปลไทย: สถานีบริการน้ำมันห้ามใช้โทรศัพท์มือถือ" },
+            "流利": { chinese: "你们校长中文说得很流利。", pinyin: "Nǐmen xiǎozhǎng zhōngwén shuō de hěn liúli.", meaning: "แปลไทย: อธิการบดีของพวกคุณพูดภาษาจีนได้คล่องแคล่วมาก" },
+            "通过": { chinese: "大约有90%的同学通过了考试。", pinyin: "Dàyuē yǒu jiǔshí bǎi zhī yī de tóngxué tōngguò le kǎoshì.", meaning: "แปลไทย: ประมาณ 90% ของเพื่อนร่วมชั้นสอบผ่าน" },
+            "袜子": { chinese: "袜子", pinyin: "wàzi", meaning: "แปลไทย: ถุงเท้า" },
+            "密码": { chinese: "密码", pinyin: "mìmǎ", meaning: "แปลไทย: รหัสผ่าน" },
+            "醒": { chinese: "醒了", pinyin: "xǐng le", meaning: "แปลไทย: ตื่นแล้ว" },
+            "咳嗽": { chinese: "咳嗽", pinyin: "késòu", meaning: "แปลไทย: ไอ" },
+            "植物": { chinese: "同一种植物。", pinyin: "Tóng yī zhǒng zhíwù.", meaning: "แปลไทย: พืชชนิดเดียวกัน" },
+            "篇": { chinese: "这篇文章。", pinyin: "Zhè piān wénzhāng.", meaning: "แปลไทย: บทความชิ้นนี้" },
+            "准时": { chinese: "下午我一定准时到。", pinyin: "Xiàwǔ wǒ yīdìng zhǔnshí dào.", meaning: "แปลไทย: ช่วงบ่ายฉันจะไปถึงตรงเวลาอย่างแน่นอน" },
+            "活泼": { chinese: "课堂变得轻松和活泼。", pinyin: "Kètáng biàn de qīngsōng hé huópo.", meaning: "แปลไทย: ชั้นเรียนกลายเป็นความผ่อนคลายและมีชีวิตชีวา" },
+            "出生": { chinese: "那时我还没出生呢。", pinyin: "Nà shí wǒ hái méi chūshēng ne.", meaning: "แปลไทย: ตอนนั้นฉันยังไม่ได้เกิดเลย" },
+            "随便": { chinese: "不要穿得太随便了。", pinyin: "Bùyào chuān de tài suíbiàn le.", meaning: "แปลไทย: อย่าแต่งกายตามสบายจนเกินไป" },
+            "份": { chinese: "3份复印件。", pinyin: "Sān fèn fùyìnjiàn.", meaning: "แปลไทย: เอกสารสำเนา 3 ชุด" },
+            "报名": { chinese: "报名参加比赛。", pinyin: "Bàomíng cānjiā bǐsài.", meaning: "แปลไทย: สมัครเข้าร่วมการแข่งขัน" },
+            "杂志": { chinese: "沙发上的那本杂志。", pinyin: "Shāfā shàng de nà běn zázhì.", meaning: "แปลไทย: นิตยสารเล่มนั้นที่อยู่บนโซฟา" },
+            "来不及": { chinese: "估计来不及了。", pinyin: "Gūjì lái bu jí le.", meaning: "แปลไทย: คาดว่าน่าจะไม่ทันแล้ว" },
+            "愉快": { chinese: "聊得非常愉快。", pinyin: "Liáo de fēicháng yúkuài.", meaning: "แปลไทย: คุยกันอย่างมีความสุขมาก" },
+            "儿童": { chinese: "更容易被儿童接受。", pinyin: "Gèng róngyì bèi értóng jiēshòu.", meaning: "แปลไทย: ง่ายกว่าที่จะถูกยอมรับโดยเด็กๆ" },
+            "适应": { chinese: "适应当地的气候。", pinyin: "Shìyìng dāngdì de qìhòu.", meaning: "แปลไทย: ปรับตัวให้เข้ากับสภาพอากาศท้องถิ่น" },
+            "小说": { chinese: "这本小说400多页。", pinyin: "Zhè běn xiǎoshuō sìbǎi duō yè.", meaning: "แปลไทย: นวนิยายเล่มนี้มีมากกว่า 400 หน้า" },
+            "座位": { chinese: "窗户旁边的座位。", pinyin: "Chuānghù pángbiān de zuòwèi.", meaning: "แปลไทย: ที่นั่งข้างหน้าต่าง" },
+            "农村": { chinese: "从来没去过农村。", pinyin: "Cónglái méi qùguò nóngcūn.", meaning: "แปลไทย: ไม่เคยไปชนบทเลยตั้งแต่เด็ก" },
+            "京剧": { chinese: "最有名的京剧演员。", pinyin: "Zuì yōumíng de jīngjù yǎnyuán.", meaning: "แปลไทย: นักแสดงงิ้วปักกิ่งที่มีชื่อเสียงที่สุด" },
+            "棵": { chinese: "一棵树。", pinyin: "Yī kē shù.", meaning: "แปลไทย: ต้นไม้หนึ่งต้น" },
+            "吃惊": { chinese: "感到很吃惊。", pinyin: "Gǎndào hěn chījīng.", meaning: "แปลไทย: รู้สึกตกใจมาก" },
+            "毛巾": { chinese: "毛巾别到处乱扔。", pinyin: "Máojīn bié dàochù luàn rēng.", meaning: "แปลไทย: ผ้าขนหนูอย่าเอาไปโยนสะเปะสะปะทั่ว" },
+            "观众": { chinese: "观众们都站了起来。", pinyin: "Guānzhòngmen dōu zhàn le qǐlái.", meaning: "แปลไทย: บรรดาผู้ชมต่างก็ยืนขึ้นมา" },
+            "由于": { chinese: "由于天气原因。", pinyin: "Yóuyú tiānqì yuányīn.", meaning: "แปลไทย: เนื่องด้วยเหตุผลทางสภาพอากาศ" },
+            "职业": { chinese: "请在表格上填好职业。", pinyin: "Qǐng zài biǎogé shàng tián hǎo zhíyè.", meaning: "แปลไทย: กรุณากรอกอาชีพลงบนแบบฟอร์มให้เรียบร้อย" },
+            "抱歉": { chinese: "很抱歉,我不是故意的。", pinyin: "Hěn bàoqiàn, wǒ bú shì gùyi de.", meaning: "แปลไทย: ต้องขอโทษด้วยจริงๆ ฉันไม่ได้ตั้งใจ" },
+            "乱": { chinese: "房间太乱了。", pinyin: "Fángjiān tài luàn le.", meaning: "แปลไทย: ห้องรกยุ่งเหยิงเกินไปแล้ว" },
+            "顺便": { chinese: "顺便帮我带给他。", pinyin: "Shùnbiàn bāng wǒ dài gěi tā.", meaning: "แปลไทย: ถือโอกาสช่วยฉันนำไปให้เขาด้วย" },
+            "流行": { chinese: "今年流行黄色的。", pinyin: "Jīnnián liúxíng huángsè de.", meaning: "แปลไทย: ปีนี้สีเหลืองกำลังเป็นที่นิยม" },
+            "兴趣": { chinese: "考虑孩子的兴趣。", pinyin: "Kǎolǜ háizi de xìngqù.", meaning: "แปลไทย: คำนึงถึงความสนใจของเด็กๆ" },
+            "质量": { chinese: "电脑质量怎么样?", pinyin: "Diànnǎo zhìliàng zěnmeyàng?", meaning: "แปลไทย: คุณภาพของคอมพิวเตอร์เป็นอย่างไรบ้าง" },
+            "宾馆": { chinese: "宾馆为我们提供了牙刷。", pinyin: "Bīnguǎn wèi wǒmen tígōng le yáshuā.", meaning: "แปลไทย: โรงแรมได้เตรียมแปรงสีฟันไว้ให้พวกเรา" },
+            "技术": { chinese: "负责技术工作。", pinyin: "Fùzé jìshù gōngzuò.", meaning: "แปลไทย: รับผิดชอบงานด้านเทคโนโลยี" },
+            "售货员": { chinese: "招聘售货员。", pinyin: "Zhāopìn shòuhuòyuán.", meaning: "แปลไทย: รับสมัครพนักงานขาย" },
+            "困": { chinese: "觉得很困。", pinyin: "Juéde hěn kùn.", meaning: "แปลไทย: รู้สึกง่วงนอนมาก" },
+            "来得及": { chinese: "现在去还来得及。", pinyin: "Xiànzài qù hái láidejí.", meaning: "แปลไทย: ตอนนี้ไปก็ยังคงทันเวลาอยู่" },
+            "肚子": { chinese: "肚子疼。", pinyin: "Dùzi téng.", meaning: "แปลไทย: ปวดท้อง" },
+            "一共": { chinese: "一共来了5辆车。", pinyin: "Yīgòng lái le wǔ liàng chē.", meaning: "แปลไทย: ทั้งหมดมากัน 5 คัน" },
+            "恐怕": { chinese: "恐怕是你弄错了。", pinyin: "Kǒngpà shì nǐ nòng cuò le.", meaning: "แปลไทย: เกรงว่าจะเป็นคุณที่ทำผิดพลาดไป" },
+            "答案": { chinese: "答案完全正确。", pinyin: "Dá'àn wánquán zhèngquè.", meaning: "แปลไทย: คำตอบถูกต้องโดยสมบูรณ์" },
+            "吵醒": { chinese: "被声音吵醒了。", pinyin: "Bèi shēngyīn chǎoxīng le.", meaning: "แปลไทย: ถูกเสียงรบกวนปลุกจนตื่น" },
+            "饺子": { chinese: "吃饺子。", pinyin: "Chī jiǎozi.", meaning: "แปลไทย: กินเกี๊ยว" },
+            "安全": { chinese: "符合安全标准。", pinyin: "Fúhé ānquán biāozhǔn.", meaning: "แปลไทย: สอดคล้องกับมาตรฐานความปลอดภัย" },
+            "打扰": { chinese: "最好不要打扰他。", pinyin: "Zuìhǎo bùyào dǎrǎo tā.", meaning: "แปลไทย: ทางที่ดีอย่าไปรบกวนเขาเลย" },
+            "干杯": { chinese: "干杯!", pinyin: "Gānbēi!", meaning: "แปลไทย: ชนแก้ว!" },
+            "激动": { chinese: "心情很激动。", pinyin: "Xīnqíng hěn jīdòng.", meaning: "แปลไทย: อารมณ์ตื่นเต้นเร้าใจมาก" },
+            "洗衣机": { chinese: "修洗衣机。", pinyin: "Xiū xǐyījī.", meaning: "แปลไทย: ซ่อมเครื่องซักผ้า" },
+            "及时": { chinese: "请及时联系。", pinyin: "Qǐng jíshí liánxì.", meaning: "แปลไทย: โปรดติดต่อให้ทันท่วงทีด้วย" },
+            "回忆": { chinese: "美好的回忆。", pinyin: "Měihǎo de huíyì.", meaning: "แปลไทย: ความทรงจำอันงดงาม" },
+            "适合": { chinese: "这件衣服很适合你。", pinyin: "Zhè jiàn yīfu hěn shìhé nǐ.", meaning: "แปลไทย: เสื้อผ้าตัวนี้เหมาะสมกับคุณมาก" },
+            "页": { chinese: "看了几十页。", pinyin: "Kàn le jǐ shí yè.", meaning: "แปลไทย: อ่านไปหลายสิบหน้า" },
+            "不过": { chinese: "不过还没找到。", pinyin: "Bùguò hái méi zhāodào.", meaning: "แปลไทย: แต่ก็ยังหาไม่เจอ" },
+            "毕业": { chinese: "大学毕业后。", pinyin: "Dàxué bìyè hòu.", meaning: "แปลไทย: หลังจากจบการศึกษามหาวิทยาลัย" },
+            "父亲": { chinese: "我的父亲。", pinyin: "Wǒ de fùqīn.", meaning: "แปลไทย: คุณพ่อของฉัน" },
+            "暖和": { chinese: "天气很暖和。", pinyin: "Tiānqì hěn nuǎnhuo.", meaning: "แปลไทย: สภาพอากาศอบอุ่นมาก" },
+            "经济": { chinese: "国家经济发展。", pinyin: "Guójiā jīngjì fāzhǎn.", meaning: "แปลไทย: การพัฒนาเศรษฐกิจของประเทศ" },
+            "阳光": { chinese: "阳光灿烂。", pinyin: "Yángguāng cànlàn.", meaning: "แปลไทย: แสงแดดส่องสว่างสดใส" },
+            "标准": { chinese: "标准太严格。", pinyin: "Biāozhǔn tài yángé.", meaning: "แปลไทย: มาตรฐานเข้มงวดเกินไป" },
+            "大概": { chinese: "大概有1000米。", pinyin: "Dàgài yǒu yīqiān mǐ.", meaning: "แปลไทย: ประมาณมี 1,000 เมตร" },
+            "感动": { chinese: "让人很感动。", pinyin: "Ràng rén hěn gǎndòng.", meaning: "แปลไทย: ทำให้ผู้คนซาบซึ้งใจมาก" },
+            "塑料袋": { chinese: "用塑料袋装。", pinyin: "Yòng sùliàodài zhuāng.", meaning: "แปลไทย: ใช้ถุงพลาสติกบรรจุ" },
+            "增长": { chinese: "人数增长了。", pinyin: "Rénshù zēngzhǎng le.", meaning: "แปลไทย: จำนวนคนเพิ่มขึ้นแล้ว" },
+            "航班": { chinese: "航班时间。", pinyin: "Hángbān shíjiān.", meaning: "แปลไทย: เวลาเที่ยวบิน" },
+            "修": { chinese: "修理电脑。", pinyin: "Xiūlǐ diànnǎo.", meaning: "แปลไทย: ซ่อมคอมพิวเตอร์" },
+            "举办": { chinese: "举办演出活动。", pinyin: "Jǔbàn yǎnchū huódòng.", meaning: "แปลไทย: จัดกิจกรรมการแสดง" },
+            "可是": { chinese: "可是他的话让我改变了主意。", pinyin: "Kěshì tā de huà ràng wǒ gǎibiàn le zhǔyi.", meaning: "แปลไทย: แต่คำพูดของเขาททำให้ฉันเปลี่ยนความคิด" },
+            "食品": { chinese: "食品安全。", pinyin: "Shípǐn ānquán.", meaning: "แปลไทย: ความปลอดภัยด้านอาหาร" },
+            "主动": { chinese: "要主动点儿。", pinyin: "Yào zhǔdòng diǎnr.", meaning: "แปลไทย: ควรเป็นฝ่ายกระทำก่อนหน่อย" },
+            "重新": { chinese: "重新打印一份。", pinyin: "Chóngxīn dǎyìn yī fèn.", meaning: "แปลไทย: พิมพ์ใหม่อีกหนึ่งชุด" },
+            "严重": { chinese: "病情很严重。", pinyin: "Bìngqing hěn yánzhòng.", meaning: "แปลไทย: อาการป่วยรุนแรงมาก" },
+            "窗户": { chinese: "把窗户关了吗?", pinyin: "Bǎ chuānghù guān le ma?", meaning: "แปลไทย: ปิดหน้าต่างหรือยัง?" },
+            "孙子": { chinese: "我的孙子。", pinyin: "Wǒ de sūnzi.", meaning: "แปลไทย: หลานชายของฉัน" },
+            "数量": { chinese: "增加数量。", pinyin: "Zēngjiā shùliàng.", meaning: "แปลไทย: เพิ่มจำนวน" },
+            "降水": { chinese: "降水影响大。", pinyin: "Jiàngshuǐ yǐngxiǎng dà.", meaning: "แปลไทย: ปริมาณน้ำฝนส่งผลกระทบมาก" },
+            "工具书": { chinese: "查工具书。", pinyin: "Chá gōngjùshū.", meaning: "แปลไทย: ค้นหาหนังสืออ้างอิง" },
+            "兴奋": { chinese: "感到兴奋。", pinyin: "Gǎndào xīngfèn.", meaning: "แปลไทย: รู้สึกตื่นเต้น" },
+            "抽烟": { chinese: "抽烟对身体不好。", pinyin: "Chōuyān duì shēntǐ bù hǎo.", meaning: "แปลไทย: สูบบุหรี่ไม่ดีต่อร่างกาย" },
+            "消息": { chinese: "听到消息。", pinyin: "Tīng dào xiāoxi.", meaning: "แปลไทย: ได้ยินข่าวสาร" },
+            "猜": { chinese: "猜一猜。", pinyin: "Cāi yī cāi.", meaning: "แปลไทย: ทายดูสิ" },
+            "信用卡": { chinese: "用信用卡付款。", pinyin: "Yòng xìnyòngkǎ fùkuān.", meaning: "แปลไทย: ชำระเงินด้วยบัตรเครดิต" },
+            "沙发": { chinese: "坐在沙发上。", pinyin: "Zuò zài shāfā shàng.", meaning: "แปลไทย: นั่งอยู่บนโซฟา" }
+        };
+
+        // ดึงค่าพารามิเตอร์จาก URL
+        const params = new URLSearchParams(window.location.search);
+        
+        const word = params.get('word') || 'ไม่พบข้อมูล';
+        const pinyin = params.get('pinyin') || '-';
+        const meaning = params.get('meaning') || '-';
+        const type = params.get('type') || '-';
+        const freqTotal = (params.get('freqTotal') || '0');
+        const setsFound = params.get('setsFound') || '-';
+
+        document.getElementById('wordDisplay').innerText = word;
+        document.getElementById('pinyinDisplay').innerText = pinyin;
+        document.getElementById('meaningDisplay').innerText = meaning;
+        document.getElementById('typeDisplay').innerText = type;
+        document.getElementById('freqTotalDisplay').innerText = freqTotal;
+        document.getElementById('setsFoundDisplay').innerText = setsFound;
+
+        // ดึงข้อมูลตัวอย่างประโยคตรงจากฐานข้อมูลภายในตามคำศัพท์
+        if (exampleDatabaseHSK4[word]) {
+            document.getElementById('exampleChinese').innerText = exampleDatabaseHSK4[word].chinese;
+            document.getElementById('examplePinyin').innerText = exampleDatabaseHSK4[word].pinyin;
+            document.getElementById('exampleMeaning').innerText = exampleDatabaseHSK4[word].meaning;
+        } else {
+            document.getElementById('exampleChinese').innerText = "暂ไม่มีตัวอย่างประโยคในระบบ";
+            document.getElementById('examplePinyin').innerText = "-";
+            document.getElementById('exampleMeaning').innerText = "-";
+        }
+    </script>
+</body>
+</html>

@@ -30,9 +30,14 @@
         <div class="bg-white rounded-3xl border-2 border-gray-100 shadow-xl p-8 md:p-12 text-center relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
             
-            <!-- ตัวอักษรจีนหลักและพินอินคำศัพท์ -->
+            <!-- ตัวอักษรจีนหลักและพินอินคำศัพท์ พร้อมปุ่มฟังเสียง -->
             <div id="wordDisplay" class="text-7xl md:text-8xl font-extrabold text-gray-900 mb-2">-</div>
-            <div id="pinyinDisplay" class="text-2xl font-bold text-red-600 mb-6">-</div>
+            <div id="pinyinDisplay" class="text-2xl font-bold text-red-600 mb-4">-</div>
+            <div class="mb-6">
+                <button onclick="speakText(document.getElementById('wordDisplay').innerText)" class="px-4 py-2 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-100 transition shadow-sm">
+                    🔊 ฟังเสียงอ่านคำศัพท์
+                </button>
+            </div>
 
             <!-- ข้อมูลรายละเอียด -->
             <div class="bg-white rounded-2xl p-6 text-left space-y-4 mb-8 border border-gray-100 shadow-sm">
@@ -54,9 +59,14 @@
                 </div>
             </div>
 
-            <!-- ประโยคตัวอย่าง พร้อมพินอินและคำแปลภาษาไทย -->
+            <!-- ประโยคตัวอย่าง พร้อมปุ่มฟังเสียงประโยค -->
             <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-xl text-left mb-8 space-y-3">
-                <h3 class="text-xs font-bold text-yellow-800 uppercase tracking-wider">ประโยคตัวอย่างจากข้อสอบ (Example)</h3>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xs font-bold text-yellow-800 uppercase tracking-wider">ประโยคตัวอย่างจากข้อสอบ (Example)</h3>
+                    <button onclick="speakText(document.getElementById('exampleChinese').innerText)" class="px-3 py-1 bg-yellow-400 text-black text-xs font-bold rounded-lg hover:bg-yellow-500 transition shadow-sm">
+                        🔊 ฟังเสียงประโยค
+                    </button>
+                </div>
                 <p id="exampleChinese" class="text-xl font-bold text-gray-900">-</p>
                 <p id="examplePinyin" class="text-sm font-semibold text-red-600">-</p>
                 <p id="exampleMeaning" class="text-sm font-medium text-gray-700">-</p>
@@ -75,6 +85,18 @@
     </footer>
 
     <script>
+        // ฟังก์ชันสำหรับอ่านออกเสียงภาษาจีน
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("เบราว์เซอร์ของคุณไม่รองรับการออกเสียง");
+            }
+        }
+
         // ฐานข้อมูลประโยคตัวอย่างตรงตามคำศัพท์ HSK 3
         const exampleDatabaseHSK3 = {
             "经理": { chinese: "请问张经理在吗?", pinyin: "Qīngwèn Zhāng jīnglǐ zài ma?", meaning: "แปลไทย: ขอถามหน่อยครับ/ค่ะ ผู้จัดการจางอยู่ไหมครับ/คะ" },
@@ -118,25 +140,25 @@
             "身体": { chinese: "要注意身体。", pinyin: "Yào zhùyì shēntǐ.", meaning: "แปลไทย: ต้องรักษาสุขภาพด้วย" },
             "生日": { chinese: "祝你生日快乐!", pinyin: "Zhù nǐ shēngrì kuàilè!", meaning: "แปลไทย: สุขสันต์วันเกิดนะ!" },
             "时间": { chinese: "我没有时间。", pinyin: "Wǒ méiyǒu shíjiān.", meaning: "แปลไทย: ฉันไม่มีเวลา" },
-            "事情": { chinese: "有什么事情吗?", pinyin: "Yǒu shénme shìqing ma?", meaning: "แปลไทย: มีธุระอะไรหรือเปล่า" },
-            "考试": { chinese: "明天有考试。", pinyin: "Míngtiān yǒu kǎoshì.", meaning: "แปลไทย: พรุ่งนี้มีสอบ" },
-            "哭": { chinese: "别哭了。", pinyin: "Bié kū le.", meaning: "แปลไทย: อย่าร้องไห้เลย" },
+            "事情": { chinese: "有什么事情吗?", pinyin: "Yǒu shénme shìqing ma?", meaning: "มีธุระอะไรหรือเปล่า" },
+            "考试": { chinese: "明天有考试。", pinyin: "Míngtiān yǒu kǎoshì.", meaning: "พรุ่งนี้มีสอบ" },
+            "哭": { chinese: "别哭了。", pinyin: "Bié kū le.", meaning: "อย่าร้องไห้เลย" },
             "快乐": { chinese: "祝我生日快乐", pinyin: "Zhù wǒ shēngrì kuàilè", meaning: "แปลไทย: สุขสันต์วันเกิดฉัน" },
-            "离": { chinese: "离这里很远。", pinyin: "Lí zhèli hěn yuǎn.", meaning: "แปลไทย: อยู่ห่างจากที่นี่มาก" },
-            "旅游": { chinese: "我去旅游。", pinyin: "Wǒ qù lǚyóu.", meaning: "แปลไทย: ฉันไปท่องเที่ยว" },
-            "门": { chinese: "请关门。", pinyin: "Qǐng guān mén.", meaning: "แปลไทย: กรุณาปิดประตู" },
-            "难": { chinese: "汉语很难。", pinyin: "Hànyǔ hěn nán.", meaning: "แปลไทย: ภาษาจีนยากมาก" },
-            "牛奶": { chinese: "喝牛奶对身体好。", pinyin: "Hē niúnǎi duì shēntǐ hǎo.", meaning: "แปลไทย: ดื่มนมวัวดีต่อสุขภาพ" },
-            "努力": { chinese: "努力学习。", pinyin: "Nǔlì xuéxí.", meaning: "แปลไทย: ตั้งใจเรียน" },
-            "清楚": { chinese: "听不清楚。", pinyin: "Tīng bù qīngchu.", meaning: "แปลไทย: ฟังไม่ชัดเจน" },
-            "去年": { chinese: "去年我去过。", pinyin: "Qùnián wǒ qùguò.", meaning: "แปลไทย: ปีที่แล้วฉันเคยไป" },
-            "让": { chinese: "让我看看。", pinyin: "Ràng wǒ kànkan.", meaning: "แปลไทย: ให้ฉันดูหน่อย" },
-            "热情": { chinese: "服务员很热情。", pinyin: "Fúwùyuán hěn rèqíng.", meaning: "แปลไทย: พนักงานกระตือรือร้นมาก" },
-            "容易": { chinese: "汉字很容易。", pinyin: "Hànzì hěn róngyì.", meaning: "แปลไทย: ตัวอักษรจีนง่ายมาก" },
-            "声音": { chinese: "声音很小。", pinyin: "Shēngyīn hěn xiǎo.", meaning: "แปลไทย: เสียงเบามาก" },
-            "世界": { chinese: "全世界。", pinyin: "Quán shìjiè.", meaning: "แปลไทย: ทั่วโลก" },
-            "唱歌": { chinese: "他喜欢唱歌。", pinyin: "Tā xǐhuan chànggē.", meaning: "แปลไทย: เขาชอบร้องเพลง" },
-            "跳舞": { chinese: "我会跳舞。", pinyin: "Wǒ huì tiàowǔ.", meaning: "แปลไทย: ฉันเต้นรำเป็น" },
+            "离": { chinese: "离这里很远。", pinyin: "Lí zhèli hěn yuǎn.", meaning: "อยู่ห่างจากที่นี่มาก" },
+            "旅游": { chinese: "我去旅游。", pinyin: "Wǒ qù lǚyóu.", meaning: "ฉันไปท่องเที่ยว" },
+            "门": { chinese: "请关门。", pinyin: "Qǐng guān mén.", meaning: "กรุณาปิดประตู" },
+            "难": { chinese: "汉语很难。", pinyin: "Hànyǔ hěn nán.", meaning: "ภาษาจีนยากมาก" },
+            "牛奶": { chinese: "喝牛奶对身体好。", pinyin: "Hē niúnǎi duì shēntǐ hǎo.", meaning: "ดื่มนมวัวดีต่อสุขภาพ" },
+            "努力": { chinese: "努力学习。", pinyin: "Nǔlì xuéxí.", meaning: "ตั้งใจเรียน" },
+            "清楚": { chinese: "听不清楚。", pinyin: "Tīng bù qīngchu.", meaning: "ฟังไม่ชัดเจน" },
+            "去年": { chinese: "去年我去过。", pinyin: "Qùnián wǒ qùguò.", meaning: "ปีที่แล้วฉันเคยไป" },
+            "让": { chinese: "让我看看。", pinyin: "Ràng wǒ kànkan.", meaning: "ให้ฉันดูหน่อย" },
+            "热情": { chinese: "服务员很热情。", pinyin: "Fúwùyuán hěn rèqíng.", meaning: "พนักงานกระตือรือร้นมาก" },
+            "容易": { chinese: "汉字很容易。", pinyin: "Hànzì hěn róngyì.", meaning: "ตัวอักษรจีนง่ายมาก" },
+            "声音": { chinese: "声音很小。", pinyin: "Shēngyīn hěn xiǎo.", meaning: "เสียงเบามาก" },
+            "世界": { chinese: "全世界。", pinyin: "Quán shìjiè.", meaning: "ทั่วโลก" },
+            "唱歌": { chinese: "他喜欢唱歌。", pinyin: "Tā xǐhuan chànggē.", meaning: "เขาชอบร้องเพลง" },
+            "跳舞": { chinese: "我会跳舞。", pinyin: "Wǒ huì tiàowǔ.", meaning: "ฉันเต้นรำเป็น" },
             "生病": { chinese: "他生病了。", pinyin: "Tā shēngbìng le.", meaning: "เขาป่วยแล้ว" },
             "休息": { chinese: "好好休息。", pinyin: "Hǎo hǎo xiūxi.", meaning: "พักผ่อนให้ดีๆ" },
             "游泳": { chinese: "夏天喜欢游泳。", pinyin: "Xiàtiān xǐhuan yóuyǒng.", meaning: "ฤดูร้อนชอบว่ายน้ำ" },
@@ -179,7 +201,7 @@
             "外面": { chinese: "外面下雨了。", pinyin: "Wàimiàn xià yǔ le.", meaning: "ข้างนอกฝนตกแล้ว" },
             "里面": { chinese: "里面有人吗?", pinyin: "Lǐmiàn yǒu rén ma?", meaning: "ด้านในมีคนไหม?" },
             "前面": { chinese: "前面那个人是谁?", pinyin: "Qiánmiàn nà gè rén shì shéi?", meaning: "คนข้างหน้าที่อยู่ตรงนั้นคือใคร?" },
-            "后面": { chinese: "她在后面。", pinyin: "Tā zài hòumiàn.", meaning: "เธออยู่ข้างหลัง" },
+            "后面": { chinese: "她在后面。", pinyin: "Tā zài hòumiàn。", meaning: "เธออยู่ข้างหลัง" },
             "左边": { chinese: "左边的商店。", pinyin: "Zuǒbiān de shāngdiàn.", meaning: "ร้านค้าทางด้านซ้าย" },
             "右边": { chinese: "右边是医院。", pinyin: "Yòubiān shì yīyuàn.", meaning: "ด้านขวาคือโรงพยาบาล" },
             "北边": { chinese: "在宾馆的北边。", pinyin: "Zài bīnguǎn de běibian.", meaning: "อยู่ทางทิศเหนือของโรงแรม" },

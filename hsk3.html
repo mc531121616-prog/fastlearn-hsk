@@ -27,20 +27,17 @@
                 <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
                     คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 3</span> (112 คำ)
                 </h1>
-                <p class="text-gray-300 text-sm mt-1">วิเคราะห์ข้อสอบจริง พร้อมระบบ Flashcard, Quiz ทดสอบ และเสียงอ่านจำลอง</p>
+                <p class="text-gray-300 text-sm mt-1">วิเคราะห์ข้อสอบจริง พร้อมระบบ Flashcard, Quiz, เกมจับคู่, ฝึกเขียน และจำลองข้อสอบ</p>
             </div>
             
             <!-- Mode Switcher Tabs -->
-            <div class="flex bg-zinc-900 p-1.5 rounded-2xl border border-zinc-800 shadow-inner">
-                <button onclick="switchMode('grid')" id="btnGrid" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow">
-                    📋 ตารางคำศัพท์
-                </button>
-                <button onclick="switchMode('flashcard')" id="btnFlashcard" class="px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">
-                    🃏 โหมดการ์ด (Flashcard)
-                </button>
-                <button onclick="switchMode('quiz')" id="btnQuiz" class="px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">
-                    📝 ทดสอบ (Quiz)
-                </button>
+            <div class="flex flex-wrap bg-zinc-900 p-1.5 rounded-2xl border border-zinc-800 shadow-inner gap-1">
+                <button onclick="switchMode('grid')" id="btnGrid" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow">📋 ตารางคำศัพท์</button>
+                <button onclick="switchMode('flashcard')" id="btnFlashcard" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">🃏 Flashcard</button>
+                <button onclick="switchMode('quiz')" id="btnQuiz" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">📝 ทดสอบความหมาย</button>
+                <button onclick="switchMode('match')" id="btnMatch" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">🎮 เกมจับคู่</button>
+                <button onclick="switchMode('writing')" id="btnWriting" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">✍️ ฝึกเขียนพินอิน</button>
+                <button onclick="switchMode('mocktest')" id="btnMocktest" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">🏆 จำลองข้อสอบ</button>
             </div>
         </div>
     </header>
@@ -50,12 +47,9 @@
 
         <!-- Controls Bar: Search, Filter, Sort -->
         <div id="controlsBar" class="bg-white p-5 rounded-3xl border border-gray-200/80 shadow-sm mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <!-- Search Input -->
             <div class="w-full md:w-80">
                 <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
-
-            <!-- Filter by Type -->
             <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
                 <span class="text-xs font-bold text-gray-500 mr-1">กรองประเภท:</span>
                 <button onclick="filterByType('all')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition">ทั้งหมด</button>
@@ -63,8 +57,6 @@
                 <button onclick="filterByType('คำกริยา')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition">คำกริยา</button>
                 <button onclick="filterByType('คำคุณศัพท์')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition">คำคุณศัพท์</button>
             </div>
-
-            <!-- Sort By -->
             <div class="flex items-center gap-2 w-full md:w-auto justify-end">
                 <span class="text-xs font-bold text-gray-500">เรียงตาม:</span>
                 <select id="sortSelect" onchange="sortVocab()" class="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-red-600 bg-white">
@@ -77,17 +69,13 @@
 
         <!-- MODE 1: GRID VIEW -->
         <div id="sectionGrid">
-            <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Data rendered by JS -->
-            </div>
+            <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
         </div>
 
         <!-- MODE 2: FLASHCARD VIEW -->
         <div id="sectionFlashcard" class="hidden flex flex-col items-center justify-center py-6">
             <div class="w-full max-w-md perspective-1000 cursor-pointer h-96" onclick="flipCard()">
                 <div id="flashcardInner" class="relative w-full h-full duration-500 transform-style-3d shadow-xl rounded-3xl">
-                    
-                    <!-- Front Side -->
                     <div class="absolute inset-0 w-full h-full bg-white rounded-3xl border-2 border-gray-100 p-8 flex flex-col justify-between backface-hidden">
                         <div class="flex justify-between items-center">
                             <span id="fcType" class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">คำนาม</span>
@@ -102,8 +90,6 @@
                             <button onclick="event.stopPropagation(); speakWord(document.getElementById('fcWord').innerText)" class="px-2.5 py-1 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-bold">🔊 ฟังเสียง</button>
                         </div>
                     </div>
-
-                    <!-- Back Side -->
                     <div class="absolute inset-0 w-full h-full bg-zinc-900 text-white rounded-3xl p-8 flex flex-col justify-between backface-hidden rotate-y-180">
                         <div class="flex justify-between items-center">
                             <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">ความหมาย & ตัวอย่าง</span>
@@ -117,15 +103,10 @@
                                 <div id="fcExMean" class="text-xs text-gray-300">ขอถามหน่อยครับ ผู้จัดการจางอยู่ไหม</div>
                             </div>
                         </div>
-                        <div class="text-center text-xs text-gray-400 font-semibold">
-                            🔄 คลิกเพื่อพลิกกลับด้านหน้า
-                        </div>
+                        <div class="text-center text-xs text-gray-400 font-semibold">🔄 คลิกเพื่อพลิกกลับด้านหน้า</div>
                     </div>
-
                 </div>
             </div>
-
-            <!-- Flashcard Navigation Controls -->
             <div class="flex items-center gap-4 mt-8">
                 <button onclick="prevCard()" class="px-6 py-2.5 bg-white border border-gray-200 rounded-2xl font-bold text-sm shadow-sm hover:bg-gray-50 transition">← การ์ดก่อนหน้า</button>
                 <button onclick="nextCard()" class="px-6 py-2.5 bg-red-600 text-white rounded-2xl font-bold text-sm shadow-md hover:bg-red-700 transition">การ์ดถัดไป →</button>
@@ -136,31 +117,72 @@
         <div id="sectionQuiz" class="hidden max-w-xl mx-auto py-4">
             <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
-                
-                <!-- Quiz Header -->
                 <div class="flex justify-between items-center mb-6">
                     <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-gray-100 text-gray-600 rounded-full">คำถามที่ 1 / 10</span>
                     <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">คะแนน: 0</span>
                 </div>
-
-                <!-- Quiz Question Box -->
                 <div class="text-center mb-8">
                     <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
                     <div id="quizWord" class="text-7xl font-black text-gray-900 mb-2">经理</div>
                     <div id="quizPinyin" class="text-xl font-bold text-red-600">jīnglǐ</div>
                 </div>
-
-                <!-- Quiz Options Grid -->
                 <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
-
-                <!-- Next Question Button -->
-                <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">
-                    ข้อถัดไป →
-                </button>
+                <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
             </div>
         </div>
 
-        <!-- Bottom Back Button Section -->
+        <!-- MODE 4: MATCHING GAME -->
+        <div id="sectionMatch" class="hidden max-w-2xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-yellow-500"></div>
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-black text-gray-900 mb-1">🎮 เกมจับคู่คำศัพท์จีน-ไทย</h3>
+                    <p class="text-xs text-gray-500">คลิกเลือกคำศัพท์จีนทางซ้าย และความหมายภาษาไทยทางขวาให้ถูกต้องตรงกัน</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6" id="matchGameContainer">
+                    <div class="space-y-3" id="matchChineseCol"></div>
+                    <div class="space-y-3" id="matchMeaningCol"></div>
+                </div>
+                <div class="mt-6 text-center">
+                    <button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เริ่มเกมใหม่ ↺</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODE 5: WRITING / DICTATION QUIZ -->
+        <div id="sectionWriting" class="hidden max-w-xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-black text-gray-900 mb-1">✍️ ฝึกสะกดพินอินจากความหมาย</h3>
+                    <p class="text-xs text-gray-500">พิมพ์พินอินของคำศัพท์ภาษาจีนให้ถูกต้อง</p>
+                </div>
+                <div class="text-center space-y-4 mb-6">
+                    <div class="text-4xl font-extrabold text-red-600" id="writeMeaningDisplay">-</div>
+                    <div class="text-sm font-semibold text-gray-400" id="writeTypeDisplay">-</div>
+                    <input type="text" id="writeInput" placeholder="พิมพ์พินอิน เช่น jingli" class="w-full px-4 py-3 rounded-2xl border-2 border-gray-200 text-center font-bold text-lg focus:outline-none focus:border-red-600">
+                    <button onclick="checkWritingAnswer()" class="w-full py-3 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-md">ตรวจคำตอบ</button>
+                    <div id="writeResult" class="font-bold text-sm"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODE 6: MOCK TEST (SIMULATION) -->
+        <div id="sectionMocktest" class="hidden max-w-2xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-black"></div>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-black">🏆 จำลองข้อสอบ HSK ระดับ 3</h3>
+                    <span id="mockTimer" class="px-3 py-1 bg-red-100 text-red-700 font-bold rounded-full text-xs">⏱️ 10:00 นาที</span>
+                </div>
+                <div id="mockContent" class="space-y-6">
+                    <p class="text-sm text-gray-600">การทดสอบจำลองข้อสอบจริง จำนวน 5 ข้อ วัดความแม่นยำคำศัพท์และบริบทประโยค</p>
+                    <button onclick="startMockTest()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg">เริ่มทำข้อสอบจำลอง</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Back Button -->
         <div class="mt-16 text-center">
             <a href="index.html" class="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-red-600 transition shadow-lg">
                 <span>←</span> กลับสู่หน้าหลัก HSK 1-6
@@ -175,7 +197,6 @@
     </footer>
 
     <script>
-        // ฐานข้อมูลคำศัพท์ HSK 3 ครบทั้ง 112 คำ
         const hsk3Data = [
             { id: 1, word: "经理", pinyin: "jīnglǐ", meaning: "ผู้จัดการ", type: "คำนาม", freq: 8, setsFound: "H31001, H31003, H31004, H31006, H31007, H31008, H31009, H31110", chinese: "请问张经理在吗?", exPin: "Qīngwèn Zhāng jīnglǐ zài ma?", exMean: "ขอถามหน่อยครับ/ค่ะ ผู้จัดการจางอยู่ไหมครับ/คะ" },
             { id: 2, word: "照顾", pinyin: "zhàogù", meaning: "ดูแล", type: "คำกริยา", freq: 7, setsFound: "H31001, H31002, H31003, H31004, H31005, H31007, H31008", chinese: "要照顾好自己。", exPin: "Yào zhàogù hǎo zìjǐ.", exMean: "ต้องดูแลตัวเองให้ดี" },
@@ -305,30 +326,179 @@
         }
 
         function switchMode(mode) {
-            document.getElementById('sectionGrid').classList.add('hidden');
-            document.getElementById('sectionFlashcard').classList.add('hidden');
-            document.getElementById('sectionQuiz').classList.add('hidden');
+            ['sectionGrid', 'sectionFlashcard', 'sectionQuiz', 'sectionMatch', 'sectionWriting', 'sectionMocktest'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
             document.getElementById('controlsBar').classList.remove('hidden');
 
-            document.getElementById('btnGrid').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
-            document.getElementById('btnFlashcard').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
-            document.getElementById('btnQuiz').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
+            ['btnGrid', 'btnFlashcard', 'btnQuiz', 'btnMatch', 'btnWriting', 'btnMocktest'].forEach(id => {
+                document.getElementById(id).className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
+            });
 
             if (mode === 'grid') {
                 document.getElementById('sectionGrid').classList.remove('hidden');
-                document.getElementById('btnGrid').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
+                document.getElementById('btnGrid').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
             } else if (mode === 'flashcard') {
                 document.getElementById('sectionFlashcard').classList.remove('hidden');
-                document.getElementById('btnFlashcard').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
+                document.getElementById('btnFlashcard').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
                 initFlashcard();
             } else if (mode === 'quiz') {
                 document.getElementById('sectionQuiz').classList.remove('hidden');
                 document.getElementById('controlsBar').classList.add('hidden');
-                document.getElementById('btnQuiz').className = "px-4 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
+                document.getElementById('btnQuiz').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
                 startQuiz();
+            } else if (mode === 'match') {
+                document.getElementById('sectionMatch').classList.remove('hidden');
+                document.getElementById('btnMatch').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-yellow-500 text-black shadow";
+                initMatchGame();
+            } else if (mode === 'writing') {
+                document.getElementById('sectionWriting').classList.remove('hidden');
+                document.getElementById('btnWriting').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
+                initWritingQuiz();
+            } else if (mode === 'mocktest') {
+                document.getElementById('sectionMocktest').classList.remove('hidden');
+                document.getElementById('controlsBar').classList.add('hidden');
+                document.getElementById('btnMocktest').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
             }
         }
 
+        // --- MATCHING GAME LOGIC ---
+        let selectedChinese = null;
+        let selectedMeaning = null;
+        let matchPairs = [];
+        let matchedCount = 0;
+
+        function initMatchGame() {
+            const shuffled = [...hsk3Data].sort(() => 0.5 - Math.random()).slice(0, 4);
+            matchPairs = shuffled;
+            matchedCount = 0;
+            selectedChinese = null;
+            selectedMeaning = null;
+
+            const chineseCol = document.getElementById('matchChineseCol');
+            const meaningCol = document.getElementById('matchMeaningCol');
+            chineseCol.innerHTML = '';
+            meaningCol.innerHTML = '';
+
+            const chineseWords = [...shuffled].sort(() => 0.5 - Math.random());
+            const meanings = [...shuffled].sort(() => 0.5 - Math.random());
+
+            chineseWords.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-black text-2xl text-gray-800 hover:border-yellow-500 transition shadow-sm";
+                btn.innerText = item.word;
+                btn.onclick = () => selectMatchChinese(item, btn);
+                chineseCol.appendChild(btn);
+            });
+
+            meanings.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-bold text-sm text-gray-700 hover:border-yellow-500 transition shadow-sm";
+                btn.innerText = item.meaning;
+                btn.onclick = () => selectMatchMeaning(item, btn);
+                meaningCol.appendChild(btn);
+            });
+        }
+
+        function selectMatchChinese(item, btn) {
+            document.querySelectorAll('#matchChineseCol button').forEach(b => b.classList.remove('border-yellow-500', 'bg-yellow-50'));
+            btn.classList.add('border-yellow-500', 'bg-yellow-50');
+            selectedChinese = item;
+            checkMatch();
+        }
+
+        function selectMatchMeaning(item, btn) {
+            document.querySelectorAll('#matchMeaningCol button').forEach(b => b.classList.remove('border-yellow-500', 'bg-yellow-50'));
+            btn.classList.add('border-yellow-500', 'bg-yellow-50');
+            selectedMeaning = item;
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if(selectedChinese && selectedMeaning) {
+                if(selectedChinese.id === selectedMeaning.id) {
+                    matchedCount++;
+                    speakWord(selectedChinese.word);
+                    // Disable matched buttons
+                    document.querySelectorAll('#matchChineseCol button').forEach(b => { if(b.innerText === selectedChinese.word) b.className = "w-full py-4 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-black text-2xl text-green-700 opacity-50 cursor-not-allowed"; });
+                    document.querySelectorAll('#matchMeaningCol button').forEach(b => { if(b.innerText === selectedMeaning.meaning) b.className = "w-full py-4 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-bold text-sm text-green-700 opacity-50 cursor-not-allowed"; });
+                    
+                    selectedChinese = null;
+                    selectedMeaning = null;
+
+                    if(matchedCount === 4) {
+                        setTimeout(() => {
+                            alert("🎉 ยอดเยี่ยม! จับคู่ถูกต้องครบทั้งหมดแล้ว");
+                            initMatchGame();
+                        }, 300);
+                    }
+                } else {
+                    setTimeout(() => {
+                        alert("❌ ไม่ถูกต้อง ลองใหม่อีกครั้งครับ");
+                        document.querySelectorAll('#matchChineseCol button, #matchMeaningCol button').forEach(b => {
+                            if(!b.className.includes('green')) b.className = "w-full py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-bold text-sm text-gray-700 hover:border-yellow-500 transition shadow-sm";
+                        });
+                        selectedChinese = null;
+                        selectedMeaning = null;
+                    }, 300);
+                }
+            }
+        }
+
+        // --- WRITING QUIZ LOGIC ---
+        let currentWritingItem = null;
+        function initWritingQuiz() {
+            currentWritingItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
+            document.getElementById('writeMeaningDisplay').innerText = currentWritingItem.meaning;
+            document.getElementById('writeTypeDisplay').innerText = `ประเภท: ${currentWritingItem.type}`;
+            document.getElementById('writeInput').value = '';
+            document.getElementById('writeResult').innerText = '';
+        }
+        function checkWritingAnswer() {
+            const userVal = document.getElementById('writeInput').value.trim().toLowerCase();
+            const correctVal = currentWritingItem.pinyin.toLowerCase();
+            const resBox = document.getElementById('writeResult');
+            if(userVal === correctVal) {
+                resBox.innerHTML = `<span class="text-green-600 text-base">🎉 ถูกต้อง! คำนี้คือ ${currentWritingItem.word} (${currentWritingItem.pinyin})</span>`;
+                speakWord(currentWritingItem.word);
+                setTimeout(initWritingQuiz, 2000);
+            } else {
+                resBox.innerHTML = `<span class="text-red-600">❌ ยังไม่ถูกต้อง พินอินที่ถูกต้องคือ: ${currentWritingItem.pinyin}</span>`;
+            }
+        }
+
+        // --- MOCK TEST LOGIC ---
+        function startMockTest() {
+            let mockItems = [...hsk3Data].sort(() => 0.5 - Math.random()).slice(0, 5);
+            let html = `<div class="space-y-6">`;
+            mockItems.forEach((item, idx) => {
+                let wrongOpts = hsk3Data.filter(i => i.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(i => i.meaning);
+                let opts = [item.meaning, ...wrongOpts].sort(() => 0.5 - Math.random());
+                html += `
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-gray-200 space-y-3">
+                        <p class="font-bold text-gray-800">ข้อที่ ${idx+1}: คำว่า <span class="text-red-600 text-xl">${item.word}</span> (${item.pinyin}) ตรงกับความหมายใด?</p>
+                        <div class="grid grid-cols-1 gap-2">
+                            ${opts.map(opt => `<button onclick="checkMockAns(this, '${opt}', '${item.meaning}')" class="py-2.5 px-4 bg-white border border-gray-200 rounded-xl text-left text-sm font-semibold hover:border-red-500 transition">${opt}</button>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            html += `<button onclick="alert('ส่งข้อสอบเรียบร้อยแล้วครับ')" class="w-full py-4 bg-black text-white rounded-2xl font-bold hover:bg-red-600 transition shadow-lg">ส่งข้อสอบ</button></div>`;
+            document.getElementById('mockContent').innerHTML = html;
+        }
+
+        function checkMockAns(btn, selected, correct) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('button').forEach(b => {
+                b.disabled = true;
+                if(b.innerText === correct) b.className = "py-2.5 px-4 bg-green-50 border-2 border-green-500 rounded-2xl text-left text-sm font-bold text-green-700";
+            });
+            if(selected !== correct) {
+                btn.className = "py-2.5 px-4 bg-red-50 border-2 border-red-500 rounded-2xl text-left text-sm font-bold text-red-700";
+            }
+        }
+
+        // --- GRID RENDER & OTHERS ---
         const grid = document.getElementById('vocabGrid');
         function renderVocab(data) {
             grid.innerHTML = '';
@@ -339,11 +509,9 @@
             data.forEach((item) => {
                 const card = document.createElement('div');
                 card.className = "bg-white p-6 rounded-3xl border border-gray-200/80 shadow-md hover:border-red-600 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer";
-                
                 card.onclick = () => {
                     window.location.href = `hsk3-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(`ซ้ำใน ${item.freq || 3} ชุดข้อสอบ`)}&setsFound=${encodeURIComponent(item.setsFound)}`;
                 };
-
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center mb-3">
@@ -358,8 +526,7 @@
                         <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
                     </div>
                     <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
-                        <span>ดูชุดข้อสอบและตัวอย่างประโยค</span>
-                        <span>→</span>
+                        <span>ดูชุดข้อสอบและตัวอย่างประโยค</span><span>→</span>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -368,47 +535,27 @@
 
         function filterVocab() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            currentFilteredData = hsk3Data.filter(item => 
-                item.word.toLowerCase().includes(query) || 
-                item.pinyin.toLowerCase().includes(query) || 
-                item.meaning.toLowerCase().includes(query)
-            );
+            currentFilteredData = hsk3Data.filter(item => item.word.toLowerCase().includes(query) || item.pinyin.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query));
             renderVocab(currentFilteredData);
         }
 
         function filterByType(type) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition";
-            });
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition");
             event.target.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition";
-
-            if(type === 'all') {
-                currentFilteredData = [...hsk3Data];
-            } else {
-                currentFilteredData = hsk3Data.filter(i => i.type.includes(type));
-            }
+            currentFilteredData = type === 'all' ? [...hsk3Data] : hsk3Data.filter(i => i.type.includes(type));
             renderVocab(currentFilteredData);
         }
 
         function sortVocab() {
             const sortBy = document.getElementById('sortSelect').value;
-            if(sortBy === 'freq') {
-                currentFilteredData.sort((a,b) => (b.freq || 3) - (a.freq || 3));
-            } else if(sortBy === 'alpha') {
-                currentFilteredData.sort((a,b) => a.pinyin.localeCompare(b.pinyin));
-            } else {
-                currentFilteredData.sort((a,b) => a.id - b.id);
-            }
+            if(sortBy === 'freq') currentFilteredData.sort((a,b) => (b.freq || 3) - (a.freq || 3));
+            else if(sortBy === 'alpha') currentFilteredData.sort((a,b) => a.pinyin.localeCompare(b.pinyin));
+            else currentFilteredData.sort((a,b) => a.id - b.id);
             renderVocab(currentFilteredData);
         }
 
-        let fcIndex = 0;
-        let isFlipped = false;
-        function initFlashcard() {
-            fcIndex = 0;
-            isFlipped = false;
-            updateFlashcardUI();
-        }
+        let fcIndex = 0, isFlipped = false;
+        function initFlashcard() { fcIndex = 0; isFlipped = false; updateFlashcardUI(); }
         function updateFlashcardUI() {
             const item = hsk3Data[fcIndex];
             document.getElementById('fcType').innerText = item.type;
@@ -420,44 +567,17 @@
             document.getElementById('fcExChin').innerText = `【${item.chinese}】`;
             document.getElementById('fcExPin').innerText = item.exPin;
             document.getElementById('fcExMean').innerText = item.exMeaning;
+            if(isFlipped) document.getElementById('flashcardInner').classList.add('rotate-y-180');
+            else document.getElementById('flashcardInner').classList.remove('rotate-y-180');
+        }
+        function flipCard() { isFlipped = !isFlipped; const inner = document.getElementById('flashcardInner'); if(isFlipped) inner.classList.add('rotate-y-180'); else inner.classList.remove('rotate-y-180'); }
+        function nextCard() { isFlipped = false; fcIndex = (fcIndex + 1) % hsk3Data.length; updateFlashcardUI(); }
+        function prevCard() { isFlipped = false; fcIndex = (fcIndex - 1 + hsk3Data.length) % hsk3Data.length; updateFlashcardUI(); }
 
-            if(isFlipped) {
-                document.getElementById('flashcardInner').classList.add('rotate-y-180');
-            } else {
-                document.getElementById('flashcardInner').classList.remove('rotate-y-180');
-            }
-        }
-        function flipCard() {
-            isFlipped = !isFlipped;
-            const inner = document.getElementById('flashcardInner');
-            if(isFlipped) inner.classList.add('rotate-y-180');
-            else inner.classList.remove('rotate-y-180');
-        }
-        function nextCard() {
-            isFlipped = false;
-            fcIndex = (fcIndex + 1) % hsk3Data.length;
-            updateFlashcardUI();
-        }
-        function prevCard() {
-            isFlipped = false;
-            fcIndex = (fcIndex - 1 + hsk3Data.length) % hsk3Data.length;
-            updateFlashcardUI();
-        }
-
-        let quizScore = 0;
-        let quizStep = 0;
-        const totalQuiz = 5;
-        let currentQuizItem = null;
-
-        function startQuiz() {
-            quizScore = 0;
-            quizStep = 0;
-            nextQuizQuestion();
-        }
-
-      function nextQuizQuestion() {
+        let quizScore = 0, quizStep = 0, totalQuiz = 5, currentQuizItem = null;
+        function startQuiz() { quizScore = 0; quizStep = 0; nextQuizQuestion(); }
+        function nextQuizQuestion() {
             if(quizStep >= totalQuiz) {
-                // คืนค่าโครงสร้างกล่อง Quiz เดิมกลับมาก่อน แล้วค่อยแสดงผลสรุปคะแนนข้างใน
                 document.getElementById('sectionQuiz').innerHTML = `
                     <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
                         <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
@@ -473,20 +593,15 @@
             document.getElementById('nextQuizBtn').classList.add('hidden');
             document.getElementById('quizProgress').innerText = `คำถามที่ ${quizStep} / ${totalQuiz}`;
             document.getElementById('quizScore').innerText = `คะแนน: ${quizScore}`;
-
             currentQuizItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
             document.getElementById('quizWord').innerText = currentQuizItem.word;
             document.getElementById('quizPinyin').innerText = currentQuizItem.pinyin;
-
             let options = [currentQuizItem.meaning];
             while(options.length < 3) {
                 let randomItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
-                if(!options.includes(randomItem.meaning)) {
-                    options.push(randomItem.meaning);
-                }
+                if(!options.includes(randomItem.meaning)) options.push(randomItem.meaning);
             }
             options.sort(() => Math.random() - 0.5);
-
             const optionsContainer = document.getElementById('quizOptions');
             optionsContainer.innerHTML = '';
             options.forEach(opt => {
@@ -497,14 +612,11 @@
                 optionsContainer.appendChild(btn);
             });
         }
-
         function checkQuizAnswer(selected, btnElement) {
             const allBtns = document.getElementById('quizOptions').getElementsByTagName('button');
             for(let b of allBtns) {
                 b.disabled = true;
-                if(b.innerText.includes(currentQuizItem.meaning)) {
-                    b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
-                }
+                if(b.innerText.includes(currentQuizItem.meaning)) b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
             }
             if(selected === currentQuizItem.meaning) {
                 quizScore++;

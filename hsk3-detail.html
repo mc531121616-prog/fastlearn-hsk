@@ -29,7 +29,7 @@
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full flex items-center justify-center relative">
         
         <!-- ปุ่มย้อนกลับด้านซ้าย -->
-        <button onclick="navigateWord(-1)" class="absolute left-2 md:left-4 z-10 p-3 md:p-4 bg-white hover:bg-stone-50 text-stone-700 rounded-full shadow-lg border border-stone-200 transition-all hover:scale-105 flex items-center justify-center" title="คำก่อนหน้า">
+        <button onclick="changeWord(-1)" class="absolute left-2 md:left-4 z-10 p-3 md:p-4 bg-white hover:bg-stone-50 text-stone-700 rounded-full shadow-lg border border-stone-200 transition-all hover:scale-105 flex items-center justify-center" title="คำก่อนหน้า">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         </button>
 
@@ -94,7 +94,7 @@
         </div>
 
         <!-- ปุ่มถัดไปด้านขวา -->
-        <button onclick="navigateWord(1)" class="absolute right-2 md:right-4 z-10 p-3 md:p-4 bg-white hover:bg-stone-50 text-stone-700 rounded-full shadow-lg border border-stone-200 transition-all hover:scale-105 flex items-center justify-center" title="คำถัดไป">
+        <button onclick="changeWord(1)" class="absolute right-2 md:right-4 z-10 p-3 md:p-4 bg-white hover:bg-stone-50 text-stone-700 rounded-full shadow-lg border border-stone-200 transition-all hover:scale-105 flex items-center justify-center" title="คำถัดไป">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </button>
 
@@ -129,7 +129,7 @@
             { id: 20, word: "普通话", pinyin: "pūtōnghuà", meaning: "ภาษาจีนกลาง", type: "คำนาม", freq: 6, setsFound: "H31001, H31002, H31003, H31004, H31008, H31110", chinese: "北京话和普通话是相同的。", exPin: "Běijīng huà hé pūtōnghuà shì xiāngtóng de.", exMeaning: "ภาษาจีนกลาง" },
             { id: 21, word: "终于", pinyin: "zhōngyú", meaning: "ในที่สุด", type: "คำวิเศษณ์", freq: 6, setsFound: "H31002, H31003, H31004, H31006, H31007, H31008", chinese: "你终于来了。", exPin: "Nǐ zhōngyú lái le.", exMeaning: "ในที่สุดก็มา" },
             { id: 22, word: "锻炼", pinyin: "duànliàn", meaning: "ออกกำลังกาย", type: "คำกริยา", freq: 5, setsFound: "H31002, H31003, H31004, H31005, H31008", chinese: "锻炼身体。", exPin: "Duànliàn shēntǐ.", exMeaning: "ออกกำลังกาย" },
-            { id: 23, word: "新闻", pinyin: "xīnwén", meaning: "ข่าว", type: "คำนาม", freq: 7, setsFound: "H31002, H31003, H31004, H31005, H31008, H31009, H31110", chinese: "怎么不看新闻了?", exPin: "Zěnme bù kàn xīnwén le?", meaning: "ดูข่าว" },
+            { id: 23, word: "新闻", pinyin: "xīnwén", meaning: "ข่าว", type: "คำนาม", freq: 7, setsFound: "H31002, H31003, H31004, H31005, H31008, H31009, H31110", chinese: "怎么不看新闻了?", exPin: "Zěnme bù kàn xīnwén le?", exMeaning: "ดูข่าว" },
             { id: 24, word: "手表", pinyin: "shǒubiǎo", meaning: "นาฬิกาข้อมือ", type: "คำนาม", freq: 10, setsFound: "H31001, H31002, H31003, H31004, H31005, H31006, H31007, H31008, H31009, H31110", chinese: "手表不走了。", exPin: "Shǒubiǎo bù zǒu le.", meaning: "นาฬิกาข้อมือ" },
             { id: 25, word: "邻居", pinyin: "línjū", meaning: "เพื่อนบ้าน", type: "คำนาม", freq: 7, setsFound: "H31001, H31003, H31004, H31005, H31006, H31009, H31110", chinese: "那是我们邻居的女儿。", exPin: "Nà shì wǒmen línjū de nǚ'ér.", meaning: "เพื่อนบ้าน" },
             { id: 26, word: "空调", pinyin: "kōngtiáo", meaning: "เครื่องปรับอากาศ", type: "คำนาม", freq: 5, setsFound: "H31001, H31002, H31003, H31004, H31110", chinese: "把空调打开吧。", exPin: "Bǎ kōngtiáo dǎkāi ba.", meaning: "เปิดแอร์" },
@@ -221,9 +221,7 @@
             { id: 112, word: "懂", pinyin: "dǒng", meaning: "เข้าใจ", type: "คำกริยา", freq: 3, setsFound: "H31004, H31008, H31110", chinese: "听不懂。", exPin: "Tīng bù dǒng.", meaning: "รู้เรื่อง" }
         ];
 
-        let currentFilteredData = [...hsk3Data];
-
-        function speakWord(text) {
+        function speakText(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'zh-CN';
@@ -234,453 +232,41 @@
             }
         }
 
-        function switchMode(mode) {
-            ['sectionGrid', 'sectionFlashcard', 'sectionQuiz', 'sectionMatch', 'sectionWriting', 'sectionMocktest'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-            document.getElementById('controlsBar').classList.remove('hidden');
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentWordIndex = 0;
 
-            ['btnGrid', 'btnFlashcard', 'btnQuiz', 'btnMatch', 'btnWriting', 'btnMocktest'].forEach(id => {
-                document.getElementById(id).className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white";
-            });
+        // ค้นหาตำแหน่ง Index ปัจจุบันจากคำใน URL
+        const targetWord = urlParams.get('word');
+        if (targetWord) {
+            const foundIdx = hsk3FullData.findIndex(item => item.word === targetWord);
+            if (foundIdx !== -1) currentWordIndex = foundIdx;
+        }
 
-            if (mode === 'grid') {
-                document.getElementById('sectionGrid').classList.remove('hidden');
-                document.getElementById('btnGrid').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
-            } else if (mode === 'flashcard') {
-                document.getElementById('sectionFlashcard').classList.remove('hidden');
-                document.getElementById('btnFlashcard').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
-                initFlashcard();
-            } else if (mode === 'quiz') {
-                document.getElementById('sectionQuiz').classList.remove('hidden');
-                document.getElementById('controlsBar').classList.add('hidden');
-                document.getElementById('btnQuiz').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
-                startQuiz();
-            } else if (mode === 'match') {
-                document.getElementById('sectionMatch').classList.remove('hidden');
-                document.getElementById('btnMatch').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-yellow-500 text-black shadow";
-                initMatchGame();
-            } else if (mode === 'writing') {
-                document.getElementById('sectionWriting').classList.remove('hidden');
-                document.getElementById('controlsBar').classList.add('hidden');
-                document.getElementById('btnWriting').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
-                startWritingQuiz();
-            } else if (mode === 'mocktest') {
-                document.getElementById('sectionMocktest').classList.remove('hidden');
-                document.getElementById('controlsBar').classList.add('hidden');
-                document.getElementById('btnMocktest').className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-red-600 text-white shadow";
-                startMockTest();
+        function displayCurrentWord() {
+            const item = hsk3FullData[currentWordIndex];
+            document.getElementById('wordDisplay').innerText = item.word;
+            document.getElementById('pinyinDisplay').innerText = item.pinyin;
+            document.getElementById('meaningDisplay').innerText = item.meaning;
+            document.getElementById('typeDisplay').innerText = item.type;
+            document.getElementById('freqTotalDisplay').innerText = `ซ้ำใน ${item.freq || 3} ชุดข้อสอบ`;
+            document.getElementById('setsFoundDisplay').innerText = item.setsFound;
+            document.getElementById('exampleChinese').innerText = `【${item.chinese}】`;
+            document.getElementById('examplePinyin').innerText = item.exPin;
+            document.getElementById('exampleMeaning').innerText = `แปลไทย: ${item.exMean}`;
+        }
+
+        function changeWord(direction) {
+            currentWordIndex += direction;
+            if (currentWordIndex < 0) {
+                currentWordIndex = hsk3FullData.length - 1; // วนไปคำสุดท้าย
+            } else if (currentWordIndex >= hsk3FullData.length) {
+                currentWordIndex = 0; // วนกลับคำแรก
             }
+            displayCurrentWord();
         }
 
-        // --- MATCHING GAME LOGIC ---
-        let selectedChinese = null;
-        let selectedMeaning = null;
-        let matchPairs = [];
-        let matchedCount = 0;
-
-        function initMatchGame() {
-            const shuffled = [...hsk3Data].sort(() => 0.5 - Math.random()).slice(0, 4);
-            matchPairs = shuffled;
-            matchedCount = 0;
-            selectedChinese = null;
-            selectedMeaning = null;
-
-            const chineseCol = document.getElementById('matchChineseCol');
-            const meaningCol = document.getElementById('matchMeaningCol');
-            chineseCol.innerHTML = '';
-            meaningCol.innerHTML = '';
-
-            const chineseWords = [...shuffled].sort(() => 0.5 - Math.random());
-            const meanings = [...shuffled].sort(() => 0.5 - Math.random());
-
-            chineseWords.forEach(item => {
-                const btn = document.createElement('button');
-                btn.className = "w-full min-h-[72px] py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-black text-2xl text-gray-800 hover:border-yellow-500 transition shadow-sm flex items-center justify-center";
-                btn.innerText = item.word;
-                btn.onclick = () => selectMatchChinese(item, btn);
-                chineseCol.appendChild(btn);
-            });
-
-            meanings.forEach(item => {
-                const btn = document.createElement('button');
-                btn.className = "w-full min-h-[72px] py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-bold text-sm text-gray-700 hover:border-yellow-500 transition shadow-sm flex items-center justify-center text-center";
-                btn.innerText = item.meaning;
-                btn.onclick = () => selectMatchMeaning(item, btn);
-                meaningCol.appendChild(btn);
-            });
-            
-            document.getElementById('matchMsgArea').innerHTML = `<button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เริ่มเกมใหม่ ↺</button>`;
-        }
-
-        let activeChineseBtn = null;
-        let activeMeaningBtn = null;
-
-        function selectMatchChinese(item, btn) {
-            if(btn.className.includes('green')) return;
-            document.querySelectorAll('#matchChineseCol button').forEach(b => {
-                if(!b.className.includes('green')) b.className = "w-full min-h-[72px] py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-black text-2xl text-gray-800 hover:border-yellow-500 transition shadow-sm flex items-center justify-center";
-            });
-            btn.className = "w-full min-h-[72px] py-4 px-4 bg-yellow-50 border-2 border-yellow-500 rounded-2xl font-black text-2xl text-gray-800 transition shadow-sm flex items-center justify-center";
-            selectedChinese = item;
-            activeChineseBtn = btn;
-            checkMatch();
-        }
-
-        function selectMatchMeaning(item, btn) {
-            if(btn.className.includes('green')) return;
-            document.querySelectorAll('#matchMeaningCol button').forEach(b => {
-                if(!b.className.includes('green')) b.className = "w-full min-h-[72px] py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-bold text-sm text-gray-700 hover:border-yellow-500 transition shadow-sm flex items-center justify-center text-center";
-            });
-            btn.className = "w-full min-h-[72px] py-4 px-4 bg-yellow-50 border-2 border-yellow-500 rounded-2xl font-bold text-sm text-gray-700 transition shadow-sm flex items-center justify-center text-center";
-            selectedMeaning = item;
-            activeMeaningBtn = btn;
-            checkMatch();
-        }
-
-        function checkMatch() {
-            if(selectedChinese && selectedMeaning) {
-                if(selectedChinese.id === selectedMeaning.id) {
-                    matchedCount++;
-                    speakWord(selectedChinese.word);
-                    activeChineseBtn.className = "w-full min-h-[72px] py-4 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-black text-2xl text-green-700 opacity-60 cursor-not-allowed flex items-center justify-center";
-                    activeMeaningBtn.className = "w-full min-h-[72px] py-4 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-bold text-sm text-green-700 opacity-60 cursor-not-allowed flex items-center justify-center text-center";
-                    
-                    selectedChinese = null;
-                    selectedMeaning = null;
-                    activeChineseBtn = null;
-                    activeMeaningBtn = null;
-
-                    if(matchedCount === 4) {
-                        setTimeout(() => {
-                            document.getElementById('matchMsgArea').innerHTML = `
-                                <div class="p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 font-bold mb-3">🎉 ยอดเยี่ยม! จับคู่ถูกต้องครบทั้งหมดแล้ว</div>
-                                <button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เล่นอีกครั้ง ↺</button>
-                            `;
-                        }, 300);
-                    }
-                } else {
-                    activeChineseBtn.className = "w-full min-h-[72px] py-4 px-4 bg-red-50 border-2 border-red-500 rounded-2xl font-black text-2xl text-red-700 flex items-center justify-center transition";
-                    activeMeaningBtn.className = "w-full min-h-[72px] py-4 px-4 bg-red-50 border-2 border-red-500 rounded-2xl font-bold text-sm text-red-700 flex items-center justify-center text-center transition";
-                    
-                    let tempC = activeChineseBtn;
-                    let tempM = activeMeaningBtn;
-
-                    setTimeout(() => {
-                        if(!tempC.className.includes('green')) {
-                            tempC.className = "w-full min-h-[72px] py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-black text-2xl text-gray-800 hover:border-yellow-500 transition shadow-sm flex items-center justify-center";
-                        }
-                        if(!tempM.className.includes('green')) {
-                            tempM.className = "w-full min-h-[72px] py-4 px-4 bg-gray-50 border-2 border-gray-200 rounded-2xl font-bold text-sm text-gray-700 hover:border-yellow-500 transition shadow-sm flex items-center justify-center text-center";
-                        }
-                    }, 600);
-
-                    selectedChinese = null;
-                    selectedMeaning = null;
-                    activeChineseBtn = null;
-                    activeMeaningBtn = null;
-                }
-            }
-        }
-
-        // --- WRITING / PINYIN CHOICE QUIZ (10 ข้อ) ---
-        let writeScore = 0, writeStep = 0, totalWrite = 10, currentWriteItem = null;
-        function startWritingQuiz() {
-            writeScore = 0;
-            writeStep = 0;
-            nextWritingQuestion();
-        }
-
-        function nextWritingQuestion() {
-            if(writeStep >= totalWrite) {
-                document.getElementById('sectionWriting').innerHTML = `
-                    <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
-                        <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
-                        <div class="text-5xl pt-4">🏆</div>
-                        <h3 class="text-2xl font-black">สรุปผลการฝึกเขียนพินอิน</h3>
-                        <p class="text-gray-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${writeScore}</span> / ${totalWrite} คะแนน</p>
-                        <button onclick="startWritingQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มฝึกใหม่อีกครั้ง ↺</button>
-                    </div>
-                `;
-                return;
-            }
-            writeStep++;
-            document.getElementById('nextWriteBtn').classList.add('hidden');
-            document.getElementById('writeProgress').innerText = `ข้อที่ ${writeStep} / ${totalWrite}`;
-            document.getElementById('writeScore').innerText = `คะแนน: ${writeScore}`;
-
-            currentWriteItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
-            document.getElementById('writeWordDisplay').innerText = currentWriteItem.word;
-            document.getElementById('writeTypeDisplay').innerText = `ประเภท: ${currentWriteItem.type}`;
-
-            let options = [currentWriteItem.pinyin];
-            while(options.length < 4) {
-                let randomItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
-                if(!options.includes(randomItem.pinyin)) options.push(randomItem.pinyin);
-            }
-            options.sort(() => Math.random() - 0.5);
-
-            const optionsContainer = document.getElementById('writeOptions');
-            optionsContainer.innerHTML = '';
-            options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = "w-full py-3.5 px-4 rounded-2xl border border-gray-200 font-bold text-base text-gray-700 bg-gray-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-center shadow-sm";
-                btn.innerText = opt;
-                btn.onclick = () => checkWritingChoice(opt, btn);
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function checkWritingChoice(selected, btnElement) {
-            const allBtns = document.getElementById('writeOptions').getElementsByTagName('button');
-            for(let b of allBtns) {
-                b.disabled = true;
-                if(b.innerText === currentWriteItem.pinyin) {
-                    b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
-                }
-            }
-            if(selected === currentWriteItem.pinyin) {
-                writeScore++;
-                document.getElementById('writeScore').innerText = `คะแนน: ${writeScore}`;
-                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
-                speakWord(currentWriteItem.word);
-            } else {
-                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-red-500 font-bold text-base text-red-700 bg-red-50 text-center shadow-sm";
-            }
-            document.getElementById('nextWriteBtn').classList.remove('hidden');
-        }
-
-        // --- QUIZ VIEW (10 ข้อ, ดึงความหมายเดี่ยวจากฟิลด์ meaning เท่านั้น 100%) ---
-        let quizScore = 0, quizStep = 0, totalQuiz = 10, currentQuizItem = null;
-        function startQuiz() { 
-            quizScore = 0; 
-            quizStep = 0; 
-            document.getElementById('sectionQuiz').innerHTML = `
-                <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
-                    <div class="flex justify-between items-center mb-6">
-                        <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-gray-100 text-gray-600 rounded-full">คำถามที่ 1 / 10</span>
-                        <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">คะแนน: 0</span>
-                    </div>
-                    <div class="text-center mb-8">
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
-                        <div id="quizWord" class="text-7xl font-black text-gray-900 mb-2">经理</div>
-                    </div>
-                    <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
-                    <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
-                </div>
-            `;
-            nextQuizQuestion(); 
-        }
-
-        function nextQuizQuestion() {
-            if(quizStep >= totalQuiz) {
-                document.getElementById('sectionQuiz').innerHTML = `
-                    <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
-                        <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
-                        <div class="text-5xl pt-4">🏆</div>
-                        <h3 class="text-2xl font-black">สรุปผลการทดสอบ</h3>
-                        <p class="text-gray-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${quizScore}</span> / ${totalQuiz} คะแนน</p>
-                        <button onclick="startQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มทำแบบทดสอบอีกครั้ง ↺</button>
-                    </div>
-                `;
-                return;
-            }
-            quizStep++;
-            document.getElementById('nextQuizBtn').classList.add('hidden');
-            document.getElementById('quizProgress').innerText = `คำถามที่ ${quizStep} / ${totalQuiz}`;
-            document.getElementById('quizScore').innerText = `คะแนน: ${quizScore}`;
-            
-            currentQuizItem = hsk3Data[Math.floor(Math.random() * hsk3Data.length)];
-            document.getElementById('quizWord').innerText = currentQuizItem.word;
-
-            // บังคับสร้างลิสต์ตัวเลือกจากฟิลด์ meaning เดี่ยวๆ เท่านั้น
-            let allMeanings = hsk3Data.map(i => i.meaning);
-            let options = [currentQuizItem.meaning];
-            while(options.length < 4) {
-                let randomMeaning = allMeanings[Math.floor(Math.random() * allMeanings.length)];
-                if(!options.includes(randomMeaning)) {
-                    options.push(randomMeaning);
-                }
-            }
-            options.sort(() => Math.random() - 0.5);
-
-            const optionsContainer = document.getElementById('quizOptions');
-            optionsContainer.innerHTML = '';
-            options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = "w-full py-3.5 px-4 rounded-2xl border border-gray-200 font-bold text-sm text-gray-700 bg-gray-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-left flex justify-between items-center";
-                btn.innerHTML = `<span>${opt}</span> <span class="text-xs text-gray-400">เลือก</span>`;
-                btn.onclick = () => checkQuizAnswer(opt, btn);
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function checkQuizAnswer(selected, btnElement) {
-            const allBtns = document.getElementById('quizOptions').getElementsByTagName('button');
-            for(let b of allBtns) {
-                b.disabled = true;
-                if(b.innerText.includes(currentQuizItem.meaning)) b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
-            }
-            if(selected === currentQuizItem.meaning) {
-                quizScore++;
-                document.getElementById('quizScore').innerText = `คะแนน: ${quizScore}`;
-                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
-            } else {
-                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-red-500 font-bold text-sm text-red-700 bg-red-50 text-left flex justify-between items-center";
-            }
-            document.getElementById('nextQuizBtn').classList.remove('hidden');
-        }
-
-        // --- MOCK TEST LOGIC ---
-        function startMockTest() {
-            let mockItems = [...hsk3Data].sort(() => 0.5 - Math.random()).slice(0, 10);
-            let html = `<div class="space-y-6" id="mockForm">`;
-            mockItems.forEach((item, idx) => {
-                let wrongOpts = hsk3Data.filter(i => i.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(i => i.meaning);
-                let opts = [item.meaning, ...wrongOpts].sort(() => 0.5 - Math.random());
-                html += `
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-gray-200 space-y-3 mock-question" data-correct="${item.meaning}">
-                        <div class="flex items-center justify-between">
-                            <p class="font-bold text-gray-800">ข้อที่ ${idx+1}: คำว่า <span class="text-red-600 text-xl">${item.word}</span> (${item.pinyin}) ตรงกับความหมายใด?</p>
-                            <button type="button" onclick="speakWord('${item.word}')" class="px-2.5 py-1 bg-red-50 text-red-600 rounded-lg text-xs font-bold">🔊 ฟังเสียง</button>
-                        </div>
-                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-xl text-xs space-y-1">
-                            <p class="font-bold text-gray-900">ตัวอย่างประโยค: ${item.chinese}</p>
-                            <p class="text-red-600">${item.exPin}</p>
-                            <p class="text-gray-700">${item.exMean}</p>
-                        </div>
-                        <div class="grid grid-cols-1 gap-2">
-                            ${opts.map(opt => `<button type="button" onclick="selectMockOption(this, '${opt}')" class="py-2.5 px-4 bg-white border border-gray-200 rounded-2xl text-left text-sm font-semibold hover:border-red-500 transition mock-option">${opt}</button>`).join('')}
-                        </div>
-                    </div>
-                `;
-            });
-            html += `<button type="button" onclick="submitMockTest()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg">ส่งข้อสอบ</button></div>`;
-            document.getElementById('mockContent').innerHTML = html;
-        }
-
-        function selectMockOption(btn, opt) {
-            const parent = btn.parentElement;
-            parent.querySelectorAll('.mock-option').forEach(b => {
-                b.className = "py-2.5 px-4 bg-white border border-gray-200 rounded-2xl text-left text-sm font-semibold hover:border-red-500 transition mock-option";
-            });
-            btn.className = "py-2.5 px-4 bg-red-50 border-2 border-red-500 rounded-2xl text-left text-sm font-bold text-red-700 mock-option selected-ans";
-            btn.dataset.selected = opt;
-        }
-
-        function submitMockTest() {
-            const questions = document.querySelectorAll('.mock-question');
-            let score = 0;
-            questions.forEach(q => {
-                const correct = q.dataset.correct;
-                const selectedBtn = q.querySelector('.selected-ans');
-                q.querySelectorAll('.mock-option').forEach(b => {
-                    b.disabled = true;
-                    if(b.innerText === correct) {
-                        b.className = "py-2.5 px-4 bg-green-50 border-2 border-green-500 rounded-2xl text-left text-sm font-bold text-green-700";
-                    }
-                });
-                if(selectedBtn) {
-                    if(selectedBtn.innerText === correct) {
-                        score++;
-                    } else {
-                        selectedBtn.className = "py-2.5 px-4 bg-red-50 border-2 border-red-500 rounded-2xl text-left text-sm font-bold text-red-700";
-                    }
-                }
-            });
-
-            const container = document.getElementById('mockContent');
-            const summaryDiv = document.createElement('div');
-            summaryDiv.className = "mt-6 bg-white p-8 rounded-3xl border border-gray-200 text-center space-y-4 shadow-xl";
-            summaryDiv.innerHTML = `
-                <div class="text-5xl">🏆</div>
-                <h3 class="text-2xl font-black">สรุปผลคะแนนข้อสอบจำลอง</h3>
-                <p class="text-gray-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${score}</span> / ${questions.length} คะแนน</p>
-                <button type="button" onclick="startMockTest()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">ทำข้อสอบใหม่อีกครั้ง ↺</button>
-            `;
-            container.appendChild(summaryDiv);
-            summaryDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // --- GRID RENDER & OTHERS ---
-        const grid = document.getElementById('vocabGrid');
-        function renderVocab(data) {
-            grid.innerHTML = '';
-            if(data.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 font-bold">ไม่พบคำศัพท์ที่ค้นหา</div>`;
-                return;
-            }
-            data.forEach((item) => {
-                const card = document.createElement('div');
-                card.className = "bg-white p-6 rounded-3xl border border-gray-200/80 shadow-md hover:border-red-600 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer";
-                card.onclick = () => {
-                    window.location.href = `hsk3-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(`ซ้ำใน ${item.freq || 3} ชุดข้อสอบ`)}&setsFound=${encodeURIComponent(item.setsFound)}`;
-                };
-                card.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
-                            <div class="flex items-center gap-1">
-                                <button onclick="event.stopPropagation(); speakWord('${item.word}')" class="w-7 h-7 bg-red-50 text-red-600 rounded-lg flex items-center justify-center hover:bg-red-600 hover:text-white transition shadow-sm" title="ฟังเสียงอ่าน">🔊</button>
-                                <span class="text-xs font-bold px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full">ซ้ำ ${item.freq || 3} ชุด</span>
-                            </div>
-                        </div>
-                        <div class="text-4xl font-extrabold text-gray-900 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
-                        <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
-                        <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
-                        <span>ดูชุดข้อสอบและตัวอย่างประโยค</span><span>→</span>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterVocab() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            currentFilteredData = hsk3Data.filter(item => item.word.toLowerCase().includes(query) || item.pinyin.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query));
-            renderVocab(currentFilteredData);
-        }
-
-        function filterByType(type) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200 transition");
-            event.target.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition";
-            currentFilteredData = type === 'all' ? [...hsk3Data] : hsk3Data.filter(i => i.type.includes(type));
-            renderVocab(currentFilteredData);
-        }
-
-        function sortVocab() {
-            const sortBy = document.getElementById('sortSelect').value;
-            if(sortBy === 'freq') currentFilteredData.sort((a,b) => (b.freq || 3) - (a.freq || 3));
-            else if(sortBy === 'alpha') currentFilteredData.sort((a,b) => a.pinyin.localeCompare(b.pinyin));
-            else currentFilteredData.sort((a,b) => a.id - b.id);
-            renderVocab(currentFilteredData);
-        }
-
-        let fcIndex = 0, isFlipped = false;
-        function initFlashcard() { fcIndex = 0; isFlipped = false; updateFlashcardUI(); }
-        function updateFlashcardUI() {
-            const item = hsk3Data[fcIndex];
-            document.getElementById('fcType').innerText = item.type;
-            document.getElementById('fcCurrent').innerText = fcIndex + 1;
-            document.getElementById('fcWord').innerText = item.word;
-            document.getElementById('fcPinyin').innerText = item.pinyin;
-            document.getElementById('fcMeaning').innerText = item.meaning;
-            document.getElementById('fcFreq').innerText = `ซ้ำใน ${item.freq || 3} ชุดข้อสอบ`;
-            document.getElementById('fcExChin').innerText = `【${item.chinese}】`;
-            document.getElementById('fcExPin').innerText = item.exPin;
-            document.getElementById('fcExMean').innerText = item.exMean;
-            if(isFlipped) document.getElementById('flashcardInner').classList.add('rotate-y-180');
-            else document.getElementById('flashcardInner').classList.remove('rotate-y-180');
-        }
-        function flipCard() { isFlipped = !isFlipped; const inner = document.getElementById('flashcardInner'); if(isFlipped) inner.classList.add('rotate-y-180'); else inner.classList.remove('rotate-y-180'); }
-        function nextCard() { isFlipped = false; fcIndex = (fcIndex + 1) % hsk3Data.length; updateFlashcardUI(); }
-        function prevCard() { isFlipped = false; fcIndex = (fcIndex - 1 + hsk3Data.length) % hsk3Data.length; updateFlashcardUI(); }
-
-        // เริ่มต้นเรนเดอร์หน้าตารางคำศัพท์หลักทันทีเมื่อเปิดเว็บ
-        renderVocab(hsk3Data);
+        // โหลดข้อมูลแสดงผลเมื่อเปิดหน้าเว็บ
+        displayCurrentWord();
     </script>
 </body>
 </html>

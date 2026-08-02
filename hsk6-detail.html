@@ -11,7 +11,7 @@
         body { font-family: 'Prompt', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+<body class="bg-stone-100 text-gray-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
     <!-- Header Section -->
     <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
@@ -25,48 +25,73 @@
         </div>
     </header>
 
-    <!-- Main Content: รายละเอียดแบบแพทเทอร์นตัวอย่าง -->
-    <main class="max-w-xl mx-auto px-4 py-12 flex-grow w-full">
-        <div class="bg-white rounded-3xl border-2 border-gray-100 shadow-xl p-8 md:p-12 text-center relative overflow-hidden">
+    <!-- Main Content: รายละเอียด (พร้อมปุ่มเลื่อนด้านข้าง) -->
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full flex items-center justify-center relative">
+        
+        <!-- ปุ่มย้อนกลับด้านซ้าย -->
+        <button onclick="changeWord(-1)" class="absolute left-2 md:left-4 z-10 p-3 md:p-4 bg-white hover:bg-stone-50 text-stone-700 rounded-full shadow-lg border border-stone-200 transition-all hover:scale-105 flex items-center justify-center" title="คำก่อนหน้า">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+
+        <!-- การ์ดเนื้อหาตรงกลาง -->
+        <div class="w-full max-w-xl bg-white rounded-3xl border-2 border-gray-100 shadow-xl p-8 md:p-12 text-center relative overflow-hidden mx-12">
             <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
             
-            <!-- ตัวอักษรจีนหลัก และพินอินคำศัพท์ -->
+            <!-- ตัวอักษรจีนหลักและพินอินคำศัพท์ พร้อมปุ่มฟังเสียง -->
             <div id="wordDisplay" class="text-7xl md:text-8xl font-extrabold text-gray-900 mb-2">-</div>
-            <div id="pinyinDisplay" class="text-2xl font-bold text-red-600 mb-8">-</div>
+            <div id="pinyinDisplay" class="text-2xl font-bold text-red-600 mb-4">-</div>
+            <div class="mb-6">
+                <button onclick="speakText(document.getElementById('wordDisplay').innerText)" class="px-4 py-2 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-100 transition shadow-sm">
+                    🔊 ฟังเสียงอ่านคำศัพท์
+                </button>
+            </div>
 
             <!-- กล่องข้อมูลรายละเอียด -->
-            <div class="bg-white rounded-2xl p-6 text-left space-y-5 mb-8 border border-gray-100 shadow-sm">
-                <div class="flex justify-between items-center border-b border-gray-100 pb-4">
+            <div class="bg-white rounded-2xl p-6 text-left space-y-4 mb-8 border border-gray-100 shadow-sm">
+                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
                     <span class="font-semibold text-gray-500">ความหมายภาษาไทย:</span>
                     <span id="meaningDisplay" class="text-lg font-bold text-gray-800">-</span>
                 </div>
-                <div class="flex justify-between items-center border-b border-gray-100 pb-4">
+                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
                     <span class="font-semibold text-gray-500">ประเภทคำ:</span>
                     <span id="typeDisplay" class="font-medium text-gray-800">-</span>
                 </div>
-                <div class="flex justify-between items-center border-b border-gray-100 pb-4">
+                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
                     <span class="font-semibold text-gray-500">สถิติการออกข้อสอบ:</span>
                     <span id="freqBadge" class="font-bold text-red-600 bg-red-50 border border-red-100 px-3 py-1 rounded-full text-sm">-</span>
                 </div>
-                <div class="space-y-2">
+                <div class="space-y-1">
                     <span class="font-semibold text-gray-500 block">เลขชุดข้อสอบที่พบซ้ำ:</span>
                     <div id="setsFoundDisplay" class="text-sm font-medium text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-200">-</div>
                 </div>
             </div>
 
-            <!-- ประโยคตัวอย่างจากข้อสอบ (Example) พร้อมพินอินและคำแปลไทย -->
+            <!-- ประโยคตัวอย่างจากข้อสอบ (Example) พร้อมพินอินและคำแปลไทย และปุ่มฟังเสียง -->
             <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-xl text-left mb-8 space-y-3">
-                <h3 class="text-xs font-bold text-yellow-800 uppercase tracking-wider mb-2">ประโยคตัวอย่างจากข้อสอบ (EXAMPLE)</h3>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xs font-bold text-yellow-800 uppercase tracking-wider">ประโยคตัวอย่างจากข้อสอบ (EXAMPLE)</h3>
+                    <button onclick="speakText(document.getElementById('exampleChinese').innerText)" class="px-3 py-1 bg-yellow-400 text-black text-xs font-bold rounded-lg hover:bg-yellow-500 transition shadow-sm">
+                        🔊 ฟังเสียงประโยค
+                    </button>
+                </div>
                 <p id="exampleChinese" class="text-xl font-bold text-gray-900">-</p>
                 <p id="examplePinyin" class="text-sm font-semibold text-red-600">-</p>
                 <p id="exampleMeaning" class="text-sm font-medium text-gray-700">-</p>
             </div>
 
-            <!-- ปุ่มย้อนกลับ -->
-            <a href="hsk6.html" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-red-600 transition shadow-lg">
-                ← กลับสู่หน้าคลังคำศัพท์ HSK 6
-            </a>
+            <!-- ปุ่มกลับหน้าหลัก -->
+            <div>
+                <a href="hsk6.html" class="block w-full bg-black text-white py-3.5 rounded-2xl font-bold hover:bg-zinc-800 transition shadow-lg text-center text-xs">
+                    ← กลับสู่หน้าคลังคำศัพท์ HSK 6
+                </a>
+            </div>
         </div>
+
+        <!-- ปุ่มถัดไปด้านขวา -->
+        <button onclick="changeWord(1)" class="absolute right-2 md:right-4 z-10 p-3 md:p-4 bg-white hover:bg-stone-50 text-stone-700 rounded-full shadow-lg border border-stone-200 transition-all hover:scale-105 flex items-center justify-center" title="คำถัดไป">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+
     </main>
 
     <!-- Footer -->
@@ -75,33 +100,79 @@
     </footer>
 
     <script>
-        // ดึงค่าพารามิเตอร์จาก URL
-        const params = new URLSearchParams(window.location.search);
-        
-        const word = params.get('word') || 'ไม่พบข้อมูล';
-        const pinyin = params.get('pinyin') || '-';
-        const meaning = params.get('meaning') || '-';
-        const type = params.get('type') || '-';
-        const setsFound = params.get('setsFound') || '-';
-        const chinese = params.get('chinese') || 'ไม่มีตัวอย่างประโยคในระบบ';
-        const exPinyin = params.get('exPinyin') || '';
-        const exMeaning = params.get('exMeaning') || '';
+        const hsk6FullData = [
+            { id: 1, word: "坦然", pinyin: "tǎnrán", meaning: "อย่างสงบ/อย่างสบายใจ", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "闻过则喜，能够坦然接受批评，是自信的一个突出标志", exPinyin: "Wén guò zé xǐ, nénggòu tǎnrán jiēshòu pīpíng, shì zìxìn de yī gè tūchū biāozhì", exMeaning: "ได้ยินความผิดแล้วยินดี สามารถยอมรับคำวิจารณ์ได้อย่างสบายใจ คือสัญลักษณ์ที่โดดเด่นของความมั่นใจในตนเอง" },
+            { id: 2, word: "反面", pinyin: "fǎnmiàn", meaning: "ด้านลบ/ฝ่ายตรงข้าม", type: "คำนาม/คำคุณศัพท์", setsFound: "H61221", chinese: "他在这部戏中扮演的是一个反面角色", exPinyin: "Tā zài zhè bù xì zhōng bànyǎn de shì yī gè fǎnmiàn juésè", exMeaning: "เขาแสดงเป็นบทบาทฝ่ายตรงข้าม (ตัวร้าย) ในละครเรื่องนี้" },
+            { id: 3, word: "契机", pinyin: "qījī", meaning: "จังหวะ/โอกาสสำคัญ", type: "คำนาม", setsFound: "H61221", chinese: "谁敢说冒险不是一种成功的契机", exPinyin: "Shuí gǎn shuō màoxiǎn bú shì yī zhǒng chénggōng de qījī", exMeaning: "ใครจะกล้าพูดว่าการเสี่ยงภัยไม่ใช่โอกาสสำคัญของความสำเร็จชนิดหนึ่ง" },
+            { id: 4, word: "哺乳动物", pinyin: "bǔrǔ dòngwù", meaning: "สัตว์เลี้ยงลูกด้วยนม", type: "คำนาม", setsFound: "H61221", chinese: "鲸鱼其实不是鱼，而是生活在海里的一种巨型哺乳动物", exPinyin: "Jīngyú qíshí bú shì yú, ér shì shēnghuó zài hǎi lǐ de yī zhǒng jùxíng bǔrǔ dòngwù", exMeaning: "วาฬที่จริงแล้วไม่ใช่ปลา แต่เป็นสัตว์เลี้ยงลูกด้วยนมขนาดมหึมาที่อาศัยอยู่ในทะเล" },
+            { id: 5, word: "坚韧", pinyin: "jiānrèn", meaning: "เหนียวแน่น/อดทนเด็ดเดี่ยว", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "水滴石穿，靠的是坚韧不拔的毅力", exPinyin: "Shuǐ dī shí chuān, kào de shì jiānrèn bù bá de yìlì", exMeaning: "หยดน้ำลงหินทุกวันหินยังกร่อน อาศัยความพยายามที่อดทนเด็ดเดี่ยวไม่ย่อท้อ" },
+            { id: 6, word: "盲目", pinyin: "mángmù", meaning: "อย่างมืดบอด/ไร้สติ", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "我们不能盲目跟风，要有自己的独立思考", exPinyin: "Wǒmen bùnéng mángmù gēnfēng, yào yǒu zìjǐ de dúlì sīkǎo", exMeaning: "พวกเราไม่สามารถทำตามกระแสอย่างไร้สติได้ ต้องมีความคิดอิสระเป็นของตัวเอง" },
+            { id: 7, word: "凝聚", pinyin: "níngjù", meaning: "รวมตัว/กลั่นตัว", type: "คำกริยา", setsFound: "H61221", chinese: "团队合作凝聚了每个成员的心血", exPinyin: "Tuánduì hézuò níngjù le měi gè chéngyuán de xīnxuè", exMeaning: "การทำงานเป็นทีมหลอมรวมหยาดเหงื่อแรงกายของสมาชิกทุกคน" },
+            { id: 8, word: "浮躁", pinyin: "fúzào", meaning: "ใจร้อน/หุนหันพลันแล่น", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "在浮躁的社会中，保持内心的平静很难", exPinyin: "Zài fúzào de shèhuì zhōng, bǎochí nèixīn de píngjìng hěn nán", exMeaning: "ในสังคมที่ใจร้อนวุ่นวาย การรักษาความสงบในจิตใจเป็นเรื่องยากมาก" },
+            { id: 9, word: "潜能", pinyin: "qiánnéng", meaning: "ศักยภาพแฝง", type: "คำนาม", setsFound: "H61221", chinese: "每个人都有无限的潜能等待去发掘", exPinyin: "Měi gè rén dōu yǒu wúxiàn de qiánnéng děngdài qù fājué", exMeaning: "ทุกคนมีศักยภาพแฝงที่ไร้ขีดจำกัดรอคอยการไปขุดคุ้ยค้นพบ" },
+            { id: 10, word: "赋予", pinyin: "fùyǔ", meaning: "มอบหมาย/ให้อำนาจ", type: "คำกริยา", setsFound: "H61221", chinese: "时代赋予了我们这一代人重大的使命", exPinyin: "Shídài fùyǔ le wǒmen zhè yī dài rén zhòngdà de shǐmìng", exMeaning: "ยุคสมัยได้มอบหมายภารกิจอันยิ่งใหญ่ให้กับคนรุ่นพวกเรา" }
+        ];
 
-        document.getElementById('wordDisplay').innerText = word;
-        document.getElementById('pinyinDisplay').innerText = pinyin;
-        document.getElementById('meaningDisplay').innerText = meaning;
-        document.getElementById('typeDisplay').innerText = type;
-        document.getElementById('setsFoundDisplay').innerText = setsFound;
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("เบราว์เซอร์ของคุณไม่รองรับการออกเสียง");
+            }
+        }
 
-        // คำนวณจำนวนชุดข้อสอบที่พบเพื่อแสดงป้ายสถิติ
-        const setArray = setsFound ? setsFound.split(',').map(s => s.trim()).filter(s => s) : [];
-        const setCount = setArray.length;
-        document.getElementById('freqBadge').innerText = setCount > 0 ? `ซ้ำใน ${setCount} ชุดข้อสอบ` : 'พบในข้อสอบ';
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentWordIndex = 0;
 
-        // แสดงตัวอย่างประโยค พินอิน และคำแปล
-        document.getElementById('exampleChinese').innerText = chinese;
-        document.getElementById('examplePinyin').innerText = exPinyin ? `พินอิน: ${exPinyin}` : '';
-        document.getElementById('exampleMeaning').innerText = exMeaning ? `แปลไทย: ${exMeaning}` : '';
+        const targetWord = urlParams.get('word');
+        if (targetWord) {
+            const foundIdx = hsk6FullData.findIndex(item => item.word === targetWord);
+            if (foundIdx !== -1) currentWordIndex = foundIdx;
+        } else {
+            hsk6FullData[0] = {
+                id: 1,
+                word: urlParams.get('word') || '坦然',
+                pinyin: urlParams.get('pinyin') || 'tǎnrán',
+                meaning: urlParams.get('meaning') || 'อย่างสงบ/อย่างสบายใจ',
+                type: urlParams.get('type') || 'คำคุณศัพท์',
+                setsFound: urlParams.get('setsFound') || 'H61221',
+                chinese: urlParams.get('chinese') || '闻过则喜，能够坦然接受批评，是自信的一个突出标志',
+                exPinyin: urlParams.get('exPinyin') || 'Wén guò zé xǐ, nénggòu tǎnrán jiēshòu pīpíng, shì zìxìn de yī gè tūchū biāozhì',
+                exMeaning: urlParams.get('exMeaning') || 'ได้ยินความผิดแล้วยินดี สามารถยอมรับคำวิจารณ์ได้อย่างสบายใจ คือสัญลักษณ์ที่โดดเด่นของความมั่นใจในตนเอง'
+            };
+        }
+
+        function displayCurrentWord() {
+            const item = hsk6FullData[currentWordIndex];
+            document.getElementById('wordDisplay').innerText = item.word;
+            document.getElementById('pinyinDisplay').innerText = item.pinyin;
+            document.getElementById('meaningDisplay').innerText = item.meaning;
+            document.getElementById('typeDisplay').innerText = item.type;
+            
+            const setArray = item.setsFound ? item.setsFound.split(',').map(s => s.trim()).filter(s => s) : [];
+            const setCount = setArray.length;
+            document.getElementById('freqBadge').innerText = setCount > 0 ? `ซ้ำใน ${setCount} ชุดข้อสอบ` : 'พบในข้อสอบ';
+            document.getElementById('setsFoundDisplay').innerText = item.setsFound || '-';
+            
+            document.getElementById('exampleChinese').innerText = item.chinese || '暂ไม่มีตัวอย่างประโยคในระบบ';
+            document.getElementById('examplePinyin').innerText = item.exPinyin ? `พินอิน: ${item.exPinyin}` : '';
+            document.getElementById('exampleMeaning').innerText = item.exMeaning ? `แปลไทย: ${item.exMeaning}` : '';
+        }
+
+        function changeWord(direction) {
+            currentWordIndex += direction;
+            if (currentWordIndex < 0) {
+                currentWordIndex = hsk6FullData.length - 1;
+            } else if (currentWordIndex >= hsk6FullData.length) {
+                currentWordIndex = 0;
+            }
+            displayCurrentWord();
+        }
+
+        displayCurrentWord();
     </script>
 </body>
 </html>

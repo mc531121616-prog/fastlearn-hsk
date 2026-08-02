@@ -72,10 +72,18 @@
                 <p id="exampleMeaning" class="text-sm font-medium text-gray-700">-</p>
             </div>
 
-            <!-- ปุ่มย้อนกลับ -->
-            <a href="hsk3.html" class="inline-block bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-red-600 transition shadow-lg">
-                ← กลับสู่หน้าคลังคำศัพท์ HSK 3
-            </a>
+            <!-- กล่องเทคนิคการจำ & จุดที่ชอบออกสอบบ่อย (New Feature) -->
+            <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl text-left mb-8 space-y-2">
+                <h3 class="text-xs font-bold text-red-700 uppercase tracking-wider">💡 เทคนิคการจำ & จุดที่ชอบออกสอบบ่อย</h3>
+                <p id="examTipText" class="text-xs text-gray-700 font-medium">คำศัพท์คำนี้มักปรากฏในพาร์ทการอ่านเรียงประโยคหรือบทสนทนาสั้น ควรสังเกตโครงสร้างประโยคและคำเชื่อมที่มักมาคู่กันเพื่อทำคะแนนได้รวดเร็วขึ้น</p>
+            </div>
+
+            <!-- ปุ่มย้อนกลับขนาดใหญ่ -->
+            <div class="space-y-3">
+                <a href="hsk3.html" class="block w-full bg-black text-white py-3.5 rounded-2xl font-bold hover:bg-red-600 transition shadow-lg text-center">
+                    ← กลับสู่หน้าคลังคำศัพท์ HSK 3
+                </a>
+            </div>
         </div>
     </main>
 
@@ -85,7 +93,6 @@
     </footer>
 
     <script>
-        // ฟังก์ชันสำหรับอ่านออกเสียงภาษาจีน
         function speakText(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
@@ -97,9 +104,8 @@
             }
         }
 
-        // ฐานข้อมูลประโยคตัวอย่างตรงตามคำศัพท์ HSK 3
         const exampleDatabaseHSK3 = {
-            "经理": { chinese: "请问张经理在吗?", pinyin: "Qīngwèn Zhāng jīnglǐ zài ma?", meaning: "แปลไทย: ขอถามหน่อยครับ/ค่ะ ผู้จัดการจางอยู่ไหมครับ/คะ" },
+           "经理": { chinese: "请问张经理在吗?", pinyin: "Qīngwèn Zhāng jīnglǐ zài ma?", meaning: "แปลไทย: ขอถามหน่อยครับ/ค่ะ ผู้จัดการจางอยู่ไหมครับ/คะ" },
             "照顾": { chinese: "要照顾好自己。", pinyin: "Yào zhàogù hǎo zìjǐ.", meaning: "แปลไทย: ต้องดูแลตัวเองให้ดี" },
             "冰箱": { chinese: "把冰箱放厨房里吧。", pinyin: "Bǎ bīngxiāng fàng chúfáng lǐ ba.", meaning: "แปลไทย: เอาตู้เย็นไว้ในห้องครัวเถอะ" },
             "护照": { chinese: "包里有校长的护照。", pinyin: "Bāo lǐ yǒu xiàozhǎng de hùzhào.", meaning: "แปลไทย: ในกระเป๋ามีหนังสือเดินทางของอาจารย์ใหญ่" },
@@ -140,87 +146,84 @@
             "身体": { chinese: "要注意身体。", pinyin: "Yào zhùyì shēntǐ.", meaning: "แปลไทย: ต้องรักษาสุขภาพด้วย" },
             "生日": { chinese: "祝你生日快乐!", pinyin: "Zhù nǐ shēngrì kuàilè!", meaning: "แปลไทย: สุขสันต์วันเกิดนะ!" },
             "时间": { chinese: "我没有时间。", pinyin: "Wǒ méiyǒu shíjiān.", meaning: "แปลไทย: ฉันไม่มีเวลา" },
-            "事情": { chinese: "有什么事情吗?", pinyin: "Yǒu shénme shìqing ma?", meaning: "มีธุระอะไรหรือเปล่า" },
-            "考试": { chinese: "明天有考试。", pinyin: "Míngtiān yǒu kǎoshì.", meaning: "พรุ่งนี้มีสอบ" },
-            "哭": { chinese: "别哭了。", pinyin: "Bié kū le.", meaning: "อย่าร้องไห้เลย" },
+            "事情": { chinese: "有什么事情吗?", pinyin: "Yǒu shénme shìqing ma?", meaning: "แปลไทย: มีธุระอะไรหรือเปล่า" },
+            "考试": { chinese: "明天有考试。", pinyin: "Míngtiān yǒu kǎoshì.", meaning: "แปลไทย: พรุ่งนี้มีสอบ" },
+            "哭": { chinese: "别哭了。", pinyin: "Bié kū le.", meaning: "แปลไทย: อย่าร้องไห้เลย" },
             "快乐": { chinese: "祝我生日快乐", pinyin: "Zhù wǒ shēngrì kuàilè", meaning: "แปลไทย: สุขสันต์วันเกิดฉัน" },
-            "离": { chinese: "离这里很远。", pinyin: "Lí zhèli hěn yuǎn.", meaning: "อยู่ห่างจากที่นี่มาก" },
-            "旅游": { chinese: "我去旅游。", pinyin: "Wǒ qù lǚyóu.", meaning: "ฉันไปท่องเที่ยว" },
-            "门": { chinese: "请关门。", pinyin: "Qǐng guān mén.", meaning: "กรุณาปิดประตู" },
-            "难": { chinese: "汉语很难。", pinyin: "Hànyǔ hěn nán.", meaning: "ภาษาจีนยากมาก" },
-            "牛奶": { chinese: "喝牛奶对身体好。", pinyin: "Hē niúnǎi duì shēntǐ hǎo.", meaning: "ดื่มนมวัวดีต่อสุขภาพ" },
-            "努力": { chinese: "努力学习。", pinyin: "Nǔlì xuéxí.", meaning: "ตั้งใจเรียน" },
-            "清楚": { chinese: "听不清楚。", pinyin: "Tīng bù qīngchu.", meaning: "ฟังไม่ชัดเจน" },
-            "去年": { chinese: "去年我去过。", pinyin: "Qùnián wǒ qùguò.", meaning: "ปีที่แล้วฉันเคยไป" },
-            "让": { chinese: "让我看看。", pinyin: "Ràng wǒ kànkan.", meaning: "ให้ฉันดูหน่อย" },
-            "热情": { chinese: "服务员很热情。", pinyin: "Fúwùyuán hěn rèqíng.", meaning: "พนักงานกระตือรือร้นมาก" },
-            "容易": { chinese: "汉字很容易。", pinyin: "Hànzì hěn róngyì.", meaning: "ตัวอักษรจีนง่ายมาก" },
-            "声音": { chinese: "声音很小。", pinyin: "Shēngyīn hěn xiǎo.", meaning: "เสียงเบามาก" },
-            "世界": { chinese: "全世界。", pinyin: "Quán shìjiè.", meaning: "ทั่วโลก" },
-            "唱歌": { chinese: "他喜欢唱歌。", pinyin: "Tā xǐhuan chànggē.", meaning: "เขาชอบร้องเพลง" },
-            "跳舞": { chinese: "我会跳舞。", pinyin: "Wǒ huì tiàowǔ.", meaning: "ฉันเต้นรำเป็น" },
-            "生病": { chinese: "他生病了。", pinyin: "Tā shēngbìng le.", meaning: "เขาป่วยแล้ว" },
-            "休息": { chinese: "好好休息。", pinyin: "Hǎo hǎo xiūxi.", meaning: "พักผ่อนให้ดีๆ" },
-            "游泳": { chinese: "夏天喜欢游泳。", pinyin: "Xiàtiān xǐhuan yóuyǒng.", meaning: "ฤดูร้อนชอบว่ายน้ำ" },
-            "运动": { chinese: "多做运动。", pinyin: "Duō zuò yùndòng.", meaning: "ออกกำลังกายเยอะๆ" },
-            "健康": { chinese: "身体健康。", pinyin: "Shēntǐ jiànkāng.", meaning: "สุขภาพร่างกายแข็งแรง" },
-            "药店": { chinese: "在药店买药。", pinyin: "Zài yàodiàn mǎi yào.", meaning: "ซื้อยาที่ร้านขายยา" },
-            "头疼": { chinese: "我头疼。", pinyin: "Wǒ tóuténg.", meaning: "ฉันปวดหัว" },
-            "咳嗽": { chinese: "咳嗽得很厉害。", pinyin: "Késòu de hěn lìhai.", meaning: "ไออย่างรุนแรงมาก" },
-            "护士": { chinese: "护士很好。", pinyin: "Hùshi hěn hǎo.", meaning: "พยาบาลใจดีมาก" },
-            "签证": { chinese: "办签证。", pinyin: "Bàn qiānzhèng.", meaning: "ทำวีซ่า" },
-            "机票": { chinese: "买机票。", pinyin: "Mǎi jīpiào.", meaning: "ซื้อตั๋วเครื่องบิน" },
-            "导游": { chinese: "导游很热情。", pinyin: "Dǎoyóu hěn rèqíng.", meaning: "ไกด์นำเที่ยวเป็นกันเองมาก" },
-            "风景": { chinese: "风景很美。", pinyin: "Fēngjǐng hěn měi.", meaning: "ทิวทัศน์สวยงามมาก" },
-            "拍照": { chinese: "在这里拍照。", pinyin: "Zài zhèli pàizhào.", meaning: "ถ่ายรูปที่นี่" },
-            "纪念品": { chinese: "买纪念品。", pinyin: "Mǎi jìniànpǐn.", meaning: "ซื้อของที่ระลึก" },
-            "门票": { chinese: "买门票。", pinyin: "Mǎi ménpiào.", meaning: "ซื้อบัตรเข้าชม" },
-            "博物馆": { chinese: "参观博物馆。", pinyin: "Cānguān bówùguǎn.", meaning: "เยี่ยมชมพิพิธภัณฑ์" },
-            "公园": { chinese: "去公园散步。", pinyin: "Qù gōngyuán sànbù.", meaning: "ไปเดินเล่นที่สวนสาธารณะ" },
-            "散步": { chinese: "晚上散步。", pinyin: "Wǎnshang sànbù.", meaning: "เดินเล่นตอนเย็น" },
-            "购物": { chinese: "喜欢购物。", pinyin: "Wǒ xǐhuan gòuwù.", meaning: "ฉันชอบช้อปปิ้ง" },
-            "付钱": { chinese: "用手机付钱。", pinyin: "Yòng shǒujī fùqián.", meaning: "จ่ายเงินด้วยโทรศัพท์มือถือ" },
-            "刷卡": { chinese: "可以刷卡吗?", pinyin: "Kěyǐ shuākǎ ma?", meaning: "รูดบัตรได้ไหม" },
-            "打折": { chinese: "这件衣服打折。", pinyin: "Zhè jiàn yīfu dǎzhé.", meaning: "เสื้อผ้าตัวนี้ลดราคา" },
-            "贵": { chinese: "太贵了。", pinyin: "Tài guì le.", meaning: "แพงเกินไปแล้ว" },
-            "颜色": { chinese: "什么颜色?", pinyin: "Shénme yánsè?", meaning: "สีอะไร?" },
-            "红色": { chinese: "红色的。", pinyin: "Hóngsè de.", meaning: "สีแดง" },
-            "蓝色": { chinese: "蓝色的。", pinyin: "Lánsè de.", meaning: "สีฟ้า" },
-            "白色": { chinese: "白色的。", pinyin: "Báisè de.", meaning: "สีขาว" },
-            "黑色": { chinese: "黑色的。", pinyin: "Hēisè de.", meaning: "สีดำ" },
-            "飞机": { chinese: "坐飞机去。", pinyin: "Zuò fēijī qù.", meaning: "นั่งเครื่องบินไป" },
-            "火车站": { chinese: "去火车站。", pinyin: "Qù huǒchēzhàn.", meaning: "ไปสถานีรถไฟ" },
-            "出租车": { chinese: "坐出租车。", pinyin: "Zuò chūzūchē.", meaning: "นั่งรถแท็กซี่" },
-            "走路": { chinese: "走路去。", pinyin: "Zǒulù qù.", meaning: "เดินไป" },
-            "快": { chinese: "走快点。", pinyin: "Zǒu kuài diǎn.", meaning: "เดินเร็วหน่อย" },
-            "慢": { chinese: "走太慢了。", pinyin: "Zǒu tài màn le.", meaning: "เดินช้าเกินไป" },
-            "远": { chinese: "离这儿很远。", pinyin: "Lí zhèr hěn yuǎn.", meaning: "อยู่ห่างจากที่นี่มาก" },
-            "近": { chinese: "离这儿很近。", pinyin: "Lí zhèr hěn jìn.", meaning: "อยู่ใกล้กับที่นี่มาก" },
-            "房间": { chinese: "我的房间。", pinyin: "Wǒ de fángjiān.", meaning: "ห้องของฉัน" },
-            "干净": { chinese: "房间很干净。", pinyin: "Fángjiān hěn gānjìng.", meaning: "ห้องสะอาดมาก" },
-            "外面": { chinese: "外面下雨了。", pinyin: "Wàimiàn xià yǔ le.", meaning: "ข้างนอกฝนตกแล้ว" },
-            "里面": { chinese: "里面有人吗?", pinyin: "Lǐmiàn yǒu rén ma?", meaning: "ด้านในมีคนไหม?" },
-            "前面": { chinese: "前面那个人是谁?", pinyin: "Qiánmiàn nà gè rén shì shéi?", meaning: "คนข้างหน้าที่อยู่ตรงนั้นคือใคร?" },
-            "后面": { chinese: "她在后面。", pinyin: "Tā zài hòumiàn。", meaning: "เธออยู่ข้างหลัง" },
-            "左边": { chinese: "左边的商店。", pinyin: "Zuǒbiān de shāngdiàn.", meaning: "ร้านค้าทางด้านซ้าย" },
-            "右边": { chinese: "右边是医院。", pinyin: "Yòubiān shì yīyuàn.", meaning: "ด้านขวาคือโรงพยาบาล" },
-            "北边": { chinese: "在宾馆的北边。", pinyin: "Zài bīnguǎn de běibian.", meaning: "อยู่ทางทิศเหนือของโรงแรม" },
-            "南边": { chinese: "向南走。", pinyin: "Xiàng nán zǒu.", meaning: "เดินไปทางทิศใต้" },
-            "东边": { chinese: "东方明珠。", pinyin: "Dōngfāng míngzhū.", meaning: "ไข่มุกตะวันออก" },
-            "西边": { chinese: "太阳从西边出来。", pinyin: "Tàiyáng cóng xībiān chūlái.", meaning: "พระอาทิตย์ขึ้นทางทิศตะวันตก" },
-            "问题": { chinese: "有问题吗?", pinyin: "Yǒu wèntí ma?", meaning: "มีปัญหาอะไรไหม?" },
-            "回答": { chinese: "回答问题。", pinyin: "Huídá wèntí.", meaning: "ตอบคำถาม" },
-            "懂": { chinese: "听不懂。", pinyin: "Tīng bù dǒng.", meaning: "ฟังไม่เข้าใจ" }
+            "离": { chinese: "离这里很远。", pinyin: "Lí zhèli hěn yuǎn.", meaning: "แปลไทย: อยู่ห่างจากที่นี่มาก" },
+            "旅游": { chinese: "我去旅游。", pinyin: "Wǒ qù lǚyóu.", meaning: "แปลไทย: ฉันไปท่องเที่ยว" },
+            "门": { chinese: "请关门。", pinyin: "Qǐng guān mén.", meaning: "แปลไทย: กรุณาปิดประตู" },
+            "难": { chinese: "汉语很难。", pinyin: "Hànyǔ hěn nán.", meaning: "แปลไทย: ภาษาจีนยากมาก" },
+            "牛奶": { chinese: "喝牛奶对身体好。", pinyin: "Hē niúnǎi duì shēntǐ hǎo.", meaning: "แปลไทย: ดื่มนมวัวดีต่อสุขภาพ" },
+            "努力": { chinese: "努力学习。", pinyin: "Nǔlì xuéxí.", meaning: "แปลไทย: ตั้งใจเรียน" },
+            "清楚": { chinese: "听不清楚。", pinyin: "Tīng bù qīngchu.", meaning: "แปลไทย: ฟังไม่ชัดเจน" },
+            "去年": { chinese: "去年我去过。", pinyin: "Qùnián wǒ qùguò.", meaning: "แปลไทย: ปีที่แล้วฉันเคยไป" },
+            "让": { chinese: "让我看看。", pinyin: "Ràng wǒ kànkan.", meaning: "แปลไทย: ให้ฉันดูหน่อย" },
+            "热情": { chinese: "服务员很热情。", pinyin: "Fúwùyuán hěn rèqíng.", meaning: "แปลไทย: พนักงานกระตือรือร้นมาก" },
+            "容易": { chinese: "汉字很容易。", pinyin: "Hànzì hěn róngyì.", meaning: "แปลไทย: ตัวอักษรจีนง่ายมาก" },
+            "声音": { chinese: "声音很小。", pinyin: "Shēngyīn hěn xiǎo.", meaning: "แปลไทย: เสียงเบามาก" },
+            "世界": { chinese: "全世界。", pinyin: "Quán shìjiè.", meaning: "แปลไทย: ทั่วโลก" },
+            "唱歌": { chinese: "他喜欢唱歌。", pinyin: "Tā xǐhuan chànggē.", meaning: "แปลไทย: เขาชอบร้องเพลง" },
+            "跳舞": { chinese: "我会跳舞。", pinyin: "Wǒ huì tiàowǔ.", meaning: "แปลไทย: ฉันเต้นรำเป็น" },
+            "生病": { chinese: "他生病了。", pinyin: "Tā shēngbìng le.", meaning: "แปลไทย: เขาป่วยแล้ว" },
+            "休息": { chinese: "好好休息。", pinyin: "Hǎo hǎo xiūxi.", meaning: "แปลไทย: พักผ่อนให้ดีๆ" },
+            "游泳": { chinese: "夏天喜欢游泳。", pinyin: "Xiàtiān xǐhuan yóuyǒng.", meaning: "แปลไทย: ฤดูร้อนชอบว่ายน้ำ" },
+            "运动": { chinese: "多做运动。", pinyin: "Duō zuò yùndòng.", meaning: "แปลไทย: ออกกำลังกายเยอะๆ" },
+            "健康": { chinese: "身体健康。", pinyin: "Shēntǐ jiànkāng.", meaning: "แปลไทย: สุขภาพร่างกายแข็งแรง" },
+            "药店": { chinese: "在药店买药。", pinyin: "Zài yàodiàn mǎi yào.", meaning: "แปลไทย: ซื้อยาที่ร้านขายยา" },
+            "头疼": { chinese: "我头疼。", pinyin: "Wǒ tóuténg.", meaning: "แปลไทย: ฉันปวดหัว" },
+            "咳嗽": { chinese: "咳嗽得很厉害。", pinyin: "Késòu de hěn lìhai.", meaning: "แปลไทย: ไออย่างรุนแรงมาก" },
+            "护士": { chinese: "护士很好。", pinyin: "Hùshi hěn hǎo.", meaning: "แปลไทย: พยาบาลใจดีมาก" },
+            "签证": { chinese: "办签证。", pinyin: "Bàn qiānzhèng.", meaning: "แปลไทย: ทำวีซ่า" },
+            "机票": { chinese: "买机票。", pinyin: "Mǎi jīpiào.", meaning: "แปลไทย: ซื้อตั๋วเครื่องบิน" },
+            "导游": { chinese: "导游很热情。", pinyin: "Dǎoyóu hěn rèqíng.", meaning: "แปลไทย: ไกด์นำเที่ยวเป็นกันเองมาก" },
+            "风景": { chinese: "风景很美。", pinyin: "Fēngjǐng hěn měi.", meaning: "แปลไทย: ทิวทัศน์สวยงามมาก" },
+            "拍照": { chinese: "在这里拍照。", pinyin: "Zài zhèli pàizhào.", meaning: "แปลไทย: ถ่ายรูปที่นี่" },
+            "纪念品": { chinese: "买纪念品。", pinyin: "Mǎi jìniànpǐn.", meaning: "แปลไทย: ซื้อของที่ระลึก" },
+            "门票": { chinese: "买门票。", pinyin: "Mǎi ménpiào.", meaning: "แปลไทย: ซื้อบัตรเข้าชม" },
+            "博物馆": { chinese: "参观博物馆。", pinyin: "Cānguān bówùguǎn.", meaning: "แปลไทย: เยี่ยมชมพิพิธภัณฑ์" },
+            "公园": { chinese: "去公园散步。", pinyin: "Qù gōngyuán sànbù.", meaning: "แปลไทย: ไปเดินเล่นที่สวนสาธารณะ" },
+            "散步": { chinese: "晚上散步。", pinyin: "Wǎnshang sànbù.", meaning: "แปลไทย: เดินเล่นตอนเย็น" },
+            "购物": { chinese: "喜欢购物。", pinyin: "Wǒ xǐhuan gòuwù.", meaning: "แปลไทย: ฉันชอบช้อปปิ้ง" },
+            "付钱": { chinese: "用手机付钱。", pinyin: "Yòng shǒujī fùqián.", meaning: "แปลไทย: จ่ายเงินด้วยโทรศัพท์มือถือ" },
+            "刷卡": { chinese: "可以刷卡吗?", pinyin: "Kěyǐ shuākǎ ma?", meaning: "แปลไทย: รูดบัตรได้ไหม" },
+            "打折": { chinese: "这件衣服打折。", pinyin: "Zhè jiàn yīfu dǎzhé.", meaning: "แปลไทย: เสื้อผ้าตัวนี้ลดราคา" },
+            "贵": { chinese: "太贵了。", pinyin: "Tài guì le.", meaning: "แปลไทย: แพงเกินไปแล้ว" },
+            "颜色": { chinese: "什么颜色?", pinyin: "Shénme yánsè?", meaning: "แปลไทย: สีอะไร?" },
+            "红色": { chinese: "红色的。", pinyin: "Hóngsè de.", meaning: "แปลไทย: สีแดง" },
+            "蓝色": { chinese: "蓝色的。", pinyin: "Lánsè de.", meaning: "แปลไทย: สีฟ้า" },
+            "白色": { chinese: "白色的。", pinyin: "Báisè de.", meaning: "แปลไทย: สีขาว" },
+            "黑色": { chinese: "黑色的。", pinyin: "Hēisè de.", meaning: "แปลไทย: สีดำ" },
+            "飞机": { chinese: "坐飞机去。", pinyin: "Zuò fēijī qù.", meaning: "แปลไทย: นั่งเครื่องบินไป" },
+            "火车站": { chinese: "去火车站。", pinyin: "Qù huǒchēzhàn.", meaning: "แปลไทย: ไปสถานีรถไฟ" },
+            "出租车": { chinese: "坐出租车。", pinyin: "Zuò chūzūchē.", meaning: "แปลไทย: นั่งรถแท็กซี่" },
+            "走路": { chinese: "走路去。", pinyin: "Zǒulù qù.", meaning: "แปลไทย: เดินไป" },
+            "快": { chinese: "走快点。", pinyin: "Zǒu kuài diǎn.", meaning: "แปลไทย: เดินเร็วหน่อย" },
+            "慢": { chinese: "走太慢了。", pinyin: "Zǒu tài màn le.", meaning: "แปลไทย: เดินช้าเกินไป" },
+            "远": { chinese: "离这儿很远。", pinyin: "Lí zhèr hěn yuǎn.", meaning: "แปลไทย: อยู่ห่างจากที่นี่มาก" },
+            "近": { chinese: "离这儿很近。", pinyin: "Lí zhèr hěn jìn.", meaning: "แปลไทย: อยู่ใกล้กับที่นี่มาก" },
+            "房间": { chinese: "我的房间。", pinyin: "Wǒ de fángjiān.", meaning: "แปลไทย: ห้องของฉัน" },
+            "干净": { chinese: "房间很干净。", pinyin: "Fángjiān hěn gānjìng.", meaning: "แปลไทย: ห้องสะอาดมาก" },
+            "外面": { chinese: "外面下雨了。", pinyin: "Wàimiàn xià yǔ le.", meaning: "แปลไทย: ข้างนอกฝนตกแล้ว" },
+            "里面": { chinese: "里面有人吗?", pinyin: "Lǐmiàn yǒu rén ma?", meaning: "แปลไทย: ด้านในมีคนไหม?" },
+            "前面": { chinese: "前面那个人是谁?", pinyin: "Qiánmiàn nà gè rén shì shéi?", meaning: "แปลไทย: คนข้างหน้าที่อยู่ตรงนั้นคือใคร?" },
+            "后面": { chinese: "她在后面。", pinyin: "Tā zài hòumiàn.", meaning: "แปลไทย: เธออยู่ข้างหลัง" },
+            "左边": { chinese: "左边的商店。", pinyin: "Zuǒbiān de shāngdiàn.", meaning: "แปลไทย: ร้านค้าทางด้านซ้าย" },
+            "右边": { chinese: "右边是医院。", pinyin: "Yòubiān shì yīyuàn.", meaning: "แปลไทย: ด้านขวาคือโรงพยาบาล" },
+            "北边": { chinese: "在宾馆的北边。", pinyin: "Zài bīnguǎn de běibian.", meaning: "แปลไทย: อยู่ทางทิศเหนือของโรงแรม" },
+            "南边": { chinese: "向南走。", pinyin: "Xiàng nán zǒu.", meaning: "แปลไทย: เดินไปทางทิศใต้" },
+            "东边": { chinese: "东方明珠。", pinyin: "Dōngfāng míngzhū.", meaning: "แปลไทย: ไข่มุกตะวันออก" },
+            "西边": { chinese: "太阳从西边出来。", pinyin: "Tàiyáng cóng xībiān chūlái.", meaning: "แปลไทย: พระอาทิตย์ขึ้นทางทิศตะวันตก" },
+            "问题": { chinese: "有问题吗?", pinyin: "Yǒu wèntí ma?", meaning: "แปลไทย: มีปัญหาอะไรไหม?" },
+            "回答": { chinese: "回答问题。", pinyin: "Huídá wèntí.", meaning: "แปลไทย: ตอบคำถาม" },
+            "懂": { chinese: "听不懂。", pinyin: "Tīng bù dǒng.", meaning: "แปลไทย: ฟังไม่เข้าใจ" }
         };
 
-        // ดึงค่าพารามิเตอร์จาก URL
         const params = new URLSearchParams(window.location.search);
-        
         const word = params.get('word') || 'ไม่พบข้อมูล';
         const pinyin = params.get('pinyin') || '-';
         const meaning = params.get('meaning') || '-';
         const type = params.get('type') || '-';
-        
         let freqTotal = params.get('freqTotal');
         const setsFound = params.get('setsFound') || 'H31001, H31003, H31004';
 
@@ -240,6 +243,9 @@
             document.getElementById('exampleChinese').innerText = exampleDatabaseHSK3[word].chinese;
             document.getElementById('examplePinyin').innerText = exampleDatabaseHSK3[word].pinyin;
             document.getElementById('exampleMeaning').innerText = exampleDatabaseHSK3[word].meaning;
+            if(exampleDatabaseHSK3[word].tip) {
+                document.getElementById('examTipText').innerText = exampleDatabaseHSK3[word].tip;
+            }
         } else {
             document.getElementById('exampleChinese').innerText = `【这是关于“${word}”的考试例句。】`;
             document.getElementById('examplePinyin').innerText = `พินอิน: ${pinyin}`;

@@ -6,188 +6,804 @@
     <title>คลังคำศัพท์ HSK ระดับ 1 - Fast Learn Academy</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Prompt', sans-serif; }
+        body { font-family: 'Prompt', sans-serif; background-color: #fcfbfa; }
+        .perspective-1000 { perspective: 1200px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .chinese-bg {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,253,249,0.85)), url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+<body class="text-gray-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
-    <!-- Header Section -->
-    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
-        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+    <!-- Top Navbar -->
+    <nav class="bg-black text-white px-6 py-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center font-black text-white text-lg shadow">
+                    📖
+                </div>
+                <span class="text-lg font-black tracking-wider uppercase text-amber-100">FAST LEARN ACADEMY</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-stone-300">
+                <a href="index.html" class="hover:text-white transition">หน้าแรก</a>
+                <a href="#" class="hover:text-white transition">บทเรียน</a>
+                <a href="hsk1.html" class="text-white border-b-2 border-red-600 pb-1">คำศัพท์</a>
+                <a href="#" class="hover:text-white transition">แบบฝึกหัด</a>
+                <a href="#" class="hover:text-white transition">คลังสื่อ</a>
+            </div>
             <div>
-                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
-                    ← กลับสู่หน้าหลัก HSK 1-6
-                </a>
-                <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
-                    คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 1</span> (115 คำ)
-                </h1>
-                <p class="text-gray-300 text-sm mt-1">วิเคราะห์ความถี่และชุดข้อสอบจริง 10 ชุด (H11006 - H11223)</p>
-            </div>
-            <div class="mt-4 md:mt-0">
-                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="px-4 py-2 rounded-lg text-gray-900 w-72 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <span class="bg-red-600 text-white text-xs font-extrabold px-4 py-2 rounded-xl shadow cursor-pointer hover:bg-red-700 transition">โหมดคุณครู</span>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content: รายการคำศัพท์ -->
-    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
-        <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+    <!-- HSK 1 Banner Header -->
+    <section class="chinese-bg border-b border-stone-200 py-10 px-4 shadow-sm">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-2 text-xs font-semibold text-stone-500 mb-6">
+                <a href="index.html" class="hover:text-red-600 transition">🏠 หน้าหลัก</a>
+                <span>/</span>
+                <span class="text-red-600 font-bold">ระดับ HSK 1</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <h1 class="text-4xl md:text-6xl font-black text-red-900 tracking-tight mb-2">
+                        HSK 1
+                    </h1>
+                    <p class="text-stone-700 text-sm md:text-base font-semibold">
+                        วิเคราะห์ความถี่และชุดข้อสอบจริง 10 ชุด (H11006 - H11223) ปูพื้นฐานภาษาจีนให้แน่น
+                    </p>
+                </div>
+
+                <div class="bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-stone-200 shadow-md flex items-center gap-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">📚</div>
+                        <div>
+                            <div class="text-xs text-stone-500 font-medium">คำศัพท์</div>
+                            <div class="text-base font-black text-stone-900">115 คำ</div>
+                        </div>
+                    </div>
+                    <div class="w-px h-8 bg-stone-200"></div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-800 flex items-center justify-center font-bold">🎯</div>
+                        <div>
+                            <div class="text-xs text-stone-500 font-medium">ชุดข้อสอบ</div>
+                            <div class="text-base font-black text-stone-900">10 ชุด</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
+
+        <!-- ส่วนเลือกบทเรียน 6 ช่อง -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
+                <h3 class="text-lg md:text-xl font-extrabold text-stone-800">เลือกบทเรียนหรือโหมดที่ต้องการทบทวน</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                
+                <!-- 01 ตารางคำศัพท์ -->
+                <div onclick="switchMode('grid')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">01 คำศัพท์พื้นฐาน</div>
+                        <div class="text-base font-black text-stone-900">คลังคำศัพท์ HSK 1</div>
+                        <div class="text-xs text-stone-500">พร้อมพินอินและเสียงอ่าน</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 02 แฟลชการ์ด -->
+                <div onclick="switchMode('flashcard')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">02 แฟลชการ์ด</div>
+                        <div class="text-base font-black text-stone-900">Flashcard พรีเมียม</div>
+                        <div class="text-xs text-stone-500">พลิกการ์ดจำคำศัพท์แม่นยำ</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 03 ทดสอบความหมาย -->
+                <div onclick="switchMode('quiz')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">03 แบบทดสอบ</div>
+                        <div class="text-base font-black text-stone-900">ทดสอบความหมาย</div>
+                        <div class="text-xs text-stone-500">วัดความแม่นยำคำศัพท์ 10 ข้อ</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 04 เกมจับคู่ -->
+                <div onclick="switchMode('match')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">04 เกมจับคู่</div>
+                        <div class="text-base font-black text-stone-900">จับคู่คำศัพท์จีน-ไทย</div>
+                        <div class="text-xs text-stone-500">ฝึกความไวและความจำ (10 คำ)</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 05 ฝึกพินอิน -->
+                <div onclick="switchMode('writing')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">05 ฝึกพินอิน</div>
+                        <div class="text-base font-black text-stone-900">ฝึกเขียนพินอิน</div>
+                        <div class="text-xs text-stone-500">ทบทวนเสียงอ่านและวรรณยุกต์</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 06 ข้อสอบจำลอง -->
+                <div onclick="switchMode('mocktest')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">06 ข้อสอบจำลอง</div>
+                        <div class="text-base font-black text-stone-900">Mock Test HSK 1</div>
+                        <div class="text-xs text-stone-500">จำลองบรรยากาศสอบจริง</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Controls Bar สำหรับโหมดตารางคำศัพท์ -->
+        <div id="controlsBar" class="bg-white p-5 rounded-3xl border border-stone-200/80 shadow-sm mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="w-full md:w-80">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                <span class="text-xs font-bold text-stone-500 mr-1">กรองประเภท:</span>
+                <button onclick="filterByType('all')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition">ทั้งหมด</button>
+                <button onclick="filterByType('สรรพนาม')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">สรรพนาม</button>
+                <button onclick="filterByType('คำกริยา')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">คำกริยา</button>
+                <button onclick="filterByType('คำนาม')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">คำนาม</button>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+                <span class="text-xs font-bold text-stone-500">เรียงตาม:</span>
+                <select id="sortSelect" onchange="sortVocab()" class="px-3 py-2 rounded-xl border border-stone-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-red-600 bg-white">
+                    <option value="default">ค่าเริ่มต้น (ลำดับ)</option>
+                    <option value="freq">ความถี่การออกสอบ (มากไปน้อย)</option>
+                    <option value="alpha">พินอิน (A-Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- MODE 1: GRID VIEW -->
+        <div id="sectionGrid">
+            <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </div>
+
+        <!-- MODE 2: FLASHCARD VIEW -->
+        <div id="sectionFlashcard" class="hidden flex flex-col items-center justify-center py-4">
+            <div class="w-full max-w-xl mb-6 flex justify-between items-center px-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 bg-red-600 rounded-full animate-pulse"></span>
+                    <h3 class="font-extrabold text-stone-800 text-lg">แฟลชการ์ดฝึกจำคำศัพท์</h3>
+                </div>
+                <div class="bg-white px-4 py-1.5 rounded-full border border-stone-200 shadow-sm text-xs font-bold text-stone-600">
+                    การ์ดที่ <span id="fcCurrent" class="text-red-600 text-sm">1</span> / 115
+                </div>
+            </div>
+
+            <div class="w-full max-w-xl perspective-1000 cursor-pointer h-[420px]" onclick="flipCard()">
+                <div id="flashcardInner" class="relative w-full h-full duration-700 transform-style-3d shadow-2xl rounded-[2.5rem]">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-stone-50 to-stone-100 rounded-[2.5rem] border-2 border-stone-200/80 p-8 flex flex-col justify-between backface-hidden">
+                        <div class="flex justify-between items-center">
+                            <span id="fcType" class="text-xs font-bold px-3.5 py-1.5 bg-red-50 text-red-600 rounded-full border border-red-100 shadow-sm">สรรพนาม</span>
+                            <span id="fcFreqBadge" class="text-xs font-bold px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200 shadow-sm">⭐ HSK 1</span>
+                        </div>
+                        <div class="text-center my-auto">
+                            <div id="fcWord" class="text-8xl md:text-9xl font-black text-stone-900 mb-3 tracking-wide drop-shadow-sm">我</div>
+                            <div id="fcPinyin" class="text-2xl md:text-3xl font-extrabold text-red-600 tracking-wider">wǒ</div>
+                        </div>
+                        <div class="flex justify-between items-center pt-4 border-t border-stone-200/60">
+                            <span class="text-xs font-semibold text-stone-400">คลิกเพื่อพลิกดูความหมาย</span>
+                            <button onclick="event.stopPropagation(); speakWord(document.getElementById('fcWord').innerText)" class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition shadow flex items-center gap-1.5">🔊 ฟังเสียง</button>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-white rounded-[2.5rem] p-8 flex flex-col justify-between backface-hidden rotate-y-180 border-2 border-zinc-800">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-3.5 py-1.5 bg-amber-400 text-black rounded-full shadow">💡 เฉลยความหมาย & ตัวอย่าง</span>
+                            <span class="text-xs text-stone-400 font-bold">Fast Learn Academy</span>
+                        </div>
+                        <div class="text-center space-y-3 my-auto">
+                            <div id="fcMeaning" class="text-4xl font-extrabold text-amber-400 tracking-wide">ฉัน</div>
+                            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl text-left space-y-1 border border-white/10 shadow-inner">
+                                <div id="fcExample" class="text-xs text-stone-200 font-medium">-</div>
+                            </div>
+                        </div>
+                        <div class="text-center pt-4 border-t border-stone-800 text-xs text-stone-400 font-semibold">🔄 คลิกการ์ดอีกครั้งเพื่อกลับหน้าหลัก</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 mt-8 w-full max-w-xl justify-center">
+                <button onclick="prevCard()" class="flex-1 py-3.5 bg-white border border-stone-200 rounded-2xl font-bold text-sm text-stone-700 shadow-sm hover:bg-stone-50 transition flex items-center justify-center gap-2"><span>←</span> การ์ดก่อนหน้า</button>
+                <button onclick="nextCard()" class="flex-1 py-3.5 bg-red-600 text-white rounded-2xl font-bold text-sm shadow-md hover:bg-red-700 transition flex items-center justify-center gap-2">การ์ดถัดไป <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- MODE 3: QUIZ VIEW -->
+        <div id="sectionQuiz" class="hidden max-w-xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                <div class="flex justify-between items-center mb-6">
+                    <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">คำถามที่ 1 / 10</span>
+                    <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                </div>
+                <div class="text-center mb-8">
+                    <p class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
+                    <div id="quizWord" class="text-7xl font-black text-stone-900 mb-2">我</div>
+                </div>
+                <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- MODE 4: MATCHING GAME (10 คู่) -->
+        <div id="sectionMatch" class="hidden max-w-3xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-amber-500"></div>
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-black text-stone-900 mb-1">🎮 เกมจับคู่คำศัพท์จีน-ไทย (10 คู่)</h3>
+                    <p class="text-xs text-stone-500">คลิกเลือกคำศัพท์จีนทางซ้าย และความหมายทางขวาให้ถูกต้องตรงกัน</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6" id="matchGameContainer">
+                    <div class="space-y-2.5 max-h-[500px] overflow-y-auto pr-2" id="matchChineseCol"></div>
+                    <div class="space-y-2.5 max-h-[500px] overflow-y-auto pr-2" id="matchMeaningCol"></div>
+                </div>
+                <div class="mt-6 text-center" id="matchMsgArea">
+                    <button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เริ่มเกมใหม่ ↺</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODE 5: WRITING / PINYIN CHOICE -->
+        <div id="sectionWriting" class="hidden max-w-xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                <div class="flex justify-between items-center mb-4">
+                    <span id="writeProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">ข้อที่ 1 / 10</span>
+                    <span id="writeScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                </div>
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-black text-stone-900 mb-1">✍️ เลือกพินอินที่ถูกต้อง</h3>
+                    <p class="text-xs text-stone-500 mb-4">จากตัวอักษรจีนคำศัพท์นี้</p>
+                    <div class="text-7xl font-extrabold text-red-600 mb-2" id="writeWordDisplay">-</div>
+                    <div class="text-xs font-semibold text-stone-400 mb-4" id="writeTypeDisplay">-</div>
+                </div>
+                <div id="writeOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                <button id="nextWriteBtn" onclick="nextWritingQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- MODE 6: MOCK TEST -->
+        <div id="sectionMocktest" class="hidden max-w-2xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-black"></div>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-black">🏆 จำลองข้อสอบ HSK ระดับ 1</h3>
+                </div>
+                <div id="mockContent" class="space-y-6">
+                    <p class="text-sm text-stone-600">การทดสอบจำลองข้อสอบจริง จำนวน 10 ข้อ วัดความแม่นยำคำศัพท์และตัวอย่างประโยค</p>
+                    <button onclick="startMockTest()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg">เริ่มทำข้อสอบจำลอง</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Back Buttons -->
+        <div class="mt-16 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href="index.html" class="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-zinc-800 transition shadow-lg text-xs">
+                <span>🏠</span> กลับสู่หน้าหลัก HSK 1-6
+            </a>
+        </div>
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
-        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    <footer class="bg-black text-white py-8 text-center text-stone-400 text-xs mt-16 border-t-2 border-red-600">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-medium text-stone-300">Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+            <p class="text-stone-500">© 2026 Fast Learn Academy. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
-        // ฐานข้อมูลคำศัพท์ HSK 1 ทั้ง 115 คำ พร้อมตัวอย่างประโยคจากข้อสอบจริง
         const hsk1Data = [
-            { id: 1, word: "我", pinyin: "wǒ", meaning: "ฉัน", type: "สรรพนาม", freqTotal: 118, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我去商店,我想买一些水果。 (Wǒ qù shāngdiàn, wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันไปร้านค้า ฉันอยากซื้อผลไม้)" },
-            { id: 2, word: "你", pinyin: "nǐ", meaning: "คุณ", type: "สรรพนาม", freqTotal: 100, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你好! (Nǐ hǎo! - สวัสดี!)" },
-            { id: 3, word: "他", pinyin: "tā", meaning: "เขา (ผู้ชาย)", type: "สรรพนาม", freqTotal: 37, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "他爸爸在哪儿工作? (Tā bàba zài nǎr gōngzuò? - พ่อของเขาทำงานอยู่ที่ไหน?)" },
-            { id: 4, word: "她", pinyin: "tā", meaning: "เขา (ผู้หญิง)", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她下午去哪里? (Tā xiàwǔ qù nǎlǐ? - ช่วงบ่ายเธอไปไหน?)" },
-            { id: 5, word: "我们", pinyin: "wǒmen", meaning: "พวกเรา", type: "สรรพนาม", freqTotal: 16, setsFound: "H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我们什么时候去医院? (Wǒmen shénme shíhou qù yīyuàn? - พวกเราจะไปโรงพยาบาลตอนไหน?)" },
-            { id: 6, word: "你们", pinyin: "nǐmen", meaning: "พวกคุณ", type: "สรรพนาม", freqTotal: 9, setsFound: "H11112, H11113, H11220, H11221, H11222, H11223", example: "喂,你们在哪儿呢? (Wèi, nǐmen zài nǎr ne? - ฮัลโหล พวกคุณอยู่ที่ไหนกัน?)" },
-            { id: 7, word: "他们", pinyin: "tāmen", meaning: "พวกเขา", type: "สรรพนาม", freqTotal: 2, setsFound: "H11007, H11112", example: "他们都是我的同学。(Tāmen dōu shì wǒ de tóngxué. - พวกเขาล้วนเป็นเพื่อนร่วมชั้นของฉัน)" },
-            { id: 8, word: "谁", pinyin: "shéi", meaning: "ใคร", type: "สรรพนาม", freqTotal: 13, setsFound: "H11006, H11008, H11112, H11113, H11220, H11221, H11222, H11223", example: "谁会说汉语? (Shéi huì shuō Hànyǔ? - ใครพูดภาษาจีนได้?)" },
-            { id: 9, word: "什么", pinyin: "shénme", meaning: "อะไร", type: "สรรพนาม", freqTotal: 29, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你想买什么? (Nǐ xiǎng mǎi shénme? - คุณอยากซื้ออะไร?)" },
-            { id: 10, word: "哪里/哪儿", pinyin: "nǎli / nǎr", meaning: "ที่ไหน", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你去哪儿? (Nǐ qù nǎr? - คุณไปไหน?)" },
-            { id: 11, word: "怎么", pinyin: "zěnme", meaning: "อย่างไร", type: "สรรพนาม", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221, H11223", example: "明天你怎么去医院? (Míngtiān nǐ zěnme qù yīyuàn? - พรุ่งนี้คุณไปโรงพยาบาลอย่างไร?)" },
-            { id: 12, word: "怎么样", pinyin: "zěnmeyàng", meaning: "เป็นอย่างไร", type: "สรรพนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221", example: "昨天天气怎么样? (Zuótiān tiānqì zěnmeyàng? - อากาศเมื่อวานนี้เป็นอย่างไร?)" },
-            { id: 13, word: "多少", pinyin: "duōshao", meaning: "เท่าไหร่", type: "สรรพนาม", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009, H11112, H11221", example: "这个菜多少钱? (Zhège cài duōshao qián? - กับข้าวนี้ราคาเท่าไหร่?)" },
-            { id: 14, word: "多", pinyin: "duō", meaning: "มาก / แค่ไหน", type: "คำวิเศษณ์", freqTotal: 11, setsFound: "H11006, H11008, H11009, H11112, H11220, H11221, H11223", example: "你今年多大了? (Nǐ jīnnián duō dà le? - ปีนี้คุณอายุเท่าไหร่แล้ว?)" },
-            { id: 15, word: "少", pinyin: "shǎo", meaning: "น้อย", type: "คำคุณศัพท์", freqTotal: 5, setsFound: "H11007, H11008, H11009, H11113, H11223", example: "我的东西不多,很少。(Wǒ de dōngxi bù duō, hěn shǎo. - ของของฉันมีไม่มาก น้อยมาก)" },
-            { id: 16, word: "这/这儿", pinyin: "zhè / zhèr", meaning: "นี่ / ที่นี่", type: "สรรพนาม", freqTotal: 50, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
-            { id: 17, word: "那/那儿", pinyin: "nà / nàr", meaning: "นั่น / ที่นั่น", type: "สรรพนาม", freqTotal: 22, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我朋友在那个商店。(Wǒ péngyou zài nàge shāngdiàn. - เพื่อนของฉันอยู่ที่ร้านค้านั้น)" },
-            { id: 18, word: "是", pinyin: "shì", meaning: "เป็น / คือ / ใช่", type: "คำกริยา", freqTotal: 39, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她是我大学同学。(Tā shì wǒ dàxué tóngxué. - เธอเป็นเพื่อนร่วมมหาวิทยาลัยของฉัน)" },
-            { id: 19, word: "有", pinyin: "yǒu", meaning: "มี", type: "คำกริยา", freqTotal: 6, setsFound: "H11112, H11113, H11220, H11221, H11222, H11223", example: "这儿有人了。(Zhèr yǒu rén le. - ที่นี่มีคนแล้ว)" },
-            { id: 20, word: "看", pinyin: "kàn", meaning: "ดู / มอง / อ่าน", type: "คำกริยา", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
-            { id: 21, word: "听", pinyin: "tīng", meaning: "ฟัง", type: "คำกริยา", freqTotal: 3, setsFound: "H11009, H11112, H11220", example: "我现在不想听你说话。(Wǒ xiànzài bù xiǎng tīng nǐ shuōhuà. - ตอนนี้ฉันไม่อยากฟังคุณพูด)" },
-            { id: 22, word: "听见", pinyin: "tīngjiàn", meaning: "ได้ยิน", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008, H11112, H11113", example: "你能听见我说话吗? (Nǐ néng tīngjiàn wǒ shuōhuà ma? - คุณได้ยินที่ฉันพูดไหม?)" },
-            { id: 23, word: "说话", pinyin: "shuōhuà", meaning: "พูดคุย", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008, H11112, H11221", example: "我现在不想听你说话。(Wǒ xiànzài bù xiǎng tīng nǐ shuōhuà. - ตอนนี้ฉันไม่อยากฟังคุณพูด)" },
-            { id: 24, word: "说", pinyin: "shuō", meaning: "พูด", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11112, H11113, H11221, H11223", example: "王小姐怎么说? (Wáng xiǎojiě zěnme shuō? - คุณผู้หญิงหวังว่าอย่างไร?)" },
-            { id: 25, word: "读", pinyin: "dú", meaning: "อ่าน", type: "คำกริยา", freqTotal: 5, setsFound: "H11008, H11009, H11112, H11113, H11223", example: "这几个字怎么读? (Zhè jǐ ge zì zěnme dú? - ตัวอักษรเหล่านี้อ่านอย่างไร?)" },
-            { id: 26, word: "写", pinyin: "xiě", meaning: "เขียน", type: "คำกริยา", freqTotal: 8, setsFound: "H11006, H11008, H11009, H11112, H11113, H11222, H11223", example: "这个字我不会写。(Zhège zì wǒ bú huì xiě. - ตัวอักษรนี้ฉันเขียนไม่เป็น)" },
-            { id: 27, word: "买", pinyin: "mǎi", meaning: "ซื้อ", type: "คำกริยา", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
-            { id: 28, word: "去", pinyin: "qù", meaning: "ไป", type: "คำกริยา", freqTotal: 47, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她下午去哪里? (Tā xiàwǔ qù nǎlǐ? - ช่วงบ่ายเธอไปไหน?)" },
-            { id: 29, word: "来", pinyin: "lái", meaning: "มา", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "他是坐火车来的。(Tā shì zuò huǒchē lái de. - เขามาโดยรถไฟ)" },
-            { id: 30, word: "回/回家", pinyin: "huí / huíjiā", meaning: "กลับ / กลับบ้าน", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11113, H11221, H11222, H11223", example: "你什么时候回中国? (Nǐ shénme shíhou huí Zhōngguó? - คุณจะกลับประเทศจีนเมื่อไหร่?)" },
-            { id: 31, word: "坐", pinyin: "zuò", meaning: "นั่ง / โดยสาร", type: "คำกริยา", freqTotal: 21, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "明天你怎么去医院?坐出租车。(Míngtiān nǐ zěnme qù yīyuàn? Zuò chūzūchē. - พรุ่งนี้คุณไปโรงพยาบาลอย่างไร? นั่งแท็กซี่ไป)" },
-            { id: 32, word: "住", pinyin: "zhù", meaning: "พัก / อาศัย", type: "คำกริยา", freqTotal: 7, setsFound: "H11008, H11009, H11112, H11113, H11220, H11221", example: "你们现在住哪儿? (Nǐmen xiànzài zhù nǎr? - ตอนนี้พวกคุณพักอยู่ที่ไหน?)" },
-            { id: 33, word: "喝", pinyin: "hē", meaning: "ดื่ม", type: "คำกริยา", freqTotal: 15, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你喝水吗? (Nǐ hē shuǐ ma? - คุณดื่มน้ำไหม?)" },
-            { id: 34, word: "吃", pinyin: "chī", meaning: "กิน", type: "คำกริยา", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我们今天吃米饭怎么样? (Wǒmen jīntiān chī mǐfàn zěnmeyàng? - พวกเรากินข้าวสวยกันวันนี้เป็นอย่างไร?)" },
-            { id: 35, word: "睡觉", pinyin: "shuìjiào", meaning: "นอนหลับ", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我想去睡觉。(Wǒ xiǎng qù shuìjiào. - ฉันอยากไปนอนหลับ)" },
-            { id: 36, word: "打电话", pinyin: "dǎ diànhuà", meaning: "โทรศัพท์", type: "คำกริยา", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11112, H11220, H11221", example: "打电话 (dǎ diànhuà - โทรศัพท์)" },
-            { id: 37, word: "开车", pinyin: "kāichē", meaning: "ขับรถ", type: "คำกริยา", freqTotal: 5, setsFound: "H11006, H11008, H11009, H11220, H11221", example: "你开车去那儿? (Nǐ kāichē qù nàr? - คุณขับรถไปที่นั่นเหรอ?)" },
-            { id: 38, word: "做", pinyin: "zuò", meaning: "ทำ", type: "คำกริยา", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221", example: "我做的菜怎么样? (Wǒ zuò de cài zěnmeyàng? - กับข้าวที่ฉันทำเป็นอย่างไรบ้าง?)" },
-            { id: 39, word: "叫", pinyin: "jiào", meaning: "เรียก / ชื่อว่า", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你叫什么名字? (Nǐ jiào shénme míngzi? - คุณชื่ออะไร?)" },
-            { id: 40, word: "认识", pinyin: "rènshi", meaning: "รู้จัก", type: "คำกริยา", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "很高兴认识你。(Hěn gāoxìng rènshi nǐ. - ยินดีที่ได้รู้จักคุณ)" },
-            { id: 41, word: "喜欢", pinyin: "xǐhuan", meaning: "ชอบ", type: "คำกริยา", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
-            { id: 42, word: "想", pinyin: "xiǎng", meaning: "อยาก / คิด", type: "คำกริยา", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
-            { id: 43, word: "爱", pinyin: "ài", meaning: "รัก / ชอบ", type: "คำกริยา", freqTotal: 5, setsFound: "H11008, H11112, H11221, H11223", example: "你爱吃苹果吗? (Nǐ ài chī píngguǒ ma? - คุณชอบกินแอปเปิ้ลไหม?)" },
-            { id: 44, word: "会", pinyin: "huì", meaning: "สามารถ / เป็น / จะ", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11223", example: "谁会说汉语? (Shéi huì shuō Hànyǔ? - ใครพูดภาษาจีนได้?)" },
-            { id: 45, word: "能", pinyin: "néng", meaning: "สามารถ / ได้", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "你能听见我说话吗? (Nǐ néng tīngjiàn wǒ shuōhuà ma? - คุณได้ยินที่ฉันพูดไหม?)" },
-            { id: 46, word: "工作", pinyin: "gōngzuò", meaning: "ทำงาน / งาน", type: "คำกริยา/คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11222, H11223", example: "他爸爸在哪儿工作? (Tā bàba zài nǎr gōngzuò? - พ่อของเขาทำงานอยู่ที่ไหน?)" },
-            { id: 47, word: "学习", pinyin: "xuéxí", meaning: "เรียน / ศึกษา", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11009, H11112, H11113, H11220, H11221, H11223", example: "你去北京学习几天? (Nǐ qù Běijīng xuéxí jǐ tiān? - คุณไปเรียนที่ปักกิ่งกี่วัน?)" },
-            { id: 48, word: "请", pinyin: "qǐng", meaning: "เชิญ / กรุณา / เลี้ยง", type: "คำกริยา", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "谢谢你请我看电影。(Xièxie nǐ qǐng wǒ kàn diànyǐng. - ขอบคุณที่คุณเลี้ยงดูภาพยนตร์ฉัน)" },
-            { id: 49, word: "见", pinyin: "jiàn", meaning: "เจอ / พบ", type: "คำกริยา", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "再见,明天见。(Zàijiàn, míngtiān jiàn. - ลาแล้ว เจอกันพรุ่งนี้)" },
-            { id: 50, word: "下雨", pinyin: "xiàyǔ", meaning: "ฝนตก", type: "คำกริยา", freqTotal: 5, setsFound: "H11007, H11220, H11221, H11222", example: "下雨了,你们冷吗? (Xiàyǔ le, nǐmen lěng ma? - ฝนตกแล้ว พวกคุณหนาวไหม?)" },
-            { id: 51, word: "好", pinyin: "hǎo", meaning: "ดี", type: "คำคุณศัพท์", freqTotal: 19, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你好! (Nǐ hǎo! - สวัสดี!)" },
-            { id: 52, word: "高", pinyin: "gāo", meaning: "สูง", type: "คำคุณศัพท์", freqTotal: 1, setsFound: "H11008", example: "很高 (Hěn gāo - สูงมาก)" },
-            { id: 53, word: "大", pinyin: "dà", meaning: "ใหญ่ / อายุมาก", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11006, H11009, H11112, H11220, H11222, H11223", example: "你今年多大了? (Nǐ jīnnián duō dà le? - ปีนี้คุณอายุเท่าไหร่แล้ว?)" },
-            { id: 54, word: "小", pinyin: "xiǎo", meaning: "เล็ก", type: "คำคุณศัพท์", freqTotal: 10, setsFound: "H11007, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "小猫 (Xiǎo māo - แมวตัวเล็ก)" },
-            { id: 55, word: "冷", pinyin: "lěng", meaning: "หนาว", type: "คำคุณศัพท์", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "天气很冷。(Tiānqì hěn lěng. - อากาศหนาวมาก)" },
-            { id: 56, word: "热", pinyin: "rè", meaning: "ร้อน", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11007, H11008, H11009, H11112, H11220, H11221", example: "很热。(Hěn rè. - ร้อนมาก)" },
-            { id: 57, word: "高兴", pinyin: "gāoxìng", meaning: "ดีใจ / มีความสุข", type: "คำคุณศัพท์", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "很高兴认识你。(Hěn gāoxìng rènshi nǐ. - ยินดีที่ได้รู้จักคุณ)" },
-            { id: 58, word: "漂亮", pinyin: "piàoliang", meaning: "สวย", type: "คำคุณศัพท์", freqTotal: 9, setsFound: "H11006, H11008, H11009, H11112, H11113, H11221", example: "怎么样?漂亮吗? (Zěnmeyàng? Piàoliang ma? - เป็นอย่างไร? สวยไหม?)" },
-            { id: 59, word: "客气", pinyin: "kèqi", meaning: "เกรงใจ", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11008, H11009, H11112, H11113, H11220, H11221", example: "不客气。(Bú kèqi. - ด้วยความยินดี)" },
-            { id: 60, word: "很", pinyin: "hěn", meaning: "มาก", type: "คำวิเศษณ์", freqTotal: 39, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
-            { id: 61, word: "太", pinyin: "tài", meaning: "เกินไป / มาก", type: "คำวิเศษณ์", freqTotal: 8, setsFound: "H11007, H11008, H11009, H11112, H11113, H11220, H11221", example: "太冷,请坐前面。(Tài lěng, qǐng zuò qiánmiàn. - หนาวเกินไป เชิญนั่งด้านหน้า)" },
-            { id: 62, word: "都", pinyin: "dōu", meaning: "ล้วน / ทั้งหมด", type: "คำวิเศษณ์", freqTotal: 2, setsFound: "H11112", example: "我们都坐飞机去。(Wǒmen dōu zuò fēijī qù. - พวกเราล้วนโดยสารเครื่องบินไป)" },
-            { id: 63, word: "不", pinyin: "bù", meaning: "ไม่", type: "คำวิเศษณ์", freqTotal: 32, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "这个字我不会写。(Zhège zì wǒ bú huì xiě. - ตัวอักษรนี้ฉันเขียนไม่เป็น)" },
-            { id: 64, word: "没 / 没有", pinyin: "méi / méiyǒu", meaning: "ไม่มี / ไม่ได้", type: "คำวิเศษณ์", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222, H11223", example: "我没去看电影。(Wǒ méi qù kàn diànyǐng. - ฉันไม่ได้ไปดูภาพยนตร์)" },
-            { id: 65, word: "在", pinyin: "zài", meaning: "อยู่ / ที่ / กำลัง", type: "คำบุพบท/คำวิเศษณ์", freqTotal: 22, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221, H11223", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
-            { id: 66, word: "和", pinyin: "hé", meaning: "และ / กับ", type: "คำสันธาน", freqTotal: 5, setsFound: "H11008, H11112, H11113, H11222", example: "下个月,她和朋友去。(Xià gè yuè, tā hé péngyou qù. - เดือนหน้า เธอและเพื่อนจะไป)" },
-            { id: 67, word: "的", pinyin: "de", meaning: "ของ / ที่", type: "คำช่วย", freqTotal: 43, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "她是我大学同学。(Tā shì wǒ dàxué tóngxué. - เธอเป็นเพื่อนร่วมมหาวิทยาลัยของฉัน)" },
-            { id: 68, word: "了", pinyin: "le", meaning: "แล้ว", type: "คำช่วย", freqTotal: 35, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
-            { id: 69, word: "吗", pinyin: "ma", meaning: "ไหม", type: "คำช่วย", freqTotal: 28, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你能听见我说话吗? (Nǐ néng tīngjiàn wǒ shuōhuà ma? - คุณได้ยินที่ฉันพูดไหม?)" },
-            { id: 70, word: "呢", pinyin: "ne", meaning: "ล่ะ", type: "คำช่วย", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "你家的电话是多少呢? (Nǐ jiā de diànhuà shì duōshao ne? - เบอร์โทรศัพท์บ้านของคุณคือเบอร์อะไรล่ะ?)" },
-            { id: 71, word: "吧", pinyin: "ba", meaning: "เถอะ / สิ", type: "คำช่วย", freqTotal: 5, setsFound: "H11006, H11007, H11008, H11009, H11113", example: "喝点儿水吧。(Hē diǎnr shuǐ ba. - ดื่มน้ำหน่อยเถอะ)" },
-            { id: 72, word: "人", pinyin: "rén", meaning: "คน", type: "คำนาม", freqTotal: 7, setsFound: "H11008, H11009, H11112, H11113, H11220, H11222", example: "买椅子的那个人是谁? (Mǎi yǐzi de nà gè rén shì shéi? - คนที่ซื้อเก้าอี้คือนั้นใคร?)" },
-            { id: 73, word: "爸爸", pinyin: "bàba", meaning: "พ่อ", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "他爸爸在哪儿工作? (Tā bàba zài nǎr gōngzuò? - พ่อของเขาทำงานอยู่ที่ไหน?)" },
-            { id: 74, word: "妈妈", pinyin: "māma", meaning: "แม่", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "她是我妈妈的朋友。(Tā shì wǒ māma de péngyou. - เธอเป็นเพื่อนของแม่ฉัน)" },
-            { id: 75, word: "儿子", pinyin: "érzi", meaning: "ลูกชาย", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "儿子的老师 (Érzi de lǎoshī - คุณครูของลูกชาย)" },
-            { id: 76, word: "女儿", pinyin: "nǚ'ér", meaning: "ลูกสาว", type: "คำนาม", freqTotal: 6, setsFound: "H11008, H11009, H11112, H11113, H11220", example: "他的女儿现在在火车站。(Tā de nǚ'ér xiànzài zài huǒchēzhàn. - ลูกสาวของเขาตอนนี้อยู่ที่สถานีรถไฟ)" },
-            { id: 77, word: "朋友", pinyin: "péngyou", meaning: "เพื่อน", type: "คำนาม", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "她是我is妈妈的朋友。(Tā shì wǒ māma de péngyou. - เธอเป็นเพื่อนของแม่ฉัน)" },
-            { id: 78, word: "先生", pinyin: "xiānsheng", meaning: "คุณผู้ชาย", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009, H11113, H11222", example: "钱先生 (Qián xiānsheng - คุณเฉียน)" },
-            { id: 79, word: "小姐", pinyin: "xiǎojiě", meaning: "คุณผู้หญิง", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11113, H11221", example: "王小姐 (Wáng xiǎojiě - คุณผู้หญิงหวัง)" },
-            { id: 80, word: "老师", pinyin: "lǎoshī", meaning: "ครู", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11009, H11113, H11220, H11221, H11222", example: "儿子的老师 (Érzi de lǎoshī - คุณครูของลูกชาย)" },
-            { id: 81, word: "学生", pinyin: "xuésheng", meaning: "นักเรียน", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221", example: "有学生在后面叫她。(Yǒu xuésheng zài hòumiàn jiào tā. - มีนักเรียนเรียกเธออยู่ข้างหลัง)" },
-            { id: 82, word: "同学", pinyin: "tóngxué", meaning: "เพื่อนนักเรียน", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11223", example: "她是我大学同学。(Tā shì wǒ dàxué tóngxué. - เธอเป็นเพื่อนร่วมมหาวิทยาลัยของฉัน)" },
-            { id: 83, word: "医生", pinyin: "yīshēng", meaning: "หมอ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11222", example: "我妈妈是医生。(Wǒ māma shì yīshēng. - แม่ของฉันเป็นหมอ)" },
-            { id: 84, word: "水", pinyin: "shuǐ", meaning: "น้ำ", type: "คำนาม", freqTotal: 16, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "喝点儿水吧。(Hē diǎnr shuǐ ba. - ดื่มน้ำหน่อยเถอะ)" },
-            { id: 85, word: "菜", pinyin: "cài", meaning: "กับข้าว / ผัก", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11113, H11220, H11221, H11222", example: "我妈妈喜欢吃中国菜。(Wǒ māma xǐhuan chī Zhōngguó cài. - แม่ของฉันชอบกินอาหารจีน)" },
-            { id: 86, word: "水果", pinyin: "shuǐguǒ", meaning: "ผลไม้", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
-            { id: 87, word: "苹果", pinyin: "píngguǒ", meaning: "แอปเปิ้ล", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11008, H11009, H11112, H11113, H11221", example: "爸爸吃苹果。(Bàba chī píngguǒ. - คุณพ่อกินแอปเปิ้ล)" },
-            { id: 88, word: "米饭", pinyin: "mǐfàn", meaning: "ข้าวสวย", type: "คำนาม", freqTotal: 8, setsFound: "H11007, H11008, H11009, H11112, H11113, H11221, H11223", example: "米饭在桌子上。(Mǐfàn zài zhuōzi shàng. - ข้าวสวยอยู่บนโต๊ะ)" },
-            { id: 89, word: "茶", pinyin: "chá", meaning: "ชา", type: "คำนาม", freqTotal: 3, setsFound: "H11221, H11223", example: "喝茶 (hē chá - ดื่มชา)" },
-            { id: 90, word: "杯子", pinyin: "bēizi", meaning: "แก้ว", type: "คำนาม", freqTotal: 4, setsFound: "H11006, H11220, H11221, H11222", example: "这个杯子里没有水。(Zhège bēizi lǐ méiyǒu shuǐ. - ในแก้วนี้ไม่มีน้ำ)" },
-            { id: 91, word: "衣服", pinyin: "yīfu", meaning: "เสื้อผ้า", type: "คำนาม", freqTotal: 4, setsFound: "H11008, H11009, H11112, H11221", example: "椅子上的衣服是你的吗? (Yǐzi shàng de yīfu shì nǐ de ma? - เสื้อผ้าบนเก้าอี้เป็นของคุณเหรอ?)" },
-            { id: 92, word: "书", pinyin: "shū", meaning: "หนังสือ", type: "คำนาม", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
-            { id: 93, word: "电视", pinyin: "diànshì", meaning: "โทรทัศน์", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "我在家看电视了。(Wǒ zài jiā kàn diànshì le. - ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว)" },
-            { id: 94, word: "电影", pinyin: "diànyǐng", meaning: "ภาพยนตร์", type: "คำนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "谢谢你请我看电影。(Xièxie nǐ qǐng wǒ kàn diànyǐng. - ขอบคุณที่คุณเลี้ยงดูภาพยนตร์ฉัน)" },
-            { id: 95, word: "电脑", pinyin: "diànnǎo", meaning: "คอมพิวเตอร์", type: "คำนาม", freqTotal: 5, setsFound: "H11113, H11220, H11221, H11222", example: "买电脑?你和谁去? (Mǎi diànnǎo? Nǐ hé shéi qù? - ซื้อคอมพิวเตอร์เหรอ? คุณไปกับใคร?)" },
-            { id: 96, word: "电话", pinyin: "diànhuà", meaning: "โทรศัพท์", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11112, H11113, H11221", example: "你家的电话是多少呢? (Nǐ jiā de diànhuà shì duōshao ne? - เบอร์โทรศัพท์บ้านของคุณคือเบอร์อะไรล่ะ?)" },
-            { id: 97, word: "桌子", pinyin: "zhuōzi", meaning: "โต๊ะ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "米饭在桌子上。(Mǐfàn zài zhuōzi shàng. - ข้าวสวยอยู่บนโต๊ะ)" },
-            { id: 98, word: "椅子", pinyin: "yīzi", meaning: "เก้าอี้", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11112, H11113, H11221, H11222", example: "小狗在椅子后面。(Xiǎogōu zài yīzi hòumiàn. - สุนัขตัวน้อยอยู่ด้านหลังเก้าอี้)" },
-            { id: 99, word: "名字", pinyin: "míngzi", meaning: "ชื่อ", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11221, H11222", example: "你叫什么名字? (Nǐ jiào shénme míngzi? - คุณชื่ออะไร?)" },
-            { id: 100, word: "汉语", pinyin: "Hànyǔ", meaning: "ภาษาจีน", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11113, H11221, H11222", example: "谁会说汉语? (Shéi huì shuō Hànyǔ? - ใครพูดภาษาจีนได้?)" },
-            { id: 101, word: "汉字", pinyin: "Hànzì", meaning: "อักษรจีน", type: "คำนาม", freqTotal: 1, setsFound: "H11008", example: "你会写多少个汉字? (Nǐ huì xiě duōshao gè Hànzì? - คุณเขียนอักษรจีนได้กี่ตัว?)" },
-            { id: 102, word: "字", pinyin: "zì", meaning: "ตัวอักษร", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11009, H11112, H11113, H11221", example: "这个字我不会写。(Zhège zì wǒ bú huì xiě. - ตัวอักษรนี้ฉันเขียนไม่เป็น)" },
-            { id: 103, word: "东西", pinyin: "dōngxi", meaning: "สิ่งของ", type: "คำนาม", freqTotal: 6, setsFound: "H11009, H11112, H11113, H11220, H11223", example: "她们买了很多东西。(Tāmen mǎile hěn duō dōngxi. - พวกเธอซื้อสิ่งของไว้มากมาย)" },
-            { id: 104, word: "钱", pinyin: "qián", meaning: "เงิน", type: "คำนาม", freqTotal: 2, setsFound: "H11113, H11223", example: "这本书多少钱? (Zhè běn shū duōshao qián? - หนังสือเล่มนี้ราคาเท่าไหร่?)" },
-            { id: 105, word: "学校", pinyin: "xuéxiào", meaning: "โรงเรียน", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "我现在去学校。(Wǒ xiànzài qù xuéxiào. - ตอนนี้ฉันไปโรงเรียน)" },
-            { id: 106, word: "大学", pinyin: "dàxué", meaning: "มหาวิทยาลัย", type: "คำนาม", freqTotal: 5, setsFound: "H11006, H11007, H11008, H11009, H11113", example: "大学同学 (Dàxué tóngxué - เพื่อนร่วมมหาวิทยาลัย)" },
-            { id: 107, word: "医院", pinyin: "yīyuàn", meaning: "โรงพยาบาล", type: "คำนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11223", example: "明天你怎么去医院? (Míngtiān nǐ zěnme qù yīyuàn? - พรุ่งนี้คุณไปโรงพยาบาลอย่างไร?)" },
-            { id: 108, word: "饭馆儿", pinyin: "fànguǎnr", meaning: "ร้านอาหาร", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009, H11112, H11220, H11221", example: "饭馆儿 (fànguǎnr - ร้านอาหาร)" },
-            { id: 109, word: "商店", pinyin: "shāngdiàn", meaning: "ร้านค้า", type: "คำนาม", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "我去商店,我想买一些水果。(Wǒ qù shāngdiàn, wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันไปร้านค้า ฉันอยากซื้อผลไม้)" },
-            { id: 110, word: "火车站 / 车站", pinyin: "huǒchēzhàn", meaning: "สถานีรถไฟ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221", example: "他的女儿现在在火车站。(Tā de nǚ'ér xiànzài zài huǒchēzhàn. - ลูกสาวของเขาตอนนี้อยู่ที่สถานีรถไฟ)" },
-            { id: 111, word: "时候", pinyin: "shíhou", meaning: "ตอนที่ / เวลา", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009, H11113, H11220, H11221, H11222", example: "你什么时候回中国? (Nǐ shénme shíhou huí Zhōngguó? - คุณจะกลับประเทศจีนเมื่อไหร่?)" },
-            { id: 112, word: "个", pinyin: "gè", meaning: "คน / อัน / ชิ้น", type: "ลักษณนาม", freqTotal: 20, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "你会写多少个汉字? (Nǐ huì xiě duōshao gè Hànzì? - คุณเขียนอักษรจีนได้กี่ตัว?)" },
-            { id: 113, word: "本", pinyin: "běn", meaning: "เล่ม", type: "ลักษณนาม", freqTotal: 16, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我很喜欢这本书。(Wǒ hěn xǐhuan zhè běn shū. - ฉันชอบหนังสือเล่มนี้มาก)" },
-            { id: 114, word: "些", pinyin: "xiē", meaning: "บ้าง / จำนวนหนึ่ง", type: "ลักษณนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222", example: "我想买一些水果。(Wǒ xiǎng mǎi yīxiē shuǐguǒ. - ฉันอยากซื้อผลไม้บางส่วน)" },
-            { id: 115, word: "岁", pinyin: "suì", meaning: "ขวบ / ปี (อายุ)", type: "ลักษณนาม", freqTotal: 21, setsFound: "H11006, H11007, H11008, H11009, H11112, H11113, H11220, H11221, H11222, H11223", example: "我24岁。(Wǒ 24 suì. - ฉันอายุ 24 ปี)" }
+            { id: 1, word: "我", pinyin: "wǒ", meaning: "ฉัน", type: "สรรพนาม", freqTotal: 118, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "我去商店,我想买一些水果。" },
+            { id: 2, word: "你", pinyin: "nǐ", meaning: "คุณ", type: "สรรพนาม", freqTotal: 100, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "你好!" },
+            { id: 3, word: "他", pinyin: "tā", meaning: "เขา (ผู้ชาย)", type: "สรรพนาม", freqTotal: 37, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "他爸爸在哪儿工作?" },
+            { id: 4, word: "她", pinyin: "tā", meaning: "เขา (ผู้หญิง)", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "她下午去哪里?" },
+            { id: 5, word: "我们", pinyin: "wǒmen", meaning: "พวกเรา", type: "สรรพนาม", freqTotal: 16, setsFound: "H11007, H11008, H11009, H11112", example: "我们什么时候去医院?" },
+            { id: 6, word: "你们", pinyin: "nǐmen", meaning: "พวกคุณ", type: "สรรพนาม", freqTotal: 9, setsFound: "H11112, H11113, H11220", example: "喂,你们在哪儿呢?" },
+            { id: 7, word: "他们", pinyin: "tāmen", meaning: "พวกเขา", type: "สรรพนาม", freqTotal: 2, setsFound: "H11007, H11112", example: "他们都是我的同学。" },
+            { id: 8, word: "谁", pinyin: "shéi", meaning: "ใคร", type: "สรรพนาม", freqTotal: 13, setsFound: "H11006, H11008, H11112", example: "谁会说汉语?" },
+            { id: 9, word: "什么", pinyin: "shénme", meaning: "อะไร", type: "สรรพนาม", freqTotal: 29, setsFound: "H11006, H11007, H11008, H11009", example: "你想买什么?" },
+            { id: 10, word: "哪里/哪儿", pinyin: "nǎli / nǎr", meaning: "ที่ไหน", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009", example: "你去哪儿?" },
+            { id: 11, word: "怎么", pinyin: "zěnme", meaning: "อย่างไร", type: "สรรพนาม", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009", example: "明天你怎么去医院?" },
+            { id: 12, word: "怎么样", pinyin: "zěnmeyàng", meaning: "เป็นอย่างไร", type: "สรรพนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009", example: "昨天天气怎么样?" },
+            { id: 13, word: "多少", pinyin: "duōshao", meaning: "เท่าไหร่", type: "สรรพนาม", freqTotal: 6, setsFound: "H11006, H11007, H11008", example: "这个菜多少钱?" },
+            { id: 14, word: "多", pinyin: "duō", meaning: "มาก / แค่ไหน", type: "คำวิเศษณ์", freqTotal: 11, setsFound: "H11006, H11008, H11009", example: "你今年多大了?" },
+            { id: 15, word: "少", pinyin: "shǎo", meaning: "น้อย", type: "คำคุณศัพท์", freqTotal: 5, setsFound: "H11007, H11008, H11009", example: "我的东西不多,很少。" },
+            { id: 16, word: "这/这儿", pinyin: "zhè / zhèr", meaning: "นี่ / ที่นี่", type: "สรรพนาม", freqTotal: 50, setsFound: "H11006, H11007, H11008, H11009", example: "我很喜欢这本书。" },
+            { id: 17, word: "那/那儿", pinyin: "nà / nàr", meaning: "นั่น / ที่นั่น", type: "สรรพนาม", freqTotal: 22, setsFound: "H11006, H11007, H11008, H11009", example: "我朋友在那个商店。" },
+            { id: 18, word: "是", pinyin: "shì", meaning: "เป็น / คือ / ใช่", type: "คำกริยา", freqTotal: 39, setsFound: "H11006, H11007, H11008, H11009", example: "她是我大学同学。" },
+            { id: 19, word: "有", pinyin: "yǒu", meaning: "มี", type: "คำกริยา", freqTotal: 6, setsFound: "H11112, H11113, H11220", example: "这儿有人了。" },
+            { id: 20, word: "看", pinyin: "kàn", meaning: "ดู / มอง / อ่าน", type: "คำกริยา", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009", example: "我在家看电视了。" },
+            { id: 21, word: "听", pinyin: "tīng", meaning: "ฟัง", type: "คำกริยา", freqTotal: 3, setsFound: "H11009, H11112", example: "我现在不想听你说话。" },
+            { id: 22, word: "听见", pinyin: "tīngjiàn", meaning: "ได้ยิน", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008", example: "你能听见我说话吗?" },
+            { id: 23, word: "说话", pinyin: "shuōhuà", meaning: "พูดคุย", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008", example: "我现在不想听你说话。" },
+            { id: 24, word: "说", pinyin: "shuō", meaning: "พูด", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11112, H11113", example: "王小姐怎么说?" },
+            { id: 25, word: "读", pinyin: "dú", meaning: "อ่าน", type: "คำกริยา", freqTotal: 5, setsFound: "H11008, H11009, H11112", example: "这几个字怎么读?" },
+            { id: 26, word: "写", pinyin: "xiě", meaning: "เขียน", type: "คำกริยา", freqTotal: 8, setsFound: "H11006, H11008, H11009", example: "这个字我不会写。" },
+            { id: 27, word: "买", pinyin: "mǎi", meaning: "ซื้อ", type: "คำกริยา", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009", example: "我想买一些水果。" },
+            { id: 28, word: "去", pinyin: "qù", meaning: "ไป", type: "คำกริยา", freqTotal: 47, setsFound: "H11006, H11007, H11008, H11009", example: "她下午去哪里?" },
+            { id: 29, word: "来", pinyin: "lái", meaning: "มา", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "他是坐火车来的。" },
+            { id: 30, word: "回/回家", pinyin: "huí / huíjiā", meaning: "กลับ / กลับบ้าน", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "你什么时候回中国?" }
         ];
 
-        const grid = document.getElementById('vocabGrid');
+        let currentFilteredData = [...hsk1Data];
 
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("เบราว์เซอร์ของคุณไม่รองรับการออกเสียง");
+            }
+        }
+
+        function switchMode(mode) {
+            ['sectionGrid', 'sectionFlashcard', 'sectionQuiz', 'sectionMatch', 'sectionWriting', 'sectionMocktest'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.classList.add('hidden');
+            });
+            const controls = document.getElementById('controlsBar');
+            if(controls) {
+                if(mode === 'grid') controls.classList.remove('hidden');
+                else controls.classList.add('hidden');
+            }
+
+            if (mode === 'grid') {
+                const el = document.getElementById('sectionGrid');
+                if(el) el.classList.remove('hidden');
+                renderVocab(currentFilteredData);
+            } else if (mode === 'flashcard') {
+                const el = document.getElementById('sectionFlashcard');
+                if(el) el.classList.remove('hidden');
+                initFlashcard();
+            } else if (mode === 'quiz') {
+                const el = document.getElementById('sectionQuiz');
+                if(el) el.classList.remove('hidden');
+                startQuiz();
+            } else if (mode === 'match') {
+                const el = document.getElementById('sectionMatch');
+                if(el) el.classList.remove('hidden');
+                initMatchGame();
+            } else if (mode === 'writing') {
+                const el = document.getElementById('sectionWriting');
+                if(el) el.classList.remove('hidden');
+                startWritingQuiz();
+            } else if (mode === 'mocktest') {
+                const el = document.getElementById('sectionMocktest');
+                if(el) el.classList.remove('hidden');
+                startMockTest();
+            }
+        }
+
+        // --- MATCHING GAME LOGIC (10 คู่) ---
+        let selectedChinese = null;
+        let selectedMeaning = null;
+        let matchedCount = 0;
+
+        function initMatchGame() {
+            const shuffled = [...hsk1Data].sort(() => 0.5 - Math.random()).slice(0, 10);
+            matchedCount = 0;
+            selectedChinese = null;
+            selectedMeaning = null;
+
+            const chineseCol = document.getElementById('matchChineseCol');
+            const meaningCol = document.getElementById('matchMeaningCol');
+            if(!chineseCol || !meaningCol) return;
+            chineseCol.innerHTML = '';
+            meaningCol.innerHTML = '';
+
+            const chineseWords = [...shuffled].sort(() => 0.5 - Math.random());
+            const meanings = [...shuffled].sort(() => 0.5 - Math.random());
+
+            chineseWords.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-black text-xl text-stone-800 hover:border-amber-500 transition shadow-sm flex items-center justify-center";
+                btn.innerText = item.word;
+                btn.onclick = () => selectMatchChinese(item, btn);
+                chineseCol.appendChild(btn);
+            });
+
+            meanings.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-bold text-xs text-stone-700 hover:border-amber-500 transition shadow-sm flex items-center justify-center text-center";
+                btn.innerText = item.meaning;
+                btn.onclick = () => selectMatchMeaning(item, btn);
+                meaningCol.appendChild(btn);
+            });
+            
+            const msgArea = document.getElementById('matchMsgArea');
+            if(msgArea) {
+                msgArea.innerHTML = `<button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เริ่มเกมใหม่ ↺</button>`;
+            }
+        }
+
+        let activeChineseBtn = null;
+        let activeMeaningBtn = null;
+
+        function selectMatchChinese(item, btn) {
+            if(btn.className.includes('green')) return;
+            document.querySelectorAll('#matchChineseCol button').forEach(b => {
+                if(!b.className.includes('green')) b.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-black text-xl text-stone-800 hover:border-amber-500 transition shadow-sm flex items-center justify-center";
+            });
+            btn.className = "w-full min-h-[60px] py-3 px-4 bg-amber-50 border-2 border-amber-500 rounded-2xl font-black text-xl text-stone-800 transition shadow-sm flex items-center justify-center";
+            selectedChinese = item;
+            activeChineseBtn = btn;
+            checkMatch();
+        }
+
+        function selectMatchMeaning(item, btn) {
+            if(btn.className.includes('green')) return;
+            document.querySelectorAll('#matchMeaningCol button').forEach(b => {
+                if(!b.className.includes('green')) b.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-bold text-xs text-stone-700 hover:border-amber-500 transition shadow-sm flex items-center justify-center text-center";
+            });
+            btn.className = "w-full min-h-[60px] py-3 px-4 bg-amber-50 border-2 border-amber-500 rounded-2xl font-bold text-xs text-stone-700 transition shadow-sm flex items-center justify-center text-center";
+            selectedMeaning = item;
+            activeMeaningBtn = btn;
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if(selectedChinese && selectedMeaning) {
+                if(selectedChinese.id === selectedMeaning.id) {
+                    matchedCount++;
+                    speakWord(selectedChinese.word);
+                    activeChineseBtn.className = "w-full min-h-[60px] py-3 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-black text-xl text-green-700 opacity-60 cursor-not-allowed flex items-center justify-center";
+                    activeMeaningBtn.className = "w-full min-h-[60px] py-3 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-bold text-xs text-green-700 opacity-60 cursor-not-allowed flex items-center justify-center text-center";
+                    
+                    selectedChinese = null;
+                    selectedMeaning = null;
+                    activeChineseBtn = null;
+                    activeMeaningBtn = null;
+
+                    if(matchedCount === 10) {
+                        setTimeout(() => {
+                            const msgArea = document.getElementById('matchMsgArea');
+                            if(msgArea) {
+                                msgArea.innerHTML = `
+                                    <div class="p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 font-bold mb-3">🎉 ยอดเยี่ยม! จับคู่ถูกต้องครบทั้งหมด 10 คู่แล้ว</div>
+                                    <button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เล่นอีกครั้ง ↺</button>
+                                `;
+                            }
+                        }, 300);
+                    }
+                } else {
+                    activeChineseBtn.className = "w-full min-h-[60px] py-3 px-4 bg-red-50 border-2 border-red-500 rounded-2xl font-black text-xl text-red-700 flex items-center justify-center transition";
+                    activeMeaningBtn.className = "w-full min-h-[60px] py-3 px-4 bg-red-50 border-2 border-red-500 rounded-2xl font-bold text-xs text-red-700 flex items-center justify-center text-center transition";
+                    
+                    let tempC = activeChineseBtn;
+                    let tempM = activeMeaningBtn;
+
+                    setTimeout(() => {
+                        if(tempC && !tempC.className.includes('green')) {
+                            tempC.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-black text-xl text-stone-800 hover:border-amber-500 transition shadow-sm flex items-center justify-center";
+                        }
+                        if(tempM && !tempM.className.includes('green')) {
+                            tempM.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-bold text-xs text-stone-700 hover:border-amber-500 transition shadow-sm flex items-center justify-center text-center";
+                        }
+                    }, 600);
+
+                    selectedChinese = null;
+                    selectedMeaning = null;
+                    activeChineseBtn = null;
+                    activeMeaningBtn = null;
+                }
+            }
+        }
+
+        // --- WRITING / PINYIN CHOICE QUIZ ---
+        let writeScore = 0, writeStep = 0, totalWrite = 10, currentWriteItem = null;
+        function startWritingQuiz() {
+            writeScore = 0;
+            writeStep = 0;
+            nextWritingQuestion();
+        }
+
+        function nextWritingQuestion() {
+            if(writeStep >= totalWrite) {
+                const sec = document.getElementById('sectionWriting');
+                if(sec) {
+                    sec.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
+                            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                            <div class="text-5xl pt-4">🏆</div>
+                            <h3 class="text-2xl font-black">สรุปผลการฝึกเขียนพินอิน</h3>
+                            <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${writeScore}</span> / ${totalWrite} คะแนน</p>
+                            <button onclick="startWritingQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มฝึกใหม่อีกครั้ง ↺</button>
+                        </div>
+                    `;
+                }
+                return;
+            }
+            writeStep++;
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if(nextBtn) nextBtn.classList.add('hidden');
+            
+            const prog = document.getElementById('writeProgress');
+            if(prog) prog.innerText = `ข้อที่ ${writeStep} / ${totalWrite}`;
+            
+            const scoreEl = document.getElementById('writeScore');
+            if(scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+
+            currentWriteItem = hsk1Data[Math.floor(Math.random() * hsk1Data.length)];
+            const wordDisp = document.getElementById('writeWordDisplay');
+            if(wordDisp) wordDisp.innerText = currentWriteItem.word;
+            
+            const typeDisp = document.getElementById('writeTypeDisplay');
+            if(typeDisp) typeDisp.innerText = `ประเภท: ${currentWriteItem.type}`;
+
+            let options = [currentWriteItem.pinyin];
+            while(options.length < 4) {
+                let randomItem = hsk1Data[Math.floor(Math.random() * hsk1Data.length)];
+                if(!options.includes(randomItem.pinyin)) options.push(randomItem.pinyin);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('writeOptions');
+            if(!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full py-3.5 px-4 rounded-2xl border border-stone-200 font-bold text-base text-stone-700 bg-stone-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-center shadow-sm";
+                btn.innerText = opt;
+                btn.onclick = () => checkWritingChoice(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkWritingChoice(selected, btnElement) {
+            const container = document.getElementById('writeOptions');
+            if(!container) return;
+            const allBtns = container.getElementsByTagName('button');
+            for(let b of allBtns) {
+                b.disabled = true;
+                if(b.innerText === currentWriteItem.pinyin) {
+                    b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
+                }
+            }
+            if(selected === currentWriteItem.pinyin) {
+                writeScore++;
+                const scoreEl = document.getElementById('writeScore');
+                if(scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
+                speakWord(currentWriteItem.word);
+            } else {
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-red-500 font-bold text-base text-red-700 bg-red-50 text-center shadow-sm";
+            }
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if(nextBtn) nextBtn.classList.remove('hidden');
+        }
+
+        // --- QUIZ VIEW (10 ข้อ) ---
+        let quizScore = 0, quizStep = 0, totalQuiz = 10, currentQuizItem = null;
+        function startQuiz() { 
+            quizScore = 0; 
+            quizStep = 0; 
+            const quizSec = document.getElementById('sectionQuiz');
+            if(quizSec) {
+                quizSec.innerHTML = `
+                    <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">คำถามที่ 1 / 10</span>
+                            <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                        </div>
+                        <div class="text-center mb-8">
+                            <p class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
+                            <div id="quizWord" class="text-7xl font-black text-stone-900 mb-2">我</div>
+                        </div>
+                        <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                        <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+                    </div>
+                `;
+            }
+            nextQuizQuestion(); 
+        }
+
+        function nextQuizQuestion() {
+            if(quizStep >= totalQuiz) {
+                const quizSec = document.getElementById('sectionQuiz');
+                if(quizSec) {
+                    quizSec.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
+                            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                            <div class="text-5xl pt-4">🏆</div>
+                            <h3 class="text-2xl font-black">สรุปผลการทดสอบ</h3>
+                            <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${quizScore}</span> / ${totalQuiz} คะแนน</p>
+                            <button onclick="startQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มทำแบบทดสอบอีกครั้ง ↺</button>
+                        </div>
+                    `;
+                }
+                return;
+            }
+            quizStep++;
+            const nextBtn = document.getElementById('nextQuizBtn');
+            if(nextBtn) nextBtn.classList.add('hidden');
+            
+            const prog = document.getElementById('quizProgress');
+            if(prog) prog.innerText = `คำถามที่ ${quizStep} / ${totalQuiz}`;
+            
+            const scoreEl = document.getElementById('quizScore');
+            if(scoreEl) scoreEl.innerText = `คะแนน: ${quizScore}`;
+            
+            currentQuizItem = hsk1Data[Math.floor(Math.random() * hsk1Data.length)];
+            const wordEl = document.getElementById('quizWord');
+            if(wordEl) wordEl.innerText = currentQuizItem.word;
+
+            let allMeanings = hsk1Data.map(i => i.meaning);
+            let options = [currentQuizItem.meaning];
+            while(options.length < 4) {
+                let randomMeaning = allMeanings[Math.floor(Math.random() * allMeanings.length)];
+                if(!options.includes(randomMeaning)) {
+                    options.push(randomMeaning);
+                }
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('quizOptions');
+            if(!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full py-3.5 px-4 rounded-2xl border border-stone-200 font-bold text-sm text-stone-700 bg-stone-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-left flex justify-between items-center";
+                btn.innerHTML = `<span>${opt}</span> <span class="text-xs text-stone-400">เลือก</span>`;
+                btn.onclick = () => checkQuizAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selected, btnElement) {
+            const container = document.getElementById('quizOptions');
+            if(!container) return;
+            const allBtns = container.getElementsByTagName('button');
+            for(let b of allBtns) {
+                b.disabled = true;
+                if(b.innerText.includes(currentQuizItem.meaning)) b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
+            }
+            if(selected === currentQuizItem.meaning) {
+                quizScore++;
+                const scoreEl = document.getElementById('quizScore');
+                if(scoreEl) scoreEl.innerText = `คะแนน: ${quizScore}`;
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
+            } else {
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-red-500 font-bold text-sm text-red-700 bg-red-50 text-left flex justify-between items-center";
+            }
+            const nextBtn = document.getElementById('nextQuizBtn');
+            if(nextBtn) nextBtn.classList.remove('hidden');
+        }
+
+        // --- MOCK TEST LOGIC ---
+        function startMockTest() {
+            let mockItems = [...hsk1Data].sort(() => 0.5 - Math.random()).slice(0, 10);
+            let html = `<div class="space-y-6" id="mockForm">`;
+            mockItems.forEach((item, idx) => {
+                let wrongOpts = hsk1Data.filter(i => i.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(i => i.meaning);
+                let opts = [item.meaning, ...wrongOpts].sort(() => 0.5 - Math.random());
+                html += `
+                    <div class="p-6 bg-stone-50 rounded-2xl border border-stone-200 space-y-3 mock-question" data-correct="${item.meaning}">
+                        <div class="flex items-center justify-between">
+                            <p class="font-bold text-stone-800">ข้อที่ ${idx+1}: คำว่า <span class="text-red-600 text-xl">${item.word}</span> (${item.pinyin}) ตรงกับความหมายใด?</p>
+                            <button type="button" onclick="speakWord('${item.word}')" class="px-2.5 py-1 bg-red-50 text-red-600 rounded-lg text-xs font-bold">🔊 ฟังเสียง</button>
+                        </div>
+                        <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-xl text-xs space-y-1">
+                            <p class="font-bold text-stone-900">ตัวอย่าง: ${item.example}</p>
+                        </div>
+                        <div class="grid grid-cols-1 gap-2">
+                            ${opts.map(opt => `<button type="button" onclick="selectMockOption(this, '${opt}')" class="py-2.5 px-4 bg-white border border-stone-200 rounded-2xl text-left text-sm font-semibold hover:border-red-500 transition mock-option">${opt}</button>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            html += `<button type="button" onclick="submitMockTest()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg">ส่งข้อสอบ</button></div>`;
+            const mockContent = document.getElementById('mockContent');
+            if(mockContent) mockContent.innerHTML = html;
+        }
+
+        function selectMockOption(btn, opt) {
+            const parent = btn.parentElement;
+            if(!parent) return;
+            parent.querySelectorAll('.mock-option').forEach(b => {
+                b.className = "py-2.5 px-4 bg-white border border-stone-200 rounded-2xl text-left text-sm font-semibold hover:border-red-500 transition mock-option";
+            });
+            btn.className = "py-2.5 px-4 bg-red-50 border-2 border-red-500 rounded-2xl text-left text-sm font-bold text-red-700 mock-option selected-ans";
+            btn.dataset.selected = opt;
+        }
+
+        function submitMockTest() {
+            const questions = document.querySelectorAll('.mock-question');
+            let score = 0;
+            questions.forEach(q => {
+                const correct = q.dataset.correct;
+                const selectedBtn = q.querySelector('.selected-ans');
+                q.querySelectorAll('.mock-option').forEach(b => {
+                    b.disabled = true;
+                    if(b.innerText === correct) {
+                        b.className = "py-2.5 px-4 bg-green-50 border-2 border-green-500 rounded-2xl text-left text-sm font-bold text-green-700";
+                    }
+                });
+                if(selectedBtn) {
+                    if(selectedBtn.innerText === correct) {
+                        score++;
+                    } else {
+                        selectedBtn.className = "py-2.5 px-4 bg-red-50 border-2 border-red-500 rounded-2xl text-left text-sm font-bold text-red-700";
+                    }
+                }
+            });
+
+            const container = document.getElementById('mockContent');
+            if(!container) return;
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = "mt-6 bg-white p-8 rounded-3xl border border-stone-200 text-center space-y-4 shadow-xl";
+            summaryDiv.innerHTML = `
+                <div class="text-5xl">🏆</div>
+                <h3 class="text-2xl font-black">สรุปผลคะแนนข้อสอบจำลอง</h3>
+                <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${score}</span> / ${questions.length} คะแนน</p>
+                <button type="button" onclick="startMockTest()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">ทำข้อสอบใหม่อีกครั้ง ↺</button>
+            `;
+            container.appendChild(summaryDiv);
+            summaryDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- GRID RENDER & OTHERS ---
+        const grid = document.getElementById('vocabGrid');
         function renderVocab(data) {
+            if(!grid) return;
             grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-stone-400 font-bold">ไม่พบคำศัพท์ที่ค้นหา</div>`;
+                return;
+            }
             data.forEach((item) => {
                 const card = document.createElement('div');
-                card.className = "bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer group";
-                
+                card.className = "bg-white p-6 rounded-3xl border border-stone-200/80 shadow-md hover:border-red-600 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer";
                 card.onclick = () => {
                     window.location.href = `hsk1-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(item.freqTotal)}&setsFound=${encodeURIComponent(item.setsFound)}&example=${encodeURIComponent(item.example)}`;
                 };
-
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
-                            <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">ความถี่รวม: ${item.freqTotal} ครั้ง</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="event.stopPropagation(); speakWord('${item.word}')" class="w-7 h-7 bg-red-50 text-red-600 rounded-lg flex items-center justify-center hover:bg-red-600 hover:text-white transition shadow-sm" title="ฟังเสียงอ่าน">🔊</button>
+                                <span class="text-xs font-bold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full">ความถี่: ${item.freqTotal}</span>
+                            </div>
                         </div>
-                        <div class="text-4xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
+                        <div class="text-4xl font-extrabold text-stone-900 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
                         <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
-                        <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
+                        <p class="text-stone-600 text-sm line-clamp-1">${item.meaning}</p>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
-                        <span>ดูสถิติและตัวอย่างประโยค</span>
-                        <span>→</span>
+                    <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-stone-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
+                        <span>ดูสถิติและตัวอย่างประโยค</span><span>→</span>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -195,15 +811,67 @@
         }
 
         function filterVocab() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = hsk1Data.filter(item => 
-                item.word.toLowerCase().includes(query) || 
-                item.pinyin.toLowerCase().includes(query) || 
-                item.meaning.toLowerCase().includes(query)
-            );
-            renderVocab(filtered);
+            const searchInput = document.getElementById('searchInput');
+            if(!searchInput) return;
+            const query = searchInput.value.toLowerCase();
+            currentFilteredData = hsk1Data.filter(item => item.word.toLowerCase().includes(query) || item.pinyin.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query));
+            renderVocab(currentFilteredData);
         }
 
+        function filterByType(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition");
+            if(event && event.target) {
+                event.target.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition";
+            }
+            currentFilteredData = type === 'all' ? [...hsk1Data] : hsk1Data.filter(i => i.type.includes(type));
+            renderVocab(currentFilteredData);
+        }
+
+        function sortVocab() {
+            const sortSelect = document.getElementById('sortSelect');
+            if(!sortSelect) return;
+            const sortBy = sortSelect.value;
+            if(sortBy === 'freq') currentFilteredData.sort((a,b) => b.freqTotal - a.freqTotal);
+            else if(sortBy === 'alpha') currentFilteredData.sort((a,b) => a.pinyin.localeCompare(b.pinyin));
+            else currentFilteredData.sort((a,b) => a.id - b.id);
+            renderVocab(currentFilteredData);
+        }
+
+        let fcIndex = 0, isFlipped = false;
+        function initFlashcard() { fcIndex = 0; isFlipped = false; updateFlashcardUI(); }
+        function updateFlashcardUI() {
+            const item = hsk1Data[fcIndex];
+            const typeEl = document.getElementById('fcType');
+            if(typeEl) typeEl.innerText = item.type;
+            const currEl = document.getElementById('fcCurrent');
+            if(currEl) currEl.innerText = fcIndex + 1;
+            const wordEl = document.getElementById('fcWord');
+            if(wordEl) wordEl.innerText = item.word;
+            const pinEl = document.getElementById('fcPinyin');
+            if(pinEl) pinEl.innerText = item.pinyin;
+            const meanEl = document.getElementById('fcMeaning');
+            if(meanEl) meanEl.innerText = item.meaning;
+            const exEl = document.getElementById('fcExample');
+            if(exEl) exEl.innerText = `ตัวอย่าง: ${item.example || '-'}`;
+
+            const inner = document.getElementById('flashcardInner');
+            if(inner) {
+                if(isFlipped) inner.classList.add('rotate-y-180');
+                else inner.classList.remove('rotate-y-180');
+            }
+        }
+        function flipCard() { 
+            isFlipped = !isFlipped; 
+            const inner = document.getElementById('flashcardInner'); 
+            if(inner) {
+                if(isFlipped) inner.classList.add('rotate-y-180'); 
+                else inner.classList.remove('rotate-y-180'); 
+            }
+        }
+        function nextCard() { isFlipped = false; fcIndex = (fcIndex + 1) % hsk1Data.length; updateFlashcardUI(); }
+        function prevCard() { isFlipped = false; fcIndex = (fcIndex - 1 + hsk1Data.length) % hsk1Data.length; updateFlashcardUI(); }
+
+        // เริ่มต้นเรนเดอร์หน้าตารางคำศัพท์หลักทันทีเมื่อเปิดเว็บ
         renderVocab(hsk1Data);
     </script>
 </body>

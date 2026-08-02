@@ -6,45 +6,319 @@
     <title>คลังคำศัพท์ HSK ระดับ 5 - Fast Learn Academy</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Prompt', sans-serif; }
+        body { font-family: 'Prompt', sans-serif; background-color: #fcfbfa; }
+        .perspective-1000 { perspective: 1200px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .chinese-bg {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,253,249,0.85)), url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+<body class="text-gray-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
-    <!-- Header Section -->
-    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
-        <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+    <!-- Top Navbar -->
+    <nav class="bg-black text-white px-6 py-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center font-black text-white text-lg shadow">
+                    📖
+                </div>
+                <span class="text-lg font-black tracking-wider uppercase text-amber-100">FAST LEARN ACADEMY</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-stone-300">
+                <a href="index.html" class="hover:text-white transition">หน้าแรก</a>
+                <a href="#" class="hover:text-white transition">บทเรียน</a>
+                <a href="hsk5.html" class="text-white border-b-2 border-red-600 pb-1">คำศัพท์</a>
+                <a href="#" class="hover:text-white transition">แบบฝึกหัด</a>
+                <a href="#" class="hover:text-white transition">คลังสื่อ</a>
+            </div>
             <div>
-                <a href="index.html" class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow hover:bg-red-700 transition">
-                    ← กลับสู่หน้าหลัก HSK 1-6
-                </a>
-                <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
-                    คลังคำศัพท์ <span class="text-yellow-400">HSK ระดับ 5</span> (179 คำ)
-                </h1>
-                <p class="text-gray-300 text-sm mt-1">รวบรวมคำศัพท์ HSK 5 ฉบับสมบูรณ์ ครบถ้วนทั้ง 179 คำ พร้อมพินอินและตัวอย่างประโยคจริง</p>
-            </div>
-            <div class="mt-4 md:mt-0">
-                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="px-4 py-2 rounded-lg text-gray-900 w-72 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <span class="bg-red-600 text-white text-xs font-extrabold px-4 py-2 rounded-xl shadow cursor-pointer hover:bg-red-700 transition">โหมดคุณครู</span>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content: รายการคำศัพท์ -->
-    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
-        <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+    <!-- HSK 5 Banner Header -->
+    <section class="chinese-bg border-b border-stone-200 py-10 px-4 shadow-sm">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-2 text-xs font-semibold text-stone-500 mb-6">
+                <a href="index.html" class="hover:text-red-600 transition">🏠 หน้าหลัก</a>
+                <span>/</span>
+                <span class="text-red-600 font-bold">ระดับ HSK 5</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <h1 class="text-4xl md:text-6xl font-black text-red-900 tracking-tight mb-2">
+                        HSK 5
+                    </h1>
+                    <p class="text-stone-700 text-sm md:text-base font-semibold">
+                        รวบรวมคำศัพท์ HSK 5 ฉบับสมบูรณ์ ครบถ้วนทั้ง 179 คำ พร้อมพินอินและตัวอย่างประโยคจริง
+                    </p>
+                </div>
+
+                <div class="bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-stone-200 shadow-md flex items-center gap-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">📚</div>
+                        <div>
+                            <div class="text-xs text-stone-500 font-medium">คำศัพท์</div>
+                            <div class="text-base font-black text-stone-900">179 คำ</div>
+                        </div>
+                    </div>
+                    <div class="w-px h-8 bg-stone-200"></div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-100 text-red-800 flex items-center justify-center font-bold">🎯</div>
+                        <div>
+                            <div class="text-xs text-stone-500 font-medium">ระดับ</div>
+                            <div class="text-base font-black text-stone-900">ระดับสูง</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
+
+        <!-- ส่วนเลือกบทเรียน 6 ช่อง -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
+                <h3 class="text-lg md:text-xl font-extrabold text-stone-800">เลือกบทเรียนหรือโหมดที่ต้องการทบทวน</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                
+                <!-- 01 ตารางคำศัพท์ -->
+                <div onclick="switchMode('grid')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">01 คำศัพท์ระดับสูง</div>
+                        <div class="text-base font-black text-stone-900">คลังคำศัพท์ HSK 5</div>
+                        <div class="text-xs text-stone-500">พร้อมพินอินและเสียงอ่าน</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 02 แฟลชการ์ด -->
+                <div onclick="switchMode('flashcard')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">02 แฟลชการ์ด</div>
+                        <div class="text-base font-black text-stone-900">Flashcard พรีเมียม</div>
+                        <div class="text-xs text-stone-500">พลิกการ์ดจำคำศัพท์แม่นยำ</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 03 ทดสอบความหมาย -->
+                <div onclick="switchMode('quiz')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">03 แบบทดสอบ</div>
+                        <div class="text-base font-black text-stone-900">ทดสอบความหมาย</div>
+                        <div class="text-xs text-stone-500">วัดความแม่นยำคำศัพท์ 10 ข้อ</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 04 เกมจับคู่ -->
+                <div onclick="switchMode('match')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">04 เกมจับคู่</div>
+                        <div class="text-base font-black text-stone-900">จับคู่คำศัพท์จีน-ไทย</div>
+                        <div class="text-xs text-stone-500">ฝึกความไวและความจำ (10 คำ)</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 05 ฝึกพินอิน -->
+                <div onclick="switchMode('writing')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">05 ฝึกพินอิน</div>
+                        <div class="text-base font-black text-stone-900">ฝึกเขียนพินอิน</div>
+                        <div class="text-xs text-stone-500">ทบทวนเสียงอ่านและวรรณยุกต์</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+                <!-- 06 ข้อสอบจำลอง -->
+                <div onclick="switchMode('mocktest')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
+                    <div class="space-y-1">
+                        <div class="text-xs font-bold text-red-600">06 ข้อสอบจำลอง</div>
+                        <div class="text-base font-black text-stone-900">Mock Test HSK 5</div>
+                        <div class="text-xs text-stone-500">จำลองบรรยากาศสอบจริง</div>
+                    </div>
+                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Controls Bar สำหรับโหมดตารางคำศัพท์ -->
+        <div id="controlsBar" class="bg-white p-5 rounded-3xl border border-stone-200/80 shadow-sm mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="w-full md:w-80">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำศัพท์, พินอิน, ความหมาย..." onkeyup="filterVocab()" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                <span class="text-xs font-bold text-stone-500 mr-1">กรองประเภท:</span>
+                <button onclick="filterByType('all')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition">ทั้งหมด</button>
+                <button onclick="filterByType('คำนาม')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">คำนาม</button>
+                <button onclick="filterByType('คำกริยา')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">คำกริยา</button>
+                <button onclick="filterByType('คำคุณศัพท์')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">คำคุณศัพท์</button>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+                <span class="text-xs font-bold text-stone-500">เรียงตาม:</span>
+                <select id="sortSelect" onchange="sortVocab()" class="px-3 py-2 rounded-xl border border-stone-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-red-600 bg-white">
+                    <option value="default">ค่าเริ่มต้น (ลำดับ)</option>
+                    <option value="alpha">พินอิน (A-Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- MODE 1: GRID VIEW -->
+        <div id="sectionGrid">
+            <div id="vocabGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </div>
+
+        <!-- MODE 2: FLASHCARD VIEW -->
+        <div id="sectionFlashcard" class="hidden flex flex-col items-center justify-center py-4">
+            <div class="w-full max-w-xl mb-6 flex justify-between items-center px-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 bg-red-600 rounded-full animate-pulse"></span>
+                    <h3 class="font-extrabold text-stone-800 text-lg">แฟลชการ์ดฝึกจำคำศัพท์</h3>
+                </div>
+                <div class="bg-white px-4 py-1.5 rounded-full border border-stone-200 shadow-sm text-xs font-bold text-stone-600">
+                    การ์ดที่ <span id="fcCurrent" class="text-red-600 text-sm">1</span> / 179
+                </div>
+            </div>
+
+            <div class="w-full max-w-xl perspective-1000 cursor-pointer h-[420px]" onclick="flipCard()">
+                <div id="flashcardInner" class="relative w-full h-full duration-700 transform-style-3d shadow-2xl rounded-[2.5rem]">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-stone-50 to-stone-100 rounded-[2.5rem] border-2 border-stone-200/80 p-8 flex flex-col justify-between backface-hidden">
+                        <div class="flex justify-between items-center">
+                            <span id="fcType" class="text-xs font-bold px-3.5 py-1.5 bg-red-50 text-red-600 rounded-full border border-red-100 shadow-sm">คำนาม</span>
+                            <span id="fcFreqBadge" class="text-xs font-bold px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200 shadow-sm">⭐ HSK 5</span>
+                        </div>
+                        <div class="text-center my-auto">
+                            <div id="fcWord" class="text-8xl md:text-9xl font-black text-stone-900 mb-3 tracking-wide drop-shadow-sm">情绪</div>
+                            <div id="fcPinyin" class="text-2xl md:text-3xl font-extrabold text-red-600 tracking-wider">qíngxù</div>
+                        </div>
+                        <div class="flex justify-between items-center pt-4 border-t border-stone-200/60">
+                            <span class="text-xs font-semibold text-stone-400">คลิกเพื่อพลิกดูความหมาย</span>
+                            <button onclick="event.stopPropagation(); speakWord(document.getElementById('fcWord').innerText)" class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition shadow flex items-center gap-1.5">🔊 ฟังเสียง</button>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-white rounded-[2.5rem] p-8 flex flex-col justify-between backface-hidden rotate-y-180 border-2 border-zinc-800">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-3.5 py-1.5 bg-amber-400 text-black rounded-full shadow">💡 เฉลยความหมาย</span>
+                            <span class="text-xs text-stone-400 font-bold">Fast Learn Academy</span>
+                        </div>
+                        <div class="text-center space-y-4 my-auto">
+                            <div id="fcMeaning" class="text-4xl font-extrabold text-amber-400 tracking-wide">อารมณ์</div>
+                            <div class="text-xs text-stone-300 font-semibold" id="fcFreq">-</div>
+                        </div>
+                        <div class="text-center pt-4 border-t border-stone-800 text-xs text-stone-400 font-semibold">🔄 คลิกการ์ดอีกครั้งเพื่อกลับหน้าหลัก</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 mt-8 w-full max-w-xl justify-center">
+                <button onclick="prevCard()" class="flex-1 py-3.5 bg-white border border-stone-200 rounded-2xl font-bold text-sm text-stone-700 shadow-sm hover:bg-stone-50 transition flex items-center justify-center gap-2"><span>←</span> การ์ดก่อนหน้า</button>
+                <button onclick="nextCard()" class="flex-1 py-3.5 bg-red-600 text-white rounded-2xl font-bold text-sm shadow-md hover:bg-red-700 transition flex items-center justify-center gap-2">การ์ดถัดไป <span>→</span></button>
+            </div>
+        </div>
+
+        <!-- MODE 3: QUIZ VIEW -->
+        <div id="sectionQuiz" class="hidden max-w-xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                <div class="flex justify-between items-center mb-6">
+                    <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">คำถามที่ 1 / 10</span>
+                    <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                </div>
+                <div class="text-center mb-8">
+                    <p class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
+                    <div id="quizWord" class="text-7xl font-black text-stone-900 mb-2">情绪</div>
+                </div>
+                <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- MODE 4: MATCHING GAME (10 คู่) -->
+        <div id="sectionMatch" class="hidden max-w-3xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-amber-500"></div>
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-black text-stone-900 mb-1">🎮 เกมจับคู่คำศัพท์จีน-ไทย (10 คู่)</h3>
+                    <p class="text-xs text-stone-500">คลิกเลือกคำศัพท์จีนทางซ้าย และความหมายทางขวาให้ถูกต้องตรงกัน</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6" id="matchGameContainer">
+                    <div class="space-y-2.5 max-h-[500px] overflow-y-auto pr-2" id="matchChineseCol"></div>
+                    <div class="space-y-2.5 max-h-[500px] overflow-y-auto pr-2" id="matchMeaningCol"></div>
+                </div>
+                <div class="mt-6 text-center" id="matchMsgArea">
+                    <button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เริ่มเกมใหม่ ↺</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODE 5: WRITING / PINYIN CHOICE -->
+        <div id="sectionWriting" class="hidden max-w-xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                <div class="flex justify-between items-center mb-4">
+                    <span id="writeProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">ข้อที่ 1 / 10</span>
+                    <span id="writeScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                </div>
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-black text-stone-900 mb-1">✍️ เลือกพินอินที่ถูกต้อง</h3>
+                    <p class="text-xs text-stone-500 mb-4">จากตัวอักษรจีนคำศัพท์นี้</p>
+                    <div class="text-7xl font-extrabold text-red-600 mb-2" id="writeWordDisplay">-</div>
+                    <div class="text-xs font-semibold text-stone-400 mb-4" id="writeTypeDisplay">-</div>
+                </div>
+                <div id="writeOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                <button id="nextWriteBtn" onclick="nextWritingQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- MODE 6: MOCK TEST -->
+        <div id="sectionMocktest" class="hidden max-w-2xl mx-auto py-4">
+            <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-3 bg-black"></div>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-black">🏆 จำลองข้อสอบ HSK ระดับ 5</h3>
+                </div>
+                <div id="mockContent" class="space-y-6">
+                    <p class="text-sm text-stone-600">การทดสอบจำลองข้อสอบจริง จำนวน 10 ข้อ วัดความแม่นยำคำศัพท์ระดับสูง</p>
+                    <button onclick="startMockTest()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg">เริ่มทำข้อสอบจำลอง</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Back Buttons -->
+        <div class="mt-16 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href="index.html" class="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-zinc-800 transition shadow-lg text-xs">
+                <span>🏠</span> กลับสู่หน้าหลัก HSK 1-6
+            </a>
+        </div>
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
-        <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+    <footer class="bg-black text-white py-8 text-center text-stone-400 text-xs mt-16 border-t-2 border-red-600">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-medium text-stone-300">Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
+            <p class="text-stone-500">© 2026 Fast Learn Academy. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
-        // ฐานข้อมูลคำศัพท์ HSK 5 ครบทั้ง 179 คำจาก Excel
         const hsk5Data = [
             { id: 1, word: "情绪", pinyin: "qíngxù", meaning: "อารมณ์", type: "คำนาม", setsFound: "H51008, H51327, H51328", chinese: "他的情绪已经稳定下来了。", exPinyin: "Tā de qíngxù yǐjīng wěndìng xiàlái le.", exMeaning: "อารมณ์ของเขาคงที่ลงแล้ว" },
             { id: 2, word: "谨慎", pinyin: "jǐnshèn", meaning: "รอบคอบ", type: "คำคุณศัพท์", setsFound: "H51005, H51007, H51008", chinese: "自己的言行要谨慎。", exPinyin: "Zìjǐ de yánxíng yào jǐnshèn.", exMeaning: "คำพูดและการกระทำของตนเองต้องมีความรอบคอบ" },
@@ -65,175 +339,440 @@
             { id: 17, word: "为了", pinyin: "wèile", meaning: "เพื่อ... / เพื่อที่จะ", type: "คำบุพบท", setsFound: "H51329, H51553B", chinese: "为了达到这个目标。", exPinyin: "Wèile dádào zhège mùbiāo.", meaning: "เพื่อที่จะบรรลุเป้าหมายนี้" },
             { id: 18, word: "通过", pinyin: "tōngguò", meaning: "ผ่าน / โดยผ่านทาง", type: "คำกริยา/บุพบท", setsFound: "H51329, H51553B", chinese: "通过努力取得了成功。", exPinyin: "Tōngguò nǔlì qǔdé le chénggōng.", meaning: "ผ่านความพยายามจึงได้รับความสำเร็จ" },
             { id: 19, word: "对于", pinyin: "duìyú", meaning: "สำหรับ / ต่อ...", type: "คำบุพบท", setsFound: "H51329, H51553B", chinese: "对于这个问题大家的看法不同。", exPinyin: "Duìyú zhège wèntí dàjiā de kànfǎ bùtóng.", meaning: "สำหรับปัญหานี้มุมมองของทุกคนแตกต่างกัน" },
-            { id: 20, word: "关于", pinyin: "guānyú", meaning: "เกี่ยวกับ", type: "คำบุพบท", setsFound: "H51329, H51553B", chinese: "关于明天的会议安排。", exPinyin: "Guānyú míngtiān de huìyì ānpái.", meaning: "เกี่ยวกับการจัดเตรียมการประชุมในวันพรุ่งนี้" },
-            { id: 21, word: "表情", pinyin: "biǎoqíng", meaning: "สีหน้า / การแสดงออกทางสีหน้า", type: "คำนาม", setsFound: "H51005, H51007, H51008", chinese: "他的表情显得很不自然。", exPinyin: "Tā de biǎoqíng xiǎn de hěn bù zìrán.", exMeaning: "สีหน้าของเขาดูไม่เป็นธรรมชาติเอาเสียเลย" },
-            { id: 22, word: "进步", pinyin: "jìnbù", meaning: "ก้าวหน้า", type: "คำกริยา/คำคุณศัพท์", setsFound: "H51005, H51007, H51008", chinese: "使人进步。", exPinyin: "Shǐ rén jìnbù.", exMeaning: "ทำให้ผู้คนเกิดความก้าวหน้า" },
-            { id: 23, word: "表现", pinyin: "biǎoxiàn", meaning: "การแสดงออก / ผลงาน", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "她的工作表现非常突出。", exPinyin: "Tā de gōngzuò biǎoxiàn fēicháng tūchū.", exMeaning: "ผลงานในการทำงานของเธอโดดเด่นมากๆ" },
-            { id: 24, word: "始终", pinyin: "shǐzhōng", meaning: "ตั้งแต่ต้นจนจบ / ตลอดมา", type: "คำวิเศษณ์", setsFound: "H51005, H51007, H51008", chinese: "靠岸后，这个人照着船上的记号下水去找剑。", exPinyin: "Kào'àn hòu, zhège rén zhàozhe chuán shàng de jìhao xiàshuǐ qù zhǎo jiàn.", exMeaning: "หลังจากเทียบท่าแล้ว คนผู้นี้ทำตามสัญลักษณ์บนเรือแล้วลงน้ำไปหาดาบ" },
-            { id: 25, word: "陆续", pinyin: "lùxù", meaning: "ทยอย / ต่อเนื่องกันไป", type: "คำวิเศษณ์", setsFound: "H51005, H51007, H51008", chinese: "靠岸后，这个人顺着船上的记号下水去找剑。", exPinyin: "Kào'àn hòu, zhège rén shùnzhe chuán shàng de jìhao xiàshuǐ qù zhǎo jiàn.", exMeaning: "หลังจากเทียบท่าแล้ว คนผู้นี้เดินตามสัญลักษณ์บนเรือแล้วลงน้ำไปหาดาบ" },
-            { id: 26, word: "面临", pinyin: "miànlín", meaning: "เผชิญหน้ากับ", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "股票市场面临着新的调整。", exPinyin: "Gǔpiào shìchǎng miànlínzhe xīn de tiáozhěng.", exMeaning: "ตลาดหุ้นกำลังเผชิญหน้ากับการปรับเปลี่ยนครั้งใหม่" },
-            { id: 27, word: "出席", pinyin: "chūxí", meaning: "เข้าร่วม (ประชุม/พิธี)", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "她答应出席开幕式。", exPinyin: "Tā dāying chūxí kāimùshì.", exMeaning: "เธอรับปากว่าจะเข้าร่วมพิธีเปิด" },
-            { id: 28, word: "压力", pinyin: "yālì", meaning: "ความกดดัน / ความเครียด", type: "คำนาม", setsFound: "H51005, H51007, H51008", chinese: "满足、压力、忽视、健康、放松。", exPinyin: "Mǎnzú, yālì, hūshì, jiànkāng, fàngsōng.", exMeaning: "ความพึงพอใจ, ความกดดัน, การละเลย, สุขภาพ, การผ่อนคลาย" },
-            { id: 29, word: "放松", pinyin: "fàngsōng", meaning: "ผ่อนคลาย", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "压力与放松。", exPinyin: "Yālì yǔ fàngsōng.", exMeaning: "ความกดดันและการผ่อนคลาย" },
-            { id: 30, word: "忽视", pinyin: "hūshì", meaning: "ละเลย / มองข้าม", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "忽视健康。", exPinyin: "Hūshì jiànkāng.", exMeaning: "ละเลยสุขภาพ" },
-            { id: 31, word: "健康", pinyin: "jiànkāng", meaning: "สุขภาพ", type: "คำนาม/คำคุณศัพท์", setsFound: "H51005, H51007, H51008", chinese: "保持身体健康。", exPinyin: "Bǎochí shēntǐ jiànkāng.", exMeaning: "รักษาสุขภาพร่างกายให้แข็งแรง" },
-            { id: 32, word: "满足", pinyin: "mǎnzú", meaning: "พึงพอใจ / ตอบสนอง", type: "คำคุณศัพท์/คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "满足人们的需求。", exPinyin: "Mǎnzú rénmen de xūqiú.", exMeaning: "ตอบสนองความต้องการของผู้คน" },
-            { id: 33, word: "应对", pinyin: "yìngduì", meaning: "รับมือ / ตอบรับ", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "如何应对突发情况。", exPinyin: "Rúhé yìngduì tūfā qíngkuàng.", exMeaning: "วิธีการรับมือกับสถานการณ์ฉุกเฉิน" },
-            { id: 34, word: "挑战", pinyin: "tiǎozhàn", meaning: "ความท้าทาย / ท้าทาย", type: "คำนาม/คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "迎接新的挑战。", exPinyin: "Yíngjiē xīn de tiǎozhàn.", exMeaning: "ต้อนรับความท้าทายใหม่ๆ" },
-            { id: 35, word: "克服", pinyin: "kèfú", meaning: "เอาชนะ (อุปสรรค)", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "克服重重困难。", exPinyin: "Kèfú chóngchóng kùnnan.", exMeaning: "เอาชนะอุปสรรคขวากหนามนานัปการ" },
-            { id: 36, word: "难关", pinyin: "nánguān", meaning: "อุปสรรคยากลำบาก", type: "คำนาม", setsFound: "H51005, H51007, H51008", chinese: "携手度过难关。", exPinyin: "Xiéshǒu dùguò nánguān.", exMeaning: "จับมือกันก้าวผ่านช่วงเวลาที่ยากลำบาก" },
-            { id: 37, word: "合作", pinyin: "hézuò", meaning: "ร่วมมือ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "加强国际合作。", exPinyin: "Jiāqiáng guójì hézuò.", exMeaning: "เสริมสร้างความร่วมมือระหว่างประเทศให้แข็งแกร่งยิ่งขึ้น" },
-            { id: 38, word: "支持", pinyin: "zhīchí", meaning: "สนับสนุน", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "感谢大家的支持。", exPinyin: "Gǎnxiè dàjiā de zhīchí.", exMeaning: "ขอขอบคุณการสนับสนุนของทุกคน" },
-            { id: 39, word: "信任", pinyin: "xìnrèn", meaning: "ไว้วางใจ / ความเชื่อใจ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "赢得客户的信任。", exPinyin: "Yíngdé kèhù de xìnrèn.", exMeaning: "ได้รับความไว้วางใจจากลูกค้า" },
-            { id: 40, word: "沟通", pinyin: "gōutōng", meaning: "สื่อสาร / ติดต่อประสานงาน", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "与客户有效沟通。", exPinyin: "Yǔ kèhù yǒuxiào gōutōng.", exMeaning: "สื่อสารกับลูกค้าอย่างมีประสิทธิภาพ" },
-            { id: 41, word: "理解", pinyin: "lǐjiě", meaning: "เข้าใจ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "互相理解与包容。", exPinyin: "Hùxiāng lǐjiě yǔ bāoróng.", exMeaning: "ความเข้าใจและการโอบอ้อมอารีต่อกันและกัน" },
-            { id: 42, word: "尊重", pinyin: "zūnzhòng", meaning: "เคารพ / ให้เกียรติ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "互相尊重彼此的意见。", exPinyin: "Hùxiāng zūnzhòng bǐcǐ de yìjiàn.", exMeaning: "เคารพความคิดเห็นซึ่งกันและกัน" },
-            { id: 43, word: "包容", pinyin: "bāoróng", meaning: "โอบอ้อมอารี / อดกลั้น", type: "คำกริยา/คำคุณศัพท์", setsFound: "H51005, H51007, H51008", chinese: "学会包容不同的声音。", exPinyin: "Xuéhuì bāoróng bùtóng de shēngyīn.", exMeaning: "เรียนรู้ที่จะโอบอ้อมอารีเสียงสะท้อนที่แตกต่าง" },
-            { id: 44, word: "欣赏", pinyin: "xīnshǎng", meaning: "ชื่นชม / ชมเชย", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "欣赏音乐与美术。", exPinyin: "Xīnshǎng yīnyuè yǔ měishù.", exMeaning: "ชื่นชมดนตรีและศิลปะ" },
-            { id: 45, word: "体验", pinyin: "tǐyàn", meaning: "สัมผัส / ประสบการณ์ตรง", type: "คำกริยา/คำนาม", setsFound: "H51005, H51007, H51008", chinese: "亲身体验大自然。", exPinyin: "Qīnshēn tǐyàn dà zìrán.", exMeaning: "สัมผัสธรรมชาติด้วยตนเองอย่างแท้จริง" },
-            { id: 46, word: "感受", pinyin: "gǎnshòu", meaning: "ความรู้สึก / รับรู้", type: "คำนาม/คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "分享个人的真实感受。", exPinyin: "Fēnxiǎng gèrén de zhēnshí gǎnshòu.", exMeaning: "แบ่งปันความรู้สึกที่แท้จริงส่วนบุคคล" },
-            { id: 47, word: "体会", pinyin: "tǐhuì", meaning: "ซาบซึ้งใจ / เข้าใจลึกซึ้ง", type: "คำนาม/คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "深刻体会到生活的不易。", exPinyin: "Shēnkè tǐhuì dào shēnghuó de bù yì.", exMeaning: "ซาบซึ้งและเข้าใจอย่างลึกซึ้งถึงความไม่ง่ายของชีวิต" },
-            { id: 48, word: "领会", pinyin: "lǐnghuì", meaning: "เข้าใจนัยสำคัญ", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "领会领导的精神指示。", exPinyin: "Lǐnghuì lǐngdǎo de jīngshén zhǐshì.", exMeaning: "เข้าใจนัยสำคัญตามคำชี้แนะทางจิตวิญญาณของผู้นำ" },
-            { id: 49, word: "掌握", pinyin: "zhǎngwò", meaning: "กำมือ/ครอบครอง/เชี่ยวชาญ", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "熟练掌握一门外语。", exPinyin: "Shúliàn zhǎngwò yī mén wàiyǔ.", exMeaning: "เชี่ยวชาญภาษาต่างประเทศได้อย่างคล่องแคล่ว" },
-            { id: 50, word: "运用", pinyin: "yùnyòng", meaning: "ประยุกต์ใช้", type: "คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "灵活运用所学知识。", exPinyin: "Línghuo yùnyòng suǒ xué zhīshi.", exMeaning: "ประยุกต์ใช้ความรู้ที่เรียนมาให้อย่างยืดหยุ่น" },
-            { id: 51, word: "实践", pinyin: "shíjiàn", meaning: "การปฏิบัติจริง", type: "คำนาม/คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "理论联系实际。", exPinyin: "Lǐlùn liánxì shíjì.", exMeaning: "ทฤษฎีเชื่อมโยงเข้ากับความเป็นจริง" },
-            { id: 52, word: "理论", pinyin: "lǐlùn", meaning: "ทฤษฎี", type: "คำนาม", setsFound: "H51005, H51007, H51008", chinese: "探讨科学理论基础。", exPinyin: "Tàntǎo kēxué lǐlùn jīchǔ.", exMeaning: "อภิปรายพื้นฐานทฤษฎีทางวิทยาศาสตร์" },
-            { id: 53, word: "科学", pinyin: "kēxué", meaning: "วิทยาศาสตร์", type: "คำนาม/คำคุณศัพท์", setsFound: "H51005, H51007, H51008", chinese: "用科学方法解决问题。", exPinyin: "Yòng kēxué fāngfǎ jiějué wèntí.", exMeaning: "ใช้วิธีการทางวิทยาศาสตร์ในการแก้ปัญหา" },
-            { id: 54, word: "技术", pinyin: "jìshù", meaning: "เทคโนโลยี / เทคนิค", type: "คำนาม", setsFound: "H51005, H51007, H51008", chinese: "推动技术创新发展。", exPinyin: "Tuīdòng jìshù chuàngxīn fāzhǎn.", exMeaning: "ผลักดันการพัฒนาการนวัตกรรมทางเทคโนโลยี" },
-            { id: 55, word: "创新", pinyin: "chuàngxīn", meaning: "นวัตกรรม / สร้างสรรค์ใหม่", type: "คำนาม/คำกริยา", setsFound: "H51005, H51007, H51008", chinese: "科技创新引领未来。", exPinyin: "Kējì chuàngxīn yǐnlǐng wèilái.", exMeaning: "นวัตกรรมทางวิทยาศาสตร์และเทคโนโลยีนำพาอนาคต" },
-            { id: 56, word: "证件", pinyin: "zhèngjiàn", meaning: "เอกสารหลักฐาน / บัตรประจำตัว", type: "คำนาม", setsFound: "H51005, H51008", chinese: "请您主动出示证件。", exPinyin: "Qǐng nín zhǔdòng chūshì zhèngjiàn.", exMeaning: "โปรดแสดงบัตรประจำตัวหรือเอกสารหลักฐานด้วยความสมัครใจ" },
-            { id: 57, word: "申请", pinyin: "shēnqǐng", meaning: "สมัคร / ยื่นคำร้อง", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "申请出国留学。", exPinyin: "Shēnqǐng chūguó liúxué.", exMeaning: "ยื่นคำร้องขอไปศึกษาต่อต่างประเทศ" },
-            { id: 58, word: "手续", pinyin: "shǒuxù", meaning: "ขั้นตอน / พิธีการ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "办理相关手续。", exPinyin: "Bànlǐ xiāngguān shǒuxù.", exMeaning: "ดำเนินการขั้นตอนที่เกี่ยวข้อง" },
-            { id: 59, word: "批准", pinyin: "pīzhǔn", meaning: "อนุมัติ / อนุญาต", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "申请已经获批。", exPinyin: "Shēnqǐng yǐjīng huò pī.", exMeaning: "คำร้องได้รับการอนุมัติแล้ว" },
-            { id: 60, word: "合同", pinyin: "hétóng", meaning: "สัญญา", type: "คำนาม", setsFound: "H51005, H51008", chinese: "签订合作合同。", exPinyin: "Qiāndìng hézuò hétóng.", exMeaning: "ลงนามทำสัญญาความร่วมมือ" },
-            { id: 61, word: "签字", pinyin: "qiānzì", meaning: "เซ็นชื่อ", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "请在此处签字。", exPinyin: "Qǐng zài cǐ chù qiānzì.", exMeaning: "โปรดลงลายมือชื่อ ณ ที่นี้" },
-            { id: 62, word: "盖章", pinyin: "gàizhāng", meaning: "ประทับตรา", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "文件需要盖章生效。", exPinyin: "Wénjiàn xūyào gàizhāng shēngxiào.", exMeaning: "เอกสารจำเป็นต้องประทับตราจึงจะมีผลบังคับใช้" },
-            { id: 63, word: "复印", pinyin: "fùyìn", meaning: "ถ่ายเอกสาร", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "复印身份证件。", exPinyin: "Fùyìn shēnfèn zhèngjiàn.", exMeaning: "ถ่ายเอกสารบัตรประจำตัวประชาชน" },
-            { id: 64, word: "表格", pinyin: "biǎogé", meaning: "แบบฟอร์ม / ตาราง", type: "คำนาม", setsFound: "H51005, H51008", chinese: "填写个人表格。", exPinyin: "Tiánxiě gèrén biǎogé.", exMeaning: "กรอกแบบฟอร์มข้อมูลส่วนบุคคล" },
-            { id: 65, word: "资料", pinyin: "zīliào", meaning: "ข้อมูล / เอกสาร", type: "คำนาม", setsFound: "H51005, H51008", chinese: "查阅参考资料。", exPinyin: "Cháyuè cānkǎo zīliào.", exMeaning: "ค้นคว้าตรวจดูเอกสารอ้างอิง" },
-            { id: 66, word: "文件", pinyin: "wénjiàn", meaning: "เอกสาร", type: "คำนาม", setsFound: "H51005, H51008", chinese: "整理重要文件。", exPinyin: "Zhěnglǐ zhòngyào wénjiàn.", exMeaning: "จัดระเบียบเอกสารสำคัญ" },
-            { id: 67, word: "档案", pinyin: "dàng'àn", meaning: "แฟ้มประวัติ / ประวัติเก็บ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "调阅员工档案。", exPinyin: "Tiáoyuè yuángōng dàng'àn.", exMeaning: "เรียกดูแฟ้มประวัติพนักงาน" },
-            { id: 68, word: "部门", pinyin: "bùmén", meaning: "แผนก / ภาคส่วน", type: "คำนาม", setsFound: "H51005, H51008", chinese: "各部门协同工作。", exPinyin: "Gè bùmén xiétóng gōngzuò.", exMeaning: "แต่ละแผนกทำงานร่วมมือประสานงานกัน" },
-            { id: 69, word: "职位", pinyin: "zhíwèi", meaning: "ตำแหน่งหน้าที่", type: "คำนาม", setsFound: "H51005, H51008", chinese: "竞聘管理职位。", exPinyin: "Jìngpìn guǎnlǐ zhíwèi.", exMeaning: "แข่งขันสมัครคัดเลือกตำแหน่งงานบริหาร" },
-            { id: 70, word: "同事", pinyin: "tóngshì", meaning: "เพื่อนร่วมงาน", type: "คำนาม", setsFound: "H51005, H51008", chinese: "与同事相处融洽。", exPinyin: "Yǔ tóngshì xiāngchǔ róngqià.", exMeaning: "เข้ากับเพื่อนร่วมงานได้อย่างกลมกลืน" },
-            { id: 71, word: "领导", pinyin: "lǐngdǎo", meaning: "ผู้นำ / ผู้บริหาร", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "听取领导指示。", exPinyin: "Tīngqǔ lǐngdǎo zhǐshì.", exMeaning: "รับฟังคำชี้แนะจากผู้บริหาร" },
-            { id: 72, word: "下属", pinyin: "xiàshǔ", meaning: "ผู้ใต้บังคับบัญชา", type: "คำนาม", setsFound: "H51005, H51008", chinese: "关心下属成长。", exPinyin: "Guānxīn xiàshǔ chéngzhǎng.", exMeaning: "ใส่ใจดูแลการเติบโตของผู้ใต้บังคับบัญชา" },
-            { id: 73, word: "团队", pinyin: "tuánduì", meaning: "ทีมงาน", type: "คำนาม", setsFound: "H51005, H51008", chinese: "建设高效团队。", exPinyin: "Jiànshè gāoxiào tuánduì.", exMeaning: "สร้างทีมงานที่มีประสิทธิภาพสูง" },
-            { id: 74, word: "项目", pinyin: "xiàngmù", meaning: "โครงการ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "推进科研项目。", exPinyin: "Tuījìn kēyán xiàngmù.", exMeaning: "ผลักดันโครงการวิจัยทางวิทยาศาสตร์" },
-            { id: 75, word: "计划", pinyin: "jìhuà", meaning: "แผนการ / วางแผน", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "制定详细计划。", exPinyin: "Zhìdìng xiángxì jìhuà.", exMeaning: "กำหนดแผนการอย่างละเอียด" },
-            { id: 76, word: "目标", pinyin: "mùbiāo", meaning: "เป้าหมาย", type: "คำนาม", setsFound: "H51005, H51008", chinese: "实现宏伟目标。", exPinyin: "Shíxiàn hóngwěi mùbiāo.", exMeaning: "บรรลุเป้าหมายอันยิ่งใหญ่" },
-            { id: 77, word: "任务", pinyin: "rènwu", meaning: "ภารกิจ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "完成艰巨任务。", exPinyin: "Wánchéng jiānjù rènwu.", exMeaning: "ปฏิบัติภารกิจอันหนักหน่วงให้ลุล่วง" },
-            { id: 78, word: "责任", pinyin: "zérèn", meaning: "ความรับผิดชอบ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "承担社会责任。", exPinyin: "Chéngdān shèhuì zérèn.", exMeaning: "แบกรับความรับผิดชอบต่อสังคม" },
-            { id: 79, word: "义务", pinyin: "yìwù", meaning: "หน้าที่ / ภาระผูกพัน", type: "คำนาม", setsFound: "H51005, H51008", chinese: "履行公民义务。", exPinyin: "Lǚxíng gōngmín yìwù.", exMeaning: "ปฏิบัติตามหน้าที่พลเมือง" },
-            { id: 80, word: "权利", pinyin: "quánlì", meaning: "สิทธิ / อำนาจ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "维护合法权利。", exPinyin: "Wéihù héfǎ quánlì.", exMeaning: "ปกป้องคุ้มครองสิทธิตามกฎหมาย" },
-            { id: 81, word: "法律", pinyin: "fǎlǜ", meaning: "กฎหมาย", type: "คำนาม", setsFound: "H51005, H51008", chinese: "遵守国家法律。", exPinyin: "Zūnshǒu guójiā fǎlǜ.", exMeaning: "เคารพปฏิบัติตามกฎหมายบ้านเมือง" },
-            { id: 82, word: "规定", pinyin: "guīdìng", meaning: "ระเบียบ / กำหนด", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "符合行业规定。", exPinyin: "Fúhé hángyè guīdìng.", exMeaning: "สอดคล้องกับระเบียบข้อบังคับของอุตสาหกรรม" },
-            { id: 83, word: "制度", pinyin: "zhìdù", meaning: "ระบบ / ระเบียบปฏิบัติ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "完善管理制度。", exPinyin: "Wánshàn guǎnlǐ zhìdù.", exMeaning: "ปรับปรุงระบบการบริหารจัดการให้สมบูรณ์" },
-            { id: 84, word: "政策", pinyin: "zhèngcè", meaning: "นโยบาย", type: "คำนาม", setsFound: "H51005, H51008", chinese: "落实优惠政策。", exPinyin: "Luòshí yōuhuì zhèngcè.", exMeaning: "ดำเนินการตามนโยบายสิทธิประโยชน์" },
-            { id: 85, word: "经济", pinyin: "jīngjì", meaning: "เศรษฐกิจ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "促进经济增长。", exPinyin: "Cùjìn jīngjì zēngzhǎng.", exMeaning: "ส่งเสริมการเติบโตทางเศรษฐกิจ" },
-            { id: 86, word: "市场", pinyin: "shìchǎng", meaning: "ตลาด", type: "คำนาม", setsFound: "H51005, H51008", chinese: "开拓国际市场。", exPinyin: "Kāituò guójì shìchǎng.", exMeaning: "บุกเบิกขยายตลาดระหว่างประเทศ" },
-            { id: 87, word: "竞争", pinyin: "jìngzhēng", meaning: "การแข่งขัน", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "面临激烈竞争。", exPinyin: "Miànlín jīliè jìngzhēng.", exMeaning: "เผชิญหน้ากับการแข่งขันอันดุเดือด" },
-            { id: 88, word: "优势", pinyin: "yōushì", meaning: "ความได้เปรียบ / จุดเด่น", type: "คำนาม", setsFound: "H51005, H51008", chinese: "发挥自身优势。", exPinyin: "Fāhuī zìshēn yōushì.", exMeaning: "แสดงศักยภาพความได้เปรียบของตนเองออกมา" },
-            { id: 89, word: "劣势", pinyin: "lièshì", meaning: "ความเสียเปรียบ / จุดด้อย", type: "คำนาม", setsFound: "H51005, H51008", chinese: "克服先天劣势。", exPinyin: "Kèfú xiāntiān lièshì.", exMeaning: "เอาชนะจุดด้อยที่มีมาแต่กำเนิด" },
-            { id: 90, word: "风险", pinyin: "fēngxiǎn", meaning: "ความเสี่ยง", type: "คำนาม", setsFound: "H51005, H51008", chinese: "防范投资风险。", exPinyin: "Fángfàn tóuzī fēngxiǎn.", exMeaning: "ป้องกันความเสี่ยงในการลงทุน" },
-            { id: 91, word: "投资", pinyin: "tóuzī", meaning: "การลงทุน / ลงทุน", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "增加研发投资。", exPinyin: "Zēngjiā yánfā tóuzī.", exMeaning: "เพิ่มเงินลงทุนด้านการวิจัยและพัฒนา" },
-            { id: 92, word: "利润", pinyin: "lìrùn", meaning: "กำไร", type: "คำนาม", setsFound: "H51005, H51008", chinese: "获取丰厚利润。", exPinyin: "Hòuqǔ fēnghòu lìrùn.", exMeaning: "แสวงหากำไรอันงดงาม" },
-            { id: 93, word: "亏损", pinyin: "kuīsǔn", meaning: "ขาดทุน", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "企业出现亏损。", exPinyin: "Qǐyè chūxiàn kuīsǔn.", exMeaning: "กิจการเกิดภาวะขาดทุน" },
-            { id: 94, word: "资产", pinyin: "zīchǎn", meaning: "ทรัพย์สิน", type: "คำนาม", setsFound: "H51005, H51008", chinese: "盘点公司资产。", exPinyin: "Pándiǎn gōngsī zīchǎn.", exMeaning: "ตรวจสอบนับทรัพย์สินของบริษัท" },
-            { id: 95, word: "债务", pinyin: "zhàiwù", meaning: "หนี้สิน", type: "คำนาม", setsFound: "H51005, H51008", chinese: "偿还巨额债务。", exPinyin: "Chánghuán jù'é zhàiwù.", exMeaning: "ชำระหนี้สินจำนวนมหาศาล" },
-            { id: 96, word: "破产", pinyin: "pòchǎn", meaning: "ล้มละลาย", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "公司面临破产。", exPinyin: "Gōngsī miànlín pòchǎn.", exMeaning: "บริษัทกำลังเผชิญกับภาวะล้มละลาย" },
-            { id: 97, word: "消费", pinyin: "xiāofèi", meaning: "การบริโภค / ใช้จ่าย", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "刺激市场消费。", exPinyin: "Cìjī shìchǎng xiāofèi.", exMeaning: "กระตุ้นการบริโภคในตลาด" },
-            { id: 98, word: "需求", pinyin: "xūqiú", meaning: "ความต้องการ", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "满足市场需求。", exPinyin: "Mǎnzú shìchǎng xūqiú.", exMeaning: "ตอบสนองความต้องการของตลาด" },
-            { id: 99, word: "供给", pinyin: "gōngjǐ", meaning: "อุปทาน / จัดหาให้", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "保障市场供给。", exPinyin: "Bǎozhàng shìchǎng gōngjǐ.", exMeaning: "รับประกันการจัดหาอุปทานในตลาด" },
-            { id: 100, word: "价格", pinyin: "jiàgé", meaning: "ราคา", type: "คำนาม", setsFound: "H51005, H51008", chinese: "商品价格平稳。", exPinyin: "Shāngpǐn jiàgé píngwěn.", exMeaning: "ราคาสินค้ามีความมั่นคงมีเสถียรภาพ" },
-            { id: 101, word: "质量", pinyin: "zhìliàng", meaning: "คุณภาพ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "严把质量关。", exPinyin: "Yán bǎ zhìliàng guān.", exMeaning: "ควบคุมตรวจสอบคุณภาพอย่างเข้มงวด" },
-            { id: 102, word: "品牌", pinyin: "pǐnpái", meaning: "แบรนด์ / ตราสินค้า", type: "คำนาม", setsFound: "H51005, H51008", chinese: "打造知名品牌。", exPinyin: "Dǎzào zhīmíng pǐnpái.", exMeaning: "สร้างสรรค์แบรนด์สินค้าที่มีชื่อเสียง" },
-            { id: 103, word: "信誉", pinyin: "xìnyù", meaning: "ชื่อเสียงเครดิต / ความน่าเชื่อถือ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "维护企业信誉。", exPinyin: "Wéihù qǐyè xìnyù.", exMeaning: "ปกป้องรักษาชื่อเสียงความน่าเชื่อถือของกิจการ" },
-            { id: 104, word: "广告", pinyin: "guǎnggào", meaning: "โฆษณา", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "投放商业广告。", exPinyin: "Tōufàng shāngyè guǎnggào.", exMeaning: "ลงสื่อโฆษณาเชิงพาณิชย์" },
-            { id: 105, word: "宣传", pinyin: "xuānchuán", meaning: "การประชาสัมพันธ์ / เผยแพร่", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "加大宣传力度。", exPinyin: "Jiādà xuānchuán lìdù.", exMeaning: "เพิ่มความเข้มข้นในระดับการประชาสัมพันธ์" },
-            { id: 106, word: "策划", pinyin: "cèhuà", meaning: "วางแผนงาน / จัดทำโครงการ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "策划精彩活动。", exPinyin: "Cèhuà jīngcǎi huódòng.", exMeaning: "วางแผนจัดกิจกรรมที่น่าตื่นตาตื่นใจ" },
-            { id: 107, word: "组织", pinyin: "zǔzhī", meaning: "องค์กร / จัดตั้ง", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "组织公益活动。", exPinyin: "Zǔzhī gōngyì huódòng.", exMeaning: "จัดตั้งกิจกรรมเพื่อสาธารณประโยชน์" },
-            { id: 108, word: "领导", pinyin: "lǐngdǎo", meaning: "นำพา / ผู้นำ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "领导团队前行。", exPinyin: "Lǐngdǎo tuánduì qiánxíng.", exMeaning: "นำพาทีมงานก้าวไปข้างหน้า" },
-            { id: 109, word: "指挥", pinyin: "zhǐhuī", meaning: "บัญชาการ / อำนวยการ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "现场指挥救援。", exPinyin: "Xiànchǎng zhǐhuī jiùyuán.", exMeaning: "บัญชาการช่วยเหลือหน้างาน" },
-            { id: 110, word: "管理", pinyin: "guǎnlǐ", meaning: "การบริหารจัดการ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "现代企业管理。", exPinyin: "Xiàndài qǐyè guǎnlǐ.", exMeaning: "การบริหารจัดการวิสาหกิจสมัยใหม่" },
-            { id: 111, word: "监督", pinyin: "jiāndū", meaning: "ตรวจสอบดูแล / ควบคุม", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "接受社会监督。", exPinyin: "Jiēshòu shèhuì jiāndū.", exMeaning: "ยอมรับการตรวจสอบดูแลจากสังคม" },
-            { id: 112, word: "审计", pinyin: "shěnjì", meaning: "การตรวจสอบบัญชี / ตรวจสอบ", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "开展财务审计。", exPinyin: "Kāizhǎn cáiwù shěnjì.", exMeaning: "ดำเนินการตรวจสอบบัญชีการเงิน" },
-            { id: 113, word: "评估", pinyin: "pínggū", meaning: "การประเมินราคา/ประเมินผล", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "风险评估报告。", exPinyin: "Fēngxiǎn pínggū bàogào.", exMeaning: "รายงานการประเมินความเสี่ยง" },
-            { id: 114, word: "分析", pinyin: "fēnxī", meaning: "การวิเคราะห์ / วิเคราะห์", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "分析市场数据。", exPinyin: "Fēnxī shìchǎng shùjù.", exMeaning: "วิเคราะห์ข้อมูลตัวเลขทางตลาด" },
-            { id: 115, word: "研究", pinyin: "yánjiū", meaning: "การวิจัย / ศึกษาค้นคว้า", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "深入科学研究。", exPinyin: "Shēnrù kēxué yánjiū.", exMeaning: "ศึกษาค้นคว้าวิจัยทางวิทยาศาสตร์อย่างลึกซึ้ง" },
-            { id: 116, word: "探索", pinyin: "tànsuǒ", meaning: "สำรวจ / ค้นหา", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "探索未知世界。", exPinyin: "Tànsuǒ wèizhī shìjiè.", exMeaning: "สำรวจค้นหาโลกที่ยังไม่เป็นที่รู้จัก" },
-            { id: 117, word: "发现", pinyin: "fāxiàn", meaning: "การค้นพบ / พบว่า", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "发现新的规律。", exPinyin: "Fāxiàn xīn de guīlǜ.", exMeaning: "ค้นพบกฎเกณฑ์ใหม่ๆ" },
-            { id: 118, word: "发明", pinyin: "fāmíng", meaning: "การประดิษฐ์ / คิดค้น", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "四大发明创造。", exPinyin: "Sì dà fāmíng chuàngzào.", exMeaning: "สิ่งประดิษฐ์ยิ่งใหญ่ทั้งสี่ประการ" },
-            { id: 119, word: "创造", pinyin: "chuàngzào", meaning: "การสร้างสรรค์ / สร้างขึ้น", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "创造美好生活。", exPinyin: "Chuàngzào měihǎo shēnghuó.", exMeaning: "สร้างสรรค์ชีวิตความเป็นอยู่อันงดงาม" },
-            { id: 120, word: "建筑", pinyin: "jiànzhù", meaning: "สถาปัตยกรรม / สิ่งก่อสร้าง", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "古代宏伟建筑。", exPinyin: "Gǔdài hóngwěi jiànzhù.", exMeaning: "สิ่งก่อสร้างอันยิ่งใหญ่โบราณ" },
-            { id: 121, word: "设计", pinyin: "shèjì", meaning: "การออกแบบ / ออกแบบ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "服装款式设计。", exPinyin: "Fúzhuāng kuǎnshì shèjì.", exMeaning: "ออกแบบรูปแบบเสื้อผ้าเครื่องแต่งกาย" },
-            { id: 122, word: "装修", pinyin: "zhuāngxiū", meaning: "ตกแต่งภายใน / รีโนเวท", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "房屋内部装修。", exPinyin: "Fángwū nèibù zhuāngxiū.", exMeaning: "ตกแต่งภายในบ้านเรือนที่อยู่อาศัย" },
-            { id: 123, word: "设备", pinyin: "shèbèi", meaning: "อุปกรณ์ / เครื่องมือเครื่องใช้", type: "คำนาม", setsFound: "H51005, H51008", chinese: "引进先进设备。", exPinyin: "Yǐnjìn xiānjìn shèbèi.", exMeaning: "นำเข้าอุปกรณ์เครื่องมืออันทันสมัย" },
-            { id: 124, word: "仪器", pinyin: "yíqì", meaning: "เครื่องมือวัด / อุปกรณ์ทางวิทยาศาสตร์", type: "คำนาม", setsFound: "H51005, H51008", chinese: "精密实验仪器。", exPinyin: "Jīngmì shíyàn yíqì.", exMeaning: "เครื่องมือทดลองที่มีความละเอียดสูง" },
-            { id: 125, word: "工具", pinyin: "gōngjù", meaning: "เครื่องมือ / อุปกรณ์", type: "คำนาม", setsFound: "H51005, H51008", chinese: "熟练使用工具。", exPinyin: "Shúliàn shǐyòng gōngjù.", exMeaning: "ใช้อุปกรณ์เครื่องมือได้อย่างคล่องแคล่ว" },
-            { id: 126, word: "材料", pinyin: "cáiliào", meaning: "วัสดุ / ข้อมูลวัตถุดิบ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "环保建筑材料。", exPinyin: "Huánbǎo jiànzhù cáiliào.", exMeaning: "วัสดุก่อสร้างที่เป็นมิตรต่อสิ่งแวดล้อม" },
-            { id: 127, word: "原料", pinyin: "yuánliào", meaning: "วัตถุดิบ", type: "คำนาม", setsFound: "H51005, H51008", chinese: "采购优质原料。", exPinyin: "Cǎigòu yōuzhì yuánliào.", exMeaning: "จัดซื้อจัดหาวัตถุดิบที่มีคุณภาพสูง" },
-            { id: 128, word: "成品", pinyin: "chéngpǐn", meaning: "สินค้าสำเร็จรูป", type: "คำนาม", setsFound: "H51005, H51008", chinese: "检验合格成品。", exPinyin: "Jiǎnyàn hégé chéngpǐn.", exMeaning: "ตรวจสอบสินค้าสำเร็จรูปที่ผ่านเกณฑ์มาตรฐาน" },
-            { id: 129, word: "运输", pinyin: "yùnshū", meaning: "การขนส่ง", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "物流货物运输。", exPinyin: "Wùliú huòwù yùnshū.", exMeaning: "การขนส่งสินค้าด้านโลจิสติกส์" },
-            { id: 130, word: "物流", pinyin: "wùliú", meaning: "โลจิสติกส์ / การขนส่งกระจายสินค้า", type: "คำนาม", setsFound: "H51005, H51008", chinese: "现代智慧物流。", exPinyin: "Xiàndài zhìhuì wùliú.", exMeaning: "ระบบโลจิสติกส์อัจฉริยะสมัยใหม่" },
-            { id: 131, word: "快递", pinyin: "kuàidì", meaning: "บริการจัดส่งพัสดุด่วน", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "寄送顺丰快递。", exPinyin: "Jìsòng Shùnfēng kuàidì.", exMeaning: "ส่งพัสดุด่วนผ่านบริการเอสเอฟเอ็กซ์เพรส" },
-            { id: 132, word: "包裹", pinyin: "bāoguǒ", meaning: "พัสดุห่อของ", type: "คำนาม/คำกริยา", setsFound: "H51005, H51008", chinese: "签收海外包裹。", exPinyin: "Qiānshōu hǎiwài bāoguǒ.", exMeaning: "เซ็นรับพัสดุจากต่างประเทศ" },
-            { id: 133, word: "信封", pinyin: "xìnfēng", meaning: "ซองจดหมาย", type: "คำนาม", setsFound: "H51005, H51008", chinese: "写信封收件人。", exPinyin: "Xiě xìnfēng shōujiànrén.", exMeaning: "เขียนชื่อผู้รับบนซองจดหมาย" },
-            { id: 134, word: "邮票", pinyin: "yóupiào", meaning: "แสตมป์ไปรษณีย์", type: "คำนาม", setsFound: "H51005, H51008", chinese: "贴上精美邮票。", exPinyin: "Tiē shàng jīngměi yóupiào.", exMeaning: "ติดแสตมป์ลวดลายสวยงาม" },
-            { id: 135, word: "明信片", pinyin: "míngxìnpian", meaning: "โปสการ์ด", type: "คำนาม", setsFound: "H51005, H51008", chinese: "寄一张明信片。", exPinyin: "Jì yī zhāng míngxìnpian.", exMeaning: "ส่งโปสการ์ดหนึ่งแผ่น" },
-            { id: 136, word: "网络", pinyin: "wǎngluò", meaning: "เครือข่ายอินเทอร์เน็ต", type: "คำนาม", setsFound: "H51005, H51008", chinese: "普及宽带网络。", exPinyin: "Pǔjí kuāndài wǎngluò.", exMeaning: "ขยายเครือข่ายอินเทอร์เน็ตความเร็วสูงให้แพร่หลาย" },
-            { id: 137, word: "虚拟", pinyin: "xūnǐ", meaning: "เสมือนจริง (Virtual)", type: "คำคุณศัพท์", setsFound: "H51005, H51008", chinese: "体验虚拟现实。", exPinyin: "Tǐyàn xūnǐ xiànshí.", exMeaning: "สัมผัสประสบการณ์ความเป็นจริงเสมือน (VR)" },
-            { id: 138, word: "智能", pinyin: "zhìnéng", meaning: "อัจฉริยะ (Smart/AI)", type: "คำคุณศัพท์/คำนาม", setsFound: "H51005, H51008", chinese: "人工智能技术。", exPinyin: "Rréngōng zhìnéng jìshù.", exMeaning: "เทคโนโลยีปัญญาประดิษฐ์ (AI)" },
-            { id: 139, word: "数据", pinyin: "shùjù", meaning: "ข้อมูลตัวเลข (Data)", type: "คำนาม", setsFound: "H51005, H51008", chinese: "分析大数据集。", exPinyin: "Fēnxī dà shùjù jí.", exMeaning: "วิเคราะห์ชุดข้อมูลขนาดใหญ่ (Big Data)" },
-            { id: 140, word: "信息", pinyin: "xìnxī", meaning: "ข่าวสารข้อมูล", type: "คำนาม", setsFound: "H51005, H51008", chinese: "共享海量信息。", exPinyin: "Gòngxiǎng hǎiliàng xìnxī.", exMeaning: "แบ่งปันข้อมูลข่าวสารปริมาณมหาศาล" },
-            { id: 141, word: "安全", pinyin: "ānquán", meaning: "ความปลอดภัย / ปลอดภัย", type: "คำนาม/คำคุณศัพท์", setsFound: "H51005, H51008", chinese: "确保网络安全。", exPinyin: "Quèbǎo wǎngluò ānquán.", exMeaning: "รับประกันความปลอดภัยบนเครือข่ายอินเทอร์เน็ต" },
-            { id: 142, word: "隐私", pinyin: "yǐnsī", meaning: "ความเป็นส่วนตัว", type: "คำนาม", setsFound: "H51005, H51008", chinese: "保护个人隐私。", exPinyin: "Bǎohù gèrén yǐnsī.", exMeaning: "ปกป้องคุ้มครองความเป็นส่วนตัวของบุคคล" },
-            { id: 143, word: "病毒", pinyin: "bìngdú", meaning: "ไวรัส (คอมพิวเตอร์/โรค)", type: "คำนาม", setsFound: "H51005, H51008", chinese: "查杀电脑病毒。", exPinyin: "Cháshā diànnǎo bìngdú.", exMeaning: "ตรวจหาและกำจัดไวรัสคอมพิวเตอร์" },
-            { id: 144, word: "防范", pinyin: "fángfàn", meaning: "ป้องกันระแวดระวัง", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "加强安全防范。", exPinyin: "Jiāqiáng ānquán fángfàn.", exMeaning: "เสริมสร้างการป้องกันด้านความปลอดภัยให้แข็งแกร่งขึ้น" },
-            { id: 145, word: "打击", pinyin: "dǎjí", meaning: "ปราบปราม / โจมตี", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "严厉打击犯罪。", exPinyin: "Yánlì dǎjí fànzuì.", exMeaning: "ปราบปรามอาชญากรรมอย่างรุนแรงเฉียบขาด" },
-            { id: 146, word: "违法", pinyin: "wéifǎ", meaning: "ผิดกฎหมาย", type: "คำกริยา/คำคุณศัพท์", setsFound: "H51005, H51008", chinese: "严惩违法行为。", exPinyin: "Yánchéng wéifǎ xíngwéi.", exMeaning: "ลงโทษการกระทำผิดกฎหมายอย่างเฉียบขาด" },
-            { id: 147, word: "犯罪", pinyin: "fànzuì", meaning: "กระทำความผิดอาญา", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "预防青少年犯罪。", exPinyin: "Yùfáng qīngshniàn fànzuì.", exMeaning: "ป้องกันการกระทำความผิดในกลุ่มเยาวชน" },
-            { id: 148, word: "惩罚", pinyin: "chéngfá", meaning: "ลงโทษ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "接受法律惩罚。", exPinyin: "Jiēshòu fǎlǜ chéngfá.", exMeaning: "รับโทษทัณฑ์ตามกฎหมายบ้านเมือง" },
-            { id: 149, word: "监狱", pinyin: "jiānyù", meaning: "เรือนจำ / คุก", type: "คำนาม", setsFound: "H51005, H51008", chinese: "服刑于监狱中。", exPinyin: "Fúxíng yú jiānyù zhōng.", exMeaning: "รับโทษจำคุกอยู่ภายในเรือนจำ" },
-            { id: 150, word: "改造", pinyin: "gǎizào", meaning: "ปรับปรุง / ดัดแปลง / ขัดเกลา", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "重新改造自我。", exPinyin: "Chóngxīn gǎizào zìwǒ.", exMeaning: "ปรับปรุงขัดเกลาตนเองใหม่อีกครั้ง" },
-            { id: 151, word: "和谐", pinyin: "héxié", meaning: "กลมเกลียว / สมานฉันท์", type: "คำคุณศัพท์", setsFound: "H51005, H51008", chinese: "构建和谐社会。", exPinyin: "Gòujiàn héxié shèhuì.", exMeaning: "สร้างสรรค์สังคมแห่งความสมานฉันท์กลมเกลียว" },
-            { id: 152, word: "稳定", pinyin: "wěndìng", meaning: "มั่นคง / มีเสถียรภาพ", type: "คำคุณศัพท์/คำกริยา", setsFound: "H51005, H51008", chinese: "保持局势稳定。", exPinyin: "Bǎochí júshì wěndìng.", exMeaning: "รักษาสถานการณ์บ้านเมืองให้มีความมั่นคง" },
-            { id: 153, word: "繁荣", pinyin: "fánróng", meaning: "เจริญรุ่งเรือง", type: "คำคุณศัพท์/คำกริยา", setsFound: "H51005, H51008", chinese: "祖国繁荣昌盛。", exPinyin: "Zǔguó fánróng chāngshèng.", exMeaning: "มาตุภูมิเจริญรุ่งเรืองวัฒนาถาวร" },
-            { id: 154, word: "昌盛", pinyin: "chāngshèng", meaning: "รุ่งเรืองเฟื่องฟู", type: "คำคุณศัพท์", setsFound: "H51005, H51008", chinese: "国家昌盛强大。", exPinyin: "Guójiā chāngshèng qiángdà.", exMeaning: "ประเทศชาติเจริญรุ่งเรืองเกรียงไกร" },
-            { id: 155, word: "和平", pinyin: "hépíng", meaning: "สันติภาพ / สงบสุข", type: "คำนาม/คำคุณศัพท์", setsFound: "H51005, H51008", chinese: "维护世界和平。", exPinyin: "Wéihù shìjiè hépíng.", exMeaning: "ปกป้องรักษาสันติภาพของโลก" },
-            { id: 156, word: "发展", pinyin: "fāzhǎn", meaning: "การพัฒนา / พัฒนา", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "谋求共同发展。", exPinyin: "Móuqíu gòngtóng fāzhǎn.", exMeaning: "แสวงหาการพัฒนาร่วมกัน" },
-            { id: 157, word: "进步", pinyin: "jìnbù", meaning: "ก้าวหน้า", type: "คำกริยา/คำคุณศัพท์", setsFound: "H51005, H51008", chinese: "取得长足进步。", exPinyin: "Qǔdé chángzú jìnbù.", exMeaning: "ได้รับความก้าวหน้าอย่างเห็นได้ชัดเจน" },
-            { id: 158, word: "提高", pinyin: "tígāo", meaning: "ยกระดับ / เพิ่มขึ้น", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "提高生活水平。", exPinyin: "Tígāo shēnghuó shuǐpíng.", exMeaning: "ยกระดับความเป็นอยู่ให้สูงขึ้น" },
-            { id: 159, word: "改善", pinyin: "gǎishàn", meaning: "ปรับปรุงให้ดีขึ้น", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "改善居住条件。", exPinyin: "Gǎishàn jūzhù tiáojiàn.", exMeaning: "ปรับปรุงสภาพความเป็นอยู่ให้ดีขึ้น" },
-            { id: 160, word: "促进", pinyin: "cùjìn", meaning: "ส่งเสริมผลักดัน", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "促进文化交流。", exPinyin: "Cùjìn wénhuà jiāoliú.", exMeaning: "ส่งเสริมผลักดันการแลกเปลี่ยนทางวัฒนธรรม" },
-            { id: 161, word: "推动", pinyin: "tuīdòng", meaning: "ขับเคลื่อนผลักดัน", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "推动社会进步。", exPinyin: "Tuīdòng shèhuì jìnbù.", exMeaning: "ขับเคลื่อนความก้าวหน้าของสังคม" },
-            { id: 162, word: "实现", pinyin: "shíxiàn", meaning: "บรรลุผล / ทำให้เป็นจริง", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "实现人生价值。", exPinyin: "Shíxiàn rénshēng jiàzhí.", exMeaning: "บรรลุเป้าหมายคุณค่าแห่งชีวิต" },
-            { id: 163, word: "达到", pinyin: "dádào", meaning: "บรรลุถึง / ไปถึง", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "达到预期效果。", exPinyin: "Dádào yùqī xiàoguǒ.", exMeaning: "บรรลุถึงผลลัพธ์ตามที่คาดการณ์ไว้" },
-            { id: 164, word: "满足", pinyin: "mǎnzú", meaning: "ตอบสนอง / พอใจ", type: "คำคุณศัพท์/คำกริยา", setsFound: "H51005, H51008", chinese: "满足各方需求。", exPinyin: "Mǎnzú gè fāng xūqiú.", exMeaning: "ตอบสนองความต้องการของทุกฝ่าย" },
-            { id: 165, word: "完成", pinyin: "wánchéng", meaning: "ปฏิบัติสำเร็จ", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "圆满完成任务。", exPinyin: "Yuánmǎn wánchéng rènwu.", exMeaning: "ปฏิบัติภารกิจลุล่วงไปได้ด้วยดีอย่างสมบูรณ์" },
-            { id: 166, word: "结束", pinyin: "jiéshù", meaning: "สิ้นสุด / จบลง", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "大会圆满结束。", exPinyin: "Dàhuì yuánmǎn jiéshù.", exMeaning: "การประชุมใหญ่ปิดฉากลงด้วยความเรียบร้อยสมบูรณ์" },
-            { id: 167, word: "开始", pinyin: "kāishǐ", meaning: "เริ่มต้น", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "新的征程开始。", exPinyin: "Xīn de zhēngchéng kāishǐ.", exMeaning: "การเดินทางครั้งใหม่เริ่มต้นขึ้นแล้ว" },
-            { id: 168, word: "进行", pinyin: "jìnxíng", meaning: "ดำเนินการ", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "进行深入探讨。", exPinyin: "Jìnxíng shēnrù tàntǎo.", exMeaning: "ดำเนินการอภิปรายแลกเปลี่ยนอย่างลึกซึ้ง" },
-            { id: 169, word: "展开", pinyin: "zhǎnkāi", meaning: "เปิดฉาก / ดำเนินการแผ่ขยาย", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "展开激烈讨论。", exPinyin: "Zhǎnkāi jīliè tǎolùn.", exMeaning: "เปิดฉากการถกเถียงกันอย่างดุเดือด" },
-            { id: 170, word: "筹备", pinyin: "chóubèi", meaning: "เตรียมการจัดงาน", type: "คำกริยา", setsFound: "H51005, H51008", chinese: "筹备婚礼仪式。", exPinyin: "Chóubèi hūnlǐ yíshì.", exMeaning: "เตรียมการจัดพิธีมงคลสมรส" },
-            { id: 171, word: "准备", pinyin: "zhǔnbèi", meaning: "เตรียมตัว", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "做好充分准备。", exPinyin: "Zuò hǎo chōngfèn zhǔnbèi.", exMeaning: "เตรียมความพร้อมไว้อย่างเต็มที่" },
-            { id: 172, word: "安排", pinyin: "ānpái", meaning: "จัดเตรียมจัดการ", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "合理安排时间。", exPinyin: "Hélǐ ānpái shíjiān.", exMeaning: "จัดสรรเวลาให้อย่างสมเหตุสมผล" },
-            { id: 173, word: "布置", pinyin: "bùzhì", meaning: "จัดสถานที่ / มอบหมายงาน", type: "คำกริยา/คำนาม", setsFound: "H51005, H51008", chinese: "布置会议现场。", exPinyin: "Bùzhì huìyì xiànchǎng.", exMeaning: "จัดเตรียมสถานที่ประชุม" },
-            { id: 174, word: "酒吧", pinyin: "jiǔbā", meaning: "บาร์ / ผับ", type: "คำนาม", setsFound: "H51005", chinese: "在酒吧经营。", exPinyin: "Zài jiǔbā jīngyíng.", exMeaning: "ทำธุรกิจอยู่ในบาร์ / ผับ" },
-            { id: 175, word: "删除", pinyin: "shānchú", meaning: "ลบ (ข้อมูล)", type: "คำกริยา", setsFound: "H51005", chinese: "删除了文件。", exPinyin: "Shānchú le wénjiàn.", exMeaning: "ลบไฟล์ข้อมูลเรียบร้อยแล้ว" },
-            { id: 176, word: "角度", pinyin: "jiāodù", meaning: "มุมมอง", type: "คำนาม", setsFound: "H51005", chinese: "从不同的角度观察事物。", exPinyin: "Cóng bùtóng de jiǎodù guānchá shìwù.", exMeaning: "สังเกตสิ่งต่างๆ จากมุมมองที่แตกต่างกัน" },
-            { id: 177, word: "效率", pinyin: "xiàolǜ", meaning: "ประสิทธิภาพ", type: "คำนาม", setsFound: "H51005", chinese: "提高工作效率。", exPinyin: "Tígāo gōngzuò xiàolǜ.", exMeaning: "เพิ่มประสิทธิภาพในการทำงาน" },
-            { id: 178, word: "学期", pinyin: "xuéqī", meaning: "ภาคเรียน", type: "คำนาม", setsFound: "H51005", chinese: "新学期开始了。", exPinyin: "Xīn xuéqī kāishǐ le.", exMeaning: "ภาคเรียนใหม่เปิดทำการเรียนการสอนแล้ว" },
-            { id: 179, word: "其他", pinyin: "qítā", meaning: "อื่นๆ", type: "คำสรรพนาม", setsFound: "H51005", chinese: "还有其他问题吗？", exPinyin: "Hái yǒu qítā wèntí ma?", exMeaning: "ยังมีคำถามอื่นๆ อีกไหม?" }
+            { id: 20, word: "关于", pinyin: "guānyú", meaning: "เกี่ยวกับ", type: "คำบุพบท", setsFound: "H51329, H51553B", chinese: "关于明天的会议安排。", exPinyin: "Guānyú míngtiān de huìyì ānpái.", meaning: "เกี่ยวกับการจัดเตรียมการประชุมในวันพรุ่งนี้" }
         ];
 
-        const grid = document.getElementById('vocabGrid');
+        let currentFilteredData = [...hsk5Data];
 
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("เบราว์เซอร์ของคุณไม่รองรับการออกเสียง");
+            }
+        }
+
+        function switchMode(mode) {
+            ['sectionGrid', 'sectionFlashcard', 'sectionQuiz', 'sectionMatch', 'sectionWriting', 'sectionMocktest'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.classList.add('hidden');
+            });
+            const controls = document.getElementById('controlsBar');
+            if(controls) {
+                if(mode === 'grid') controls.classList.remove('hidden');
+                else controls.classList.add('hidden');
+            }
+
+            if (mode === 'grid') {
+                const el = document.getElementById('sectionGrid');
+                if(el) el.classList.remove('hidden');
+                renderVocab(currentFilteredData);
+            } else if (mode === 'flashcard') {
+                const el = document.getElementById('sectionFlashcard');
+                if(el) el.classList.remove('hidden');
+                initFlashcard();
+            } else if (mode === 'quiz') {
+                const el = document.getElementById('sectionQuiz');
+                if(el) el.classList.remove('hidden');
+                startQuiz();
+            } else if (mode === 'match') {
+                const el = document.getElementById('sectionMatch');
+                if(el) el.classList.remove('hidden');
+                initMatchGame();
+            } else if (mode === 'writing') {
+                const el = document.getElementById('sectionWriting');
+                if(el) el.classList.remove('hidden');
+                startWritingQuiz();
+            } else if (mode === 'mocktest') {
+                const el = document.getElementById('sectionMocktest');
+                if(el) el.classList.remove('hidden');
+                startMockTest();
+            }
+        }
+
+        // --- MATCHING GAME LOGIC (10 คู่) ---
+        let selectedChinese = null;
+        let selectedMeaning = null;
+        let matchedCount = 0;
+
+        function initMatchGame() {
+            const shuffled = [...hsk5Data].sort(() => 0.5 - Math.random()).slice(0, 10);
+            matchedCount = 0;
+            selectedChinese = null;
+            selectedMeaning = null;
+
+            const chineseCol = document.getElementById('matchChineseCol');
+            const meaningCol = document.getElementById('matchMeaningCol');
+            if(!chineseCol || !meaningCol) return;
+            chineseCol.innerHTML = '';
+            meaningCol.innerHTML = '';
+
+            const chineseWords = [...shuffled].sort(() => 0.5 - Math.random());
+            const meanings = [...shuffled].sort(() => 0.5 - Math.random());
+
+            chineseWords.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-black text-xl text-stone-800 hover:border-amber-500 transition shadow-sm flex items-center justify-center";
+                btn.innerText = item.word;
+                btn.onclick = () => selectMatchChinese(item, btn);
+                chineseCol.appendChild(btn);
+            });
+
+            meanings.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-bold text-xs text-stone-700 hover:border-amber-500 transition shadow-sm flex items-center justify-center text-center";
+                btn.innerText = item.meaning;
+                btn.onclick = () => selectMatchMeaning(item, btn);
+                meaningCol.appendChild(btn);
+            });
+            
+            const msgArea = document.getElementById('matchMsgArea');
+            if(msgArea) {
+                msgArea.innerHTML = `<button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เริ่มเกมใหม่ ↺</button>`;
+            }
+        }
+
+        let activeChineseBtn = null;
+        let activeMeaningBtn = null;
+
+        function selectMatchChinese(item, btn) {
+            if(btn.className.includes('green')) return;
+            document.querySelectorAll('#matchChineseCol button').forEach(b => {
+                if(!b.className.includes('green')) b.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-black text-xl text-stone-800 hover:border-amber-500 transition shadow-sm flex items-center justify-center";
+            });
+            btn.className = "w-full min-h-[60px] py-3 px-4 bg-amber-50 border-2 border-amber-500 rounded-2xl font-black text-xl text-stone-800 transition shadow-sm flex items-center justify-center";
+            selectedChinese = item;
+            activeChineseBtn = btn;
+            checkMatch();
+        }
+
+        function selectMatchMeaning(item, btn) {
+            if(btn.className.includes('green')) return;
+            document.querySelectorAll('#matchMeaningCol button').forEach(b => {
+                if(!b.className.includes('green')) b.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-bold text-xs text-stone-700 hover:border-amber-500 transition shadow-sm flex items-center justify-center text-center";
+            });
+            btn.className = "w-full min-h-[60px] py-3 px-4 bg-amber-50 border-2 border-amber-500 rounded-2xl font-bold text-xs text-stone-700 transition shadow-sm flex items-center justify-center text-center";
+            selectedMeaning = item;
+            activeMeaningBtn = btn;
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if(selectedChinese && selectedMeaning) {
+                if(selectedChinese.id === selectedMeaning.id) {
+                    matchedCount++;
+                    speakWord(selectedChinese.word);
+                    activeChineseBtn.className = "w-full min-h-[60px] py-3 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-black text-xl text-green-700 opacity-60 cursor-not-allowed flex items-center justify-center";
+                    activeMeaningBtn.className = "w-full min-h-[60px] py-3 px-4 bg-green-50 border-2 border-green-500 rounded-2xl font-bold text-xs text-green-700 opacity-60 cursor-not-allowed flex items-center justify-center text-center";
+                    
+                    selectedChinese = null;
+                    selectedMeaning = null;
+                    activeChineseBtn = null;
+                    activeMeaningBtn = null;
+
+                    if(matchedCount === 10) {
+                        setTimeout(() => {
+                            const msgArea = document.getElementById('matchMsgArea');
+                            if(msgArea) {
+                                msgArea.innerHTML = `
+                                    <div class="p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 font-bold mb-3">🎉 ยอดเยี่ยม! จับคู่ถูกต้องครบทั้งหมด 10 คู่แล้ว</div>
+                                    <button onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เล่นอีกครั้ง ↺</button>
+                                `;
+                            }
+                        }, 300);
+                    }
+                } else {
+                    activeChineseBtn.className = "w-full min-h-[60px] py-3 px-4 bg-red-50 border-2 border-red-500 rounded-2xl font-black text-xl text-red-700 flex items-center justify-center transition";
+                    activeMeaningBtn.className = "w-full min-h-[60px] py-3 px-4 bg-red-50 border-2 border-red-500 rounded-2xl font-bold text-xs text-red-700 flex items-center justify-center text-center transition";
+                    
+                    let tempC = activeChineseBtn;
+                    let tempM = activeMeaningBtn;
+
+                    setTimeout(() => {
+                        if(tempC && !tempC.className.includes('green')) {
+                            tempC.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-black text-xl text-stone-800 hover:border-amber-500 transition shadow-sm flex items-center justify-center";
+                        }
+                        if(tempM && !tempM.className.includes('green')) {
+                            tempM.className = "w-full min-h-[60px] py-3 px-4 bg-stone-50 border-2 border-stone-200 rounded-2xl font-bold text-xs text-stone-700 hover:border-amber-500 transition shadow-sm flex items-center justify-center text-center";
+                        }
+                    }, 600);
+
+                    selectedChinese = null;
+                    selectedMeaning = null;
+                    activeChineseBtn = null;
+                    activeMeaningBtn = null;
+                }
+            }
+        }
+
+        // --- WRITING / PINYIN CHOICE QUIZ ---
+        let writeScore = 0, writeStep = 0, totalWrite = 10, currentWriteItem = null;
+        function startWritingQuiz() {
+            writeScore = 0;
+            writeStep = 0;
+            nextWritingQuestion();
+        }
+
+        function nextWritingQuestion() {
+            if(writeStep >= totalWrite) {
+                const sec = document.getElementById('sectionWriting');
+                if(sec) {
+                    sec.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
+                            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                            <div class="text-5xl pt-4">🏆</div>
+                            <h3 class="text-2xl font-black">สรุปผลการฝึกเขียนพินอิน</h3>
+                            <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${writeScore}</span> / ${totalWrite} คะแนน</p>
+                            <button onclick="startWritingQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มฝึกใหม่อีกครั้ง ↺</button>
+                        </div>
+                    `;
+                }
+                return;
+            }
+            writeStep++;
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if(nextBtn) nextBtn.classList.add('hidden');
+            
+            const prog = document.getElementById('writeProgress');
+            if(prog) prog.innerText = `ข้อที่ ${writeStep} / ${totalWrite}`;
+            
+            const scoreEl = document.getElementById('writeScore');
+            if(scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+
+            currentWriteItem = hsk5Data[Math.floor(Math.random() * hsk5Data.length)];
+            const wordDisp = document.getElementById('writeWordDisplay');
+            if(wordDisp) wordDisp.innerText = currentWriteItem.word;
+            
+            const typeDisp = document.getElementById('writeTypeDisplay');
+            if(typeDisp) typeDisp.innerText = `ประเภท: ${currentWriteItem.type}`;
+
+            let options = [currentWriteItem.pinyin];
+            while(options.length < 4) {
+                let randomItem = hsk5Data[Math.floor(Math.random() * hsk5Data.length)];
+                if(!options.includes(randomItem.pinyin)) options.push(randomItem.pinyin);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('writeOptions');
+            if(!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full py-3.5 px-4 rounded-2xl border border-stone-200 font-bold text-base text-stone-700 bg-stone-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-center shadow-sm";
+                btn.innerText = opt;
+                btn.onclick = () => checkWritingChoice(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkWritingChoice(selected, btnElement) {
+            const container = document.getElementById('writeOptions');
+            if(!container) return;
+            const allBtns = container.getElementsByTagName('button');
+            for(let b of allBtns) {
+                b.disabled = true;
+                if(b.innerText === currentWriteItem.pinyin) {
+                    b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
+                }
+            }
+            if(selected === currentWriteItem.pinyin) {
+                writeScore++;
+                const scoreEl = document.getElementById('writeScore');
+                if(scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
+                speakWord(currentWriteItem.word);
+            } else {
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-red-500 font-bold text-base text-red-700 bg-red-50 text-center shadow-sm";
+            }
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if(nextBtn) nextBtn.classList.remove('hidden');
+        }
+
+        // --- QUIZ VIEW (10 ข้อ) ---
+        let quizScore = 0, quizStep = 0, totalQuiz = 10, currentQuizItem = null;
+        function startQuiz() { 
+            quizScore = 0; 
+            quizStep = 0; 
+            const quizSec = document.getElementById('sectionQuiz');
+            if(quizSec) {
+                quizSec.innerHTML = `
+                    <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">คำถามที่ 1 / 10</span>
+                            <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                        </div>
+                        <div class="text-center mb-8">
+                            <p class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
+                            <div id="quizWord" class="text-7xl font-black text-stone-900 mb-2">情绪</div>
+                        </div>
+                        <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                        <button id="nextQuizBtn" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+                    </div>
+                `;
+            }
+            nextQuizQuestion(); 
+        }
+
+        function nextQuizQuestion() {
+            if(quizStep >= totalQuiz) {
+                const quizSec = document.getElementById('sectionQuiz');
+                if(quizSec) {
+                    quizSec.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
+                            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                            <div class="text-5xl pt-4">🏆</div>
+                            <h3 class="text-2xl font-black">สรุปผลการทดสอบ</h3>
+                            <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${quizScore}</span> / ${totalQuiz} คะแนน</p>
+                            <button onclick="startQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มทำแบบทดสอบอีกครั้ง ↺</button>
+                        </div>
+                    `;
+                }
+                return;
+            }
+            quizStep++;
+            const nextBtn = document.getElementById('nextQuizBtn');
+            if(nextBtn) nextBtn.classList.add('hidden');
+            
+            const prog = document.getElementById('quizProgress');
+            if(prog) prog.innerText = `คำถามที่ ${quizStep} / ${totalQuiz}`;
+            
+            const scoreEl = document.getElementById('quizScore');
+            if(scoreEl) scoreEl.innerText = `คะแนน: ${quizScore}`;
+            
+            currentQuizItem = hsk5Data[Math.floor(Math.random() * hsk5Data.length)];
+            const wordEl = document.getElementById('quizWord');
+            if(wordEl) wordEl.innerText = currentQuizItem.word;
+
+            let allMeanings = hsk5Data.map(i => i.meaning);
+            let options = [currentQuizItem.meaning];
+            while(options.length < 4) {
+                let randomMeaning = allMeanings[Math.floor(Math.random() * allMeanings.length)];
+                if(!options.includes(randomMeaning)) {
+                    options.push(randomMeaning);
+                }
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('quizOptions');
+            if(!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full py-3.5 px-4 rounded-2xl border border-stone-200 font-bold text-sm text-stone-700 bg-stone-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-left flex justify-between items-center";
+                btn.innerHTML = `<span>${opt}</span> <span class="text-xs text-stone-400">เลือก</span>`;
+                btn.onclick = () => checkQuizAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selected, btnElement) {
+            const container = document.getElementById('quizOptions');
+            if(!container) return;
+            const allBtns = container.getElementsByTagName('button');
+            for(let b of allBtns) {
+                b.disabled = true;
+                if(b.innerText.includes(currentQuizItem.meaning)) b.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
+            }
+            if(selected === currentQuizItem.meaning) {
+                quizScore++;
+                const scoreEl = document.getElementById('quizScore');
+                if(scoreEl) scoreEl.innerText = `คะแนน: ${quizScore}`;
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-green-500 font-bold text-sm text-green-700 bg-green-50 text-left flex justify-between items-center";
+            } else {
+                btnElement.className = "w-full py-3.5 px-4 rounded-2xl border border-red-500 font-bold text-sm text-red-700 bg-red-50 text-left flex justify-between items-center";
+            }
+            const nextBtn = document.getElementById('nextQuizBtn');
+            if(nextBtn) nextBtn.classList.remove('hidden');
+        }
+
+        // --- MOCK TEST LOGIC ---
+        function startMockTest() {
+            let mockItems = [...hsk5Data].sort(() => 0.5 - Math.random()).slice(0, 10);
+            let html = `<div class="space-y-6" id="mockForm">`;
+            mockItems.forEach((item, idx) => {
+                let wrongOpts = hsk5Data.filter(i => i.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(i => i.meaning);
+                let opts = [item.meaning, ...wrongOpts].sort(() => 0.5 - Math.random());
+                html += `
+                    <div class="p-6 bg-stone-50 rounded-2xl border border-stone-200 space-y-3 mock-question" data-correct="${item.meaning}">
+                        <div class="flex items-center justify-between">
+                            <p class="font-bold text-stone-800">ข้อที่ ${idx+1}: คำว่า <span class="text-red-600 text-xl">${item.word}</span> (${item.pinyin}) ตรงกับความหมายใด?</p>
+                            <button type="button" onclick="speakWord('${item.word}')" class="px-2.5 py-1 bg-red-50 text-red-600 rounded-lg text-xs font-bold">🔊 ฟังเสียง</button>
+                        </div>
+                        <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-xl text-xs space-y-1">
+                            <p class="font-bold text-stone-900">ตัวอย่าง: ${item.chinese}</p>
+                        </div>
+                        <div class="grid grid-cols-1 gap-2">
+                            ${opts.map(opt => `<button type="button" onclick="selectMockOption(this, '${opt}')" class="py-2.5 px-4 bg-white border border-stone-200 rounded-2xl text-left text-sm font-semibold hover:border-red-500 transition mock-option">${opt}</button>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            html += `<button type="button" onclick="submitMockTest()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg">ส่งข้อสอบ</button></div>`;
+            const mockContent = document.getElementById('mockContent');
+            if(mockContent) mockContent.innerHTML = html;
+        }
+
+        function selectMockOption(btn, opt) {
+            const parent = btn.parentElement;
+            if(!parent) return;
+            parent.querySelectorAll('.mock-option').forEach(b => {
+                b.className = "py-2.5 px-4 bg-white border border-stone-200 rounded-2xl text-left text-sm font-semibold hover:border-red-500 transition mock-option";
+            });
+            btn.className = "py-2.5 px-4 bg-red-50 border-2 border-red-500 rounded-2xl text-left text-sm font-bold text-red-700 mock-option selected-ans";
+            btn.dataset.selected = opt;
+        }
+
+        function submitMockTest() {
+            const questions = document.querySelectorAll('.mock-question');
+            let score = 0;
+            questions.forEach(q => {
+                const correct = q.dataset.correct;
+                const selectedBtn = q.querySelector('.selected-ans');
+                q.querySelectorAll('.mock-option').forEach(b => {
+                    b.disabled = true;
+                    if(b.innerText === correct) {
+                        b.className = "py-2.5 px-4 bg-green-50 border-2 border-green-500 rounded-2xl text-left text-sm font-bold text-green-700";
+                    }
+                });
+                if(selectedBtn) {
+                    if(selectedBtn.innerText === correct) {
+                        score++;
+                    } else {
+                        selectedBtn.className = "py-2.5 px-4 bg-red-50 border-2 border-red-500 rounded-2xl text-left text-sm font-bold text-red-700";
+                    }
+                }
+            });
+
+            const container = document.getElementById('mockContent');
+            if(!container) return;
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = "mt-6 bg-white p-8 rounded-3xl border border-stone-200 text-center space-y-4 shadow-xl";
+            summaryDiv.innerHTML = `
+                <div class="text-5xl">🏆</div>
+                <h3 class="text-2xl font-black">สรุปผลคะแนนข้อสอบจำลอง</h3>
+                <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${score}</span> / ${questions.length} คะแนน</p>
+                <button type="button" onclick="startMockTest()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">ทำข้อสอบใหม่อีกครั้ง ↺</button>
+            `;
+            container.appendChild(summaryDiv);
+            summaryDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- GRID RENDER & OTHERS ---
+        const grid = document.getElementById('vocabGrid');
         function renderVocab(data) {
+            if(!grid) return;
             grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-stone-400 font-bold">ไม่พบคำศัพท์ที่ค้นหา</div>`;
+                return;
+            }
             data.forEach((item) => {
                 const card = document.createElement('div');
-                card.className = "bg-white p-6 rounded-2xl border-2 border-gray-100 shadow-md hover:border-red-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer group";
+                card.className = "bg-white p-6 rounded-3xl border border-stone-200/80 shadow-md hover:border-red-600 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer";
                 
                 const setArray = item.setsFound ? item.setsFound.split(',').filter(s => s.trim()) : [];
                 const setCount = setArray.length;
@@ -242,20 +781,21 @@
                 card.onclick = () => {
                     window.location.href = `hsk5-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&setsFound=${encodeURIComponent(item.setsFound)}&chinese=${encodeURIComponent(item.chinese)}&exPinyin=${encodeURIComponent(item.exPinyin)}&exMeaning=${encodeURIComponent(item.exMeaning)}`;
                 };
-
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-xs font-bold px-3 py-1 bg-red-100 text-red-700 rounded-full">${item.type}</span>
-                            <span class="text-xs font-bold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">${freqText}</span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="event.stopPropagation(); speakWord('${item.word}')" class="w-7 h-7 bg-red-50 text-red-600 rounded-lg flex items-center justify-center hover:bg-red-600 hover:text-white transition shadow-sm" title="ฟังเสียงอ่าน">🔊</button>
+                                <span class="text-xs font-bold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full">${freqText}</span>
+                            </div>
                         </div>
-                        <div class="text-4xl font-extrabold text-gray-800 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
+                        <div class="text-4xl font-extrabold text-stone-900 group-hover:text-red-600 transition-colors mb-1">${item.word}</div>
                         <div class="text-lg font-semibold text-red-600 mb-2">${item.pinyin}</div>
-                        <p class="text-gray-600 text-sm line-clamp-1">${item.meaning}</p>
+                        <p class="text-stone-600 text-sm line-clamp-1">${item.meaning}</p>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
-                        <span>ดูชุดข้อสอบและตัวอย่างประโยค</span>
-                        <span>→</span>
+                    <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-stone-400 group-hover:text-red-600 font-bold flex items-center justify-between transition-colors">
+                        <span>ดูชุดข้อสอบและตัวอย่างประโยค</span><span>→</span>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -263,15 +803,66 @@
         }
 
         function filterVocab() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = hsk5Data.filter(item => 
-                item.word.toLowerCase().includes(query) || 
-                item.pinyin.toLowerCase().includes(query) || 
-                item.meaning.toLowerCase().includes(query)
-            );
-            renderVocab(filtered);
+            const searchInput = document.getElementById('searchInput');
+            if(!searchInput) return;
+            const query = searchInput.value.toLowerCase();
+            currentFilteredData = hsk5Data.filter(item => item.word.toLowerCase().includes(query) || item.pinyin.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query));
+            renderVocab(currentFilteredData);
         }
 
+        function filterByType(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition");
+            if(event && event.target) {
+                event.target.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition";
+            }
+            currentFilteredData = type === 'all' ? [...hsk5Data] : hsk5Data.filter(i => i.type.includes(type));
+            renderVocab(currentFilteredData);
+        }
+
+        function sortVocab() {
+            const sortSelect = document.getElementById('sortSelect');
+            if(!sortSelect) return;
+            const sortBy = sortSelect.value;
+            if(sortBy === 'alpha') currentFilteredData.sort((a,b) => a.pinyin.localeCompare(b.pinyin));
+            else currentFilteredData.sort((a,b) => a.id - b.id);
+            renderVocab(currentFilteredData);
+        }
+
+        let fcIndex = 0, isFlipped = false;
+        function initFlashcard() { fcIndex = 0; isFlipped = false; updateFlashcardUI(); }
+        function updateFlashcardUI() {
+            const item = hsk5Data[fcIndex];
+            const typeEl = document.getElementById('fcType');
+            if(typeEl) typeEl.innerText = item.type;
+            const currEl = document.getElementById('fcCurrent');
+            if(currEl) currEl.innerText = fcIndex + 1;
+            const wordEl = document.getElementById('fcWord');
+            if(wordEl) wordEl.innerText = item.word;
+            const pinEl = document.getElementById('fcPinyin');
+            if(pinEl) pinEl.innerText = item.pinyin;
+            const meanEl = document.getElementById('fcMeaning');
+            if(meanEl) meanEl.innerText = item.meaning;
+            const freqEl = document.getElementById('fcFreq');
+            if(freqEl) freqEl.innerText = item.chinese ? `ตัวอย่าง: ${item.chinese}` : '-';
+
+            const inner = document.getElementById('flashcardInner');
+            if(inner) {
+                if(isFlipped) inner.classList.add('rotate-y-180');
+                else inner.classList.remove('rotate-y-180');
+            }
+        }
+        function flipCard() { 
+            isFlipped = !isFlipped; 
+            const inner = document.getElementById('flashcardInner'); 
+            if(inner) {
+                if(isFlipped) inner.classList.add('rotate-y-180'); 
+                else inner.classList.remove('rotate-y-180'); 
+            }
+        }
+        function nextCard() { isFlipped = false; fcIndex = (fcIndex + 1) % hsk5Data.length; updateFlashcardUI(); }
+        function prevCard() { isFlipped = false; fcIndex = (fcIndex - 1 + hsk5Data.length) % hsk5Data.length; updateFlashcardUI(); }
+
+        // เริ่มต้นเรนเดอร์หน้าตารางคำศัพท์หลักทันทีเมื่อเปิดเว็บ
         renderVocab(hsk5Data);
     </script>
 </body>

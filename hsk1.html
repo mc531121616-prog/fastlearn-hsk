@@ -2761,6 +2761,127 @@
             speakText(word);
         }
 
+        // --- WRITING / PINYIN CHOICE QUIZ ---
+        // แสดงตัวอักษรจีน แล้วให้ผู้เรียนเลือกพินอินที่ถูกต้อง
+        let writeScore = 0;
+        let writeStep = 0;
+        const totalWrite = 10;
+        let currentWriteItem = null;
+        let writingPool = [];
+
+        function resetWritingView() {
+            const sec = document.getElementById('sectionWriting');
+            if (!sec) return;
+            sec.innerHTML = `
+                <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span id="writeProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">ข้อที่ 1 / 10</span>
+                        <span id="writeScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                    </div>
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-black text-stone-900 mb-1">✍️ ฝึกเลือกพินอิน</h3>
+                        <p class="text-sm text-stone-500 mb-4">ดูตัวอักษรจีน แล้วเลือกพินอินที่ถูกต้อง</p>
+                        <div class="text-7xl font-extrabold text-red-600 mb-2" id="writeWordDisplay">-</div>
+                        <div class="text-sm font-semibold text-stone-400 mb-4" id="writeTypeDisplay">-</div>
+                    </div>
+                    <div id="writeOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                    <button id="nextWriteBtn" type="button" onclick="nextWritingQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+                </div>
+            `;
+        }
+
+        function startWritingQuiz() {
+            writeScore = 0;
+            writeStep = 0;
+            currentWriteItem = null;
+            // สุ่มคำศัพท์ 10 คำจากคลัง HSK1 โดยไม่ซ้ำกันในรอบเดียว
+            writingPool = [...hsk1Data].sort(() => Math.random() - 0.5).slice(0, totalWrite);
+            resetWritingView();
+            nextWritingQuestion();
+        }
+
+        function nextWritingQuestion() {
+            if (writeStep >= totalWrite) {
+                const sec = document.getElementById('sectionWriting');
+                if (sec) {
+                    sec.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
+                            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                            <div class="text-5xl pt-4">🏆</div>
+                            <h3 class="text-2xl font-black">สรุปผลการฝึกเลือกพินอิน</h3>
+                            <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${writeScore}</span> / ${totalWrite} คะแนน</p>
+                            <button type="button" onclick="startWritingQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มฝึกใหม่อีกครั้ง ↺</button>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            currentWriteItem = writingPool[writeStep];
+            writeStep++;
+
+            const prog = document.getElementById('writeProgress');
+            if (prog) prog.innerText = `ข้อที่ ${writeStep} / ${totalWrite}`;
+            const scoreEl = document.getElementById('writeScore');
+            if (scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if (nextBtn) nextBtn.classList.add('hidden');
+
+            const wordDisp = document.getElementById('writeWordDisplay');
+            if (wordDisp) wordDisp.innerText = currentWriteItem.word;
+            const typeDisp = document.getElementById('writeTypeDisplay');
+            if (typeDisp) typeDisp.innerText = `ประเภท: ${currentWriteItem.type}`;
+
+            const options = [currentWriteItem.pinyin];
+            const candidates = [...hsk1Data]
+                .filter(item => item.id !== currentWriteItem.id)
+                .sort(() => Math.random() - 0.5);
+            for (const item of candidates) {
+                if (!options.includes(item.pinyin)) options.push(item.pinyin);
+                if (options.length === 4) break;
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('writeOptions');
+            if (!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = "w-full py-4 px-4 rounded-2xl border border-stone-200 font-bold text-lg text-stone-700 bg-stone-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-center shadow-sm";
+                btn.innerText = opt;
+                btn.onclick = () => checkWritingChoice(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkWritingChoice(selected, btnElement) {
+            if (!currentWriteItem) return;
+            const container = document.getElementById('writeOptions');
+            if (!container) return;
+            const allBtns = container.getElementsByTagName('button');
+            for (const b of allBtns) {
+                b.disabled = true;
+                if (b.innerText === currentWriteItem.pinyin) {
+                    b.className = "w-full py-4 px-4 rounded-2xl border-2 border-green-500 font-bold text-lg text-green-700 bg-green-50 text-center shadow-sm";
+                }
+            }
+
+            if (selected === currentWriteItem.pinyin) {
+                writeScore++;
+                btnElement.className = "w-full py-4 px-4 rounded-2xl border-2 border-green-500 font-bold text-lg text-green-700 bg-green-50 text-center shadow-sm";
+                if (typeof speakWord === 'function') speakWord(currentWriteItem.word);
+            } else {
+                btnElement.className = "w-full py-4 px-4 rounded-2xl border-2 border-red-500 font-bold text-lg text-red-700 bg-red-50 text-center shadow-sm";
+            }
+
+            const scoreEl = document.getElementById('writeScore');
+            if (scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if (nextBtn) nextBtn.classList.remove('hidden');
+        }
+
         // --- ระบบสุ่มข้อสอบ 4 พาร์ท (สุ่มจาก 100 ข้อต่อพาร์ท ไม่ซ้ำกันในทุกรอบ) ---
         let examQuestions = [];
         let userAnswers = {};

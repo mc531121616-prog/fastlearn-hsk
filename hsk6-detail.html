@@ -6,39 +6,115 @@
     <title>รายละเอียดคำศัพท์ HSK 6 - Fast Learn Academy</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700;800&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+    <script>
+        // ปรับชุดสีของ Tailwind ให้อยู่ในโทน ขาว-ดำ-แดง ของแบรนด์ Fast Learn Academy
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50:'#FDF1F1', 100:'#FCEAEA', 200:'#F6D9DA', 300:'#EFB9BB',
+                            400:'#E36569', 500:'#DE3540', 600:'#D81E2C', 700:'#B0121D',
+                            800:'#7A0F17', 900:'#4E0A10'
+                        },
+                        amber: {
+                            50:'#FCEAEA', 100:'#F6D9DA', 200:'#EFB9BB', 300:'#E36569',
+                            400:'#D81E2C', 500:'#B0121D', 600:'#B0121D', 700:'#7A0F17',
+                            800:'#7A0F17', 900:'#4E0A10'
+                        },
+                        yellow: {
+                            50:'#FCEAEA', 100:'#F6D9DA', 200:'#EFB9BB', 300:'#E36569',
+                            400:'#D81E2C', 500:'#B0121D', 600:'#B0121D', 700:'#7A0F17',
+                            800:'#7A0F17', 900:'#4E0A10'
+                        },
+                        stone: {
+                            50:'#FAF8F5', 100:'#F5F1EC', 200:'#E8E2DA', 300:'#D8D0C5',
+                            400:'#ABA296', 500:'#8A8177', 600:'#6B635A', 700:'#524B44',
+                            800:'#372F2A', 900:'#181412'
+                        },
+                        gray: {
+                            50:'#FAF8F5', 100:'#F5F1EC', 200:'#E8E2DA', 300:'#D8D0C5',
+                            400:'#ABA296', 500:'#8A8177', 600:'#6B635A', 700:'#524B44',
+                            800:'#372F2A', 900:'#181412'
+                        },
+                        zinc: {
+                            50:'#FAF8F5', 100:'#F5F1EC', 200:'#E8E2DA', 300:'#D8D0C5',
+                            400:'#8A8177', 500:'#6B635A', 600:'#524B44', 700:'#372F2A',
+                            800:'#241E1B', 900:'#181412', 950:'#0F0C0B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Prompt', sans-serif; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #FAF8F5; }
+        h1, h2, h3, .font-black, .font-extrabold { font-family: 'Kanit', sans-serif; }
+        #wordDisplay { font-family: 'Noto Serif SC', serif; }
+        #exampleChinese { font-family: 'Noto Serif SC', serif; }
+        .seal-badge{
+            width:44px; height:44px; border-radius:10px; border:2px solid #D81E2C; color:#D81E2C;
+            display:flex; align-items:center; justify-content:center;
+            font-family:'Noto Serif SC', serif; font-weight:900; font-size:19px;
+            transform:rotate(6deg); flex-shrink:0;
+        }
     </style>
 </head>
-<body class="bg-stone-100 text-gray-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
+<body class="bg-stone-50 text-stone-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
+
+    <!-- Top Navbar -->
+    <nav class="bg-stone-900 text-white px-6 py-4 shadow-md sticky top-0 z-50 border-b-2 border-red-600">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center font-black text-white text-lg shadow" style="transform:rotate(-3deg); font-family:'Noto Serif SC',serif;">
+                    学
+                </div>
+                <div>
+                    <div class="text-base font-extrabold tracking-wide leading-none">FAST LEARN <span class="text-red-500">ACADEMY</span></div>
+                    <div class="text-[10px] tracking-[3px] text-stone-400 uppercase mt-1">HSK Prep Center</div>
+                </div>
+            </a>
+            <a href="hsk6.html" class="text-xs font-bold text-stone-300 hover:text-white transition">← กลับสู่คลังคำศัพท์ HSK 6</a>
+        </div>
+    </nav>
 
     <!-- Header Section -->
-    <header class="bg-black text-white border-b-4 border-red-600 shadow-lg">
+    <header class="bg-white border-b border-stone-200">
         <div class="max-w-4xl mx-auto px-4 py-8 text-center">
-            <div class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow">
-                FAST LEARN ACADEMY
+            <div class="inline-flex items-center gap-2 text-xs font-semibold text-stone-500 mb-3">
+                <a href="index.html" class="hover:text-red-600 transition">หน้าหลัก</a>
+                <span>/</span>
+                <a href="hsk6.html" class="hover:text-red-600 transition">HSK 6</a>
+                <span>/</span>
+                <span class="text-red-600 font-bold">รายละเอียดคำศัพท์</span>
             </div>
-            <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide">
-                รายละเอียดคำศัพท์ <span class="text-yellow-400">HSK ระดับ 6</span>
-            </h1>
+            <div class="flex items-center justify-center gap-3">
+                <div class="seal-badge">陆</div>
+                <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide text-stone-900">
+                    รายละเอียดคำศัพท์ <span class="text-red-600">HSK ระดับ 6</span>
+                </h1>
+            </div>
         </div>
     </header>
 
     <!-- Main Content: รายละเอียด (พร้อมปุ่มเลื่อนด้านข้าง) -->
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full flex items-center justify-center relative">
-        
+
         <!-- ปุ่มย้อนกลับด้านซ้าย -->
         <button onclick="changeWord(-1)" class="absolute left-2 md:left-4 z-10 p-3 md:p-4 bg-white hover:bg-stone-50 text-stone-700 rounded-full shadow-lg border border-stone-200 transition-all hover:scale-105 flex items-center justify-center" title="คำก่อนหน้า">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         </button>
 
         <!-- การ์ดเนื้อหาตรงกลาง -->
-        <div class="w-full max-w-xl bg-white rounded-3xl border-2 border-gray-100 shadow-xl p-8 md:p-12 text-center relative overflow-hidden mx-12">
+        <div class="w-full max-w-xl bg-white rounded-3xl border-2 border-stone-100 shadow-xl p-8 md:p-12 text-center relative overflow-hidden mx-12">
             <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
-            
+            <div class="absolute top-5 right-5 text-xs font-bold text-stone-300" id="wordPosition">1 / 115</div>
+
             <!-- ตัวอักษรจีนหลักและพินอินคำศัพท์ พร้อมปุ่มฟังเสียง -->
-            <div id="wordDisplay" class="text-7xl md:text-8xl font-extrabold text-gray-900 mb-2">-</div>
+            <div id="wordDisplay" class="text-7xl md:text-8xl font-extrabold text-stone-900 mb-2 mt-2">-</div>
             <div id="pinyinDisplay" class="text-2xl font-bold text-red-600 mb-4">-</div>
             <div class="mb-6">
                 <button onclick="speakText(document.getElementById('wordDisplay').innerText)" class="px-4 py-2 bg-red-50 text-red-600 rounded-xl text-xs font-bold hover:bg-red-100 transition shadow-sm">
@@ -46,42 +122,42 @@
                 </button>
             </div>
 
-            <!-- กล่องข้อมูลรายละเอียด -->
-            <div class="bg-white rounded-2xl p-6 text-left space-y-4 mb-8 border border-gray-100 shadow-sm">
-                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                    <span class="font-semibold text-gray-500">ความหมายภาษาไทย:</span>
-                    <span id="meaningDisplay" class="text-lg font-bold text-gray-800">-</span>
+            <!-- ข้อมูลรายละเอียด -->
+            <div class="bg-stone-50 rounded-2xl p-6 text-left space-y-4 mb-8 border border-stone-100">
+                <div class="flex justify-between items-center border-b border-stone-200 pb-3">
+                    <span class="font-semibold text-stone-500">ความหมายภาษาไทย:</span>
+                    <span id="meaningDisplay" class="text-lg font-bold text-stone-800">-</span>
                 </div>
-                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                    <span class="font-semibold text-gray-500">ประเภทคำ:</span>
-                    <span id="typeDisplay" class="font-medium text-gray-800">-</span>
+                <div class="flex justify-between items-center border-b border-stone-200 pb-3">
+                    <span class="font-semibold text-stone-500">ประเภทคำ:</span>
+                    <span id="typeDisplay" class="font-medium text-stone-800">-</span>
                 </div>
-                <div class="flex justify-between items-center border-b border-gray-100 pb-3">
-                    <span class="font-semibold text-gray-500">สถิติการออกข้อสอบ:</span>
-                    <span id="freqBadge" class="font-bold text-red-600 bg-red-50 border border-red-100 px-3 py-1 rounded-full text-sm">-</span>
+                <div class="flex justify-between items-center border-b border-stone-200 pb-3">
+                    <span class="font-semibold text-stone-500">ความถี่รวมทั้งหมด:</span>
+                    <span id="freqTotalDisplay" class="font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full text-sm">-</span>
                 </div>
                 <div class="space-y-1">
-                    <span class="font-semibold text-gray-500 block">เลขชุดข้อสอบที่พบซ้ำ:</span>
-                    <div id="setsFoundDisplay" class="text-sm font-medium text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-200">-</div>
+                    <span class="font-semibold text-stone-500 block">ชุดข้อสอบที่พบ:</span>
+                    <span id="setsFoundDisplay" class="text-sm font-medium text-stone-700 block bg-white p-3 rounded-xl border border-stone-200">-</span>
                 </div>
             </div>
 
-            <!-- ประโยคตัวอย่างจากข้อสอบ (Example) พร้อมพินอินและคำแปลไทย และปุ่มฟังเสียง -->
-            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-xl text-left mb-8 space-y-3">
+            <!-- ประโยคตัวอย่าง พร้อมปุ่มฟังเสียงประโยค -->
+            <div class="bg-red-50 border-l-4 border-red-600 p-6 rounded-r-xl text-left mb-8 space-y-3">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-xs font-bold text-yellow-800 uppercase tracking-wider">ประโยคตัวอย่างจากข้อสอบ (EXAMPLE)</h3>
-                    <button onclick="speakText(document.getElementById('exampleChinese').innerText)" class="px-3 py-1 bg-yellow-400 text-black text-xs font-bold rounded-lg hover:bg-yellow-500 transition shadow-sm">
+                    <h3 class="text-xs font-bold text-red-800 uppercase tracking-wider">ประโยคตัวอย่างจากข้อสอบ (EXAMPLE)</h3>
+                    <button onclick="speakText(document.getElementById('exampleChinese').innerText)" class="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-lg hover:bg-red-700 transition shadow-sm">
                         🔊 ฟังเสียงประโยค
                     </button>
                 </div>
-                <p id="exampleChinese" class="text-xl font-bold text-gray-900">-</p>
+                <p id="exampleChinese" class="text-xl font-bold text-stone-900">-</p>
                 <p id="examplePinyin" class="text-sm font-semibold text-red-600">-</p>
-                <p id="exampleMeaning" class="text-sm font-medium text-gray-700">-</p>
+                <p id="exampleMeaning" class="text-sm font-medium text-stone-600 pt-2 border-t border-red-100">-</p>
             </div>
 
             <!-- ปุ่มกลับหน้าหลัก -->
             <div>
-                <a href="hsk6.html" class="block w-full bg-black text-white py-3.5 rounded-2xl font-bold hover:bg-zinc-800 transition shadow-lg text-center text-xs">
+                <a href="hsk6.html" class="block w-full bg-stone-900 text-white py-3.5 rounded-2xl font-bold hover:bg-stone-800 transition shadow-lg text-center text-xs">
                     ← กลับสู่หน้าคลังคำศัพท์ HSK 6
                 </a>
             </div>
@@ -95,29 +171,203 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-6 text-center text-gray-400 text-sm mt-12 border-t-2 border-red-600">
+    <footer class="bg-stone-900 text-white py-6 text-center text-stone-400 text-sm mt-12 border-t-2 border-red-600">
         <p>Fast Learn Academy • เซ็นทรัล โคราช ชั้น 3 Education Zone</p>
     </footer>
 
     <script>
-        const hsk6FullData = [
-            { id: 1, word: "坦然", pinyin: "tǎnrán", meaning: "อย่างสงบ/อย่างสบายใจ", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "闻过则喜，能够坦然接受批评，是自信的一个突出标志", exPinyin: "Wén guò zé xǐ, nénggòu tǎnrán jiēshòu pīpíng, shì zìxìn de yī gè tūchū biāozhì", exMeaning: "ได้ยินความผิดแล้วยินดี สามารถยอมรับคำวิจารณ์ได้อย่างสบายใจ คือสัญลักษณ์ที่โดดเด่นของความมั่นใจในตนเอง" },
-            { id: 2, word: "反面", pinyin: "fǎnmiàn", meaning: "ด้านลบ/ฝ่ายตรงข้าม", type: "คำนาม/คำคุณศัพท์", setsFound: "H61221", chinese: "他在这部戏中扮演的是一个反面角色", exPinyin: "Tā zài zhè bù xì zhōng bànyǎn de shì yī gè fǎnmiàn juésè", exMeaning: "เขาแสดงเป็นบทบาทฝ่ายตรงข้าม (ตัวร้าย) ในละครเรื่องนี้" },
-            { id: 3, word: "契机", pinyin: "qījī", meaning: "จังหวะ/โอกาสสำคัญ", type: "คำนาม", setsFound: "H61221", chinese: "谁敢说冒险不是一种成功的契机", exPinyin: "Shuí gǎn shuō màoxiǎn bú shì yī zhǒng chénggōng de qījī", exMeaning: "ใครจะกล้าพูดว่าการเสี่ยงภัยไม่ใช่โอกาสสำคัญของความสำเร็จชนิดหนึ่ง" },
-            { id: 4, word: "哺乳动物", pinyin: "bǔrǔ dòngwù", meaning: "สัตว์เลี้ยงลูกด้วยนม", type: "คำนาม", setsFound: "H61221", chinese: "鲸鱼其实不是鱼，而是生活在海里的一种巨型哺乳动物", exPinyin: "Jīngyú qíshí bú shì yú, ér shì shēnghuó zài hǎi lǐ de yī zhǒng jùxíng bǔrǔ dòngwù", exMeaning: "วาฬที่จริงแล้วไม่ใช่ปลา แต่เป็นสัตว์เลี้ยงลูกด้วยนมขนาดมหึมาที่อาศัยอยู่ในทะเล" },
-            { id: 5, word: "坚韧", pinyin: "jiānrèn", meaning: "เหนียวแน่น/อดทนเด็ดเดี่ยว", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "水滴石穿，靠的是坚韧不拔的毅力", exPinyin: "Shuǐ dī shí chuān, kào de shì jiānrèn bù bá de yìlì", exMeaning: "หยดน้ำลงหินทุกวันหินยังกร่อน อาศัยความพยายามที่อดทนเด็ดเดี่ยวไม่ย่อท้อ" },
-            { id: 6, word: "盲目", pinyin: "mángmù", meaning: "อย่างมืดบอด/ไร้สติ", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "我们不能盲目跟风，要有自己的独立思考", exPinyin: "Wǒmen bùnéng mángmù gēnfēng, yào yǒu zìjǐ de dúlì sīkǎo", exMeaning: "พวกเราไม่สามารถทำตามกระแสอย่างไร้สติได้ ต้องมีความคิดอิสระเป็นของตัวเอง" },
-            { id: 7, word: "凝聚", pinyin: "níngjù", meaning: "รวมตัว/กลั่นตัว", type: "คำกริยา", setsFound: "H61221", chinese: "团队合作凝聚了每个成员的心血", exPinyin: "Tuánduì hézuò níngjù le měi gè chéngyuán de xīnxuè", exMeaning: "การทำงานเป็นทีมหลอมรวมหยาดเหงื่อแรงกายของสมาชิกทุกคน" },
-            { id: 8, word: "浮躁", pinyin: "fúzào", meaning: "ใจร้อน/หุนหันพลันแล่น", type: "คำคุณศัพท์", setsFound: "H61221", chinese: "在浮躁的社会中，保持内心的平静很难", exPinyin: "Zài fúzào de shèhuì zhōng, bǎochí nèixīn de píngjìng hěn nán", exMeaning: "ในสังคมที่ใจร้อนวุ่นวาย การรักษาความสงบในจิตใจเป็นเรื่องยากมาก" },
-            { id: 9, word: "潜能", pinyin: "qiánnéng", meaning: "ศักยภาพแฝง", type: "คำนาม", setsFound: "H61221", chinese: "每个人都有无限的潜能等待去发掘", exPinyin: "Měi gè rén dōu yǒu wúxiàn de qiánnéng děngdài qù fājué", exMeaning: "ทุกคนมีศักยภาพแฝงที่ไร้ขีดจำกัดรอคอยการไปขุดคุ้ยค้นพบ" },
-            { id: 10, word: "赋予", pinyin: "fùyǔ", meaning: "มอบหมาย/ให้อำนาจ", type: "คำกริยา", setsFound: "H61221", chinese: "时代赋予了我们这一代人重大的使命", exPinyin: "Shídài fùyǔ le wǒmen zhè yī dài rén zhòngdà de shǐmìng", exMeaning: "ยุคสมัยได้มอบหมายภารกิจอันยิ่งใหญ่ให้กับคนรุ่นพวกเรา" }
+        // ฐานข้อมูลคำศัพท์ HSK 6 ครบถ้วน 183 คำ (ชุดเดียวกับหน้าคลังคำศัพท์ hsk6.html)
+        const hsk6Data = [
+            { id: 1, word: "坦然", pinyin: "tǎnrán", meaning: "อยางสงบ/อยางสบายใจ", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61221", example: "闻过则喜,能够坦然接受批评,是自信的一个突出标志", examplePinyin: "Wénguò-zéxǐ, nénggòu tǎnrán jiēshòu pīpíng, shì zìxìn de yí ge tūchū biāozhì.", exampleMeaning: "การยินดีเมื่อได้ยินคำวิจารณ์ตนเอง สามารถรับฟังคำวิจารณ์ได้อย่างสงบ เป็นสัญลักษณ์เด่นของความมั่นใจในตนเอง" },
+            { id: 2, word: "反面", pinyin: "fǎnmiàn", meaning: "ดานลบ/ฝายตรงขาม", type: "คำนาม/คำคุณศัพท", freqTotal: 1, setsFound: "H61221", example: "他在这部戏中扮演的是一个反面角色", examplePinyin: "Tā zài zhè bù xì zhōng bànyǎn de shì yí ge fǎnmiàn juésè.", exampleMeaning: "เขารับบทบาทที่เป็นตัวร้ายในละครเรื่องนี้" },
+            { id: 3, word: "契机", pinyin: "qījī", meaning: "จังหวะ/โอกาสสำคัญ", type: "คำนาม", freqTotal: 1, setsFound: "H61221", example: "谁敢说冒险不是一种成功的契机", examplePinyin: "Shéi gǎn shuō màoxiǎn bú shì yì zhǒng chénggōng de qìjī.", exampleMeaning: "ใครกล้าพูดว่าการเสี่ยงภัยไม่ใช่โอกาสสู่ความสำเร็จ" },
+            { id: 4, word: "哺乳动物", pinyin: "bǔrǔ dòngwù", meaning: "สัตวเลี้ยงลูกดวยนม", type: "คำนาม", freqTotal: 1, setsFound: "H61221", example: "鲸鱼其实不是鱼,而是生活在海里的一种巨型哺乳动物", examplePinyin: "Jīngyú qíshí bú shì yú, ér shì shēnghuó zài hǎilǐ de yì zhǒng jùxíng bǔrǔ dòngwù.", exampleMeaning: "ปลาวาฬจริงๆ แล้วไม่ใช่ปลา แต่เป็นสัตว์เลี้ยงลูกด้วยนมขนาดยักษ์ที่อาศัยอยู่ในทะเล" },
+            { id: 5, word: "璀璨", pinyin: "cuǐcàn", meaning: "เจิดจา/แพรวพราว", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61221", example: "陕西历史博物馆以其丰富的文物藏品,被誉为\"华夏宝库\"", examplePinyin: "Shǎnxī Lìshǐ Bówùguǎn yǐ qí fēngfù de wénwù cángpǐn, bèi yùwéi 'Huáxià bǎokù'.", exampleMeaning: "พิพิธภัณฑ์ประวัติศาสตร์ส่านซีได้รับการยกย่องว่าเป็น 'คลังสมบัติแห่งจีน' ด้วยโบราณวัตถุอันมากมาย" },
+            { id: 6, word: "脍炙人口", pinyin: "kuìzhì-rénkǒu", meaning: "เปนที่เลื่องลือ/ติดปากผูคน", type: "สำนวน", freqTotal: 1, setsFound: "H61221", example: "老舍一生创作了许多脍炙人口的文学作品", examplePinyin: "Lǎoshě yìshēng chuàngzuò le xǔduō kuìzhì-rénkǒu de wénxué zuòpǐn.", exampleMeaning: "เหลาเส่อสร้างสรรค์ผลงานวรรณกรรมที่เป็นที่เลื่องลือมากมายตลอดชีวิตของเขา" },
+            { id: 7, word: "视线", pinyin: "shìxiàn", meaning: "สายตา", type: "คำนาม", freqTotal: 1, setsFound: "H61221", example: "不应该让经验和习惯束缚了我们的思维和视线", examplePinyin: "Bù yīnggāi ràng jīngyàn hé xíguàn shùfù le wǒmen de sīwéi hé shìxiàn.", exampleMeaning: "ไม่ควรปล่อยให้ประสบการณ์และความเคยชินมาผูกมัดความคิดและมุมมองของเรา" },
+            { id: 8, word: "风景", pinyin: "fēngjǐng", meaning: "ทิวทัศน", type: "คำนาม", freqTotal: 2, setsFound: "H61221", example: "收在眼里的就会是另一幅风景", examplePinyin: "Shōu zài yǎn lǐ de jiù huì shì lìng yì fú fēngjǐng.", exampleMeaning: "สิ่งที่เก็บไว้ในสายตาก็จะกลายเป็นทิวทัศน์อีกภาพหนึ่ง" },
+            { id: 9, word: "明珠", pinyin: "míngzhū", meaning: "ไขมุก/สิ่งลํ้าคา", type: "คำนาม", freqTotal: 1, setsFound: "H61221", example: "被称为云贵高原上的一颗明珠", examplePinyin: "Bèi chēngwéi Yúnguì Gāoyuán shàng de yì kē míngzhū.", exampleMeaning: "ได้รับการขนานนามว่าเป็นไข่มุกเม็ดหนึ่งบนที่ราบสูงยูนนาน-กุ้ยโจว" },
+            { id: 10, word: "脆弱", pinyin: "cuìruò", meaning: "เปราะบาง", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61221", example: "人的脆弱和坚强都超乎自己的想象", examplePinyin: "Rén de cuìruò hé jiānqiáng dōu chāohū zìjǐ de xiǎngxiàng.", exampleMeaning: "ความเปราะบางและความเข้มแข็งของมนุษย์นั้นเกินกว่าที่ตัวเองจะจินตนาการได้" },
+            { id: 11, word: "顽强", pinyin: "wánqiáng", meaning: "เหนียวแนน/ทรหด", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61221", example: "有时,我们可能脆弱得因为一句话就泪流满面", examplePinyin: "Yǒushí, wǒmen kěnéng cuìruò de yīnwèi yí jù huà jiù lèiliú-mǎnmiàn.", exampleMeaning: "บางครั้งเราอาจเปราะบางจนน้ำตาไหลอาบหน้าเพียงเพราะคำพูดคำเดียว" },
+            { id: 12, word: "自强不息", pinyin: "zìqiáng-bùxī", meaning: "มุงมั่นพัฒนาตนเองไมหยุดยั้ง", type: "สำนวน", freqTotal: 1, setsFound: "H61221", example: "竞争的力量,让生命自强不息", examplePinyin: "Jìngzhēng de lìliang, ràng shēngmìng zìqiáng-bùxī.", exampleMeaning: "พลังแห่งการแข่งขันทำให้ชีวิตมุ่งมั่นพัฒนาตนเองไม่หยุดยั้ง" },
+            { id: 13, word: "消失", pinyin: "xiāoshī", meaning: "หายไป", type: "กริยา", freqTotal: 2, setsFound: "H61221", example: "从中国历史上神秘地消失了", examplePinyin: "Cóng Zhōngguó lìshǐ shàng shénmì de xiāoshī le.", exampleMeaning: "หายไปจากประวัติศาสตร์จีนอย่างลึกลับ" },
+            { id: 14, word: "众说纷纭", pinyin: "zhòngshuō-fēnyún", meaning: "เสียงวิจารณหลากหลาย", type: "สำนวน", freqTotal: 1, setsFound: "H61221", example: "关于楼兰古国消失的原因仍然众说纷纭", examplePinyin: "Guānyú Lóulán gǔguó xiāoshī de yuányīn réngrán zhòngshuō-fēnyún.", exampleMeaning: "สาเหตุการหายไปของอาณาจักรโลวหลานโบราณยังคงมีการวิจารณ์ที่หลากหลาย" },
+            { id: 15, word: "孕育", pinyin: "yùnyù", meaning: "ฟูมฟก/กอเกิด", type: "กริยา", freqTotal: 1, setsFound: "H61221", example: "大气为地球生命的孕育、繁衍提供了环境", examplePinyin: "Dàqì wèi dìqiú shēngmìng de yùnyù, fányǎn tígōng le huánjìng.", exampleMeaning: "ชั้นบรรยากาศเป็นสภาพแวดล้อมที่เอื้อต่อการก่อกำเนิดและแพร่พันธุ์ของสิ่งมีชีวิตบนโลก" },
+            { id: 16, word: "宽恕", pinyin: "kuānshù", meaning: "ใหอภัย", type: "กริยา/คำนาม", freqTotal: 1, setsFound: "H61221", example: "宽恕别人,就是善待自己", examplePinyin: "Kuānshù biéren, jiùshì shàndài zìjǐ.", exampleMeaning: "การให้อภัยผู้อื่น ก็คือการปฏิบัติดีต่อตัวเอง" },
+            { id: 17, word: "安宁", pinyin: "ānníng", meaning: "ความสงบสุข", type: "คำนาม/คำคุณศัพท", freqTotal: 1, setsFound: "H61221", example: "让我们的心灵获得安宁", examplePinyin: "Ràng wǒmen de xīnlíng huòdé ānníng.", exampleMeaning: "ให้จิตใจของเราได้รับความสงบสุข" },
+            { id: 18, word: "凝聚", pinyin: "níngjù", meaning: "รวมตัวกัน/กลั่นกรอง", type: "กริยา", freqTotal: 1, setsFound: "H61221", example: "凝聚了东南西北各方的特点", examplePinyin: "Níngjù le dōngnánxīběi gèfāng de tèdiǎn.", exampleMeaning: "รวบรวมลักษณะเด่นของทุกทิศทางไว้ด้วยกัน" },
+            { id: 19, word: "萦绕", pinyin: "yíngrào", meaning: "วนเวียน/คละคลุง", type: "กริยา", freqTotal: 1, setsFound: "H61221", example: "有许多的\"不可能\"在我们心头萦绕", examplePinyin: "Yǒu xǔduō de 'bù kěnéng' zài wǒmen xīntóu yíngrào.", exampleMeaning: "มีคำว่า 'เป็นไปไม่ได้' มากมายวนเวียนอยู่ในใจเรา" },
+            { id: 20, word: "职场", pinyin: "zhíchǎng", meaning: "แวดวงการทำงาน", type: "คำนาม", freqTotal: 1, setsFound: "H61221", example: "短时间内留下的第一印象,准确度通常很高", examplePinyin: "Duǎn shíjiān nèi liú xià de dì-yī yìnxiàng, zhǔnquèdù tōngcháng hěn gāo.", exampleMeaning: "ความประทับใจแรกที่เกิดขึ้นในเวลาสั้นๆ มักจะแม่นยำสูง" },
+            { id: 21, word: "漫画", pinyin: "mànhuà", meaning: "การตูน", type: "คำนาม", freqTotal: 1, setsFound: "H61220", example: "漫画是人们喜闻乐见的一种艺术形式", examplePinyin: "Mànhuà shì rénmen xǐwén-lèjiàn de yì zhǒng yìshù xíngshì.", exampleMeaning: "การ์ตูนเป็นรูปแบบศิลปะที่ผู้คนชื่นชอบ" },
+            { id: 22, word: "精细", pinyin: "jīngxī", meaning: "ประณีต/ละเอียด", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61220", example: "这本杂志的对象,主要是面向中国留学生及其他汉语爱好者", examplePinyin: "Zhè běn zázhì de duìxiàng, zhǔyào shì miànxiàng Zhōngguó liúxuéshēng jí qítā Hànyǔ àihàozhě.", exampleMeaning: "นิตยสารเล่มนี้มีกลุ่มเป้าหมายหลักคือนักศึกษาต่างชาติชาวจีนและผู้ที่ชื่นชอบภาษาจีน" },
+            { id: 23, word: "起源", pinyin: "qǐyuán", meaning: "ตนกำเนิด", type: "กริยา/คำนาม", freqTotal: 1, setsFound: "H61220", example: "关于汉字的起源,中国有一个古老的传说", examplePinyin: "Guānyú Hànzì de qǐyuán, Zhōngguó yǒu yí ge gǔlǎo de chuánshuō.", exampleMeaning: "เกี่ยวกับต้นกำเนิดของอักษรจีน จีนมีตำนานเก่าแก่เรื่องหนึ่ง" },
+            { id: 24, word: "仓颉造字", pinyin: "cāngjié-zàozì", meaning: "ซางเจี๋ยสรางตัวอักษร", type: "สำนวน", freqTotal: 1, setsFound: "H61220", example: "那就是\"仓颉造字\"", examplePinyin: "Nà jiùshì 'Cāngjié zàozì'.", exampleMeaning: "นั่นก็คือเรื่อง 'ซางเจี๋ยสร้างอักษร'" },
+            { id: 25, word: "截止", pinyin: "jiézhǐ", meaning: "สิ้นสุด/ถึง(เวลา)", type: "กริยา", freqTotal: 1, setsFound: "H61220", example: "截止下午5点,入园参观人数已超过15万", examplePinyin: "Jiézhǐ xiàwǔ 5 diǎn, rùyuán cānguān rénshù yǐ chāoguò 15 wàn.", exampleMeaning: "จนถึงเวลา 5 โมงเย็น จำนวนผู้เข้าชมสวนสาธารณะเกิน 150,000 คนแล้ว" },
+            { id: 26, word: "度量衡", pinyin: "dùliànghéng", meaning: "มาตราชั่งตวงวัด", type: "คำนาม", freqTotal: 1, setsFound: "H61220", example: "秦朝统一了货币、度量衡、文字", examplePinyin: "Qíncháo tǒngyī le huòbì, dùliànghéng, wénzì.", exampleMeaning: "ราชวงศ์ฉินรวมสกุลเงิน มาตราชั่งตวงวัด และตัวอักษรให้เป็นหนึ่งเดียว" },
+            { id: 27, word: "完美主义者", pinyin: "wánměi zhǔyìzhě", meaning: "ผูที่นิยมความสมบูรณแบบ", type: "คำนาม", freqTotal: 1, setsFound: "H61220", example: "积极的完美主义者会鼓励别人不断进步", examplePinyin: "Jījí de wánměi zhǔyìzhě huì gǔlì biéren búduàn jìnbù.", exampleMeaning: "ผู้ที่นิยมความสมบูรณ์แบบในเชิงบวกจะให้กำลังใจผู้อื่นให้ก้าวหน้าอย่างต่อเนื่อง" },
+            { id: 28, word: "测绘", pinyin: "cèhuì", meaning: "สำรวจและทำแผนที่", type: "กริยา", freqTotal: 1, setsFound: "H61220", example: "用先进的技术测绘出海底世界", examplePinyin: "Yòng xiānjìn de jìshù cèhuì chū hǎidǐ shìjiè.", exampleMeaning: "ใช้เทคโนโลยีล้ำสมัยสำรวจและทำแผนที่โลกใต้ทะเล" },
+            { id: 29, word: "麋鹿", pinyin: "mílù", meaning: "กวางมารี", type: "คำนาม", freqTotal: 1, setsFound: "H61220", example: "麋鹿是中国特有的动物", examplePinyin: "Mílù shì Zhōngguó tèyǒu de dòngwù.", exampleMeaning: "กวางมารีเป็นสัตว์ที่มีเฉพาะในจีน" },
+            { id: 30, word: "四不像", pinyin: "sìbúxiàng", meaning: "สี่ไมเหมือน", type: "คำนาม", freqTotal: 1, setsFound: "H61220", example: "所以被俗称为\"四不像\"", examplePinyin: "Suǒyǐ bèi súchēng wéi 'sìbúxiàng'.", exampleMeaning: "จึงถูกเรียกกันทั่วไปว่า 'สี่ไม่เหมือน'" },
+            { id: 31, word: "播种", pinyin: "bōzhǒng", meaning: "เพาะเมล็ด/หวานเมล็ด", type: "กริยา", freqTotal: 1, setsFound: "H61220", example: "正是我们播种希望的时候", examplePinyin: "Zhèngshì wǒmen bōzhòng xīwàng de shíhou.", exampleMeaning: "นี่คือช่วงเวลาที่พวกเราหว่านเมล็ดพันธุ์แห่งความหวัง" },
+            { id: 32, word: "夺目", pinyin: "duómù", meaning: "เจิดจา/สะดุดตา", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61220", example: "让它在我们手中放出夺目的光芒", examplePinyin: "Ràng tā zài wǒmen shǒuzhōng fàngchū duómù de guāngmáng.", exampleMeaning: "ปล่อยให้มันเปล่งประกายแสงอันสะดุดตาในมือของเรา" },
+            { id: 33, word: "力所能及", pinyin: "lìsuǒnéngjí", meaning: "เทาที่กำลังความสามารถจะทำได", type: "สำนวน", freqTotal: 1, setsFound: "H61220", example: "即使你做的只是一件非常平凡的小事,力所能及地去帮助有困难的人", examplePinyin: "Jíshǐ nǐ zuò de zhǐshì yí jiàn fēicháng píngfán de xiǎoshì, lìsuǒnéngjí de qù bāngzhù yǒu kùnnan de rén.", exampleMeaning: "แม้สิ่งที่คุณทำจะเป็นเพียงเรื่องเล็กน้อยธรรมดา ก็จงช่วยเหลือผู้ที่ลำบากเท่าที่กำลังจะทำได้" },
+            { id: 34, word: "平凡", pinyin: "píngfán", meaning: "ธรรมดา", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61220", example: "平凡的小事/平凡的人", examplePinyin: "Píngfán de xiǎoshì / píngfán de rén.", exampleMeaning: "เรื่องเล็กน้อยธรรมดา / คนธรรมดา" },
+            { id: 35, word: "事必躬亲", pinyin: "shìbì-gōngqīn", meaning: "ลงมือทำเองทุกเรื่อง", type: "สำนวน", freqTotal: 1, setsFound: "H61220", example: "不需要,也不可能事必躬亲", examplePinyin: "Bù xūyào, yě bù kěnéng shìbì-gōngqīn.", exampleMeaning: "ไม่จำเป็น และเป็นไปไม่ได้ที่จะลงมือทำเองทุกเรื่อง" },
+            { id: 36, word: "明察秋毫", pinyin: "míngchá-qiūháo", meaning: "มองเห็นรายละเอียดเล็กๆ นอยๆ ไดอยางชัดเจน", type: "สำนวน", freqTotal: 1, setsFound: "H61220", example: "一定要明察秋毫", examplePinyin: "Yídìng yào míngchá-qiūháo.", exampleMeaning: "ต้องมองเห็นรายละเอียดเล็กน้อยได้อย่างชัดเจนแน่นอน" },
+            { id: 37, word: "模范", pinyin: "mófàn", meaning: "แบบอยาง/ตนแบบ", type: "คำนาม/คำคุณศัพท", freqTotal: 1, setsFound: "H61220", example: "为每个员工做出模范", examplePinyin: "Wèi měi ge yuángōng zuòchū mófàn.", exampleMeaning: "เป็นแบบอย่างให้พนักงานทุกคน" },
+            { id: 38, word: "雕刻", pinyin: "diāokè", meaning: "แกะสลัก", type: "กริยา", freqTotal: 1, setsFound: "H61220", example: "家里的梁、柱、门、窗和日用摆设上都雕刻着龙", examplePinyin: "Jiā lǐ de liáng, zhù, mén, chuāng hé rìyòng bǎishè shàng dōu diāokèzhe lóng.", exampleMeaning: "คาน เสา ประตู หน้าต่าง และเครื่องใช้ในบ้านล้วนแกะสลักลายมังกร" },
+            { id: 39, word: "普及", pinyin: "pǔjí", meaning: "แพรหลาย", type: "กริยา/คำคุณศัพท", freqTotal: 7, setsFound: "H61220", example: "已在世界各地得到普及", examplePinyin: "Yǐ zài shìjiè gèdì dédào pǔjí.", exampleMeaning: "ได้แพร่หลายไปทั่วทุกมุมโลกแล้ว" },
+            { id: 40, word: "密切", pinyin: "mìqiè", meaning: "ใกลชิด/สนิทสนม", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61220", example: "雨滴的大小与雨滴的关系十分密切", examplePinyin: "Yǔdī de dàxiǎo yǔ yǔdī de guānxi shífēn mìqiè.", exampleMeaning: "ขนาดของหยดน้ำฝนมีความสัมพันธ์ใกล้ชิดกับ (ปัจจัยอื่นๆ) มาก" },
+            { id: 41, word: "超越", pinyin: "chāoyuè", meaning: "กาวขาม/เหนือกวา", type: "กริยา", freqTotal: 1, setsFound: "H61219", example: "不求与人相比,但求超越自己", examplePinyin: "Bù qiú yǔ rén xiāngbǐ, dàn qiú chāoyuè zìjǐ.", exampleMeaning: "ไม่ขอเปรียบเทียบกับผู้อื่น แต่ขอก้าวข้ามตัวเอง" },
+            { id: 42, word: "融洽", pinyin: "róngqià", meaning: "กลมกลืน/ปรองดอง", type: "คำคุณศัพท", freqTotal: 2, setsFound: "H61219", example: "各种文明不断交流、融合、创新的过程", examplePinyin: "Gèzhǒng wénmíng búduàn jiāoliú, rónghé, chuàngxīn de guòchéng.", exampleMeaning: "กระบวนการที่อารยธรรมต่างๆ แลกเปลี่ยน หลอมรวม และสร้างสรรค์สิ่งใหม่อย่างต่อเนื่อง" },
+            { id: 43, word: "富集", pinyin: "fùjí", meaning: "อุดมสมบูรณ/สะสมมาก", type: "กริยา/คำคุณศัพท", freqTotal: 1, setsFound: "H61219", example: "张家口生态资源富集,地形地貌独特", examplePinyin: "Zhāngjiākǒu shēngtài zīyuán fùjí, dìxíng dìmào dútè.", exampleMeaning: "จางเจียโข่วมีทรัพยากรธรรมชาติอุดมสมบูรณ์ ภูมิประเทศมีเอกลักษณ์เฉพาะ" },
+            { id: 44, word: "必需品", pinyin: "bìxūpǐn", meaning: "สิ่งจำเปน", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "盐是调味品,更是生命的必需品", examplePinyin: "Yán shì tiáowèipǐn, gèng shì shēngmìng de bìxūpǐn.", exampleMeaning: "เกลือเป็นเครื่องปรุงรส และยังเป็นสิ่งจำเป็นต่อชีวิตด้วย" },
+            { id: 45, word: "成见", pinyin: "chéngjiàn", meaning: "อคติ", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "要想接受新事物,我们必须先去除自己的成见", examplePinyin: "Yào xiǎng jiēshòu xīn shìwù, wǒmen bìxū xiān qùchú zìjǐ de chéngjiàn.", exampleMeaning: "หากต้องการยอมรับสิ่งใหม่ เราต้องขจัดอคติของตัวเองออกไปก่อน" },
+            { id: 46, word: "潜能", pinyin: "qiánnéng", meaning: "ศักยภาพ", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "每个人身上都有巨大的潜能", examplePinyin: "Měi ge rén shēnshang dōu yǒu jùdà de qiánnéng.", exampleMeaning: "ทุกคนล้วนมีศักยภาพอันยิ่งใหญ่ซ่อนอยู่ในตัว" },
+            { id: 47, word: "模式", pinyin: "móshì", meaning: "รูปแบบ/โมเดล", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "成功并没有固定的模式", examplePinyin: "Chénggōng bìng méiyǒu gùdìng de móshì.", exampleMeaning: "ความสำเร็จไม่มีรูปแบบตายตัว" },
+            { id: 48, word: "遵循", pinyin: "zūnxún", meaning: "ปฏิบัติตาม", type: "กริยา", freqTotal: 1, setsFound: "H61219", example: "不一定要遵循成功法则", examplePinyin: "Bù yídìng yào zūnxún chénggōng fǎzé.", exampleMeaning: "ไม่จำเป็นต้องปฏิบัติตามกฎแห่งความสำเร็จเสมอไป" },
+            { id: 49, word: "竹制", pinyin: "zhúzhì", meaning: "ทำดวยไมไผ", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61219", example: "算是一种竹制的器具", examplePinyin: "Suàn shì yì zhǒng zhúzhì de qìjù.", exampleMeaning: "นับเป็นเครื่องใช้ที่ทำจากไม้ไผ่ชนิดหนึ่ง" },
+            { id: 50, word: "概括", pinyin: "gàikuò", meaning: "สรุปใจความ", type: "กริยา", freqTotal: 1, setsFound: "H61219", example: "概括当时一切与计算有关的数学知识", examplePinyin: "Gàikuò dāngshí yíqiè yǔ jìsuàn yǒuguān de shùxué zhīshi.", exampleMeaning: "สรุปความรู้ทางคณิตศาสตร์ที่เกี่ยวข้องกับการคำนวณในสมัยนั้นทั้งหมด" },
+            { id: 51, word: "展现", pinyin: "zhǎnxiàn", meaning: "จัดแสดง/ปรากฏ", type: "กริยา", freqTotal: 1, setsFound: "H61219", example: "结合音乐通过投影展现在屏幕上", examplePinyin: "Jiéhé yīnyuè tōngguò tóuyǐng zhǎnxiàn zài píngmù shàng.", exampleMeaning: "ผสมผสานดนตรีเข้ากับการฉายภาพบนหน้าจอ" },
+            { id: 52, word: "独特", pinyin: "dútè", meaning: "เปนเอกลักษณ/พิเศษ", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61219", example: "沙画具在独特的表演魅力", examplePinyin: "Shāhuà jùyǒu dútè de biǎoyǎn mèilì.", exampleMeaning: "การวาดภาพด้วยทรายมีเสน่ห์ในการแสดงที่เป็นเอกลักษณ์" },
+            { id: 53, word: "奇妙", pinyin: "qímiào", meaning: "มหัศจรรย", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61219", example: "能使现场观众获得奇妙的视觉享受", examplePinyin: "Néng shǐ xiànchǎng guānzhòng huòdé qímiào de shìjué xiǎngshòu.", exampleMeaning: "สามารถทำให้ผู้ชมในสถานที่ได้รับประสบการณ์ทางสายตาที่มหัศจรรย์" },
+            { id: 54, word: "整体", pinyin: "zhěngtǐ", meaning: "ภาพรวม/สวนรวม", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "即将整体一分为二", examplePinyin: "Jíjiāng zhěngtǐ yìfēnwéi'èr.", exampleMeaning: "กำลังจะแบ่งภาพรวมออกเป็นสองส่วน" },
+            { id: 55, word: "认定", pinyin: "rèndìng", meaning: "วินิจฉัย/ลงความเห็น", type: "กริยา", freqTotal: 1, setsFound: "H61219", example: "该比值被认定为最能让人产生美感的比例", examplePinyin: "Gāi bǐzhí bèi rèndìng wéi zuì néng ràng rén chǎnshēng měigǎn de bǐlì.", exampleMeaning: "อัตราส่วนนี้ได้รับการยอมรับว่าเป็นสัดส่วนที่ทำให้เกิดความรู้สึกงดงามมากที่สุด" },
+            { id: 56, word: "成分", pinyin: "chéngfèn", meaning: "สวนประกอบ", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "铁锈的主要成分就是铁与氧反应后生成的氧化铁", examplePinyin: "Tiěxiù de zhǔyào chéngfèn jiùshì tiě yǔ yǎng fǎnyìng hòu shēngchéng de yǎnghuàtiě.", exampleMeaning: "องค์ประกอบหลักของสนิมเหล็กคือเหล็กออกไซด์ที่เกิดจากปฏิกิริยาระหว่างเหล็กกับออกซิเจน" },
+            { id: 57, word: "结论", pinyin: "jiélùn", meaning: "ขอสรุป", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "在下结论之前,应先深入调查一番", examplePinyin: "Zài xià jiélùn zhīqián, yīng xiān shēnrù diàochá yì fān.", exampleMeaning: "ก่อนจะสรุป ควรตรวจสอบเชิงลึกก่อนสักครั้ง" },
+            { id: 58, word: "感激", pinyin: "gǎnjī", meaning: "ซาบซึ้งใจ/ขอบคุณ", type: "กริยา/คำคุณศัพท", freqTotal: 1, setsFound: "H61219", example: "把抱怨的心态,转化为感激的心态", examplePinyin: "Bǎ bàoyuàn de xīntài, zhuǎnhuà wéi gǎnjī de xīntài.", exampleMeaning: "เปลี่ยนทัศนคติของการบ่นให้กลายเป็นทัศนคติแห่งความซาบซึ้งขอบคุณ" },
+            { id: 59, word: "根源", pinyin: "gēnyuán", meaning: "รากเหงา/ตนตอ", type: "คำนาม", freqTotal: 1, setsFound: "H61219", example: "不幸的,在于看不见自己的幸运的根源", examplePinyin: "Búxìng de, zàiyú kànbújiàn zìjǐ de xìngyùn de gēnyuán.", exampleMeaning: "ความโชคร้ายคือการมองไม่เห็นต้นตอแห่งความโชคดีของตัวเอง" },
+            { id: 60, word: "回答", pinyin: "huídá", meaning: "ตอบ", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "回答问题之前,每个人有两分钟的准备时间", examplePinyin: "Huídá wèntí zhīqián, měi ge rén yǒu liǎng fēnzhōng de zhǔnbèi shíjiān.", exampleMeaning: "ก่อนตอบคำถาม แต่ละคนมีเวลาเตรียมตัว 2 นาที" },
+            { id: 61, word: "洁白", pinyin: "jiébái", meaning: "ขาวสะอาด", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61218", example: "一口健康洁白的牙齿,可以让你的笑容更迷人", examplePinyin: "Yìkǒu jiànkāng jiébái de yáchǐ, kěyǐ ràng nǐ de xiàoróng gèng mírén.", exampleMeaning: "ฟันที่แข็งแรงและขาวสะอาดจะทำให้รอยยิ้มของคุณมีเสน่ห์ยิ่งขึ้น" },
+            { id: 62, word: "象征", pinyin: "xiàngzhēng", meaning: "สัญลักษณ/เปนตัวแทน", type: "คำนาม/กริยา", freqTotal: 1, setsFound: "H61218", example: "外滩一直被世人看成是上海的象征", examplePinyin: "Wàitān yìzhí bèi shìrén kànchéng shì Shànghǎi de xiàngzhēng.", exampleMeaning: "หวายทันถูกมองว่าเป็นสัญลักษณ์ของเซี่ยงไฮ้มาโดยตลอด" },
+            { id: 63, word: "顾虑", pinyin: "gùlǜ", meaning: "ความกังวล", type: "คำนาม/กริยา", freqTotal: 1, setsFound: "H61218", example: "顾虑太多,犹豫不决,就容易把机会从手中溜走", examplePinyin: "Gùlǜ tài duō, yóuyù-bùjué, jiù róngyì bǎ jīhuì cóng shǒuzhōng liūzǒu.", exampleMeaning: "กังวลมากเกินไป ลังเลไม่ตัดสินใจ ก็จะทำให้โอกาสหลุดลอยไปจากมือได้ง่าย" },
+            { id: 64, word: "筹集", pinyin: "chóují", meaning: "ระดมทุน/รวบรวมเงิน", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "建造这个博物馆所需的经费是由他一个人筹集的", examplePinyin: "Jiànzào zhège bówùguǎn suǒxū de jīngfèi shì yóu tā yí ge rén chóují de.", exampleMeaning: "ค่าใช้จ่ายที่ต้องใช้สร้างพิพิธภัณฑ์แห่งนี้ระดมทุนโดยเขาเพียงคนเดียว" },
+            { id: 65, word: "必备品", pinyin: "bìbèipǐn", meaning: "สิ่งของจำเปน", type: "คำนาม", freqTotal: 2, setsFound: "H61218", example: "酒是节日餐桌上的必备品", examplePinyin: "Jiǔ shì jiérì cānzhuō shàng de bìbèipǐn.", exampleMeaning: "เหล้าเป็นสิ่งที่ขาดไม่ได้บนโต๊ะอาหารในเทศกาล" },
+            { id: 66, word: "清热解毒", pinyin: "qīngrè-jiědú", meaning: "แกรอนในและขับพิษ", type: "สำนวน", freqTotal: 1, setsFound: "H61218", example: "绿豆汤有清热解毒、止渴消暑的功效", examplePinyin: "Lǜdòutāng yǒu qīngrè-jiědú, zhǐkě xiāoshǔ de gōngxiào.", exampleMeaning: "น้ำแกงถั่วเขียวมีสรรพคุณแก้ร้อนในขับพิษ ดับกระหาย คลายร้อน" },
+            { id: 67, word: "契合/合拍", pinyin: "qìhé/hépāi", meaning: "สอดคลอง/เขากันไดดี", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "不要希望与每个人都能合拍", examplePinyin: "Búyào xīwàng yǔ měi ge rén dōu néng hépāi.", exampleMeaning: "อย่าคาดหวังว่าจะเข้ากันได้ดีกับทุกคน" },
+            { id: 68, word: "传承", pinyin: "chuánchéng", meaning: "สืบทอด", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "饮食礼仪已形成一套相当完善的制度一直传承到现代", examplePinyin: "Yǐnshí lǐyí yǐ xíngchéng yí tào xiāngdāng wánshàn de zhìdù yìzhí chuánchéng dào xiàndài.", exampleMeaning: "จารีตธรรมเนียมการกินได้กลายเป็นระบบที่ค่อนข้างสมบูรณ์และสืบทอดมาจนถึงปัจจุบัน" },
+            { id: 69, word: "塞上", pinyin: "sàishàng", meaning: "แถบชายแดนเหนือ", type: "คำนาม", freqTotal: 1, setsFound: "H61218", example: "包头剪纸有着别样的塞上风情", examplePinyin: "Bāotóu jiǎnzhǐ yǒuzhe biéyàng de sàishàng fēngqíng.", exampleMeaning: "งานตัดกระดาษของเมืองเปาโถวมีเสน่ห์แบบชายแดนเหนือที่เป็นเอกลักษณ์" },
+            { id: 70, word: "谜面", pinyin: "mímiàn", meaning: "โจทยปริศนา", type: "คำนาม", freqTotal: 1, setsFound: "H61218", example: "前半部分是形象的比喻,像谜面", examplePinyin: "Qián bàn bùfen shì xíngxiàng de bǐyù, xiàng mímiàn.", exampleMeaning: "ส่วนแรกเป็นการเปรียบเปรยเชิงภาพ เหมือนโจทย์ปริศนา" },
+            { id: 71, word: "谜底", pinyin: "mídǐ", meaning: "คำตอบปริศนา", type: "คำนาม", freqTotal: 1, setsFound: "H61218", example: "后半部分是解释、说明,像谜底", examplePinyin: "Hòu bàn bùfen shì jiěshì, shuōmíng, xiàng mídǐ.", exampleMeaning: "ส่วนหลังเป็นการอธิบาย ชี้แจง เหมือนคำตอบปริศนา" },
+            { id: 72, word: "烹调", pinyin: "pēngtiáo", meaning: "ปรุงอาหาร", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "给宝宝烹调食物时一定要符合他的口味", examplePinyin: "Gěi bǎobǎo pēngtiáo shíwù shí yídìng yào fúhé tā de kǒuwèi.", exampleMeaning: "เวลาปรุงอาหารให้ลูกน้อยต้องคำนึงถึงรสชาติที่ถูกปากเขาด้วย" },
+            { id: 73, word: "保存", pinyin: "bǎocún", meaning: "เก็บรักษา", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "人类精神文明的成果是以书籍的形式保存的", examplePinyin: "Rénlèi jīngshén wénmíng de chéngguǒ shì yǐ shūjí de xíngshì bǎocún de.", exampleMeaning: "ผลสัมฤทธิ์ทางอารยธรรมจิตใจของมนุษย์ถูกเก็บรักษาไว้ในรูปแบบของหนังสือ" },
+            { id: 74, word: "享用", pinyin: "xiǎngyòng", meaning: "เสพสุข/เพลิดเพลินกับการใชงาน", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "读书就是享用这些成果并把它们据为己有的过程", examplePinyin: "Dúshū jiùshì xiǎngyòng zhèxiē chéngguǒ bìng bǎ tāmen jùwéijǐyǒu de guòchéng.", exampleMeaning: "การอ่านหนังสือคือกระบวนการเสพสุขจากผลสัมฤทธิ์เหล่านี้และทำให้เป็นของตัวเอง" },
+            { id: 75, word: "系统", pinyin: "xìtǒng", meaning: "ระบบ", type: "คำนาม", freqTotal: 1, setsFound: "H61218", example: "加入到人类精神文明的系统中去", examplePinyin: "Jiārù dào rénlèi jīngshén wénmíng de xìtǒng zhōngqù.", exampleMeaning: "เข้าร่วมเป็นส่วนหนึ่งของระบบอารยธรรมจิตใจของมนุษยชาติ" },
+            { id: 76, word: "比喻", pinyin: "bǐyù", meaning: "เปรียบเปรย", type: "กริยา/คำนาม", freqTotal: 1, setsFound: "H61218", example: "如果拿桔子来比喻人生", examplePinyin: "Rúguǒ ná júzi lái bǐyù rénshēng.", exampleMeaning: "ถ้าเปรียบเทียบชีวิตกับส้ม" },
+            { id: 77, word: "认可", pinyin: "rènkě", meaning: "ยอมรับ", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "拿到了小桔子会认为是甜的", examplePinyin: "Nádào le xiǎo júzi huì rènwéi shì tián de.", exampleMeaning: "หยิบได้ส้มลูกเล็กก็จะคิดว่ามันหวาน" },
+            { id: 78, word: "发觉", pinyin: "fājué", meaning: "ตระหนัก/พบวา", type: "กริยา", freqTotal: 1, setsFound: "H61218", example: "拿到酸桔子会发觉它是大的", examplePinyin: "Nádào suān júzi huì fājué tā shì dà de.", exampleMeaning: "หยิบได้ส้มเปรี้ยวก็จะพบว่ามันลูกใหญ่" },
+            { id: 79, word: "营养", pinyin: "yíngyǎng", meaning: "โภชนาการ", type: "คำนาม", freqTotal: 1, setsFound: "H61218", example: "白菜是人们生活中不可缺少的一种重要蔬菜,味道鲜美可口,营养丰富", examplePinyin: "Báicài shì rénmen shēnghuó zhōng bùkě quēshǎo de yì zhǒng zhòngyào shūcài, wèidao xiānměi kěkǒu, yíngyǎng fēngfù.", exampleMeaning: "กะหล่ำปลีเป็นผักสำคัญที่ขาดไม่ได้ในชีวิตประจำวัน รสชาติสดอร่อยและมีคุณค่าทางโภชนาการสูง" },
+            { id: 80, word: "群众", pinyin: "qúnzhòng", meaning: "มวลชน/ประชาชน", type: "คำนาม", freqTotal: 1, setsFound: "H61218", example: "为广大群众所喜爱", examplePinyin: "Wèi guǎngdà qúnzhòng suǒ xǐ'ài.", exampleMeaning: "เป็นที่ชื่นชอบของมวลชนอย่างกว้างขวาง" },
+            { id: 81, word: "匮乏", pinyin: "kuìfá", meaning: "ขาดแคลน", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61218", example: "创业之所以未果,十之八九是由于资金匮乏", examplePinyin: "Chuàngyè zhī suǒyǐ wèiguǒ, shízhībājiǔ shì yóuyú zījīn kuìfá.", exampleMeaning: "การเริ่มธุรกิจที่ไม่ประสบผล ส่วนใหญ่มักเกิดจากเงินทุนขาดแคลน" },
+            { id: 82, word: "指南针", pinyin: "zhǐnánzhēn", meaning: "เข็มทิศ", type: "คำนาม", freqTotal: 1, setsFound: "H61111", example: "指南针是中国古代的四大发明", examplePinyin: "Zhǐnánzhēn shì Zhōngguó gǔdài de sì dà fāmíng.", exampleMeaning: "เข็มทิศเป็นหนึ่งในสี่สิ่งประดิษฐ์ยิ่งใหญ่ของจีนโบราณ" },
+            { id: 83, word: "形状", pinyin: "xíngzhuàng", meaning: "รูปราง", type: "คำนาม", freqTotal: 1, setsFound: "H61111", example: "北斗七星由7颗星组成,连在一起时形状像一个勺子", examplePinyin: "Běidǒuqīxīng yóu 7 kē xīng zǔchéng, lián zài yìqǐ shí xíngzhuàng xiàng yí ge sháozi.", exampleMeaning: "กลุ่มดาวหมีใหญ่ประกอบด้วยดาว 7 ดวง เรียงกันเป็นรูปทัพพี" },
+            { id: 84, word: "绝望", pinyin: "juéwàng", meaning: "สิ้นหวัง", type: "คำคุณศัพท/กริยา", freqTotal: 1, setsFound: "H61111", example: "实际上,世上没有绝望的处境,只有对处境绝望的人", examplePinyin: "Shíjì shàng, shìshang méiyǒu juéwàng de chǔjìng, zhǐyǒu duì chǔjìng juéwàng de rén.", exampleMeaning: "ที่จริงแล้ว ในโลกนี้ไม่มีสถานการณ์ที่สิ้นหวัง มีแต่คนที่หมดหวังต่อสถานการณ์เท่านั้น" },
+            { id: 85, word: "名牌", pinyin: "míngpái", meaning: "แบรนดเนม", type: "คำนาม", freqTotal: 1, setsFound: "H61111", example: "穿衣服不必一味追求名牌,但一定要注意搭配", examplePinyin: "Chuān yīfu bú bì yíwèi zhuīqiú míngpái, dàn yídìng yào zhùyì dāpèi.", exampleMeaning: "การแต่งตัวไม่จำเป็นต้องไล่ตามแบรนด์เนมเสมอไป แต่ต้องใส่ใจการจับคู่เสื้อผ้า" },
+            { id: 86, word: "预测", pinyin: "yùcè", meaning: "คาดการณ", type: "กริยา/คำนาม", freqTotal: 1, setsFound: "H61111", example: "秋冬是流感高发季节,接种流感疫苗是预防流感最为有效的措施", examplePinyin: "Qiūdōng shì liúgǎn gāofā jìjié, jiēzhòng liúgǎn yìmiáo shì yùfáng liúgǎn zuìwéi yǒuxiào de cuòshī.", exampleMeaning: "ฤดูใบไม้ร่วงถึงหนาวเป็นช่วงที่ไข้หวัดใหญ่ระบาดบ่อย การฉีดวัคซีนคือมาตรการป้องกันที่ได้ผลที่สุด" },
+            { id: 87, word: "适应", pinyin: "shìyìng", meaning: "ปรับตัว", type: "กริยา", freqTotal: 2, setsFound: "H61111", example: "知道先适应环境,然后改造环境", examplePinyin: "Zhīdào xiān shìyìng huánjìng, ránhòu gǎizào huánjìng.", exampleMeaning: "รู้จักปรับตัวเข้ากับสภาพแวดล้อมก่อน แล้วจึงค่อยปรับปรุงสภาพแวดล้อม" },
+            { id: 88, word: "规律", pinyin: "guīlǜ", meaning: "กฎเกณฑ", type: "คำนาม", freqTotal: 2, setsFound: "H61111", example: "树的年轮可以指示方向", examplePinyin: "Shù de niánlún kěyǐ zhǐshì fāngxiàng.", exampleMeaning: "วงปีของต้นไม้สามารถบอกทิศทางได้" },
+            { id: 89, word: "协商", pinyin: "xiéshāng", meaning: "เจรจาหารือ", type: "กริยา", freqTotal: 1, setsFound: "H61111", example: "进行协商或妥协", examplePinyin: "Jìnxíng xiéshāng huò tuǒxié.", exampleMeaning: "ดำเนินการเจรจาหารือหรือประนีประนอม" },
+            { id: 90, word: "妥协", pinyin: "tuǒxié", meaning: "ประนีประนอม", type: "กริยา", freqTotal: 1, setsFound: "H61111", example: "这样的公司及个人由于太固执,很难有大的发展", examplePinyin: "Zhèyàng de gōngsī jí gèrén yóuyú tài gùzhí, hěn nán yǒu dà de fāzhǎn.", exampleMeaning: "บริษัทและบุคคลแบบนี้เพราะดื้อรั้นเกินไป จึงยากที่จะพัฒนาไปได้ไกล" },
+            { id: 91, word: "薄利多销", pinyin: "bólì-duōxiāo", meaning: "ทำไรนอยขายมาก", type: "สำนวน", freqTotal: 1, setsFound: "H61111", example: "根据薄利多销、量大价优的原则", examplePinyin: "Gēnjù bólì-duōxiāo, liàng dà jià yōu de yuánzé.", exampleMeaning: "ตามหลักการทำกำไรน้อยแต่ขายได้มาก ปริมาณเยอะราคาดี" },
+            { id: 92, word: "精通", pinyin: "jīngtōng", meaning: "เชี่ยวชาญ/ชำนาญ", type: "กริยา", freqTotal: 1, setsFound: "H61111", example: "对天文、历法、音乐、医药、数学等都很精通", examplePinyin: "Duì tiānwén, lìfǎ, yīnyuè, yīyào, shùxué děng dōu hěn jīngtōng.", exampleMeaning: "เชี่ยวชาญทั้งดาราศาสตร์ ปฏิทิน ดนตรี การแพทย์ คณิตศาสตร์ และอื่นๆ" },
+            { id: 93, word: "记载", pinyin: "jìzǎi", meaning: "บันทึก", type: "กริยา/คำนาม", freqTotal: 1, setsFound: "H61111", example: "书中还记载了当时的许多发明创造", examplePinyin: "Shū zhōng hái jìzǎi le dāngshí de xǔduō fāmíng chuàngzào.", exampleMeaning: "ในหนังสือยังบันทึกสิ่งประดิษฐ์และนวัตกรรมในยุคนั้นไว้มากมาย" },
+            { id: 94, word: "缓慢", pinyin: "huǎnmàn", meaning: "เชื่องชา", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61111", example: "银杏是树中的\"老寿星\"。它生长非常缓慢", examplePinyin: "Yínxìng shì shùzhōng de 'lǎoshòuxīng'. Tā shēngzhǎng fēicháng huǎnmàn.", exampleMeaning: "แปะก๊วยคือ 'เทพเจ้าอายุยืน' แห่งต้นไม้ มันเติบโตช้ามาก" },
+            { id: 95, word: "家乡", pinyin: "jiāxiāng", meaning: "บานเกิด", type: "คำนาม", freqTotal: 1, setsFound: "H61111", example: "中国是银杏的故乡/家乡", examplePinyin: "Zhōngguó shì yínxìng de gùxiāng/jiāxiāng.", exampleMeaning: "จีนคือบ้านเกิดของแปะก๊วย" },
+            { id: 96, word: "精力", pinyin: "jīnglì", meaning: "พลังงาน", type: "คำนาม", freqTotal: 3, setsFound: "H61111", example: "精力是有限的,人的精力很容易被分散", examplePinyin: "Jīnglì shì yǒuxiàn de, rén de jīnglì hěn róngyì bèi fēnsàn.", exampleMeaning: "พลังงานมีจำกัด พลังงานของคนถูกกระจายไปได้ง่าย" },
+            { id: 97, word: "相貌", pinyin: "xiàngmào", meaning: "รูปรางหนาตา", type: "คำนาม", freqTotal: 1, setsFound: "H61110", example: "她不但相貌出众,而且写得一手好文章", examplePinyin: "Tā búdàn xiàngmào chūzhòng, érqiě xiě de yìshǒu hǎo wénzhāng.", exampleMeaning: "เธอไม่เพียงรูปร่างหน้าตาโดดเด่น แต่ยังเขียนบทความได้ดีอีกด้วย" },
+            { id: 98, word: "衡量", pinyin: "héngliáng", meaning: "ประเมิน/วัด", type: "กริยา", freqTotal: 2, setsFound: "H61110", example: "是不是好的作品,可以用两个标准去衡量", examplePinyin: "Shì bú shì hǎo de zuòpǐn, kěyǐ yòng liǎng ge biāozhǔn qù héngliáng.", exampleMeaning: "จะเป็นผลงานที่ดีหรือไม่ สามารถใช้เกณฑ์สองอย่างมาประเมินได้" },
+            { id: 99, word: "泰山北斗", pinyin: "tàishān-běidǒu", meaning: "ปูชนียบุคคล/ผูทรงคุณวุฒิระดับสูง", type: "สำนวน", freqTotal: 1, setsFound: "H61110", example: "他父亲是京剧界的泰山北斗", examplePinyin: "Tā fùqīn shì jīngjùjiè de tàishān-běidǒu.", exampleMeaning: "พ่อของเขาเป็นปูชนียบุคคลในวงการงิ้วปักกิ่ง" },
+            { id: 100, word: "家喻户晓", pinyin: "jiāyù-hùxiǎo", meaning: "เปนที่รูจักกันดีทั่วบานทั่วเมือง", type: "สำนวน", freqTotal: 1, setsFound: "H61110", example: "在中国可谓是家喻户晓", examplePinyin: "Zài Zhōngguó kěwèi shì jiāyù-hùxiǎo.", exampleMeaning: "ในจีนถือได้ว่าเป็นที่รู้จักกันดีทั่วบ้านทั่วเมือง" },
+            { id: 101, word: "通货膨胀", pinyin: "tōnghuò-péngzhàng", meaning: "ภาวะเงินเฟอ", type: "คำนาม", freqTotal: 1, setsFound: "H61110", example: "在通货膨胀的情况下", examplePinyin: "Zài tōnghuò péngzhàng de qíngkuàng xià.", exampleMeaning: "ภายใต้สถานการณ์เงินเฟ้อ" },
+            { id: 102, word: "成本", pinyin: "chéngběn", meaning: "ตนทุน", type: "คำนาม", freqTotal: 1, setsFound: "H61110", example: "生活成本就会增加", examplePinyin: "Shēnghuó chéngběn jiù huì zēngjiā.", exampleMeaning: "ต้นทุนค่าครองชีพก็จะเพิ่มขึ้น" },
+            { id: 103, word: "宽容", pinyin: "kuānróng", meaning: "ใจกวาง/อดกลั้น", type: "คำคุณศัพท/กริยา", freqTotal: 2, setsFound: "H61110", example: "宽容是一种为人处世的哲学", examplePinyin: "Kuānróng shì yì zhǒng wéirén-chǔshì de zhéxué.", exampleMeaning: "ความใจกว้างเป็นปรัชญาการวางตัวในสังคมอย่างหนึ่ง" },
+            { id: 104, word: "钦佩", pinyin: "qīnpèi", meaning: "ชื่นชม/ยกยอง", type: "กริยา", freqTotal: 1, setsFound: "H61110", example: "赢得别人的钦佩与尊敬", examplePinyin: "Yíngdé biéren de qīnpèi yǔ zūnjìng.", exampleMeaning: "ได้รับความชื่นชมและความเคารพจากผู้อื่น" },
+            { id: 105, word: "改造", pinyin: "gǎizào", meaning: "ปรับปรุง/ดัดแปลง", type: "กริยา", freqTotal: 1, setsFound: "H61110", example: "有的人,只会抱怨环境;后的人,知道先适应环境,然后改造环境", examplePinyin: "Yǒude rén, zhǐ huì bàoyuàn huánjìng; hòu de rén, zhīdào xiān shìyìng huánjìng, ránhòu gǎizào huánjìng.", exampleMeaning: "บางคนเอาแต่บ่นสภาพแวดล้อม แต่คนที่ฉลาดกว่ารู้จักปรับตัวเข้ากับสภาพแวดล้อมก่อนแล้วจึงปรับปรุงมัน" },
+            { id: 106, word: "周期", pinyin: "zhōuqī", meaning: "วัฏจักร/รอบ", type: "คำนาม", freqTotal: 1, setsFound: "H61110", example: "地震在时间上具有一定的周期性", examplePinyin: "Dìzhèn zài shíjiān shàng jùyǒu yídìng de zhōuqīxìng.", exampleMeaning: "แผ่นดินไหวมีความเป็นวัฏจักรตามช่วงเวลาระดับหนึ่ง" },
+            { id: 107, word: "活跃", pinyin: "huóyuè", meaning: "คึกคัก/กระตือรือรน", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61110", example: "地震活动频繁,强度大,称为地震活跃期", examplePinyin: "Dìzhèn huódòng pínfán, qiángdù dà, chēngwéi dìzhèn huóyuèqī.", exampleMeaning: "กิจกรรมแผ่นดินไหวเกิดบ่อยและรุนแรง เรียกว่าช่วงแผ่นดินไหวคึกคัก" },
+            { id: 108, word: "持之以恒", pinyin: "chízhī-yǐhéng", meaning: "มีความเพียรพยายามอยางตอเนื่อง", type: "สำนวน", freqTotal: 1, setsFound: "H61110", example: "在它们之中,从未间断过这种努力,持之以恒", examplePinyin: "Zài tāmen zhīzhōng, cóngwèi jiànduànguò zhè zhǒng nǔlì, chízhī-yǐhéng.", exampleMeaning: "ในหมู่พวกเขา ไม่เคยหยุดความพยายามนี้เลย มีความเพียรอย่างต่อเนื่อง" },
+            { id: 109, word: "一如既往", pinyin: "yīrújìwǎng", meaning: "เปนเชนเดิมทุกประการ", type: "สำนวน", freqTotal: 1, setsFound: "H61110", example: "一如既往地进行努力", examplePinyin: "Yīrújìwǎng de jìnxíng nǔlì.", exampleMeaning: "พยายามอย่างต่อเนื่องเหมือนเดิมทุกประการ" },
+            { id: 110, word: "可口", pinyin: "kěkǒu", meaning: "ถูกปาก/อรอย", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61110", example: "整个烹煮的食物比切碎后烹煮的食物更可口", examplePinyin: "Zhěnggè pēngzhǔ de shíwù bǐ qiēsuì hòu pēngzhǔ de shíwù gèng kěkǒu.", exampleMeaning: "อาหารที่ปรุงทั้งชิ้นอร่อยกว่าอาหารที่ปรุงหลังหั่นชิ้นเล็ก" },
+            { id: 111, word: "意味着", pinyin: "yìwèizhe", meaning: "มีความหมายวา/หมายถึง", type: "กริยา", freqTotal: 1, setsFound: "H61110", example: "意味着糖、酸等元素已经析出", examplePinyin: "Yìwèizhe táng, suān děng yuánsù yǐjīng xīchū.", exampleMeaning: "หมายความว่าน้ำตาล กรด และองค์ประกอบอื่นๆ ได้แยกตัวออกมาแล้ว" },
+            { id: 112, word: "熏陶", pinyin: "xūntáo", meaning: "อบรมบมนิสัย/ซึมซับ", type: "กริยา", freqTotal: 1, setsFound: "H61110", example: "阅读不是讲大道理的熏陶", examplePinyin: "Yuèdú bú shì jiǎng dàdàoli de xūntáo.", exampleMeaning: "การอ่านไม่ใช่การอบรมด้วยหลักการใหญ่โต" },
+            { id: 113, word: "心灵", pinyin: "xīnlíng", meaning: "จิตใจ", type: "คำนาม", freqTotal: 1, setsFound: "H61110", example: "就会从中得到心灵的安慰", examplePinyin: "Jiù huì cóngzhōng dédào xīnlíng de ānwèi.", exampleMeaning: "ก็จะได้รับการปลอบประโลมทางจิตใจจากสิ่งนั้น" },
+            { id: 114, word: "庞然大物", pinyin: "pángrán-dàwù", meaning: "สิ่งที่มีขนาดใหญโตมโหฬาร", type: "สำนวน", freqTotal: 1, setsFound: "H61110", example: "同大象、狮子、蓝鲸等庞然大物起来", examplePinyin: "Tóng dàxiàng, shīzi, lánjīng děng pángrán-dàwù qǐlái.", exampleMeaning: "เมื่อเทียบกับสัตว์ขนาดมหึมาอย่างช้าง สิงโต วาฬสีน้ำเงิน" },
+            { id: 115, word: "想方设法", pinyin: "xiǎngfāng-shèfǎ", meaning: "สารพัดวิธี/หาทางทุกวิถีทาง", type: "สำนวน", freqTotal: 1, setsFound: "H61110", example: "人类绞尽脑汁、想方设法要消灭它们", examplePinyin: "Rénlèi jiǎojìn-nǎozhī, xiǎngfāng-shèfǎ yào xiāomiè tāmen.", exampleMeaning: "มนุษย์ขบคิดสุดสมอง หาสารพัดวิธีเพื่อกำจัดพวกมัน" },
+            { id: 116, word: "刺激", pinyin: "cìjī", meaning: "กระตุน/เรา", type: "กริยา/คำนาม", freqTotal: 1, setsFound: "H61110", example: "挑战难度太低,不能满足他们的要求,觉得不够刺激", examplePinyin: "Tiǎozhàn nándù tài dī, bùnéng mǎnzú tāmen de yāoqiú, juéde búgòu cìjī.", exampleMeaning: "ความท้าทายที่ระดับความยากต่ำเกินไป ไม่สามารถตอบสนองความต้องการของพวกเขา รู้สึกว่าไม่ตื่นเต้นเร้าใจพอ" },
+            { id: 117, word: "真诚", pinyin: "zhēnchéng", meaning: "จริงใจ", type: "คำคุณศัพท", freqTotal: 2, setsFound: "H61009", example: "一个人只要真诚,总能打动人", examplePinyin: "Yí ge rén zhǐyào zhēnchéng, zǒng néng dǎdòng rén.", exampleMeaning: "ตราบใดที่คนเรามีความจริงใจ ก็สามารถซาบซึ้งใจผู้อื่นได้เสมอ" },
+            { id: 118, word: "卓越", pinyin: "zhuóyuè", meaning: "โดดเดน/ยอดเยี่ยม", type: "คำคุณศัพท", freqTotal: 2, setsFound: "H61009", example: "尽管在科学领域取得了卓越的成就", examplePinyin: "Jǐnguǎn zài kēxué lǐngyù qǔdé le zhuóyuè de chéngjiù.", exampleMeaning: "แม้จะประสบความสำเร็จอันโดดเด่นในวงการวิทยาศาสตร์" },
+            { id: 119, word: "磨难", pinyin: "mónàn", meaning: "ความทุกขยาก/เคราะหกรรม", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "影响一个人快乐的,有时并不是困境及磨难", examplePinyin: "Yǐngxiǎng yí ge rén kuàilè de, yǒushí bìng bú shì kùnjìng jí mónàn.", exampleMeaning: "สิ่งที่ส่งผลต่อความสุขของคนคนหนึ่ง บางครั้งก็ไม่ใช่ความยากลำบากหรือเคราะห์กรรม" },
+            { id: 120, word: "挑衅", pinyin: "tiǎoxìn", meaning: "ยั่วยุ/ทาทาย", type: "กริยา", freqTotal: 2, setsFound: "H61009", example: "有些人在面对别人的挑衅和责难时", examplePinyin: "Yǒuxiē rén zài miànduì biéren de tiǎoxìn hé zémàn shí.", exampleMeaning: "เมื่อบางคนเผชิญกับการยั่วยุและการตำหนิจากผู้อื่น" },
+            { id: 121, word: "见闻", pinyin: "jiànwén", meaning: "สิ่งที่ไดยินไดเห็น", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "记载了他西行取经的见闻", examplePinyin: "Jìzǎi le tā xīxíng qǔjīng de jiànwén.", exampleMeaning: "บันทึกสิ่งที่เขาได้พบเห็นระหว่างการเดินทางไปทางตะวันตกเพื่อแสวงหาพระคัมภีร์" },
+            { id: 122, word: "风土人情", pinyin: "fēngtǔ-rénqíng", meaning: "ขนบธรรมเนียมประเพณี", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "介绍了沿途各国的历史沿革、风土人情", examplePinyin: "Jièshào le yántú gèguó de lìshǐ yángé, fēngtǔ-rénqíng.", exampleMeaning: "แนะนำประวัติศาสตร์และขนบธรรมเนียมของประเทศต่างๆ ตลอดเส้นทาง" },
+            { id: 123, word: "青睐", pinyin: "qīnglài", meaning: "โปรดปราน/พึงใจ", type: "คำนาม/กริยา", freqTotal: 2, setsFound: "H61009", example: "深受研究者的青睐", examplePinyin: "Shēnshòu yánjiūzhě de qīnglài.", exampleMeaning: "เป็นที่โปรดปรานอย่างมากของนักวิจัย" },
+            { id: 124, word: "期待", pinyin: "qīdài", meaning: "ตั้งตารอคอย", type: "กริยา", freqTotal: 3, setsFound: "H61009", example: "别一味在幻想中自傲,现实中失落,不如主动期待", examplePinyin: "Bié yíwèi zài huànxiǎng zhōng zì'ào, xiànshí zhōng shīluò, bùrú zhǔdòng qīdài.", exampleMeaning: "อย่ามัวหลงตัวเองในจินตนาการแล้วผิดหวังกับความจริง สู้เป็นฝ่ายรอคอยด้วยตัวเองดีกว่า" },
+            { id: 125, word: "流传", pinyin: "liúchuán", meaning: "เผยแพร/ตกทอด", type: "กริยา", freqTotal: 2, setsFound: "H61009", example: "布老虎是一种古代就已在中国民间广为流传的工艺品", examplePinyin: "Bùlǎohǔ shì yì zhǒng gǔdài jiù yǐ zài Zhōngguó mínjiān guǎngwéi liúchuán de gōngyìpǐn.", exampleMeaning: "เสือผ้าเป็นงานหัตถกรรมที่เผยแพร่กันอย่างแพร่หลายในหมู่ประชาชนจีนมาตั้งแต่โบราณ" },
+            { id: 126, word: "收藏", pinyin: "shōucáng", meaning: "สะสม", type: "คำนาม/กริยา", freqTotal: 2, setsFound: "H61009", example: "还是很好的儿童玩具、室内摆设、馈赠礼品及个人收藏品", examplePinyin: "Háishi hěn hǎo de értóng wánjù, shìnèi bǎishè, kuìzèng lǐpǐn jí gèrén shōucángpǐn.", exampleMeaning: "ยังเป็นทั้งของเล่นเด็ก ของตกแต่งบ้าน ของขวัญ และของสะสมส่วนตัวที่ดี" },
+            { id: 127, word: "寄托", pinyin: "jìtuō", meaning: "ฝากความหวัง", type: "กริยา", freqTotal: 2, setsFound: "H61009", example: "它寄托着人们对美好的生活的与追求", examplePinyin: "Tā jìtuōzhe rénmen duì měihǎo de shēnghuó de yǔ zhuīqiú.", exampleMeaning: "มันฝากความหวังของผู้คนต่อชีวิตที่ดีงามและการแสวงหาไว้ในตัว" },
+            { id: 128, word: "功效", pinyin: "gōngxiào", meaning: "สรรพคุณ/ประสิทธิภาพ", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "很多人知道苹果有抗击癌症的功效", examplePinyin: "Hěn duō rén zhīdào píngguǒ yǒu kàngjí áizhèng de gōngxiào.", exampleMeaning: "หลายคนรู้ว่าแอปเปิ้ลมีสรรพคุณต้านมะเร็ง" },
+            { id: 129, word: "发挥", pinyin: "fāhuī", meaning: "เปลงประกาย(ความสามารถ)", type: "กริยา", freqTotal: 2, setsFound: "H61009", example: "为了最大限度地发挥苹果的抗癌作用", examplePinyin: "Wèile zuìdà xiàndù de fāhuī píngguǒ de kàng'ái zuòyòng.", exampleMeaning: "เพื่อดึงศักยภาพในการต้านมะเร็งของแอปเปิ้ลออกมาให้มากที่สุด" },
+            { id: 130, word: "视野", pinyin: "shìyě", meaning: "วิสัยทัศน/ขอบเขตการมองเห็น", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "甚至有些比正在捕捉的更容易抓到,但猎豹从不会改变视野", examplePinyin: "Shènzhì yǒuxiē bǐ zhèngzài bǔzhuō de gèng róngyì zhuādào, dàn lièbào cóng bú huì gǎibiàn shìyě.", exampleMeaning: "แม้บางตัวจะจับได้ง่ายกว่าตัวที่กำลังไล่ล่าอยู่ แต่เสือชีตาห์ไม่เคยเปลี่ยนเป้าสายตา" },
+            { id: 131, word: "障碍", pinyin: "zhàngài", meaning: "อุปสรรค", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "成本过高是其发展的最大障碍", examplePinyin: "Chéngběn guògāo shì qí fāzhǎn de zuìdà zhàng'ài.", exampleMeaning: "ต้นทุนที่สูงเกินไปคืออุปสรรคใหญ่ที่สุดในการพัฒนา" },
+            { id: 132, word: "妈妈", pinyin: "māma", meaning: "แม", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "有个孩子,在他出生的那天,妈妈就离开了人世", examplePinyin: "Yǒu ge háizi, zài tā chūshēng de nàtiān, māma jiù líkāi le rénshì.", exampleMeaning: "มีเด็กคนหนึ่ง วันที่เขาเกิดแม่ของเขาก็จากโลกนี้ไป" },
+            { id: 133, word: "礼物", pinyin: "lǐwù", meaning: "ของขวัญ", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "妈妈为你留下了最珍贵的礼物", examplePinyin: "Māma wèi nǐ liú xià le zuì zhēnguì de lǐwù.", exampleMeaning: "แม่ทิ้งของขวัญล้ำค่าที่สุดไว้ให้เธอ" },
+            { id: 134, word: "眼睛", pinyin: "yǎnjing", meaning: "ตา", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "妈妈还给了你明亮的眼睛", examplePinyin: "Māma hái gěi le nǐ míngliàng de yǎnjing.", exampleMeaning: "แม่ยังให้ดวงตาที่สดใสแก่เธอด้วย" },
+            { id: 135, word: "世界", pinyin: "shìjiè", meaning: "โลก", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "去看看这个世界", examplePinyin: "Qù kànkan zhège shìjiè.", exampleMeaning: "ไปดูโลกใบนี้กัน" },
+            { id: 136, word: "生活", pinyin: "shēnghuó", meaning: "ชีวิต", type: "คำนาม", freqTotal: 2, setsFound: "H61009", example: "生活", examplePinyin: "Shēnghuó.", exampleMeaning: "ชีวิต" },
+            { id: 137, word: "罕见", pinyin: "hǎnjiàn", meaning: "พบไดยาก/หายาก", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61007", example: "这儿的冬天一点儿也不冷,下雪天更是罕见", examplePinyin: "Zhèr de dōngtiān yìdiǎnr yě bù lěng, xiàxuětiān gèng shì hǎnjiàn.", exampleMeaning: "ฤดูหนาวที่นี่ไม่หนาวเลยแม้แต่น้อย วันที่หิมะตกยิ่งพบได้ยาก" },
+            { id: 138, word: "躲避", pinyin: "duǒbì", meaning: "หลบเลี่ยง", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "为了躲避天敌的追杀,很多动物都具有非常强的伪装能力", examplePinyin: "Wèile duǒbì tiāndí de zhuīshā, hěn duō dòngwù dōu jùyǒu fēicháng qiáng de wěizhuāng nénglì.", exampleMeaning: "เพื่อหลบเลี่ยงการล่าจากศัตรูตามธรรมชาติ สัตว์หลายชนิดจึงมีความสามารถในการพรางตัวสูงมาก" },
+            { id: 139, word: "寓意", pinyin: "yùyì", meaning: "ความหมายแฝง/คติ", type: "คำนาม/กริยา", freqTotal: 1, setsFound: "H61007", example: "孙中山铜像总高度为11.12米,寓意孙中山先生的诞辰11月12日", examplePinyin: "Sūn Zhōngshān tóngxiàng zǒng gāodù wéi 11.12 mǐ, yùyì Sūn Zhōngshān xiānsheng de dànchén 11 yuè 12 rì.", exampleMeaning: "รูปปั้นซุนยัตเซ็นมีความสูงรวม 11.12 เมตร เป็นสัญลักษณ์แทนวันเกิดของซุนยัตเซ็นวันที่ 12 พฤศจิกายน" },
+            { id: 140, word: "凭借", pinyin: "píngjiè", meaning: "อาศัย/พึ่งพา", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "不管鸟的翅膀多么完美,如果不凭借空气,它就永远不能飞到高空", examplePinyin: "Bùguǎn niǎo de chìbǎng duōme wánměi, rúguǒ bù píngjiè kōngqì, tā jiù yǒngyuǎn bùnéng fēidào gāokōng.", exampleMeaning: "ไม่ว่าปีกนกจะสมบูรณ์แบบเพียงใด หากไม่อาศัยอากาศ มันก็ไม่มีวันบินขึ้นสู่ที่สูงได้" },
+            { id: 141, word: "反思", pinyin: "fǎnsī", meaning: "ทบทวนตัวเอง/สะทอนความคิด", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "犯了错误,首先要反思自己", examplePinyin: "Fàn le cuòwù, shǒuxiān yào fǎnsī zìjǐ.", exampleMeaning: "เมื่อทำผิดพลาด สิ่งแรกที่ต้องทำคือทบทวนตัวเอง" },
+            { id: 142, word: "抱怨", pinyin: "bàoyuàn", meaning: "บน/ตัดพอ", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "不要总是抱怨别人做的不好", examplePinyin: "Búyào zǒngshì bàoyuàn biéren zuò de bùhǎo.", exampleMeaning: "อย่าเอาแต่บ่นว่าคนอื่นทำไม่ดี" },
+            { id: 143, word: "吸取", pinyin: "xīqǔ", meaning: "ดูดซับ/เรียนรู", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "吸取了小提琴演奏技巧的某些长处", examplePinyin: "Xīqǔ le xiǎotíqín yǎnzòu jìqiǎo de mǒuxiē chángchù.", exampleMeaning: "หยิบยกจุดเด่นบางอย่างของเทคนิคการเล่นไวโอลินมาใช้" },
+            { id: 144, word: "改良", pinyin: "gǎiliáng", meaning: "ปรับปรุง/พัฒนา", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "使二胡从一种伴奏乐器为独奏乐器", examplePinyin: "Shǐ èrhú cóng yì zhǒng bànzòu yuèqì wéi dúzòu yuèqì.", exampleMeaning: "ทำให้เอ้อหูเปลี่ยนจากเครื่องดนตรีประกอบเป็นเครื่องดนตรีเดี่ยว" },
+            { id: 145, word: "性能", pinyin: "xìngnéng", meaning: "สมรรถนะ/ประสิทธิภาพ", type: "คำนาม", freqTotal: 1, setsFound: "H61007", example: "由此得到的金属工具的性能更好、更稳定", examplePinyin: "Yóucǐ dédào de jīnshǔ gōngjù de xìngnéng gèng hǎo, gèng wěndìng.", exampleMeaning: "เครื่องมือโลหะที่ได้จึงมีสมรรถนะดีขึ้นและมีความเสถียรมากขึ้น" },
+            { id: 146, word: "成熟", pinyin: "chéngshú", meaning: "เติบโตเต็มที่", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61007", example: "其心理会更加成熟", examplePinyin: "Qí xīnlǐ huì gèngjiā chéngshú.", exampleMeaning: "จิตใจของเขาจะเติบโตเป็นผู้ใหญ่ยิ่งขึ้น" },
+            { id: 147, word: "络绎不绝", pinyin: "luòyì-bùjué", meaning: "เนืองแนน/ไมขาดสาย", type: "สำนวน", freqTotal: 1, setsFound: "H61007", example: "慕名前来旅游的中外游客络绎不绝", examplePinyin: "Mùmíng qiánlái lǚyóu de zhōngwài yóukè luòyì-bùjué.", exampleMeaning: "นักท่องเที่ยวทั้งชาวไทยและชาวต่างชาติที่มาเยือนด้วยชื่อเสียงมีอยู่อย่างไม่ขาดสาย" },
+            { id: 148, word: "闻名于世", pinyin: "wénmíng-yúshì", meaning: "โดงดังไปทั่วโลก", type: "สำนวน", freqTotal: 1, setsFound: "H61007", example: "以翠海瀑布、彩林、云峰等奇观闻名于世", examplePinyin: "Yǐ Cuìhǎi Pùbù, Cǎilín, Yúnfēng děng qíguān wénmíng-yúshì.", exampleMeaning: "มีชื่อเสียงโด่งดังไปทั่วโลกด้วยทัศนียภาพอัศจรรย์อย่างน้ำตกชุ่ยไห่ ป่าสีสัน และยอดเขาหยุนเฟิง" },
+            { id: 149, word: "遗产", pinyin: "yíchǎn", meaning: "มรดก", type: "คำนาม", freqTotal: 1, setsFound: "H61007", example: "也是世界自然遗产", examplePinyin: "Yě shì shìjiè zìrán yíchǎn.", exampleMeaning: "ก็เป็นมรดกโลกทางธรรมชาติด้วย" },
+            { id: 150, word: "频繁", pinyin: "pínfán", meaning: "บอยครั้ง", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61007", example: "使用比较频繁", examplePinyin: "Shǐyòng bǐjiào pínfán.", exampleMeaning: "ใช้งานค่อนข้างบ่อย" },
+            { id: 151, word: "鲁莽", pinyin: "lǔmǎng", meaning: "บุมบาม/สะเพรา", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61007", example: "做事不能太鲁莽", examplePinyin: "Zuòshì bùnéng tài lǔmǎng.", exampleMeaning: "การทำงานไม่ควรบุ่มบ่ามสะเพร่าเกินไป" },
+            { id: 152, word: "装备", pinyin: "zhuāngbèi", meaning: "อุปกรณ/ยุทโธปกรณ", type: "คำนาม/กริยา", freqTotal: 1, setsFound: "H61007", example: "不需要任何专门的场地和装备", examplePinyin: "Bù xūyào rènhé zhuānmén de chǎngdì hé zhuāngbèi.", exampleMeaning: "ไม่จำเป็นต้องมีสถานที่และอุปกรณ์เฉพาะทางใดๆ" },
+            { id: 153, word: "滔滔不绝", pinyin: "tāotāo-bùjué", meaning: "พูดนํ้าไหลไฟดับ", type: "สำนวน", freqTotal: 1, setsFound: "H61007", example: "滔滔不绝地阐述了治国安邦的见解", examplePinyin: "Tāotāo-bùjué de chǎnshù le zhìguó ānbāng de jiànjiě.", exampleMeaning: "อธิบายความเห็นเกี่ยวกับการปกครองประเทศอย่างไม่หยุดปาก" },
+            { id: 154, word: "闪烁", pinyin: "shǎnshuò", meaning: "ระยิบระยับ/กะพริบ", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "感觉星星好像在闪烁", examplePinyin: "Gǎnjué xīngxing hǎoxiàng zài shǎnshuò.", exampleMeaning: "รู้สึกเหมือนดวงดาวกำลังกะพริบระยิบระยับ" },
+            { id: 155, word: "家长会", pinyin: "jiāzhǎnghuì", meaning: "การประชุมผูปกครอง", type: "คำนาม", freqTotal: 1, setsFound: "H61007", example: "她第一次参加家长会", examplePinyin: "Tā dì-yī cì cānjiā jiāzhǎnghuì.", exampleMeaning: "นี่เป็นครั้งแรกที่เธอเข้าร่วมการประชุมผู้ปกครอง" },
+            { id: 156, word: "多动症", pinyin: "duōdòngzhèng", meaning: "โรคสมาธิสั้น", type: "คำนาม", freqTotal: 1, setsFound: "H61007", example: "是不是有多动症?", examplePinyin: "Shì bú shì yǒu duōdòngzhèng?", exampleMeaning: "เป็นโรคสมาธิสั้นหรือเปล่า?" },
+            { id: 157, word: "奇迹", pinyin: "qíjì", meaning: "ปาฏิหาริย", type: "คำนาม", freqTotal: 2, setsFound: "H61007", example: "现在只有奇迹才能救得了他", examplePinyin: "Xiànzài zhǐyǒu qíjì cáinéng jiù de le tā.", exampleMeaning: "ตอนนี้มีแต่ปาฏิหาริย์เท่านั้นที่จะช่วยเขาได้" },
+            { id: 158, word: "重点大学", pinyin: "zhòngdiǎn dàxué", meaning: "มหาวิทยาลัยชั้นนำ", type: "คำนาม", freqTotal: 1, setsFound: "H61007", example: "被重点大学录取了", examplePinyin: "Bèi zhòngdiǎn dàxué lùqǔ le.", exampleMeaning: "ได้รับการรับเข้ามหาวิทยาลัยชั้นนำแล้ว" },
+            { id: 159, word: "欣赏", pinyin: "xīnshǎng", meaning: "ชื่นชม", type: "กริยา", freqTotal: 1, setsFound: "H61007", example: "这个世界上只有您能欣赏我", examplePinyin: "Zhège shìjiè shàng zhǐyǒu nín néng xīnshǎng wǒ.", exampleMeaning: "ในโลกนี้มีแต่คุณเท่านั้นที่ชื่นชมฉันได้" },
+            { id: 160, word: "模仿", pinyin: "mófǎng", meaning: "เลียนแบบ", type: "กริยา", freqTotal: 1, setsFound: "H61006", example: "创新并不拒绝模仿,模仿是创新的基础", examplePinyin: "Chuàngxīn bìng bù jùjué mófǎng, mófǎng shì chuàngxīn de jīchǔ.", exampleMeaning: "นวัตกรรมไม่ได้ปฏิเสธการเลียนแบบ การเลียนแบบคือรากฐานของนวัตกรรม" },
+            { id: 161, word: "倾诉", pinyin: "qīngsù", meaning: "ระบายความในใจ", type: "กริยา", freqTotal: 1, setsFound: "H61006", example: "作为倾诉对象,我们不需要发表自己的观点", examplePinyin: "Zuòwéi qīngsù duìxiàng, wǒmen bù xūyào fābiǎo zìjǐ de guāndiǎn.", exampleMeaning: "ในฐานะผู้รับฟังการระบายความในใจ เราไม่จำเป็นต้องแสดงความเห็นของตัวเอง" },
+            { id: 162, word: "慌张", pinyin: "huāngzhāng", meaning: "ลนลาน/ตื่นตระหนก", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61006", example: "羊的胆子很小,遇到点儿响动就会惊慌失措", examplePinyin: "Yáng de dǎnzi hěn xiǎo, yùdào diǎnr xiǎngdòng jiù huì jīnghuāng-shīcuò.", exampleMeaning: "แกะเป็นสัตว์ที่ขี้กลัวมาก แค่มีเสียงเล็กน้อยก็จะตกใจกลัวจนควบคุมตัวเองไม่ได้" },
+            { id: 163, word: "推销员", pinyin: "tuīxiāoyuán", meaning: "พนักงานขาย", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "以前我做过推销员三年", examplePinyin: "Yǐqián wǒ zuòguo tuīxiāoyuán sān nián.", exampleMeaning: "ก่อนหน้านี้ฉันเคยเป็นพนักงานขายมาสามปี" },
+            { id: 164, word: "独创性", pinyin: "dúchuàngxìng", meaning: "ความคิดสรางสรรคเฉพาะตัว", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "创造力与一般能力的区别在于它的新颖性和独创性", examplePinyin: "Chuàngzàolì yǔ yìbān nénglì de qūbié zàiyú tā de xīnyǐngxìng hé dúchuàngxìng.", exampleMeaning: "ความแตกต่างระหว่างความคิดสร้างสรรค์กับความสามารถทั่วไปอยู่ที่ความแปลกใหม่และเอกลักษณ์เฉพาะตัว" },
+            { id: 165, word: "期望", pinyin: "qīwàng", meaning: "ความคาดหวัง", type: "คำนาม/กริยา", freqTotal: 1, setsFound: "H61006", example: "按照别人对自己的期望去生活", examplePinyin: "Ànzhào biéren duì zìjǐ de qīwàng qù shēnghuó.", exampleMeaning: "ใช้ชีวิตตามความคาดหวังของผู้อื่นที่มีต่อตนเอง" },
+            { id: 166, word: "扩散", pinyin: "kuòsàn", meaning: "แพรกระจาย", type: "กริยา", freqTotal: 1, setsFound: "H61006", example: "酒精一般在胃里就会被血液带进循环系统", examplePinyin: "Jiǔjīng yìbān zài wèi lǐ jiù huì bèi xuèyè dàijìn xúnhuán xìtǒng.", exampleMeaning: "แอลกอฮอล์โดยทั่วไปจะถูกเลือดพาเข้าสู่ระบบหมุนเวียนตั้งแต่อยู่ในกระเพาะแล้ว" },
+            { id: 167, word: "浓度", pinyin: "nóngdù", meaning: "ความเขมขน", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "当肝脏解酒浓度低于酒精摄入浓度的时候,血液中的酒精浓度增加", examplePinyin: "Dāng gānzàng jiějiǔ nóngdù dīyú jiǔjīng shèrù nóngdù de shíhou, xuèyè zhōng de jiǔjīng nóngdù zēngjiā.", exampleMeaning: "เมื่อความเข้มข้นในการสลายแอลกอฮอล์ของตับต่ำกว่าความเข้มข้นที่ดื่มเข้าไป ความเข้มข้นแอลกอฮอล์ในเลือดก็จะเพิ่มขึ้น" },
+            { id: 168, word: "核心", pinyin: "héxīn", meaning: "แกนหลัก/หัวใจสำคัญ", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "中国花茶的生产始于南宋,最早的加工核心在福州", examplePinyin: "Zhōngguó huāchá de shēngchǎn shǐyú Nánsòng, zuìzǎo de jiāgōng héxīn zài Fúzhōu.", exampleMeaning: "การผลิตชาดอกไม้ของจีนเริ่มต้นตั้งแต่สมัยราชวงศ์ซ่งใต้ ศูนย์กลางการแปรรูปแรกเริ่มอยู่ที่ฝูโจว" },
+            { id: 169, word: "抛弃", pinyin: "pāoqì", meaning: "ทอดทิ้ง", type: "กริยา", freqTotal: 1, setsFound: "H61006", example: "随着年龄的增长,我们似乎被这个世界抛弃了", examplePinyin: "Suízhe niánlíng de zēngzhǎng, wǒmen sìhū bèi zhège shìjiè pāoqì le.", exampleMeaning: "เมื่ออายุมากขึ้น เราดูเหมือนจะถูกโลกใบนี้ทอดทิ้งไป" },
+            { id: 170, word: "充满", pinyin: "chōngmǎn", meaning: "เต็มไปดวย", type: "กริยา", freqTotal: 1, setsFound: "H61006", example: "当你身心愉悦,对这个世界充满善意时", examplePinyin: "Dāng nǐ shēnxīn yúyuè, duì zhège shìjiè chōngmǎn shànyì shí.", exampleMeaning: "เมื่อคุณรู้สึกเบิกบานใจและเต็มไปด้วยความปรารถนาดีต่อโลกใบนี้" },
+            { id: 171, word: "悲观", pinyin: "bēiguān", meaning: "มองโลกในแงราย", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61006", example: "相反,当你悲观郁闷、觉得什么都不对劲儿时", examplePinyin: "Xiāngfǎn, dāng nǐ bēiguān yùmèn, juéde shénme dōu bú duìjìnr shí.", exampleMeaning: "ในทางตรงกันข้าม เมื่อคุณมองโลกในแง่ร้าย หดหู่ รู้สึกว่าทุกอย่างไม่เข้าท่า" },
+            { id: 172, word: "特定", pinyin: "tèdìng", meaning: "เฉพาะเจาะจง", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61006", example: "传达出一种认识、角度别致、形式上特定的信息", examplePinyin: "Chuándá chū yì zhǒng rènshi, jiǎodù biézhì, xíngshì shàng tèdìng de xìnxī.", exampleMeaning: "สื่อสารความเข้าใจ มุมมองที่แปลกใหม่ และข้อมูลที่มีรูปแบบเฉพาะเจาะจงออกมา" },
+            { id: 173, word: "胸怀", pinyin: "xiōnghuái", meaning: "ความใจกวาง/จิตใจ", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "幽默是一种乐观的人生态度、机智的方式、轻松的心态和宽容的胸怀", examplePinyin: "Yōumò shì yì zhǒng lèguān de rénshēng tàidu, jīzhì de fāngshì, qīngsōng de xīntài hé kuānróng de xiōnghuái.", exampleMeaning: "อารมณ์ขันคือทัศนคติต่อชีวิตแบบมองโลกในแง่ดี วิธีคิดที่ชาญฉลาด จิตใจที่ผ่อนคลาย และความใจกว้าง" },
+            { id: 174, word: "情绪", pinyin: "qíngxù", meaning: "อารมณ", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "你最应该做的并不是用情绪或态度上的强硬来压倒对方", examplePinyin: "Nǐ zuì yīnggāi zuò de bìng bú shì yòng qíngxù huò tàidu shàng de qiángyìng lái yādǎo duìfāng.", exampleMeaning: "สิ่งที่คุณควรทำที่สุดไม่ใช่การใช้อารมณ์หรือท่าทีที่แข็งกร้าวเพื่อกดดันอีกฝ่าย" },
+            { id: 175, word: "抵触", pinyin: "dǐchù", meaning: "ตอตาน/ขัดแยง", type: "กริยา", freqTotal: 1, setsFound: "H61006", example: "对方的抗拒和对抗情绪也就越大", examplePinyin: "Duìfāng de kàngjù hé duìkàng qíngxù yě jiù yuè dà.", exampleMeaning: "การต่อต้านและอารมณ์ขัดแย้งของอีกฝ่ายก็จะยิ่งรุนแรงขึ้น" },
+            { id: 176, word: "沮丧", pinyin: "jǔsàng", meaning: "หดหู/ทอแท", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61006", example: "为沮丧的人说一句鼓励的话", examplePinyin: "Wèi jǔsàng de rén shuō yí jù gǔlì de huà.", exampleMeaning: "พูดให้กำลังใจคนที่กำลังหดหู่ท้อแท้สักคำ" },
+            { id: 177, word: "锦上添花", pinyin: "jǐnshàng-tiānhuā", meaning: "ทำสิ่งที่ดียิ่งๆ ขึ้นไปอีก", type: "สำนวน", freqTotal: 1, setsFound: "H61006", example: "许多时候,雪中送炭比锦上添花好", examplePinyin: "Xǔduō shíhou, xuězhōngsòngtàn bǐ jǐnshàng-tiānhuā hǎo.", exampleMeaning: "หลายครั้งการให้ในยามยากลำบากดีกว่าการเพิ่มเติมสิ่งดีให้กับสิ่งที่ดีอยู่แล้ว" },
+            { id: 178, word: "微妙", pinyin: "wēimiào", meaning: "ละเอียดออน/ซับซอน", type: "คำคุณศัพท", freqTotal: 1, setsFound: "H61006", example: "礼仪是一种微妙的东西", examplePinyin: "Lǐyí shì yì zhǒng wēimiào de dōngxi.", exampleMeaning: "มารยาทเป็นเรื่องที่ละเอียดอ่อนซับซ้อน" },
+            { id: 179, word: "犒劳", pinyin: "kàoláo", meaning: "ใหรางวัล/ปลอบขวัญ", type: "กริยา", freqTotal: 1, setsFound: "H61006", example: "用巧克力、蛋糕、布丁、奶酪等甜美的食物来犒劳自己", examplePinyin: "Yòng qiǎokèlì, dàngāo, bùdīng, nǎilào děng tiánměi de shíwù lái kǎoláo zìjǐ.", exampleMeaning: "ให้รางวัลตัวเองด้วยของหวาน เช่น ช็อกโกแลต เค้ก พุดดิ้ง และชีส" },
+            { id: 180, word: "女孩儿", pinyin: "nǚháir", meaning: "เด็กผูหญิง", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "女孩儿5岁那年就已经很懂事了", examplePinyin: "Nǚháir 5 suì nà nián jiù yǐjīng hěn dǒngshì le.", exampleMeaning: "เด็กหญิงตอนอายุ 5 ขวบก็รู้เรื่องมากแล้ว" },
+            { id: 181, word: "药店", pinyin: "yàodiàn", meaning: "รานขายยา", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "女孩儿悄悄溜出门,向药店走去", examplePinyin: "Nǚháir qiāoqiāo liūchūmén, xiàng yàodiàn zǒu qù.", exampleMeaning: "เด็กหญิงแอบหลบออกจากบ้านไป มุ่งหน้าไปที่ร้านขายยา" },
+            { id: 182, word: "手术", pinyin: "shǒushù", meaning: "การผาตัด", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "弟弟需要接受一个费用昂贵的手术", examplePinyin: "Dìdi xūyào jiēshòu yí ge fèiyòng ángguì de shǒushù.", exampleMeaning: "น้องชายต้องเข้ารับการผ่าตัดที่มีค่าใช้จ่ายแพงมาก" },
+            { id: 183, word: "神经外科医生", pinyin: "shénjīng wàikē yīshēng", meaning: "ศัลยแพทยระบบประสาท", type: "คำนาม", freqTotal: 1, setsFound: "H61006", example: "那个店员的弟弟是一位神经外科医生", examplePinyin: "Nàge diànyuán de dìdi shì yí wèi shénjīng wàikē yīshēng.", exampleMeaning: "น้องชายของพนักงานคนนั้นเป็นศัลยแพทย์ระบบประสาท" }
         ];
 
         function speakText(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'zh-CN';
-                utterance.rate = 0.9;
+                utterance.rate = 0.72;
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("เบราว์เซอร์ของคุณไม่รองรับการออกเสียง");
@@ -129,44 +379,30 @@
 
         const targetWord = urlParams.get('word');
         if (targetWord) {
-            const foundIdx = hsk6FullData.findIndex(item => item.word === targetWord);
+            const foundIdx = hsk6Data.findIndex(item => item.word === targetWord);
             if (foundIdx !== -1) currentWordIndex = foundIdx;
-        } else {
-            hsk6FullData[0] = {
-                id: 1,
-                word: urlParams.get('word') || '坦然',
-                pinyin: urlParams.get('pinyin') || 'tǎnrán',
-                meaning: urlParams.get('meaning') || 'อย่างสงบ/อย่างสบายใจ',
-                type: urlParams.get('type') || 'คำคุณศัพท์',
-                setsFound: urlParams.get('setsFound') || 'H61221',
-                chinese: urlParams.get('chinese') || '闻过则喜，能够坦然接受批评，是自信的一个突出标志',
-                exPinyin: urlParams.get('exPinyin') || 'Wén guò zé xǐ, nénggòu tǎnrán jiēshòu pīpíng, shì zìxìn de yī gè tūchū biāozhì',
-                exMeaning: urlParams.get('exMeaning') || 'ได้ยินความผิดแล้วยินดี สามารถยอมรับคำวิจารณ์ได้อย่างสบายใจ คือสัญลักษณ์ที่โดดเด่นของความมั่นใจในตนเอง'
-            };
         }
 
         function displayCurrentWord() {
-            const item = hsk6FullData[currentWordIndex];
+            const item = hsk6Data[currentWordIndex];
             document.getElementById('wordDisplay').innerText = item.word;
             document.getElementById('pinyinDisplay').innerText = item.pinyin;
             document.getElementById('meaningDisplay').innerText = item.meaning;
             document.getElementById('typeDisplay').innerText = item.type;
-            
-            const setArray = item.setsFound ? item.setsFound.split(',').map(s => s.trim()).filter(s => s) : [];
-            const setCount = setArray.length;
-            document.getElementById('freqBadge').innerText = setCount > 0 ? `ซ้ำใน ${setCount} ชุดข้อสอบ` : 'พบในข้อสอบ';
-            document.getElementById('setsFoundDisplay').innerText = item.setsFound || '-';
-            
-            document.getElementById('exampleChinese').innerText = item.chinese || '暂ไม่มีตัวอย่างประโยคในระบบ';
-            document.getElementById('examplePinyin').innerText = item.exPinyin ? `พินอิน: ${item.exPinyin}` : '';
-            document.getElementById('exampleMeaning').innerText = item.exMeaning ? `แปลไทย: ${item.exMeaning}` : '';
+            document.getElementById('freqTotalDisplay').innerText = item.freqTotal + ' ครั้ง';
+            document.getElementById('setsFoundDisplay').innerText = item.setsFound;
+            document.getElementById('wordPosition').innerText = (currentWordIndex + 1) + ' / ' + hsk6Data.length;
+
+            document.getElementById('exampleChinese').innerText = item.example || 'ยังไม่มีตัวอย่างประโยคในระบบ';
+            document.getElementById('examplePinyin').innerText = item.examplePinyin || '-';
+            document.getElementById('exampleMeaning').innerText = item.exampleMeaning ? `แปล: ${item.exampleMeaning}` : '-';
         }
 
         function changeWord(direction) {
             currentWordIndex += direction;
             if (currentWordIndex < 0) {
-                currentWordIndex = hsk6FullData.length - 1;
-            } else if (currentWordIndex >= hsk6FullData.length) {
+                currentWordIndex = hsk6Data.length - 1;
+            } else if (currentWordIndex >= hsk6Data.length) {
                 currentWordIndex = 0;
             }
             displayCurrentWord();

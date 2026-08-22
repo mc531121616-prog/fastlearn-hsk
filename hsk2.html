@@ -388,7 +388,7 @@
                     <h3 class="text-2xl font-black">🏆 จำลองข้อสอบ HSK ระดับ 2 (40 ข้อ)</h3>
                 </div>
                 <div id="examContainer" class="space-y-6">
-                    <p class="text-sm text-stone-600">แบบทดสอบแบ่งออกเป็น 4 พาร์ท พาร์ทละ 10 ข้อ (พาร์ท 2-3 สุ่มจากคลังข้อสอบจริง 100 ข้อ/พาร์ท ไม่ซ้ำกันทุกรอบ)</p>
+                    <p class="text-sm text-stone-600">แบบทดสอบแบ่งออกเป็น 4 พาร์ท พาร์ทละ 10 ข้อ (พาร์ท 3-4 สุ่มจากคลังข้อสอบจริง 100 ข้อ/พาร์ท ไม่ซ้ำกันทุกรอบ)</p>
                     <button onclick="startExam()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg text-base">เริ่มทำข้อสอบ 40 ข้อ</button>
                 </div>
             </div>
@@ -583,106 +583,106 @@
 
         // คลังข้อสอบพาร์ท 2 ครบถ้วน 100 ข้อจริง
         const fillBlankPool = [
-            { sentence: "我最喜欢踢（　）球。", options: ["足", "手", "篮", "排"], answer: "足", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
-            { sentence: "小王的杯子是什么（　）色的？", options: ["颜", "红", "绿", "蓝"], answer: "颜", meaning: "แก้วของเสี่ยวหวังเป็นสีอะไร" },
-            { sentence: "你喜欢什么（　）动？", options: ["运", "活", "感", "劳"], answer: "运", meaning: "คุณชอบกีฬาอะไร" },
-            { sentence: "我下（　）机了。", options: ["飞", "手", "电", "汽"], answer: "飞", meaning: "ฉันลงจากเครื่องบินแล้ว" },
-            { sentence: "这个字是大的（　）思吗？", options: ["意", "想", "思", "像"], answer: "意", meaning: "อักษรตัวนี้มีความหมายว่า 'ใหญ่' ใช่ไหม" },
-            { sentence: "羊肉很好（　）。", options: ["吃", "喝", "看", "听"], answer: "吃", meaning: "เนื้อแกะอร่อยมาก" },
-            { sentence: "天气很（　）。", options: ["冷", "热", "高", "长"], answer: "冷", meaning: "อากาศหนาวมาก" },
-            { sentence: "这个题我不（　）。", options: ["会", "能", "想", "要"], answer: "会", meaning: "ข้อนี้ฉันทำไม่เป็น" },
-            { sentence: "他在哪（　）呢？", options: ["儿", "边", "面", "头"], answer: "儿", meaning: "เขาอยู่ที่ไหน" },
-            { sentence: "买了个新手（　）。", options: ["机", "表", "包", "车"], answer: "机", meaning: "ซื้อโทรศัพท์มือถือเครื่องใหม่มาหนึ่งเครื่อง" },
-            { sentence: "请在这儿写您的名（　）。", options: ["字", "片", "声", "人"], answer: "字", meaning: "กรุณาเขียนชื่อของคุณตรงนี้" },
-            { sentence: "一年有八千七百多个小（　）。", options: ["时", "钟", "分", "秒"], answer: "时", meaning: "หนึ่งปีมีมากกว่า 8,700 ชั่วโมง" },
-            { sentence: "手机在桌子上（　）。", options: ["呢", "吗", "吧", "啊"], answer: "呢", meaning: "โทรศัพท์มือถืออยู่บนโต๊ะ" },
-            { sentence: "这是去饭（　）的路吗？", options: ["店", "馆", "厅", "桌"], answer: "店", meaning: "นี่คือทางไปร้านอาหารใช่ไหม" },
-            { sentence: "让我看看里面是什么东（　）。", options: ["西", "南", "北", "方"], answer: "西", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นของอะไร" },
-            { sentence: "准备好（　）吗？", options: ["了", "过", "着", "在"], answer: "了", meaning: "เตรียมพร้อมแล้วหรือยัง" },
-            { sentence: "你喜欢（　）么运动？", options: ["什", "怎么", "谁", "哪"], answer: "什", meaning: "คุณชอบกีฬาอะไร" },
-            { sentence: "没关（　），电影还没开始呢。", options: ["系", "心", "事", "理"], answer: "系", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
-            { sentence: "那家饭店（　）做得不错。", options: ["鱼", "肉", "菜", "蛋"], answer: "鱼", meaning: "ปลาของร้านอาหารร้านนั้นทำได้ไม่เลว" },
-            { sentence: "买了很多（　）。", options: ["菜", "饭", "果", "水"], answer: "菜", meaning: "ซื้อผัก/กับข้าวมาเยอะมาก" },
-            { sentence: "我们都爱吃西（　）。", options: ["瓜", "果", "菜", "桃"], answer: "瓜", meaning: "พวกเราล้วนชอบกินแตงโม" },
-            { sentence: "晚上我们去（　）歌怎么样？", options: ["唱", "听", "跳", "玩"], answer: "唱", meaning: "ตอนเย็นพวกเราไปร้องเพลงกันเป็นไง" },
-            { sentence: "非常欢迎你来我们公（　）工作！", options: ["司", "园", "所", "厂"], answer: "司", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
-            { sentence: "这里有（　）个杯子。", options: ["几", "多", "少", "每"], answer: "几", meaning: "ที่นี่มีแก้วน้ำสองสามใบ" },
-            { sentence: "这个药饭后吃，每天吃三（　）。", options: ["次", "遍", "回", "下"], answer: "次", meaning: "ยาตัวนี้กินหลังอาหาร กินวันละ 3 ครั้ง" },
-            { sentence: "我和哥哥去商（　）买了很多菜。", options: ["店", "场", "业", "人"], answer: "店", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมาเยอะมาก" },
-            { sentence: "十五分钟（　）到了。", options: ["就", "才", "又", "还"], answer: "就", meaning: "อีก 15 นาทีก็ถึงแล้ว" },
-            { sentence: "这次考试她考（　）非常好。", options: ["得", "地", "的", "过"], answer: "得", meaning: "การสอบครั้งนี้เธอสอบได้ดีมาก" },
-            { sentence: "考试题太（　）了。", options: ["多", "少", "大", "小"], answer: "多", meaning: "โจทย์ข้อสอบเยอะเกินไปแล้ว" },
-            { sentence: "星期六也不休（　）。", options: ["息", "假", "班", "业"], answer: "息", meaning: "วันเสาร์ก็ไม่ได้พักผ่อน" },
-            { sentence: "苹果洗好了，来吃一（　）吧。", options: ["个", "只", "条", "件"], answer: "个", meaning: "ล้างแอปเปิ้ลเสร็จแล้ว มาทานสักลูกสิ" },
-            { sentence: "正在床上看电（　）呢。", options: ["视", "影", "脑", "话"], answer: "视", meaning: "กำลังดูทีวีอยู่บนเตียง" },
-            { sentence: "每天早上她都要慢（　）一小时。", options: ["跑", "走", "跳", "动"], answer: "跑", meaning: "ทุกเช้าเธอจะต้องวิ่งเหยาะๆ หนึ่งชั่วโมง" },
-            { sentence: "在哪（　）呢？", options: ["儿", "里", "边", "处"], answer: "儿", meaning: "อยู่ที่ไหน" },
-            { sentence: "因为我不知道怎（　）说。", options: ["么", "样", "么样", "哪"], answer: "么", meaning: "เพราะว่าฉันไม่รู้ว่าจะพูดอย่างไร" },
-            { sentence: "她笑着对我（　）。", options: ["说", "讲", "听", "看"], answer: "说", meaning: "เธอยิ้มและพูดกับฉัน" },
-            { sentence: "坐出租（　）去。", options: ["车", "机", "船", "飞"], answer: "车", meaning: "นั่งรถแท็กซี่ไป" },
-            { sentence: "打电（　）。", options: ["话", "报", "视", "脑"], answer: "话", meaning: "โทรศัพท์" },
-            { sentence: "您能等一（　）吗？", options: ["下", "回", "次", "时"], answer: "下", meaning: "คุณรอสักครู่ได้ไหม" },
-            { sentence: "最喜欢踢足（　）。", options: ["球", "篮", "排", "羽"], answer: "球", meaning: "ชอบเตะฟุตบอลที่สุด" },
-            { sentence: "弟弟比我（　）两岁。", options: ["小", "大", "高", "重"], answer: "小", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
-            { sentence: "他还在教室里学（　）。", options: ["习", "校", "生", "文"], answer: "习", meaning: "เขายังเรียนอยู่ในห้องเรียน" },
-            { sentence: "晴天，但是很（　）。", options: ["冷", "热", "暖", "高"], answer: "冷", meaning: "ท้องฟ้าโปร่ง แต่หนาวมาก" },
-            { sentence: "买这个电脑的（　）很少。", options: ["人", "家", "员", "者"], answer: "人", meaning: "คนที่ซื้อคอมพิวเตอร์เครื่องนี้น้อยมาก" },
-            { sentence: "现在是十一（　）三十分。", options: ["点", "分", "时", "刻"], answer: "点", meaning: "ตอนนี้เป็นเวลา 11 โมง 30 นาที" },
-            { sentence: "快坐下喝点儿（　）吧。", options: ["水", "茶", "酒", "奶"], answer: "水", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
-            { sentence: "外面已（　）下雨了。", options: ["经", "在", "常", "正"], answer: "经", meaning: "ข้างนอกฝนตกแล้ว" },
-            { sentence: "这个字我会（　）了。", options: ["写", "读", "说", "听"], answer: "写", meaning: "ตัวอักษรตัวนี้ฉันเขียนเป็นแล้ว" },
-            { sentence: "向前（　）。", options: ["走", "跑", "飞", "去"], answer: "走", meaning: "เดินไปข้างหน้า" },
-            { sentence: "我会跳（　）。", options: ["舞", "高", "远", "绳"], answer: "舞", meaning: "ฉันเต้นรำเป็น" },
-            { sentence: "可能要下（　）。", options: ["雪", "雨", "冰", "水"], answer: "雪", meaning: "หิมะอาจจะตก" },
-            { sentence: "你下午准备（　）什么？", options: ["做", "干", "办", "玩"], answer: "做", meaning: "ตอนบ่ายคุณเตรียมจะทำอะไร" },
-            { sentence: "外面的雪真（　）。", options: ["大", "小", "多", "深"], answer: "大", meaning: "หิมะข้างนอกตกหนักจริง" },
-            { sentence: "我（　）喜欢踢足球。", options: ["最", "很", "非常", "太"], answer: "最", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
-            { sentence: "你再等一（　）。", options: ["下", "会儿", "刻", "秒"], answer: "下", meaning: "คุณรออีกสักครู่" },
-            { sentence: "那个名（　）很有意思。", options: ["字", "称", "声", "号"], answer: "字", meaning: "ชื่อนั้นน่าสนใจมาก" },
-            { sentence: "请告诉我您的电（　）是多少。", options: ["话", "脑", "视", "报"], answer: "话", meaning: "กรุณาบอกฉันว่าเบอร์โทรศัพท์ของคุณคืออะไร" },
-            { sentence: "可能快下（　）了。", options: ["雨", "雪", "雹", "水"], answer: "雨", meaning: "ฝนน่าจะใกล้ตกแล้ว" },
-            { sentence: "这儿的羊肉很好吃，但是也很（　）。", options: ["贵", "便宜", "多", "少"], answer: "贵", meaning: "เนื้อแกะที่นี่อร่อยมาก แต่ก็แพงมากด้วย" },
-            { sentence: "这次考试她考得非（　）好。", options: ["常", "特", "极", "太"], answer: "常", meaning: "การสอบครั้งนี้เธอสอบได้ดีอย่างยิ่ง" },
-            { sentence: "我和哥哥去商店买了很多（　）。", options: ["菜", "饭", "肉", "鱼"], answer: "菜", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมามากมาย" },
-            { sentence: "大家都准备（　）了吗？", options: ["好", "完", "到", "成"], answer: "好", meaning: "ทุกคนเตรียมพร้อมแล้วหรือยัง" },
-            { sentence: "明天天气怎（　）样？", options: ["么", "那", "这", "什"], answer: "么", meaning: "พรุ่งนี้อากาศเป็นอย่างไรบ้าง" },
-            { sentence: "你们听（　）我说的话了吗？", options: ["懂", "见", "到", "完"], answer: "懂", meaning: "พวกคุณฟังสิ่งที่ฉันพูดเข้าใจไหม" },
-            { sentence: "你什么时候能回（　）？", options: ["来", "去", "到", "家"], answer: "来", meaning: "คุณจะกลับมาได้เมื่อไหร่" },
-            { sentence: "别（　）了，手机在桌子上呢。", options: ["找", "看", "要", "想"], answer: "找", meaning: "ไม่ต้องหาแล้ว โทรศัพท์มือถืออยู่บนโต๊ะ" },
-            { sentence: "没关系，电影还没开（　）呢。", options: ["始", "门", "演", "动"], answer: "始", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
-            { sentence: "因为我不会游（　）。", options: ["泳", "水", "戏", "玩"], answer: "泳", meaning: "เพราะว่าฉันว่ายน้ำไม่เป็น" },
-            { sentence: "他在那儿和孩子们踢足（　）呢。", options: ["球", "篮", "排", "羽"], answer: "球", meaning: "เขาอยู่ที่นั่นกำลังเตะฟุตบอลกับเด็กๆ" },
-            { sentence: "晚上一起去跳（　），怎么样？", options: ["舞", "高", "绳", "远"], answer: "舞", meaning: "ตอนเย็นไปเต้นรำด้วยกันเป็นอย่างไร" },
-            { sentence: "想早点儿睡（　）。", options: ["觉", "床", "休息", "起"], answer: "觉", meaning: "อยากนอนหลับให้เร็วหน่อย" },
-            { sentence: "我知（　）她的名字。", options: ["道", "识", "名", "理"], answer: "道", meaning: "ฉันรู้ชื่อของเธอ" },
-            { sentence: "爸爸觉（　）茶不好喝。", options: ["得", "想", "知", "看"], answer: "得", meaning: "คุณพ่อรู้สึกว่าชาไม่อร่อย" },
-            { sentence: "大人一天可（　）吃4次。", options: ["以", "能", "会", "要"], answer: "以", meaning: "ผู้ใหญ่กินได้วันละ 4 ครั้ง" },
-            { sentence: "我想送他一个电（　）。", options: ["脑", "视", "话", "影"], answer: "脑", meaning: "ฉันอยากมอบคอมพิวเตอร์ให้เขาหนึ่งเครื่อง" },
-            { sentence: "学习汉（　）。", options: ["语", "字", "文", "话"], answer: "语", meaning: "เรียนภาษาจีน" },
-            { sentence: "非常欢迎你来我们公司工（　）！", options: ["作", "事", "业", "务"], answer: "作", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
-            { sentence: "听说读写一个都不能（　）。", options: ["少", "多", "小", "无"], answer: "少", meaning: "ฟัง พูด อ่าน เขียน ขาดไม่ได้สักอย่างเดียว" },
-            { sentence: "这儿的羊肉很好（　）。", options: ["吃", "喝", "看", "玩"], answer: "吃", meaning: "เนื้อแกะที่นี่อร่อยมาก" },
-            { sentence: "时间过得（　）快。", options: ["真", "很", "太", "最"], answer: "真", meaning: "เวลาผ่านไปเร็วจริงๆ" },
-            { sentence: "弟弟比我（　）两岁。", options: ["小", "大", "高", "重"], answer: "小", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
-            { sentence: "我有两个孩（　）。", options: ["子", "童", "人", "女"], answer: "子", meaning: "ฉันมีลูกสองคน" },
-            { sentence: "我和朋（　）去看电影。", options: ["友", "伴", "人", "辈"], answer: "友", meaning: "ฉันกับเพื่อนไปดูหนัง" },
-            { sentence: "快坐下喝点儿（　）吧。", options: ["水", "茶", "酒", "奶"], answer: "水", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
-            { sentence: "我和我丈夫2008年去过一次北（　）。", options: ["京", "海", "方", "边"], answer: "京", meaning: "ฉันกับสามีเคยไปปักกิ่งหนึ่งครั้งเมื่อปี 2008" },
-            { sentence: "还有时间，我再睡5分（　）。", options: ["钟", "时", "刻", "秒"], answer: "钟", meaning: "ยังมีเวลา ฉันนอนต่ออีก 5 นาที" },
-            { sentence: "十五分（　）就到了。", options: ["钟", "时", "刻", "秒"], answer: "钟", meaning: "15 นาทีก็ถึงแล้ว" },
-            { sentence: "今天太累（　）。", options: ["了", "过", "着", "在"], answer: "了", meaning: "วันนี้เหนื่อยมากแล้ว" },
-            { sentence: "让我看看里面是（　）么东西。", options: ["什", "怎", "多", "哪"], answer: "什", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นอะไร" },
-            { sentence: "唱歌是一件让人高兴的事（　）。", options: ["情", "务", "理", "件"], answer: "情", meaning: "การร้องเพลงเป็นเรื่องที่ทำให้คนมีความสุข" },
-            { sentence: "少买（　）。多买（　）。", options: ["些", "点", "个", "多"], answer: "些", meaning: "ซื้อน้อยหน่อย ซื้อเยอะหน่อย" },
-            { sentence: "你去过“一元店”（　）？", options: ["吗", "呢", "吧", "啊"], answer: "吗", meaning: "คุณเคยไปร้าน '1 หยวน' ไหม" },
-            { sentence: "这本汉语书是（　）的？", options: ["谁", "什么", "哪", "怎么"], answer: "谁", meaning: "หนังสือภาษาจีนเล่มนี้เป็นของใคร" },
-            { sentence: "前面那个小狗真好（　）儿。", options: ["玩", "看", "吃", "听"], answer: "玩", meaning: "สุนัขตัวเล็กข้างหน้าเล่นสนุกจริงๆ" },
-            { sentence: "没关系，有不懂的问题，你可以再来（　）我。", options: ["找", "看", "听", "问"], answer: "问", meaning: "ไม่เป็นไร มีปัญหาที่ไม่เข้าใจ คุณสามารถมาถามฉันอีกได้" },
-            { sentence: "小李帮（　）了它们。", options: ["助", "忙", "手", "力"], answer: "助", meaning: "เสี่ยวหลี่ช่วยเหลือพวกมัน" },
-            { sentence: "你喜欢什么运（　）？", options: ["动", "活", "感", "力"], answer: "动", meaning: "คุณชอบกีฬาอะไร" },
-            { sentence: "我还想介绍你们认（　）呢。", options: ["识", "知", "明", "理"], answer: "识", meaning: "ฉันยังอยากแนะนำให้พวกคุณรู้จักกันเลย" },
-            { sentence: "希（　）住得离公司近一些。", options: ["望", "想", "看", "要"], answer: "望", meaning: "หวังว่าจะได้อยู่อาศัยใกล้บริษัทขึ้นอีกหน่อย" },
-            { sentence: "你家离学校（　）吗？", options: ["远", "近", "大", "高"], answer: "远", meaning: "บ้านของคุณอยู่ไกลจากโรงเรียนไหม" }
+            { sentence: "我最喜欢踢 _____ 球。", options: ["足", "手", "篮", "排"], answer: "足", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { sentence: "小王的杯子是什么 _____ 色的？", options: ["颜", "红", "绿", "蓝"], answer: "颜", meaning: "แก้วของเสี่ยวหวังเป็นสีอะไร" },
+            { sentence: "你喜欢什么 _____ 动？", options: ["运", "活", "感", "劳"], answer: "运", meaning: "คุณชอบกีฬาอะไร" },
+            { sentence: "我下 _____ 机了。", options: ["飞", "手", "电", "汽"], answer: "飞", meaning: "ฉันลงจากเครื่องบินแล้ว" },
+            { sentence: "这个字是大的 _____ 思吗？", options: ["意", "想", "思", "像"], answer: "意", meaning: "อักษรตัวนี้มีความหมายว่า 'ใหญ่' ใช่ไหม" },
+            { sentence: "羊肉很好 _____ 。", options: ["吃", "喝", "看", "听"], answer: "吃", meaning: "เนื้อแกะอร่อยมาก" },
+            { sentence: "天气很 _____ 。", options: ["冷", "热", "高", "长"], answer: "冷", meaning: "อากาศหนาวมาก" },
+            { sentence: "这个题我不 _____ 。", options: ["会", "能", "想", "要"], answer: "会", meaning: "ข้อนี้ฉันทำไม่เป็น" },
+            { sentence: "他在哪 _____ 呢？", options: ["儿", "边", "面", "头"], answer: "儿", meaning: "เขาอยู่ที่ไหน" },
+            { sentence: "买了个新手 _____ 。", options: ["机", "表", "包", "车"], answer: "机", meaning: "ซื้อโทรศัพท์มือถือเครื่องใหม่มาหนึ่งเครื่อง" },
+            { sentence: "请在这儿写您的名 _____ 。", options: ["字", "片", "声", "人"], answer: "字", meaning: "กรุณาเขียนชื่อของคุณตรงนี้" },
+            { sentence: "一年有八千七百多个小 _____ 。", options: ["时", "钟", "分", "秒"], answer: "时", meaning: "หนึ่งปีมีมากกว่า 8,700 ชั่วโมง" },
+            { sentence: "手机在桌子上 _____ 。", options: ["呢", "吗", "吧", "啊"], answer: "呢", meaning: "โทรศัพท์มือถืออยู่บนโต๊ะ" },
+            { sentence: "这是去饭 _____ 的路吗？", options: ["店", "馆", "厅", "桌"], answer: "店", meaning: "นี่คือทางไปร้านอาหารใช่ไหม" },
+            { sentence: "让我看看里面是什么东 _____ 。", options: ["西", "南", "北", "方"], answer: "西", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นของอะไร" },
+            { sentence: "准备好 _____ 吗？", options: ["了", "过", "着", "在"], answer: "了", meaning: "เตรียมพร้อมแล้วหรือยัง" },
+            { sentence: "你喜欢 _____ 么运动？", options: ["什", "怎么", "谁", "哪"], answer: "什", meaning: "คุณชอบกีฬาอะไร" },
+            { sentence: "没关 _____ ，电影还没开始呢。", options: ["系", "心", "事", "理"], answer: "系", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
+            { sentence: "那家饭店 _____ 做得不错。", options: ["鱼", "肉", "菜", "蛋"], answer: "鱼", meaning: "ปลาของร้านอาหารร้านนั้นทำได้ไม่เลว" },
+            { sentence: "买了很多 _____ 。", options: ["菜", "饭", "果", "水"], answer: "菜", meaning: "ซื้อผัก/กับข้าวมาเยอะมาก" },
+            { sentence: "我们都爱吃西 _____ 。", options: ["瓜", "果", "菜", "桃"], answer: "瓜", meaning: "พวกเราล้วนชอบกินแตงโม" },
+            { sentence: "晚上我们去 _____ 歌怎么样？", options: ["唱", "听", "跳", "玩"], answer: "唱", meaning: "ตอนเย็นพวกเราไปร้องเพลงกันเป็นไง" },
+            { sentence: "非常欢迎你来我们公 _____ 工作！", options: ["司", "园", "所", "厂"], answer: "司", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
+            { sentence: "这里有 _____ 个杯子。", options: ["几", "多", "少", "每"], answer: "几", meaning: "ที่นี่มีแก้วน้ำสองสามใบ" },
+            { sentence: "这个药饭后吃，每天吃三 _____ 。", options: ["次", "遍", "回", "下"], answer: "次", meaning: "ยาตัวนี้กินหลังอาหาร กินวันละ 3 ครั้ง" },
+            { sentence: "我和哥哥去商 _____ 买了很多菜。", options: ["店", "场", "业", "人"], answer: "店", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมาเยอะมาก" },
+            { sentence: "十五分钟 _____ 到了。", options: ["就", "才", "又", "还"], answer: "就", meaning: "อีก 15 นาทีก็ถึงแล้ว" },
+            { sentence: "这次考试她考 _____ 非常好。", options: ["得", "地", "的", "过"], answer: "得", meaning: "การสอบครั้งนี้เธอสอบได้ดีมาก" },
+            { sentence: "考试题太 _____ 了。", options: ["多", "少", "大", "小"], answer: "多", meaning: "โจทย์ข้อสอบเยอะเกินไปแล้ว" },
+            { sentence: "星期六也不休 _____ 。", options: ["息", "假", "班", "业"], answer: "息", meaning: "วันเสาร์ก็ไม่ได้พักผ่อน" },
+            { sentence: "苹果洗好了，来吃一 _____ 吧。", options: ["个", "只", "条", "件"], answer: "个", meaning: "ล้างแอปเปิ้ลเสร็จแล้ว มาทานสักลูกสิ" },
+            { sentence: "正在床上看电 _____ 呢。", options: ["视", "影", "脑", "话"], answer: "视", meaning: "กำลังดูทีวีอยู่บนเตียง" },
+            { sentence: "每天早上她都要慢 _____ 一小时。", options: ["跑", "走", "跳", "动"], answer: "跑", meaning: "ทุกเช้าเธอจะต้องวิ่งเหยาะๆ หนึ่งชั่วโมง" },
+            { sentence: "在哪 _____ 呢？", options: ["儿", "里", "边", "处"], answer: "儿", meaning: "อยู่ที่ไหน" },
+            { sentence: "因为我不知道怎 _____ 说。", options: ["么", "样", "么样", "哪"], answer: "么", meaning: "เพราะว่าฉันไม่รู้ว่าจะพูดอย่างไร" },
+            { sentence: "她笑着对我 _____ 。", options: ["说", "讲", "听", "看"], answer: "说", meaning: "เธอยิ้มและพูดกับฉัน" },
+            { sentence: "坐出租 _____ 去。", options: ["车", "机", "船", "飞"], answer: "车", meaning: "นั่งรถแท็กซี่ไป" },
+            { sentence: "打电 _____ 。", options: ["话", "报", "视", "脑"], answer: "话", meaning: "โทรศัพท์" },
+            { sentence: "您能等一 _____ 吗？", options: ["下", "回", "次", "时"], answer: "下", meaning: "คุณรอสักครู่ได้ไหม" },
+            { sentence: "最喜欢踢足 _____ 。", options: ["球", "篮", "排", "羽"], answer: "球", meaning: "ชอบเตะฟุตบอลที่สุด" },
+            { sentence: "弟弟比我 _____ 两岁。", options: ["小", "大", "高", "重"], answer: "小", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
+            { sentence: "他还在教室里学 _____ 。", options: ["习", "校", "生", "文"], answer: "习", meaning: "เขายังเรียนอยู่ในห้องเรียน" },
+            { sentence: "晴天，但是很 _____ 。", options: ["冷", "热", "暖", "高"], answer: "冷", meaning: "ท้องฟ้าโปร่ง แต่หนาวมาก" },
+            { sentence: "买这个电脑的 _____ 很少。", options: ["人", "家", "员", "者"], answer: "人", meaning: "คนที่ซื้อคอมพิวเตอร์เครื่องนี้น้อยมาก" },
+            { sentence: "现在是十一 _____ 三十分。", options: ["点", "分", "时", "刻"], answer: "点", meaning: "ตอนนี้เป็นเวลา 11 โมง 30 นาที" },
+            { sentence: "快坐下喝点儿 _____ 吧。", options: ["水", "茶", "酒", "奶"], answer: "水", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
+            { sentence: "外面已 _____ 下雨了。", options: ["经", "在", "常", "正"], answer: "经", meaning: "ข้างนอกฝนตกแล้ว" },
+            { sentence: "这个字我会 _____ 了。", options: ["写", "读", "说", "听"], answer: "写", meaning: "ตัวอักษรตัวนี้ฉันเขียนเป็นแล้ว" },
+            { sentence: "向前 _____ 。", options: ["走", "跑", "飞", "去"], answer: "走", meaning: "เดินไปข้างหน้า" },
+            { sentence: "我会跳 _____ 。", options: ["舞", "高", "远", "绳"], answer: "舞", meaning: "ฉันเต้นรำเป็น" },
+            { sentence: "可能要下 _____ 。", options: ["雪", "雨", "冰", "水"], answer: "雪", meaning: "หิมะอาจจะตก" },
+            { sentence: "你下午准备 _____ 什么？", options: ["做", "干", "办", "玩"], answer: "做", meaning: "ตอนบ่ายคุณเตรียมจะทำอะไร" },
+            { sentence: "外面的雪真 _____ 。", options: ["大", "小", "多", "深"], answer: "大", meaning: "หิมะข้างนอกตกหนักจริง" },
+            { sentence: "我 _____ 喜欢踢足球。", options: ["最", "很", "非常", "太"], answer: "最", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { sentence: "你再等一 _____ 。", options: ["下", "会儿", "刻", "秒"], answer: "下", meaning: "คุณรออีกสักครู่" },
+            { sentence: "那个名 _____ 很有意思。", options: ["字", "称", "声", "号"], answer: "字", meaning: "ชื่อนั้นน่าสนใจมาก" },
+            { sentence: "请告诉我您的电 _____ 是多少。", options: ["话", "脑", "视", "报"], answer: "话", meaning: "กรุณาบอกฉันว่าเบอร์โทรศัพท์ของคุณคืออะไร" },
+            { sentence: "可能快下 _____ 了。", options: ["雨", "雪", "雹", "水"], answer: "雨", meaning: "ฝนน่าจะใกล้ตกแล้ว" },
+            { sentence: "这儿的羊肉很好吃，但是也很 _____ 。", options: ["贵", "便宜", "多", "少"], answer: "贵", meaning: "เนื้อแกะที่นี่อร่อยมาก แต่ก็แพงมากด้วย" },
+            { sentence: "这次考试她考得非 _____ 好。", options: ["常", "特", "极", "太"], answer: "常", meaning: "การสอบครั้งนี้เธอสอบได้ดีอย่างยิ่ง" },
+            { sentence: "我和哥哥去商店买了很多 _____ 。", options: ["菜", "饭", "肉", "鱼"], answer: "菜", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมามากมาย" },
+            { sentence: "大家都准备 _____ 了吗？", options: ["好", "完", "到", "成"], answer: "好", meaning: "ทุกคนเตรียมพร้อมแล้วหรือยัง" },
+            { sentence: "明天天气怎 _____ 样？", options: ["么", "那", "这", "什"], answer: "么", meaning: "พรุ่งนี้อากาศเป็นอย่างไรบ้าง" },
+            { sentence: "你们听 _____ 我说的话了吗？", options: ["懂", "见", "到", "完"], answer: "懂", meaning: "พวกคุณฟังสิ่งที่ฉันพูดเข้าใจไหม" },
+            { sentence: "你什么时候能回 _____ ？", options: ["来", "去", "到", "家"], answer: "来", meaning: "คุณจะกลับมาได้เมื่อไหร่" },
+            { sentence: "别 _____ 了，手机在桌子上呢。", options: ["找", "看", "要", "想"], answer: "找", meaning: "ไม่ต้องหาแล้ว โทรศัพท์มือถืออยู่บนโต๊ะ" },
+            { sentence: "没关系，电影还没开 _____ 呢。", options: ["始", "门", "演", "动"], answer: "始", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
+            { sentence: "因为我不会游 _____ 。", options: ["泳", "水", "戏", "玩"], answer: "泳", meaning: "เพราะว่าฉันว่ายน้ำไม่เป็น" },
+            { sentence: "他在那儿和孩子们踢足 _____ 呢。", options: ["球", "篮", "排", "羽"], answer: "球", meaning: "เขาอยู่ที่นั่นกำลังเตะฟุตบอลกับเด็กๆ" },
+            { sentence: "晚上一起去跳 _____ ，怎么样？", options: ["舞", "高", "绳", "远"], answer: "舞", meaning: "ตอนเย็นไปเต้นรำด้วยกันเป็นอย่างไร" },
+            { sentence: "想早点儿睡 _____ 。", options: ["觉", "床", "休息", "起"], answer: "觉", meaning: "อยากนอนหลับให้เร็วหน่อย" },
+            { sentence: "我知 _____ 她的名字。", options: ["道", "识", "名", "理"], answer: "道", meaning: "ฉันรู้ชื่อของเธอ" },
+            { sentence: "爸爸觉 _____ 茶不好喝。", options: ["得", "想", "知", "看"], answer: "得", meaning: "คุณพ่อรู้สึกว่าชาไม่อร่อย" },
+            { sentence: "大人一天可 _____ 吃4次。", options: ["以", "能", "会", "要"], answer: "以", meaning: "ผู้ใหญ่กินได้วันละ 4 ครั้ง" },
+            { sentence: "我想送他一个电 _____ 。", options: ["脑", "视", "话", "影"], answer: "脑", meaning: "ฉันอยากมอบคอมพิวเตอร์ให้เขาหนึ่งเครื่อง" },
+            { sentence: "学习汉 _____ 。", options: ["语", "字", "文", "话"], answer: "语", meaning: "เรียนภาษาจีน" },
+            { sentence: "非常欢迎你来我们公司工 _____ ！", options: ["作", "事", "业", "务"], answer: "作", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
+            { sentence: "听说读写一个都不能 _____ 。", options: ["少", "多", "小", "无"], answer: "少", meaning: "ฟัง พูด อ่าน เขียน ขาดไม่ได้สักอย่างเดียว" },
+            { sentence: "这儿的羊肉很好 _____ 。", options: ["吃", "喝", "看", "玩"], answer: "吃", meaning: "เนื้อแกะที่นี่อร่อยมาก" },
+            { sentence: "时间过得 _____ 快。", options: ["真", "很", "太", "最"], answer: "真", meaning: "เวลาผ่านไปเร็วจริงๆ" },
+            { sentence: "弟弟比我 _____ 两岁。", options: ["小", "大", "高", "重"], answer: "小", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
+            { sentence: "我有两个孩 _____ 。", options: ["子", "童", "人", "女"], answer: "子", meaning: "ฉันมีลูกสองคน" },
+            { sentence: "我和朋 _____ 去看电影。", options: ["友", "伴", "人", "辈"], answer: "友", meaning: "ฉันกับเพื่อนไปดูหนัง" },
+            { sentence: "快坐下喝点儿 _____ 吧。", options: ["水", "茶", "酒", "奶"], answer: "水", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
+            { sentence: "我和我丈夫2008年去过一次北 _____ 。", options: ["京", "海", "方", "边"], answer: "京", meaning: "ฉันกับสามีเคยไปปักกิ่งหนึ่งครั้งเมื่อปี 2008" },
+            { sentence: "还有时间，我再睡5分 _____ 。", options: ["钟", "时", "刻", "秒"], answer: "钟", meaning: "ยังมีเวลา ฉันนอนต่ออีก 5 นาที" },
+            { sentence: "十五分 _____ 就到了。", options: ["钟", "时", "刻", "秒"], answer: "钟", meaning: "15 นาทีก็ถึงแล้ว" },
+            { sentence: "今天太累 _____ 。", options: ["了", "过", "着", "在"], answer: "了", meaning: "วันนี้เหนื่อยมากแล้ว" },
+            { sentence: "让我看看里面是 _____ 么东西。", options: ["什", "怎", "多", "哪"], answer: "什", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นอะไร" },
+            { sentence: "唱歌是一件让人高兴的事 _____ 。", options: ["情", "务", "理", "件"], answer: "情", meaning: "การร้องเพลงเป็นเรื่องที่ทำให้คนมีความสุข" },
+            { sentence: "少买 _____ 。多买 _____ 。", options: ["些", "点", "个", "多"], answer: "些", meaning: "ซื้อน้อยหน่อย ซื้อเยอะหน่อย" },
+            { sentence: "你去过“一元店” _____ ？", options: ["吗", "呢", "吧", "啊"], answer: "吗", meaning: "คุณเคยไปร้าน '1 หยวน' ไหม" },
+            { sentence: "这本汉语书是 _____ 的？", options: ["谁", "什么", "哪", "怎么"], answer: "谁", meaning: "หนังสือภาษาจีนเล่มนี้เป็นของใคร" },
+            { sentence: "前面那个小狗真好 _____ 儿。", options: ["玩", "看", "吃", "听"], answer: "玩", meaning: "สุนัขตัวเล็กข้างหน้าเล่นสนุกจริงๆ" },
+            { sentence: "没关系，有不懂的问题，你可以再来 _____ 我。", options: ["找", "看", "听", "问"], answer: "问", meaning: "ไม่เป็นไร มีปัญหาที่ไม่เข้าใจ คุณสามารถมาถามฉันอีกได้" },
+            { sentence: "小李帮 _____ 了它们。", options: ["助", "忙", "手", "力"], answer: "助", meaning: "เสี่ยวหลี่ช่วยเหลือพวกมัน" },
+            { sentence: "你喜欢什么运 _____ ？", options: ["动", "活", "感", "力"], answer: "动", meaning: "คุณชอบกีฬาอะไร" },
+            { sentence: "我还想介绍你们认 _____ 呢。", options: ["识", "知", "明", "理"], answer: "识", meaning: "ฉันยังอยากแนะนำให้พวกคุณรู้จักกันเลย" },
+            { sentence: "希 _____ 住得离公司近一些。", options: ["望", "想", "看", "要"], answer: "望", meaning: "หวังว่าจะได้อยู่อาศัยใกล้บริษัทขึ้นอีกหน่อย" },
+            { sentence: "你家离学校 _____ 吗？", options: ["远", "近", "大", "高"], answer: "远", meaning: "บ้านของคุณอยู่ไกลจากโรงเรียนไหม" }
         ];
 
         const wordOrderPool = [
@@ -1241,7 +1241,7 @@
             if (nextBtn) nextBtn.classList.remove('hidden');
         }
 
-        // --- ระบบสุ่มข้อสอบ 4 พาร์ท (พาร์ท 2-3 สุ่มจากคลังข้อสอบจริง 100 ข้อ/พาร์ท, พาร์ท 1 และ 4 สุ่มจากคำศัพท์ทางการ 165 คำ ไม่ซ้ำกันในทุกรอบ) ---
+        // --- ระบบสุ่มข้อสอบ 4 พาร์ท (แพทเทิร์นเดียวกับ HSK 1): พาร์ท 1-2 สุ่มจากคำศัพท์ทางการ 165 คำ, พาร์ท 3-4 สุ่มจากคลังข้อสอบจริง 100 ข้อ/พาร์ท ไม่ซ้ำกันในทุกรอบ ---
         let examQuestions = [];
         let userAnswers = {};
         let sentenceStates = {};
@@ -1258,7 +1258,7 @@
                 let options = [item.meaning, ...wrongs].sort(() => 0.5 - Math.random());
                 part1.push({
                     type: 'audio',
-                    title: "พาร์ท 1: ฟังคำศัพท์และเลือกความหมาย",
+                    title: "พาร์ท 1: ฟังประโยคและเลือกตอบ",
                     wordToSpeak: item.word,
                     question: `ฟังเสียงแล้วเลือกความหมายที่ถูกต้องของคำที่ได้ยิน`,
                     options: options,
@@ -1266,14 +1266,19 @@
                 });
             });
 
-            // พาร์ท 2: เลือกคำตอบเติมช่องว่าง (สุ่ม 10 ข้อ ไม่ซ้ำกัน จากคลังข้อสอบจริง 100 ข้อ ที่ผู้ใช้แนบมา)
-            let part2 = [...fillBlankPool].sort(() => 0.5 - Math.random()).slice(0, 10).map(b => ({
-                type: 'blank',
-                title: "พาร์ท 2: เลือกคำตอบเติมช่องว่างให้ถูกต้อง",
-                question: `จงเลือกคำตอบที่ถูกต้องมาเติมลงในช่องว่าง: <br><span class="text-red-600 font-extrabold text-2xl mt-2 block tracking-wide">${b.sentence}</span><span class="exam-thai-meaning">${b.meaning}</span>`,
-                options: [...b.options].sort(() => 0.5 - Math.random()),
-                correct: b.answer
-            }));
+            // พาร์ท 2: ช้อยส์ 4 ตัวเลือก (สุ่ม 10 ข้อจากคำศัพท์ 165 คำ ถามความหมายแบบข้อความ)
+            let shuffledMeaning = [...hsk2Data].sort(() => 0.5 - Math.random()).slice(0, 10);
+            let part2 = shuffledMeaning.map((item) => {
+                let wrongs = hsk2Data.filter(v => v.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(v => v.meaning);
+                let options = [item.meaning, ...wrongs].sort(() => 0.5 - Math.random());
+                return {
+                    type: 'choice',
+                    title: "พาร์ท 2: ช้อยส์ 4 ตัวเลือก",
+                    question: `"${item.word}" (${item.pinyin}) แปลว่าอะไร?`,
+                    options: options,
+                    correct: item.meaning
+                };
+            });
 
             // พาร์ท 3: เรียงประโยค (สุ่ม 10 ข้อ ไม่ซ้ำกัน จากคลังข้อสอบจริง 100 ข้อ ที่ผู้ใช้แนบมา)
             let part3 = [...wordOrderPool].sort(() => 0.5 - Math.random()).slice(0, 10).map((s) => {
@@ -1287,20 +1292,14 @@
                 };
             });
 
-            // พาร์ท 4: อ่านประโยคตัวอย่างจริง แล้วเลือกคำแปลไทยที่ถูกต้อง (สุ่ม 10 ข้อจาก 165 คำใน hsk2Data)
-            let vocabWithExample = hsk2Data.filter(v => v.example && v.exampleMeaning);
-            let shuffledReading = [...vocabWithExample].sort(() => 0.5 - Math.random()).slice(0, 10);
-            let part4 = shuffledReading.map((item) => {
-                let wrongs = vocabWithExample.filter(v => v.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(v => v.exampleMeaning);
-                let options = [item.exampleMeaning, ...wrongs].sort(() => 0.5 - Math.random());
-                return {
-                    type: 'choice',
-                    title: "พาร์ท 4: อ่านประโยคภาษาจีน แล้วเลือกคำแปลไทยที่ถูกต้อง",
-                    question: `<span class="zh-display text-red-600 font-extrabold text-2xl mt-2 block tracking-wide">${item.example}</span><span class="exam-thai-meaning" style="color:#8A8177; font-style:italic;">${item.examplePinyin}</span>`,
-                    options: options,
-                    correct: item.exampleMeaning
-                };
-            });
+            // พาร์ท 4: เติมคำในช่องว่าง (สุ่ม 10 ข้อ ไม่ซ้ำกัน จากคลังข้อสอบจริง 100 ข้อ ที่ผู้ใช้แนบมา)
+            let part4 = [...fillBlankPool].sort(() => 0.5 - Math.random()).slice(0, 10).map(b => ({
+                type: 'blank',
+                title: "พาร์ท 4: เติมคำในช่องว่างให้สมบูรณ์",
+                question: `จงเลือกคำตอบที่ถูกต้องมาเติมลงในช่องว่าง: <br><span class="text-red-600 font-extrabold text-2xl mt-2 block tracking-wide">${b.sentence}</span><span class="exam-thai-meaning">${b.meaning}</span>`,
+                options: [...b.options].sort(() => 0.5 - Math.random()),
+                correct: b.answer
+            }));
 
             examQuestions = [...part1, ...part2, ...part3, ...part4];
             renderExam();

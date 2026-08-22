@@ -3,40 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คลังคำศัพท์ HSK ระดับ 1 - Fast Learn Academy</title>
+    <title>คลังคำศัพท์ HSK ระดับ 2 - Fast Learn Academy</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700;800&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+    <script>
+        // ปรับชุดสีของ Tailwind ให้อยู่ในโทน ขาว-ดำ-แดง ของแบรนด์ Fast Learn Academy
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        red: {
+                            50:'#FDF1F1', 100:'#FCEAEA', 200:'#F6D9DA', 300:'#EFB9BB',
+                            400:'#E36569', 500:'#DE3540', 600:'#D81E2C', 700:'#B0121D',
+                            800:'#7A0F17', 900:'#4E0A10'
+                        },
+                        amber: {
+                            50:'#FCEAEA', 100:'#F6D9DA', 200:'#EFB9BB', 300:'#E36569',
+                            400:'#D81E2C', 500:'#B0121D', 600:'#B0121D', 700:'#7A0F17',
+                            800:'#7A0F17', 900:'#4E0A10'
+                        },
+                        yellow: {
+                            50:'#FCEAEA', 100:'#F6D9DA', 200:'#EFB9BB', 300:'#E36569',
+                            400:'#D81E2C', 500:'#B0121D', 600:'#B0121D', 700:'#7A0F17',
+                            800:'#7A0F17', 900:'#4E0A10'
+                        },
+                        stone: {
+                            50:'#FAF8F5', 100:'#F5F1EC', 200:'#E8E2DA', 300:'#D8D0C5',
+                            400:'#ABA296', 500:'#8A8177', 600:'#6B635A', 700:'#524B44',
+                            800:'#372F2A', 900:'#181412'
+                        },
+                        gray: {
+                            50:'#FAF8F5', 100:'#F5F1EC', 200:'#E8E2DA', 300:'#D8D0C5',
+                            400:'#ABA296', 500:'#8A8177', 600:'#6B635A', 700:'#524B44',
+                            800:'#372F2A', 900:'#181412'
+                        },
+                        zinc: {
+                            50:'#FAF8F5', 100:'#F5F1EC', 200:'#E8E2DA', 300:'#D8D0C5',
+                            400:'#8A8177', 500:'#6B635A', 600:'#524B44', 700:'#372F2A',
+                            800:'#241E1B', 900:'#181412', 950:'#0F0C0B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #fcfbfa; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #FAF8F5; }
+        h1, h2, h3, .font-black, .font-extrabold { font-family: 'Kanit', sans-serif; }
+        #wordDisplay, #fcWord, #fcBackWord, #fcExample, #quizWord, #writeWordDisplay, .zh-display { font-family: 'Noto Serif SC', serif; }
         .perspective-1000 { perspective: 1200px; }
         .transform-style-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
         .chinese-bg {
-            background-image: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,253,249,0.85)), url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+            position: relative;
+            background: linear-gradient(160deg, #FCEAEA 0%, #FAF8F5 55%, #FAF8F5 100%);
+            overflow: hidden;
+        }
+        .chinese-bg::after{
+            content:'汉语水平考试';
+            position:absolute; right:-18px; bottom:-38px;
+            font-family:'Noto Serif SC', serif; font-weight:900; font-size:96px;
+            color: rgba(216,30,44,0.06); letter-spacing:6px; white-space:nowrap; pointer-events:none;
+        }
+        .seal-badge{
+            width:44px; height:44px; border-radius:10px; border:2px solid #D81E2C; color:#D81E2C;
+            display:flex; align-items:center; justify-content:center;
+            font-family:'Noto Serif SC', serif; font-weight:900; font-size:19px;
+            transform:rotate(6deg); flex-shrink:0;
         }
     </style>
+
+<style>
+/* ปรับคำแปลภาษาไทยในข้อสอบให้อ่านง่ายขึ้น */
+.exam-thai-meaning {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    font-weight: 600;
+    color: #6B635A;
+}
+/* ข้อความภาษาไทยของโจทย์และคำแนะนำใน Mock Test */
+#examContainer p {
+    line-height: 1.7;
+}
+@media (max-width: 640px) {
+    .exam-thai-meaning {
+        font-size: 1.05rem;
+    }
+}
+</style>
 </head>
-<body class="text-gray-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
+<body class="text-stone-900 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
     <!-- Top Navbar -->
-    <nav class="bg-black text-white px-6 py-4 shadow-md sticky top-0 z-50">
+    <nav class="bg-stone-900 text-white px-6 py-4 shadow-md sticky top-0 z-50 border-b-2 border-red-600">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center font-black text-white text-lg shadow">
-                    📖
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center font-black text-white text-lg shadow" style="transform:rotate(-3deg); font-family:'Noto Serif SC',serif;">
+                    学
                 </div>
-                <span class="text-lg font-black tracking-wider uppercase text-amber-100">FAST LEARN ACADEMY</span>
-            </div>
+                <div>
+                    <div class="text-base font-extrabold tracking-wide leading-none">FAST LEARN <span class="text-red-500">ACADEMY</span></div>
+                    <div class="text-[10px] tracking-[3px] text-stone-400 uppercase mt-1">HSK Prep Center</div>
+                </div>
+            </a>
             <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-stone-300">
                 <a href="index.html" class="hover:text-white transition">หน้าแรก</a>
-                <a href="#" class="hover:text-white transition">บทเรียน</a>
-                <a href="hsk1.html" class="text-white border-b-2 border-red-600 pb-1">คำศัพท์</a>
-                <a href="#" class="hover:text-white transition">แบบฝึกหัด</a>
-                <a href="#" class="hover:text-white transition">คลังสื่อ</a>
+                <a href="index.html#levels" class="hover:text-white transition">บทเรียน</a>
+                <a href="hsk2.html" class="text-white border-b-2 border-red-600 pb-1">คำศัพท์ HSK 2</a>
+                <a href="#sectionMocktest" onclick="switchMode('mocktest')" class="hover:text-white transition">Mock Test</a>
             </div>
             <div>
                 <span class="bg-red-600 text-white text-xs font-extrabold px-4 py-2 rounded-xl shadow cursor-pointer hover:bg-red-700 transition">โหมดคุณครู</span>
@@ -44,22 +124,25 @@
         </div>
     </nav>
 
-    <!-- HSK 1 Banner Header -->
+    <!-- HSK 2 Banner Header -->
     <section class="chinese-bg border-b border-stone-200 py-10 px-4 shadow-sm">
         <div class="max-w-6xl mx-auto">
             <div class="flex items-center gap-2 text-xs font-semibold text-stone-500 mb-6">
                 <a href="index.html" class="hover:text-red-600 transition">🏠 หน้าหลัก</a>
                 <span>/</span>
-                <span class="text-red-600 font-bold">ระดับ HSK 1</span>
+                <span class="text-red-600 font-bold">ระดับ HSK 2</span>
             </div>
 
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                    <h1 class="text-4xl md:text-6xl font-black text-red-900 tracking-tight mb-2">
-                        HSK 1
-                    </h1>
-                    <p class="text-stone-700 text-sm md:text-base font-semibold">
-                        วิเคราะห์ความถี่และชุดข้อสอบจริง 10 ชุด (H11006 - H11223) ปูพื้นฐานภาษาจีนให้แน่น
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="seal-badge">贰</div>
+                        <h1 class="text-4xl md:text-6xl font-black text-stone-900 tracking-tight">
+                            HSK <span class="text-red-600">2</span>
+                        </h1>
+                    </div>
+                    <p class="text-stone-600 text-sm md:text-base font-semibold">
+                        คำศัพท์และประโยคจากคลังข้อสอบจริง 200 ข้อ (เรียงประโยค 100 ข้อ + เลือกคำตอบ 100 ข้อ) ต่อยอดจาก HSK 1
                     </p>
                 </div>
 
@@ -68,7 +151,7 @@
                         <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">📚</div>
                         <div>
                             <div class="text-xs text-stone-500 font-medium">คำศัพท์</div>
-                            <div class="text-base font-black text-stone-900">115 คำ</div>
+                            <div class="text-base font-black text-stone-900">165 คำ</div>
                         </div>
                     </div>
                     <div class="w-px h-8 bg-stone-200"></div>
@@ -76,7 +159,7 @@
                         <div class="w-10 h-10 rounded-xl bg-red-100 text-red-800 flex items-center justify-center font-bold">🎯</div>
                         <div>
                             <div class="text-xs text-stone-500 font-medium">ชุดข้อสอบ</div>
-                            <div class="text-base font-black text-stone-900">คลังข้อสอบ 100 ข้อจริง</div>
+                            <div class="text-base font-black text-stone-900">คลังข้อสอบ 200 ข้อจริง</div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +183,7 @@
                 <div onclick="switchMode('grid')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
                     <div class="space-y-1">
                         <div class="text-xs font-bold text-red-600">01 คำศัพท์พื้นฐาน</div>
-                        <div class="text-base font-black text-stone-900">คลังคำศัพท์ HSK 1</div>
+                        <div class="text-base font-black text-stone-900">คลังคำศัพท์ HSK 2</div>
                         <div class="text-xs text-stone-500">พร้อมพินอินและเสียงอ่าน</div>
                     </div>
                     <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
@@ -150,8 +233,8 @@
                 <div onclick="switchMode('mocktest')" class="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm hover:border-red-600 hover:shadow-md transition-all cursor-pointer flex justify-between items-center group">
                     <div class="space-y-1">
                         <div class="text-xs font-bold text-red-600">06 ข้อสอบจำลอง</div>
-                        <div class="text-base font-black text-stone-900">Mock Test HSK 1 (40 ข้อ)</div>
-                        <div class="text-xs text-stone-500">แบ่ง 4 พาร์ท (สุ่มจาก 100 ข้อจริง)</div>
+                        <div class="text-base font-black text-stone-900">Mock Test HSK 2 (40 ข้อ)</div>
+                        <div class="text-xs text-stone-500">แบ่ง 4 พาร์ท (สุ่มพาร์ทละ 10 ข้อ ไม่ซ้ำกัน)</div>
                     </div>
                     <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl group-hover:bg-red-700 transition shadow-sm pointer-events-none">เริ่มเรียน</button>
                 </div>
@@ -166,8 +249,8 @@
             </div>
             <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
                 <span class="text-xs font-bold text-stone-500 mr-1">กรองประเภท:</span>
-                <button onclick="filterByType('all', event)" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition">ทั้งหมด</button>
-                <button onclick="filterByType('สรรพนาม', event)" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">สรรพนาม</button>
+                <button onclick="filterByType('all')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition">ทั้งหมด</button>
+                <button onclick="filterByType('สรรพนาม')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">สรรพนาม</button>
                 <button onclick="filterByType('คำกริยา', event)" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">คำกริยา</button>
                 <button onclick="filterByType('คำนาม', event)" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition">คำนาม</button>
             </div>
@@ -194,16 +277,16 @@
                     <h3 class="font-extrabold text-stone-800 text-lg">แฟลชการ์ดฝึกจำคำศัพท์</h3>
                 </div>
                 <div class="bg-white px-4 py-1.5 rounded-full border border-stone-200 shadow-sm text-xs font-bold text-stone-600">
-                    การ์ดที่ <span id="fcCurrent" class="text-red-600 text-sm">1</span> / 115
+                    การ์ดที่ <span id="fcCurrent" class="text-red-600 text-sm">1</span> / 165
                 </div>
             </div>
 
-            <div class="w-full max-w-xl perspective-1000 cursor-pointer h-[420px]" onclick="flipCard()">
+            <div class="w-full max-w-xl perspective-1000 cursor-pointer h-[500px]" onclick="flipCard()">
                 <div id="flashcardInner" class="relative w-full h-full duration-700 transform-style-3d shadow-2xl rounded-[2.5rem]">
                     <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-stone-50 to-stone-100 rounded-[2.5rem] border-2 border-stone-200/80 p-8 flex flex-col justify-between backface-hidden">
                         <div class="flex justify-between items-center">
                             <span id="fcType" class="text-xs font-bold px-3.5 py-1.5 bg-red-50 text-red-600 rounded-full border border-red-100 shadow-sm">สรรพนาม</span>
-                            <span id="fcFreqBadge" class="text-xs font-bold px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200 shadow-sm">⭐ HSK 1</span>
+                            <span id="fcFreqBadge" class="text-xs font-bold px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full border border-amber-200 shadow-sm">⭐ HSK 2</span>
                         </div>
                         <div class="text-center my-auto">
                             <div id="fcWord" class="text-8xl md:text-9xl font-black text-stone-900 mb-3 tracking-wide drop-shadow-sm">我</div>
@@ -214,18 +297,25 @@
                             <button onclick="event.stopPropagation(); speakWord(document.getElementById('fcWord').innerText)" class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-bold hover:bg-red-700 transition shadow flex items-center gap-1.5">🔊 ฟังเสียง</button>
                         </div>
                     </div>
-                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-white rounded-[2.5rem] p-8 flex flex-col justify-between backface-hidden rotate-y-180 border-2 border-zinc-800">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-white rounded-[2.5rem] p-7 flex flex-col justify-between backface-hidden rotate-y-180 border-2 border-zinc-800">
                         <div class="flex justify-between items-center">
                             <span class="text-xs font-bold px-3.5 py-1.5 bg-amber-400 text-black rounded-full shadow">💡 เฉลยความหมาย & ตัวอย่าง</span>
-                            <span class="text-xs text-stone-400 font-bold">Fast Learn Academy</span>
+                            <span class="text-xs text-stone-400 font-bold hidden sm:inline">Fast Learn Academy</span>
                         </div>
-                        <div class="text-center space-y-3 my-auto">
-                            <div id="fcMeaning" class="text-4xl font-extrabold text-amber-400 tracking-wide">ฉัน</div>
-                            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl text-left space-y-1 border border-white/10 shadow-inner">
-                                <div id="fcExample" class="text-xs text-stone-200 font-medium">-</div>
+                        <div class="text-center space-y-2.5 my-auto">
+                            <div class="flex items-center justify-center gap-3">
+                                <div id="fcBackWord" class="text-3xl font-black text-white">我</div>
+                                <div id="fcBackPinyin" class="text-base font-bold text-red-400">wǒ</div>
+                            </div>
+                            <div id="fcMeaning" class="text-2xl font-extrabold text-amber-400 tracking-wide">ฉัน</div>
+                            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl text-left space-y-2 border border-white/10 shadow-inner">
+                                <div class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">ตัวอย่างประโยค</div>
+                                <div id="fcExample" class="text-lg font-bold text-white leading-snug">-</div>
+                                <div id="fcExamplePinyin" class="text-xs text-red-300 font-semibold">-</div>
+                                <div id="fcExampleMeaning" class="text-xs text-stone-200 font-medium pt-1 border-t border-white/10">-</div>
                             </div>
                         </div>
-                        <div class="text-center pt-4 border-t border-stone-800 text-xs text-stone-400 font-semibold">🔄 คลิกการ์ดอีกครั้งเพื่อกลับหน้าหลัก</div>
+                        <div class="text-center pt-3 border-t border-stone-800 text-xs text-stone-400 font-semibold">🔄 คลิกการ์ดอีกครั้งเพื่อกลับหน้าหลัก</div>
                     </div>
                 </div>
             </div>
@@ -295,10 +385,10 @@
             <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-3 bg-black"></div>
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-black">🏆 จำลองข้อสอบ HSK ระดับ 1 (40 ข้อ)</h3>
+                    <h3 class="text-2xl font-black">🏆 จำลองข้อสอบ HSK ระดับ 2 (40 ข้อ)</h3>
                 </div>
                 <div id="examContainer" class="space-y-6">
-                    <p class="text-sm text-stone-600">แบบทดสอบแบ่งออกเป็น 4 พาร์ท (สุ่มพาร์ทละ 10 ข้อ จากคลังข้อสอบจริง 100 ข้อต่อพาร์ท)</p>
+                    <p class="text-sm text-stone-600">แบบทดสอบแบ่งออกเป็น 4 พาร์ท พาร์ทละ 10 ข้อ (พาร์ท 2-3 สุ่มจากคลังข้อสอบจริง 100 ข้อ/พาร์ท ไม่ซ้ำกันทุกรอบ)</p>
                     <button onclick="startExam()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition shadow-lg text-base">เริ่มทำข้อสอบ 40 ข้อ</button>
                 </div>
             </div>
@@ -322,482 +412,383 @@
     </footer>
 
     <script>
-        // ฐานข้อมูลคำศัพท์ HSK 1 ครบถ้วน 115 คำ
-        const hsk1Data = [
-            { id: 1, word: "我", pinyin: "wǒ", meaning: "ฉัน", type: "สรรพนาม", freqTotal: 118, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "我去商店,我想买一些水果。" },
-            { id: 2, word: "你", pinyin: "nǐ", meaning: "คุณ", type: "สรรพนาม", freqTotal: 100, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "你好!" },
-            { id: 3, word: "他", pinyin: "tā", meaning: "เขา (ผู้ชาย)", type: "สรรพนาม", freqTotal: 37, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "他爸爸在哪儿工作?" },
-            { id: 4, word: "她", pinyin: "tā", meaning: "เขา (ผู้หญิง)", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009, H11112", example: "她下午去哪里?" },
-            { id: 5, word: "我们", pinyin: "wǒmen", meaning: "พวกเรา", type: "สรรพนาม", freqTotal: 16, setsFound: "H11007, H11008, H11009, H11112", example: "我们什么时候去医院?" },
-            { id: 6, word: "你们", pinyin: "nǐmen", meaning: "พวกคุณ", type: "สรรพนาม", freqTotal: 9, setsFound: "H11112, H11113, H11220", example: "喂,你们在哪儿呢?" },
-            { id: 7, word: "他们", pinyin: "tāmen", meaning: "พวกเขา", type: "สรรพนาม", freqTotal: 2, setsFound: "H11007, H11112", example: "他们都是我的同学。" },
-            { id: 8, word: "谁", pinyin: "shéi", meaning: "ใคร", type: "สรรพนาม", freqTotal: 13, setsFound: "H11006, H11008, H11112", example: "谁会说汉语?" },
-            { id: 9, word: "什么", pinyin: "shénme", meaning: "อะไร", type: "สรรพนาม", freqTotal: 29, setsFound: "H11006, H11007, H11008, H11009", example: "你想买什么?" },
-            { id: 10, word: "哪里/哪儿", pinyin: "nǎli / nǎr", meaning: "ที่ไหน", type: "สรรพนาม", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009", example: "你去哪儿?" },
-            { id: 11, word: "怎么", pinyin: "zěnme", meaning: "อย่างไร", type: "สรรพนาม", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009", example: "明天你怎么去医院?" },
-            { id: 12, word: "怎么样", pinyin: "zěnmeyàng", meaning: "เป็นอย่างไร", type: "สรรพนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009", example: "昨天天气怎么样?" },
-            { id: 13, word: "多少", pinyin: "duōshao", meaning: "เท่าไหร่", type: "สรรพนาม", freqTotal: 6, setsFound: "H11006, H11007, H11008", example: "这个菜多少钱?" },
-            { id: 14, word: "多", pinyin: "duō", meaning: "มาก / แค่ไหน", type: "คำวิเศษณ์", freqTotal: 11, setsFound: "H11006, H11008, H11009", example: "你今年多大了?" },
-            { id: 15, word: "少", pinyin: "shǎo", meaning: "น้อย", type: "คำคุณศัพท์", freqTotal: 5, setsFound: "H11007, H11008, H11009", example: "我的东西不多,很少。" },
-            { id: 16, word: "这/这儿", pinyin: "zhè / zhèr", meaning: "นี่ / ที่นี่", type: "สรรพนาม", freqTotal: 50, setsFound: "H11006, H11007, H11008, H11009", example: "我很喜欢这本书。" },
-            { id: 17, word: "那/那儿", pinyin: "nà / nàr", meaning: "นั่น / ที่นั่น", type: "สรรพนาม", freqTotal: 22, setsFound: "H11006, H11007, H11008, H11009", example: "我朋友在那个商店。" },
-            { id: 18, word: "是", pinyin: "shì", meaning: "เป็น / คือ / ใช่", type: "คำกริยา", freqTotal: 39, setsFound: "H11006, H11007, H11008, H11009", example: "她是我大学同学。" },
-            { id: 19, word: "有", pinyin: "yǒu", meaning: "มี", type: "คำกริยา", freqTotal: 6, setsFound: "H11112, H11113, H11220", example: "这儿有人了。" },
-            { id: 20, word: "看", pinyin: "kàn", meaning: "ดู / มอง / อ่าน", type: "คำกริยา", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009", example: "我在家看电视了。" },
-            { id: 21, word: "听", pinyin: "tīng", meaning: "ฟัง", type: "คำกริยา", freqTotal: 3, setsFound: "H11009, H11112", example: "我现在不想听你说话。" },
-            { id: 22, word: "听见", pinyin: "tīngjiàn", meaning: "ได้ยิน", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008", example: "你能听见我说话吗?" },
-            { id: 23, word: "说话", pinyin: "shuōhuà", meaning: "พูดคุย", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11007, H11008", example: "我现在不想听你说话。" },
-            { id: 24, word: "说", pinyin: "shuō", meaning: "พูด", type: "คำกริยา", freqTotal: 7, setsFound: "H11006, H11112, H11113", example: "王小姐怎么说?" },
-            { id: 25, word: "读", pinyin: "dú", meaning: "อ่าน", type: "คำกริยา", freqTotal: 5, setsFound: "H11008, H11009, H11112", example: "这几个字怎么读?" },
-            { id: 26, word: "写", pinyin: "xiě", meaning: "เขียน", type: "คำกริยา", freqTotal: 8, setsFound: "H11006, H11008, H11009", example: "这个字我不会写。" },
-            { id: 27, word: "买", pinyin: "mǎi", meaning: "ซื้อ", type: "คำกริยา", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009", example: "我想买一些水果。" },
-            { id: 28, word: "去", pinyin: "qù", meaning: "ไป", type: "คำกริยา", freqTotal: 47, setsFound: "H11006, H11007, H11008, H11009", example: "她下午去哪里?" },
-            { id: 29, word: "来", pinyin: "lái", meaning: "มา", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "他是坐火车来的。" },
-            { id: 30, word: "回/回家", pinyin: "huí / huíjiā", meaning: "กลับ / กลับบ้าน", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "你什么时候回中国?" },
-            { id: 31, word: "坐", pinyin: "zuò", meaning: "นั่ง / โดยสาร", type: "คำกริยา", freqTotal: 21, setsFound: "H11006, H11007, H11008, H11009", example: "明天你怎么去医院?坐出租车。" },
-            { id: 32, word: "住", pinyin: "zhù", meaning: "พัก / อาศัย", type: "คำกริยา", freqTotal: 7, setsFound: "H11008, H11009, H11112", example: "你们现在住哪儿?" },
-            { id: 33, word: "喝", pinyin: "hē", meaning: "ดื่ม", type: "คำกริยา", freqTotal: 15, setsFound: "H11006, H11007, H11008, H11009", example: "你喝水吗?" },
-            { id: 34, word: "吃", pinyin: "chī", meaning: "กิน", type: "คำกริยา", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009", example: "我们今天吃米饭怎么样?" },
-            { id: 35, word: "睡觉", pinyin: "shuìjiào", meaning: "นอนหลับ", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009", example: "我想去睡觉。" },
-            { id: 36, word: "打电话", pinyin: "dǎ diànhuà", meaning: "โทรศัพท์", type: "คำกริยา", freqTotal: 6, setsFound: "H11006, H11008, H11009", example: "打电话" },
-            { id: 37, word: "开车", pinyin: "kāichē", meaning: "ขับรถ", type: "คำกริยา", freqTotal: 5, setsFound: "H11006, H11008, H11009", example: "你开车去那儿?" },
-            { id: 38, word: "做", pinyin: "zuò", meaning: "ทำ", type: "คำกริยา", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009", example: "我做的菜怎么样?" },
-            { id: 39, word: "叫", pinyin: "jiào", meaning: "เรียก / ชื่อว่า", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "你叫什么名字?" },
-            { id: 40, word: "认识", pinyin: "rènshi", meaning: "รู้จัก", type: "คำกริยา", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009", example: "很高兴认识你。" },
-            { id: 41, word: "喜欢", pinyin: "xǐhuan", meaning: "ชอบ", type: "คำกริยา", freqTotal: 24, setsFound: "H11006, H11007, H11008, H11009", example: "我很喜欢这本书。" },
-            { id: 42, word: "想", pinyin: "xiǎng", meaning: "อยาก / คิด", type: "คำกริยา", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009", example: "我想买一些水果。" },
-            { id: 43, word: "爱", pinyin: "ài", meaning: "รัก / ชอบ", type: "คำกริยา", freqTotal: 5, setsFound: "H11008, H11112", example: "你爱吃苹果吗?" },
-            { id: 44, word: "会", pinyin: "huì", meaning: "สามารถ / เป็น / จะ", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009", example: "谁会说汉语?" },
-            { id: 45, word: "能", pinyin: "néng", meaning: "สามารถ / ได้", type: "คำกริยา", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "你能听见我说话吗?" },
-            { id: 46, word: "工作", pinyin: "gōngzuò", meaning: "ทำงาน / งาน", type: "คำกริยา/คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009", example: "他爸爸在哪儿工作?" },
-            { id: 47, word: "学习", pinyin: "xuéxí", meaning: "เรียน / ศึกษา", type: "คำกริยา", freqTotal: 9, setsFound: "H11006, H11007, H11009", example: "你去北京学习几天?" },
-            { id: 48, word: "请", pinyin: "qǐng", meaning: "เชิญ / กรุณา / เลี้ยง", type: "คำกริยา", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009", example: "谢谢你请我看电影。" },
-            { id: 49, word: "见", pinyin: "jiàn", meaning: "เจอ / พบ", type: "คำกริยา", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009", example: "再见,明天见。" },
-            { id: 50, word: "下雨", pinyin: "xiàyǔ", meaning: "ฝนตก", type: "คำกริยา", freqTotal: 5, setsFound: "H11007, H11220", example: "下雨了,你们冷吗?" },
-            { id: 51, word: "好", pinyin: "hǎo", meaning: "ดี", type: "คำคุณศัพท์", freqTotal: 19, setsFound: "H11006, H11007, H11008, H11009", example: "你好!" },
-            { id: 52, word: "高", pinyin: "gāo", meaning: "สูง", type: "คำคุณศัพท์", freqTotal: 1, setsFound: "H11008", example: "很高" },
-            { id: 53, word: "大", pinyin: "dà", meaning: "ใหญ่ / อายุมาก", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11006, H11009", example: "你今年多大了?" },
-            { id: 54, word: "小", pinyin: "xiǎo", meaning: "เล็ก", type: "คำคุณศัพท์", freqTotal: 10, setsFound: "H11007, H11009", example: "小猫" },
-            { id: 55, word: "冷", pinyin: "lěng", meaning: "หนาว", type: "คำคุณศัพท์", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009", example: "天气很冷。" },
-            { id: 56, word: "热", pinyin: "rè", meaning: "ร้อน", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11007, H11008, H11009", example: "很热。" },
-            { id: 57, word: "高兴", pinyin: "gāoxìng", meaning: "ดีใจ / มีความสุข", type: "คำคุณศัพท์", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009", example: "很高兴认识你。" },
-            { id: 58, word: "漂亮", pinyin: "piàoliang", meaning: "สวย", type: "คำคุณศัพท์", freqTotal: 9, setsFound: "H11006, H11008, H11009", example: "怎么样?漂亮吗?" },
-            { id: 59, word: "客气", pinyin: "kèqi", meaning: "เกรงใจ", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H11008, H11009", example: "不客气。" },
-            { id: 60, word: "很", pinyin: "hěn", meaning: "มาก", type: "คำวิเศษณ์", freqTotal: 39, setsFound: "H11006, H11007, H11008, H11009", example: "我很喜欢这本书。" },
-            { id: 61, word: "太", pinyin: "tài", meaning: "เกินไป / มาก", type: "คำวิเศษณ์", freqTotal: 8, setsFound: "H11007, H11008, H11009", example: "太冷,请坐前面。" },
-            { id: 62, word: "都", pinyin: "dōu", meaning: "ล้วน / ทั้งหมด", type: "คำวิเศษณ์", freqTotal: 2, setsFound: "H11112", example: "我们都坐飞机去。" },
-            { id: 63, word: "不", pinyin: "bù", meaning: "ไม่", type: "คำวิเศษณ์", freqTotal: 32, setsFound: "H11006, H11007, H11008, H11009", example: "这个字我不会写。" },
-            { id: 64, word: "没 / 没有", pinyin: "méi / méiyǒu", meaning: "ไม่มี / ไม่ได้", type: "คำวิเศษณ์", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009", example: "我没去看电影。" },
-            { id: 65, word: "在", pinyin: "zài", meaning: "อยู่ / ที่ / กำลัง", type: "คำบุพบท/คำวิเศษณ์", freqTotal: 22, setsFound: "H11006, H11007, H11008, H11009", example: "我在家看电视了。" },
-            { id: 66, word: "和", pinyin: "hé", meaning: "และ / กับ", type: "คำสันธาน", freqTotal: 5, setsFound: "H11008, H11112", example: "下个月,她和朋友去。" },
-            { id: 67, word: "的", pinyin: "de", meaning: "ของ / ที่", type: "คำช่วย", freqTotal: 43, setsFound: "H11006, H11007, H11008, H11009", example: "她是我大学同学。" },
-            { id: 68, word: "了", pinyin: "le", meaning: "แล้ว", type: "คำช่วย", freqTotal: 35, setsFound: "H11006, H11007, H11008, H11009", example: "我在家看电视了。" },
-            { id: 69, word: "吗", pinyin: "ma", meaning: "ไหม", type: "คำช่วย", freqTotal: 28, setsFound: "H11006, H11007, H11008, H11009", example: "你能听见我说话吗?" },
-            { id: 70, word: "呢", pinyin: "ne", meaning: "ล่ะ", type: "คำช่วย", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009", example: "你家的电话是多少呢?" },
-            { id: 71, word: "吧", pinyin: "ba", meaning: "เถอะ / สิ", type: "คำช่วย", freqTotal: 5, setsFound: "H11006, H11007, H11008, H11009", example: "喝点儿水吧。" },
-            { id: 72, word: "人", pinyin: "rén", meaning: "คน", type: "คำนาม", freqTotal: 7, setsFound: "H11008, H11009", example: "买椅子的那个人是谁?" },
-            { id: 73, word: "爸爸", pinyin: "bàba", meaning: "พ่อ", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009", example: "他爸爸在哪儿工作?" },
-            { id: 74, word: "妈妈", pinyin: "māma", meaning: "แม่", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009", example: "她是我妈妈的朋友。" },
-            { id: 75, word: "儿子", pinyin: "érzi", meaning: "ลูกชาย", type: "คำนาม", freqTotal: 12, setsFound: "H11006, H11007, H11008, H11009", example: "儿子的老师" },
-            { id: 76, word: "女儿", pinyin: "nǚ'ér", meaning: "ลูกสาว", type: "คำนาม", freqTotal: 6, setsFound: "H11008, H11009", example: "他的女儿现在在火车站。" },
-            { id: 77, word: "朋友", pinyin: "péngyou", meaning: "เพื่อน", type: "คำนาม", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009", example: "她是我妈妈的朋友。" },
-            { id: 78, word: "先生", pinyin: "xiānsheng", meaning: "คุณผู้ชาย", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11007, H11008, H11009", example: "钱先生" },
-            { id: 79, word: "小姐", pinyin: "xiǎojiě", meaning: "คุณผู้หญิง", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009", example: "王小姐" },
-            { id: 80, word: "老师", pinyin: "lǎoshī", meaning: "ครู", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11009", example: "儿子的老师" },
-            { id: 81, word: "学生", pinyin: "xuésheng", meaning: "นักเรียน", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11008, H11009", example: "有学生在后面叫她。" },
-            { id: 82, word: "同学", pinyin: "tóngxué", meaning: "เพื่อนนักเรียน", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "她是我大学同学。" },
-            { id: 83, word: "医生", pinyin: "yīshēng", meaning: "หมอ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009", example: "我妈妈是医生。" },
-            { id: 84, word: "水", pinyin: "shuǐ", meaning: "น้ำ", type: "คำนาม", freqTotal: 16, setsFound: "H11006, H11007, H11008, H11009", example: "喝点儿水吧。" },
-            { id: 85, word: "菜", pinyin: "cài", meaning: "กับข้าว / ผัก", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008", example: "我妈妈喜欢吃中国菜。" },
-            { id: 86, word: "水果", pinyin: "shuǐguǒ", meaning: "ผลไม้", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11007, H11008, H11009", example: "我想买一些水果。" },
-            { id: 87, word: "苹果", pinyin: "píngguǒ", meaning: "แอปเปิ้ล", type: "คำนาม", freqTotal: 8, setsFound: "H11006, H11008, H11009", example: "爸爸吃苹果。" },
-            { id: 88, word: "米饭", pinyin: "mǐfàn", meaning: "ข้าวสวย", type: "คำนาม", freqTotal: 8, setsFound: "H11007, H11008, H11009", example: "米饭在桌子上。" },
-            { id: 89, word: "茶", pinyin: "chá", meaning: "ชา", type: "คำนาม", freqTotal: 3, setsFound: "H11221", example: "喝茶" },
-            { id: 90, word: "杯子", pinyin: "bēizi", meaning: "แก้ว", type: "คำนาม", freqTotal: 4, setsFound: "H11006", example: "这个杯子里没有水。" },
-            { id: 91, word: "衣服", pinyin: "yīfu", meaning: "เสื้อผ้า", type: "คำนาม", freqTotal: 4, setsFound: "H11008, H11009", example: "椅子上的衣服是你的吗?" },
-            { id: 92, word: "书", pinyin: "shū", meaning: "หนังสือ", type: "คำนาม", freqTotal: 17, setsFound: "H11006, H11007, H11008, H11009", example: "我很喜欢这本书。" },
-            { id: 93, word: "电视", pinyin: "diànshì", meaning: "โทรทัศน์", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "我在家看电视了。" },
-            { id: 94, word: "电影", pinyin: "diànyǐng", meaning: "ภาพยนตร์", type: "คำนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009", example: "谢谢你请我看电影。" },
-            { id: 95, word: "电脑", pinyin: "diànnǎo", meaning: "คอมพิวเตอร์", type: "คำนาม", freqTotal: 5, setsFound: "H11113", example: "买电脑?你和谁去?" },
-            { id: 96, word: "电话", pinyin: "diànhuà", meaning: "โทรศัพท์", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008", example: "你家的电话是多少呢?" },
-            { id: 97, word: "桌子", pinyin: "zhuōzi", meaning: "โต๊ะ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009", example: "米饭在桌子上。" },
-            { id: 98, word: "椅子", pinyin: "yīzi", meaning: "เก้าอี้", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008", example: "小狗在椅子后面。" },
-            { id: 99, word: "名字", pinyin: "míngzi", meaning: "ชื่อ", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009", example: "你叫什么名字?" },
-            { id: 100, word: "汉语", pinyin: "Hànyǔ", meaning: "ภาษาจีน", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009", example: "谁会说汉语?" },
-            { id: 101, word: "汉字", pinyin: "Hànzì", meaning: "อักษรจีน", type: "คำนาม", freqTotal: 1, setsFound: "H11008", example: "你会写多少个汉字?" },
-            { id: 102, word: "字", pinyin: "zì", meaning: "ตัวอักษร", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11009", example: "这个字我不会写。" },
-            { id: 103, word: "东西", pinyin: "dōngxi", meaning: "สิ่งของ", type: "คำนาม", freqTotal: 6, setsFound: "H11009", example: "她们买了很多东西。" },
-            { id: 104, word: "钱", pinyin: "qián", meaning: "เงิน", type: "คำนาม", freqTotal: 2, setsFound: "H11113", example: "这本书多少钱?" },
-            { id: 105, word: "学校", pinyin: "xuéxiào", meaning: "โรงเรียน", type: "คำนาม", freqTotal: 10, setsFound: "H11006, H11007, H11008, H11009", example: "我现在去学校。" },
-            { id: 106, word: "大学", pinyin: "dàxué", meaning: "มหาวิทยาลัย", type: "คำนาม", freqTotal: 5, setsFound: "H11006, H11007, H11008, H11009", example: "大学同学" },
-            { id: 107, word: "医院", pinyin: "yīyuàn", meaning: "โรงพยาบาล", type: "คำนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009", example: "明天你怎么去医院?" },
-            { id: 108, word: "饭馆儿", pinyin: "fànguǎnr", meaning: "ร้านอาหาร", type: "คำนาม", freqTotal: 6, setsFound: "H11006, H11008, H11009", example: "饭馆儿" },
-            { id: 109, word: "商店", pinyin: "shāngdiàn", meaning: "ร้านค้า", type: "คำนาม", freqTotal: 14, setsFound: "H11006, H11007, H11008, H11009", example: "我去商店,我想买一些水果。" },
-            { id: 110, word: "火车站 / 车站", pinyin: "huǒchēzhàn", meaning: "สถานีรถไฟ", type: "คำนาม", freqTotal: 9, setsFound: "H11006, H11007, H11008, H11009", example: "他的女儿现在在火车站。" },
-            { id: 111, word: "时候", pinyin: "shíhou", meaning: "ตอนที่ / เวลา", type: "คำนาม", freqTotal: 11, setsFound: "H11006, H11007, H11008, H11009", example: "你什么时候回中国?" },
-            { id: 112, word: "个", pinyin: "gè", meaning: "คน / อัน / ชิ้น", type: "ลักษณนาม", freqTotal: 20, setsFound: "H11006, H11007, H11008, H11009", example: "你会写多少个汉字?" },
-            { id: 113, word: "本", pinyin: "běn", meaning: "เล่ม", type: "ลักษณนาม", freqTotal: 16, setsFound: "H11006, H11007, H11008, H11009", example: "我很喜欢这本书。" },
-            { id: 114, word: "些", pinyin: "xiē", meaning: "บ้าง / จำนวนหนึ่ง", type: "ลักษณนาม", freqTotal: 13, setsFound: "H11006, H11007, H11008, H11009", example: "我想买一些水果。" },
-            { id: 115, word: "岁", pinyin: "suì", meaning: "ขวบ / ปี (อายุ)", type: "ลักษณนาม", freqTotal: 21, setsFound: "H11006, H11007, H11008, H11009", example: "我24岁。" }
+        // ฐานข้อมูลคำศัพท์ HSK 2 ครบถ้วน 165 คำ
+        const hsk2Data = [
+            { id: 1, word: "分", pinyin: "fēn", meaning: "นาที (ลักษณนามเวลา) / คะแนน", type: "ลักษณนาม/คำนาม", freqTotal: 175, setsFound: "H21331, H21332, H21333, H21334, H21335, H21336, H21339, H21555B, H21555C, H21555D", example: "他们已经游了20分钟了。", examplePinyin: "Tāmen yǐjīng yóule 20 fēnzhōng le.", exampleMeaning: "พวกเขาว่ายน้ำไปแล้ว 20 นาที" },
+            { id: 2, word: "个", pinyin: "gè", meaning: "อัน / ชิ้น / คน (ลักษณนามทั่วไป)", type: "ลักษณนาม", freqTotal: 110, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "小王，这里有几个杯子？", examplePinyin: "Xiǎo Wáng, zhèli yǒu jǐ ge bēizi?", exampleMeaning: "เสี่ยวหวัง ที่นี่มีแก้วกี่ใบ" },
+            { id: 3, word: "在", pinyin: "zài", meaning: "อยู่ที่ / กำลัง", type: "คำกริยา/คำวิเศษณ์", freqTotal: 79, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "他正在北京旅游。", examplePinyin: "Tā zhèngzài Běijīng lǚyóu.", exampleMeaning: "เขากำลังท่องเที่ยวอยู่ที่ปักกิ่ง" },
+            { id: 4, word: "很", pinyin: "hěn", meaning: "มาก", type: "คำวิเศษณ์", freqTotal: 60, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "这儿的羊肉很好吃。", examplePinyin: "Zhèr de yángròu hěn hǎochī.", exampleMeaning: "เนื้อแกะที่นี่อร่อยมาก" },
+            { id: 5, word: "看", pinyin: "kàn", meaning: "ดู / มอง / อ่าน", type: "คำกริยา", freqTotal: 57, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "你知道吗？这是我第一次看见下雪。", examplePinyin: "Nǐ zhīdào ma? Zhè shì wǒ dì yī cì kànjiàn xiàxuě.", exampleMeaning: "คุณรู้ไหม นี่คือครั้งแรกที่ฉันเห็นหิมะตก" },
+            { id: 6, word: "钟", pinyin: "zhōng", meaning: "นาฬิกา / นาที", type: "คำนาม", freqTotal: 55, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "10分钟后到。", examplePinyin: "10 fēnzhōng hòu dào.", exampleMeaning: "อีก 10 นาทีถึง" },
+            { id: 7, word: "点", pinyin: "diǎn", meaning: "โมง / นาฬิกา", type: "ลักษณนาม", freqTotal: 46, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "现在是11点30分。", examplePinyin: "Xiànzài shì 11 diǎn 30 fēn.", exampleMeaning: "ตอนนี้เวลา 11 โมง 30 นาที" },
+            { id: 8, word: "听", pinyin: "tīng", meaning: "ฟัง", type: "คำกริยา", freqTotal: 39, setsFound: "H21331, H21332, H21333, H21334, H21335, H21336, H21339, H21555B, H21555C, H21555D", example: "弟弟在听歌，他听不见你说话。", examplePinyin: "Dìdi zài tīng gē, tā tīngbujiàn nǐ shuōhuà.", exampleMeaning: "น้องชายกำลังฟังเพลงอยู่ เขาไม่ได้ยินที่คุณพูด" },
+            { id: 9, word: "写", pinyin: "xiě", meaning: "เขียน", type: "คำกริยา", freqTotal: 39, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "请在这儿写您的名字。", examplePinyin: "Qǐng zài zhèr xiě nín de míngzi.", exampleMeaning: "กรุณาเขียนชื่อของคุณตรงนี้" },
+            { id: 10, word: "问", pinyin: "wèn", meaning: "ถาม", type: "คำกริยา", freqTotal: 38, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "你姐姐呢？我想问她几个问题。", examplePinyin: "Nǐ jiějie ne? Wǒ xiǎng wèn tā jǐ ge wèntí.", exampleMeaning: "พี่สาวคุณล่ะ ฉันอยากถามคำถามเธอสักสองสามข้อ" },
+            { id: 11, word: "吃", pinyin: "chī", meaning: "กิน", type: "คำกริยา", freqTotal: 36, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "吃完鸡蛋就走吧。", examplePinyin: "Chīwán jīdàn jiù zǒu ba.", exampleMeaning: "กินไข่เสร็จแล้วไปกันเถอะ" },
+            { id: 12, word: "多", pinyin: "duō", meaning: "มาก", type: "คำคุณศัพท์", freqTotal: 32, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "为什么她的比我的多？", examplePinyin: "Wèishénme tā de bǐ wǒ de duō?", exampleMeaning: "ทำไมของเธอถึงมีมากกว่าของฉัน" },
+            { id: 13, word: "能", pinyin: "néng", meaning: "สามารถ / ได้", type: "คำกริยาช่วย", freqTotal: 32, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555D", example: "身体怎么样？什么时候能出院？", examplePinyin: "Shēntǐ zěnmeyàng? Shénme shíhou néng chūyuàn?", exampleMeaning: "ร่างกายเป็นอย่างไรบ้าง เมื่อไหร่จะออกจากโรงพยาบาลได้" },
+            { id: 14, word: "要", pinyin: "yào", meaning: "ต้องการ / จะ", type: "คำกริยา/คำกริยาช่วย", freqTotal: 31, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "服务员，我要的是红茶。", examplePinyin: "Fúwùyuán, wǒ yào de shì hóngchá.", exampleMeaning: "พนักงาน ฉันต้องการชาดำ" },
+            { id: 15, word: "都", pinyin: "dōu", meaning: "ล้วน / ทั้งหมด", type: "คำวิเศษณ์", freqTotal: 27, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "每个星期六，我都去打篮球。", examplePinyin: "Měi ge xīngqīliù, wǒ dōu qù dǎ lánqiú.", exampleMeaning: "ทุกวันเสาร์ฉันไปเล่นบาสเก็ตบอล" },
+            { id: 16, word: "就", pinyin: "jiù", meaning: "ก็ (เร็วกว่าที่คิด)", type: "คำวิเศษณ์", freqTotal: 26, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "他早上6点就起床了。", examplePinyin: "Tā zǎoshang 6 diǎn jiù qǐchuáng le.", exampleMeaning: "เขาตื่นนอนตั้งแต่ 6 โมงเช้าแล้ว" },
+            { id: 17, word: "会", pinyin: "huì", meaning: "เป็น / สามารถ", type: "คำกริยาช่วย", freqTotal: 25, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我会跳舞，但跳得不怎么样。", examplePinyin: "Wǒ huì tiàowǔ, dàn tiàode bù zěnmeyàng.", exampleMeaning: "ฉันเต้นรำเป็น แต่เต้นได้ไม่ค่อยดีเท่าไหร่" },
+            { id: 18, word: "杯", pinyin: "bēi", meaning: "แก้ว / ถ้วย (ลักษณนาม)", type: "ลักษณนาม", freqTotal: 25, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "来，喝杯咖啡，休息一下。", examplePinyin: "Lái, hē bēi kāfēi, xiūxi yíxià.", exampleMeaning: "มา ดื่มกาแฟสักแก้ว พักผ่อนสักหน่อย" },
+            { id: 19, word: "读", pinyin: "dú", meaning: "อ่าน", type: "คำกริยา", freqTotal: 24, setsFound: "H21331, H21332, H21333, H21334, H21335, H21336, H21339, H21555B, H21555C, H21555D", example: "这本书你读完了？怎么样？", examplePinyin: "Zhè běn shū nǐ dúwán le? Zěnmeyàng?", exampleMeaning: "หนังสือเล่มนี้คุณอ่านจบหรือยัง เป็นอย่างไรบ้าง" },
+            { id: 20, word: "说", pinyin: "shuō", meaning: "พูด", type: "คำกริยา", freqTotal: 23, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "请在这儿写您的名字。", examplePinyin: "Qǐng zài zhèr xiě nín de míngzi.", exampleMeaning: "กรุณาเขียนชื่อของคุณตรงนี้" },
+            { id: 21, word: "水", pinyin: "shuǐ", meaning: "น้ำ", type: "คำนาม", freqTotal: 23, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "喝水对身体非常好。", examplePinyin: "Hē shuǐ duì shēntǐ fēicháng hǎo.", exampleMeaning: "การดื่มน้ำดีต่อร่างกายมาก" },
+            { id: 22, word: "年", pinyin: "nián", meaning: "ปี", type: "คำนาม", freqTotal: 23, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我来北京好几年了。", examplePinyin: "Wǒ lái Běijīng hǎo jǐ nián le.", exampleMeaning: "ฉันมาปักกิ่งหลายปีแล้ว" },
+            { id: 23, word: "太", pinyin: "tài", meaning: "เกินไป / มาก", type: "คำวิเศษณ์", freqTotal: 22, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "这儿太漂亮了。", examplePinyin: "Zhèr tài piàoliang le.", exampleMeaning: "ที่นี่สวยงามมากเหลือเกิน" },
+            { id: 24, word: "已经", pinyin: "yǐjīng", meaning: "...แล้ว", type: "คำวิเศษณ์", freqTotal: 22, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "他们已经游了20分钟了。", examplePinyin: "Tāmen yǐjīng yóule 20 fēnzhōng le.", exampleMeaning: "พวกเขาว่ายน้ำไปแล้ว 20 นาที" },
+            { id: 25, word: "红", pinyin: "hóng", meaning: "สีแดง", type: "คำคุณศัพท์", freqTotal: 21, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "左边那个红色的是我的。", examplePinyin: "Zuǒbian nàge hóngsè de shì wǒ de.", exampleMeaning: "อันสีแดงทางซ้ายนั้นเป็นของฉัน" },
+            { id: 26, word: "今天", pinyin: "jīntiān", meaning: "วันนี้", type: "คำนาม", freqTotal: 19, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "你今天怎么没来上班？", examplePinyin: "Nǐ jīntiān zěnme méi lái shàngbān?", exampleMeaning: "ทำไมวันนี้คุณไม่มาทำงาน" },
+            { id: 27, word: "快", pinyin: "kuài", meaning: "เร็ว / ใกล้จะ", type: "คำคุณศัพท์/คำวิเศษณ์", freqTotal: 18, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D", example: "都快11点了，儿子可能已经睡了。", examplePinyin: "Dōu kuài 11 diǎn le, érzi kěnéng yǐjīng shuì le.", exampleMeaning: "ใกล้จะ 11 โมงแล้ว ลูกชายอาจจะหลับไปแล้ว" },
+            { id: 28, word: "想", pinyin: "xiǎng", meaning: "อยาก / คิด", type: "คำกริยา", freqTotal: 18, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我想问她几个问题。", examplePinyin: "Wǒ xiǎng wèn tā jǐ ge wèntí.", exampleMeaning: "ฉันอยากถามคำถามเธอสักสองสามข้อ" },
+            { id: 29, word: "名字", pinyin: "míngzi", meaning: "ชื่อ", type: "คำนาม", freqTotal: 18, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "请在这儿写您的名字。", examplePinyin: "Qǐng zài zhèr xiě nín de míngzi.", exampleMeaning: "กรุณาเขียนชื่อของคุณตรงนี้" },
+            { id: 30, word: "北", pinyin: "běi", meaning: "เหนือ (ทิศ)", type: "คำนาม", freqTotal: 17, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "9月是北京天气最好的时候。", examplePinyin: "9 yuè shì Běijīng tiānqì zuì hǎo de shíhou.", exampleMeaning: "เดือนกันยายนเป็นช่วงที่อากาศที่ปักกิ่งดีที่สุด" },
+            { id: 31, word: "号", pinyin: "hào", meaning: "วันที่ / เบอร์", type: "คำนาม", freqTotal: 17, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "给你票，6号的。", examplePinyin: "Gěi nǐ piào, 6 hào de.", exampleMeaning: "ให้ตั๋วคุณ ของวันที่ 6" },
+            { id: 32, word: "非常", pinyin: "fēicháng", meaning: "อย่างมาก", type: "คำวิเศษณ์", freqTotal: 17, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "这几个颜色我都非常喜欢。", examplePinyin: "Zhè jǐ ge yánsè wǒ dōu fēicháng xǐhuan.", exampleMeaning: "สีเหล่านี้ฉันชอบมากทั้งหมดเลย" },
+            { id: 33, word: "买", pinyin: "mǎi", meaning: "ซื้อ", type: "คำกริยา", freqTotal: 17, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "前面卖西瓜，很便宜。", examplePinyin: "Qiánmiàn mài xīguā, hěn piányi.", exampleMeaning: "ข้างหน้าขายแตงโม ราคาถูกมาก" },
+            { id: 34, word: "汉语", pinyin: "Hànyǔ", meaning: "ภาษาจีน", type: "คำนาม", freqTotal: 17, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "你的汉语说得很好。", examplePinyin: "Nǐ de Hànyǔ shuōde hěn hǎo.", exampleMeaning: "ภาษาจีนของคุณพูดได้ดีมาก" },
+            { id: 35, word: "也", pinyin: "yě", meaning: "ก็ (เช่นกัน)", type: "คำวิเศษณ์", freqTotal: 16, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我也想学跳舞，可以吗？", examplePinyin: "Wǒ yě xiǎng xué tiàowǔ, kěyǐ ma?", exampleMeaning: "ฉันก็อยากเรียนเต้นรำด้วย ได้ไหม" },
+            { id: 36, word: "书", pinyin: "shū", meaning: "หนังสือ", type: "คำนาม", freqTotal: 16, setsFound: "H21331, H21332, H21333, H21334, H21555B, H21555C, H21555D", example: "这本书你读完了？", examplePinyin: "Zhè běn shū nǐ dúwán le?", exampleMeaning: "หนังสือเล่มนี้คุณอ่านจบหรือยัง" },
+            { id: 37, word: "房间", pinyin: "fángjiān", meaning: "ห้อง", type: "คำนาม", freqTotal: 15, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "房间里的东西都是你的吗？", examplePinyin: "Fángjiān lǐ de dōngxi dōu shì nǐ de ma?", exampleMeaning: "ข้าวของในห้องเป็นของคุณทั้งหมดใช่ไหม" },
+            { id: 38, word: "教室", pinyin: "jiàoshì", meaning: "ห้องเรียน", type: "คำนาม", freqTotal: 15, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "他还在教室里学习。", examplePinyin: "Tā hái zài jiàoshì lǐ xuéxí.", exampleMeaning: "เขายังเรียนหนังสืออยู่ในห้องเรียน" },
+            { id: 39, word: "完", pinyin: "wán", meaning: "เสร็จ / จบ", type: "คำกริยา", freqTotal: 15, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "等我写完后，我就去公司找你。", examplePinyin: "Děng wǒ xiěwán hòu, wǒ jiù qù gōngsī zhǎo nǐ.", exampleMeaning: "รอฉันเขียนเสร็จก่อน แล้วฉันจะไปหาคุณที่บริษัท" },
+            { id: 40, word: "喝", pinyin: "hē", meaning: "ดื่ม", type: "คำกริยา", freqTotal: 15, setsFound: "H21331, H21334, H21335, H21555B, H21555C, H21555D", example: "来，喝杯咖啡，休息一下。", examplePinyin: "Lái, hē bēi kāfēi, xiūxi yíxià.", exampleMeaning: "มา ดื่มกาแฟสักแก้ว พักผ่อนสักหน่อย" },
+            { id: 41, word: "现在", pinyin: "xiànzài", meaning: "ตอนนี้", type: "คำนาม", freqTotal: 15, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "现在是11点30分。", examplePinyin: "Xiànzài shì 11 diǎn 30 fēn.", exampleMeaning: "ตอนนี้เวลา 11 โมง 30 นาที" },
+            { id: 42, word: "跳舞", pinyin: "tiàowǔ", meaning: "เต้นรำ", type: "คำกริยา", freqTotal: 14, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我会跳舞，但跳得不怎么样。", examplePinyin: "Wǒ huì tiàowǔ, dàn tiàode bù zěnmeyàng.", exampleMeaning: "ฉันเต้นรำเป็น แต่เต้นได้ไม่ค่อยดีเท่าไหร่" },
+            { id: 43, word: "黑", pinyin: "hēi", meaning: "สีดำ", type: "คำคุณศัพท์", freqTotal: 14, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "黑色的很便宜。", examplePinyin: "Hēisè de hěn piányi.", exampleMeaning: "สีดำราคาถูกมาก" },
+            { id: 44, word: "颜色", pinyin: "yánsè", meaning: "สี", type: "คำนาม", freqTotal: 14, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "小王的杯子是什么颜色的？", examplePinyin: "Xiǎo Wáng de bēizi shì shénme yánsè de?", exampleMeaning: "แก้วของเสี่ยวหวังเป็นสีอะไร" },
+            { id: 45, word: "次", pinyin: "cì", meaning: "ครั้ง", type: "ลักษณนาม", freqTotal: 14, setsFound: "H21331, H21332, H21333, H21335, H21555B, H21555C, H21555D", example: "这是我第一次看见下雪。", examplePinyin: "Zhè shì wǒ dì yī cì kànjiàn xiàxuě.", exampleMeaning: "นี่คือครั้งแรกที่ฉันเห็นหิมะตก" },
+            { id: 46, word: "给", pinyin: "gěi", meaning: "ให้", type: "คำกริยา", freqTotal: 14, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B", example: "服务员，请给我一杯咖啡。", examplePinyin: "Fúwùyuán, qǐng gěi wǒ yì bēi kāfēi.", exampleMeaning: "พนักงาน กรุณาให้กาแฟฉันหนึ่งแก้ว" },
+            { id: 47, word: "星期", pinyin: "xīngqī", meaning: "สัปดาห์", type: "คำนาม", freqTotal: 14, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "每个星期六，我都去打篮球。", examplePinyin: "Měi ge xīngqīliù, wǒ dōu qù dǎ lánqiú.", exampleMeaning: "ทุกวันเสาร์ฉันไปเล่นบาสเก็ตบอล" },
+            { id: 48, word: "同学", pinyin: "tóngxué", meaning: "เพื่อนร่วมชั้น", type: "คำนาม", freqTotal: 14, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555D", example: "你和他是同学？", examplePinyin: "Nǐ hé tā shì tóngxué?", exampleMeaning: "คุณกับเขาเป็นเพื่อนร่วมชั้นกันเหรอ" },
+            { id: 49, word: "错", pinyin: "cuò", meaning: "ผิด", type: "คำคุณศัพท์", freqTotal: 13, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "错了，左边的是哥哥，右边这个是弟弟。", examplePinyin: "Cuò le, zuǒbian shì gēge, yòubian zhège shì dìdi.", exampleMeaning: "ผิดแล้ว ด้านซ้ายคือพี่ชาย ด้านขวานี้คือน้องชาย" },
+            { id: 50, word: "白", pinyin: "bái", meaning: "สีขาว", type: "คำคุณศัพท์", freqTotal: 13, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "小白是个医生。", examplePinyin: "Xiǎo Bái shì ge yīshēng.", exampleMeaning: "เสี่ยวไป๋เป็นหมอ" },
+            { id: 51, word: "可以", pinyin: "kěyǐ", meaning: "สามารถ / ...ได้", type: "คำกริยาช่วย", freqTotal: 13, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "下课后可以来问我。", examplePinyin: "Xiàkè hòu kěyǐ lái wèn wǒ.", exampleMeaning: "หลังเลิกเรียนสามารถมาถามฉันได้" },
+            { id: 52, word: "弟弟", pinyin: "dìdi", meaning: "น้องชาย", type: "คำนาม", freqTotal: 13, setsFound: "H21331, H21332, H21334, H21555B, H21555C, H21555D", example: "我弟弟在一家电脑公司找了个工作。", examplePinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", exampleMeaning: "น้องชายฉันหางานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่งได้แล้ว" },
+            { id: 53, word: "左边", pinyin: "zuǒbian", meaning: "ด้านซ้าย", type: "คำนาม", freqTotal: 12, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "左边是\"女\"字，右边是\"生\"字。", examplePinyin: "Zuǒbian shì 'nǚ' zì, yòubian shì 'shēng' zì.", exampleMeaning: "ด้านซ้ายคืออักษร 'หนี่ว' ด้านขวาคืออักษร 'เชิง'" },
+            { id: 54, word: "公司", pinyin: "gōngsī", meaning: "บริษัท", type: "คำนาม", freqTotal: 12, setsFound: "H21331, H21332, H21333, H21335, H21555B, H21555C, H21555D", example: "我弟弟在一家电脑公司找了个工作。", examplePinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", exampleMeaning: "น้องชายฉันหางานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่งได้แล้ว" },
+            { id: 55, word: "贵", pinyin: "guì", meaning: "แพง", type: "คำคุณศัพท์", freqTotal: 12, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "这儿的羊肉很好吃，也很贵。", examplePinyin: "Zhèr de yángròu hěn hǎochī, yě hěn guì.", exampleMeaning: "เนื้อแกะที่นี่อร่อยมาก และก็แพงมากด้วย" },
+            { id: 56, word: "觉得", pinyin: "juéde", meaning: "รู้สึกว่า / คิดว่า", type: "คำกริยา", freqTotal: 12, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C", example: "我觉得这件就很不错。", examplePinyin: "Wǒ juéde zhè jiàn jiù hěn búcuò.", exampleMeaning: "ฉันรู้สึกว่าตัวนี้ก็ไม่เลวเลย" },
+            { id: 57, word: "最", pinyin: "zuì", meaning: "...ที่สุด", type: "คำวิเศษณ์", freqTotal: 12, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我最喜欢踢足球。", examplePinyin: "Wǒ zuì xǐhuan tī zúqiú.", exampleMeaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { id: 58, word: "雪", pinyin: "xuě", meaning: "หิมะ", type: "คำนาม", freqTotal: 12, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "这是我第一次看见下雪。", examplePinyin: "Zhè shì wǒ dì yī cì kànjiàn xiàxuě.", exampleMeaning: "นี่คือครั้งแรกที่ฉันเห็นหิมะตก" },
+            { id: 59, word: "明天", pinyin: "míngtiān", meaning: "พรุ่งนี้", type: "คำนาม", freqTotal: 12, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "明天天气怎么样？", examplePinyin: "Míngtiān tiānqì zěnmeyàng?", exampleMeaning: "พรุ่งนี้อากาศเป็นอย่างไรบ้าง" },
+            { id: 60, word: "医院", pinyin: "yīyuàn", meaning: "โรงพยาบาล", type: "คำนาม", freqTotal: 11, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "听说她孩子生病了，她去医院了。", examplePinyin: "Tīngshuō tā háizi shēngbìng le, tā qù yīyuàn le.", exampleMeaning: "ได้ยินว่าลูกของเธอป่วย เธอไปโรงพยาบาลแล้ว" },
+            { id: 61, word: "运动", pinyin: "yùndòng", meaning: "กีฬา / ออกกำลังกาย", type: "คำนาม/คำกริยา", freqTotal: 11, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "你喜欢什么运动？", examplePinyin: "Nǐ xǐhuan shénme yùndòng?", exampleMeaning: "คุณชอบกีฬาอะไร" },
+            { id: 62, word: "对", pinyin: "duì", meaning: "ถูกต้อง / กับ", type: "คำคุณศัพท์/คำบุพบท", freqTotal: 11, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555C, H21555D", example: "没关系，我知道你很忙。", examplePinyin: "Méiguānxi, wǒ zhīdào nǐ hěn máng.", exampleMeaning: "ไม่เป็นไร ฉันรู้ว่าคุณยุ่งมาก" },
+            { id: 63, word: "找", pinyin: "zhǎo", meaning: "หา", type: "คำกริยา", freqTotal: 11, setsFound: "H21331, H21332, H21333, H21555C, H21555D", example: "我弟弟在一家电脑公司找了个工作。", examplePinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", exampleMeaning: "น้องชายฉันหางานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่งได้แล้ว" },
+            { id: 64, word: "比", pinyin: "bǐ", meaning: "เทียบกับ", type: "คำบุพบท", freqTotal: 11, setsFound: "H21331, H21332, H21334, H21555B, H21555C, H21555D", example: "今年比去年热得早。", examplePinyin: "Jīnnián bǐ qùnián rède zǎo.", exampleMeaning: "ปีนี้ร้อนเร็วกว่าปีที่แล้ว" },
+            { id: 65, word: "高", pinyin: "gāo", meaning: "สูง", type: "คำคุณศัพท์", freqTotal: 11, setsFound: "H21331, H21332, H21333, H21334, H21555B, H21555C", example: "弟弟比我高。", examplePinyin: "Dìdi bǐ wǒ gāo.", exampleMeaning: "น้องชายสูงกว่าฉัน" },
+            { id: 66, word: "月", pinyin: "yuè", meaning: "เดือน", type: "คำนาม", freqTotal: 11, setsFound: "H21331, H21332, H21334, H21555B, H21555C, H21555D", example: "去年8月开始学习汉语。", examplePinyin: "Qùnián 8 yuè kāishǐ xuéxí Hànyǔ.", exampleMeaning: "เริ่มเรียนภาษาจีนตั้งแต่เดือนสิงหาคมปีที่แล้ว" },
+            { id: 67, word: "时候", pinyin: "shíhou", meaning: "เวลา / ตอนที่", type: "คำนาม", freqTotal: 11, setsFound: "H21331, H21332, H21334, H21335, H21555C, H21555D", example: "我还在火车上的时候。", examplePinyin: "Wǒ hái zài huǒchē shàng de shíhou.", exampleMeaning: "ตอนที่ฉันยังอยู่บนรถไฟ" },
+            { id: 68, word: "火车", pinyin: "huǒchē", meaning: "รถไฟ", type: "คำนาม", freqTotal: 10, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我明天要早起去火车站。", examplePinyin: "Wǒ míngtiān yào zǎo qǐ qù huǒchēzhàn.", exampleMeaning: "พรุ่งนี้ฉันต้องตื่นเช้าไปสถานีรถไฟ" },
+            { id: 69, word: "洗", pinyin: "xǐ", meaning: "ล้าง / ซัก", type: "คำกริยา", freqTotal: 10, setsFound: "H21332, H21333, H21334, H21335, H21555B, H21555C", example: "妻子这几天很忙，所以我洗衣服。", examplePinyin: "Qīzi zhè jǐ tiān hěn máng, suǒyǐ wǒ xǐ yīfu.", exampleMeaning: "ช่วงนี้ภรรยายุ่งมาก ดังนั้นฉันจึงซักผ้าเอง" },
+            { id: 70, word: "别", pinyin: "bié", meaning: "อย่า", type: "คำวิเศษณ์", freqTotal: 10, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C", example: "这些事，你别告诉妈，好吗？", examplePinyin: "Zhèxiē shì, nǐ bié gàosu mā, hǎo ma?", exampleMeaning: "เรื่องพวกนี้ คุณอย่าบอกแม่นะ ตกลงไหม" },
+            { id: 71, word: "羊肉", pinyin: "yángròu", meaning: "เนื้อแกะ", type: "คำนาม", freqTotal: 10, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "这儿的羊肉很好吃。", examplePinyin: "Zhèr de yángròu hěn hǎochī.", exampleMeaning: "เนื้อแกะที่นี่อร่อยมาก" },
+            { id: 72, word: "衣服", pinyin: "yīfu", meaning: "เสื้อผ้า", type: "คำนาม", freqTotal: 10, setsFound: "H21332, H21333, H21334, H21335, H21555C", example: "你的衣服还没穿好呢。", examplePinyin: "Nǐ de yīfu hái méi chuānhǎo ne.", exampleMeaning: "เสื้อผ้าของคุณยังใส่ไม่เรียบร้อยเลย" },
+            { id: 73, word: "朋友", pinyin: "péngyou", meaning: "เพื่อน", type: "คำนาม", freqTotal: 10, setsFound: "H21331, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我和朋友去看电影。", examplePinyin: "Wǒ hé péngyou qù kàn diànyǐng.", exampleMeaning: "ฉันไปดูหนังกับเพื่อน" },
+            { id: 74, word: "远", pinyin: "yuǎn", meaning: "ไกล", type: "คำคุณศัพท์", freqTotal: 9, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B", example: "你家离学校远吗？", examplePinyin: "Nǐ jiā lí xuéxiào yuǎn ma?", exampleMeaning: "บ้านคุณอยู่ห่างจากโรงเรียนไกลไหม" },
+            { id: 75, word: "游泳", pinyin: "yóuyǒng", meaning: "ว่ายน้ำ", type: "คำกริยา", freqTotal: 9, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "他们11点10分开始游泳。", examplePinyin: "Tāmen 11 diǎn 10 fēn kāishǐ yóuyǒng.", exampleMeaning: "พวกเขาเริ่มว่ายน้ำเวลา 11 โมง 10 นาที" },
+            { id: 76, word: "岁", pinyin: "suì", meaning: "ขวบ / ปี (อายุ)", type: "ลักษณนาม", freqTotal: 9, setsFound: "H21331, H21332, H21334, H21335, H21555C, H21555D", example: "我今年已经25了，比你大一岁。", examplePinyin: "Wǒ jīnnián yǐjīng 25 le, bǐ nǐ dà yí suì.", exampleMeaning: "ปีนี้ฉันอายุ 25 แล้ว แก่กว่าคุณหนึ่งปี" },
+            { id: 77, word: "雨", pinyin: "yǔ", meaning: "ฝน", type: "คำนาม", freqTotal: 9, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555D", example: "外面下雨了。", examplePinyin: "Wàimiàn xiàyǔ le.", exampleMeaning: "ข้างนอกฝนตกแล้ว" },
+            { id: 78, word: "去年", pinyin: "qùnián", meaning: "ปีที่แล้ว", type: "คำนาม", freqTotal: 9, setsFound: "H21331, H21332, H21334, H21335, H21555B, H21555C, H21555D", example: "我去年8月开始学习汉语。", examplePinyin: "Wǒ qùnián 8 yuè kāishǐ xuéxí Hànyǔ.", exampleMeaning: "ฉันเริ่มเรียนภาษาจีนตั้งแต่เดือนสิงหาคมปีที่แล้ว" },
+            { id: 79, word: "机场", pinyin: "jīchǎng", meaning: "สนามบิน", type: "คำนาม", freqTotal: 8, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C", example: "王先生住的宾馆离机场不远。", examplePinyin: "Wáng xiānsheng zhù de bīnguǎn lí jīchǎng bù yuǎn.", exampleMeaning: "โรงแรมที่คุณหวังพักอยู่ไม่ไกลจากสนามบิน" },
+            { id: 80, word: "火车站", pinyin: "huǒchēzhàn", meaning: "สถานีรถไฟ", type: "คำนาม", freqTotal: 8, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "我去问问到火车站怎么走。", examplePinyin: "Wǒ qù wènwen dào huǒchēzhàn zěnme zǒu.", exampleMeaning: "ฉันจะไปถามทางไปสถานีรถไฟหน่อย" },
+            { id: 81, word: "西", pinyin: "xī", meaning: "ตะวันตก (ทิศ)", type: "คำนาม", freqTotal: 8, setsFound: "H21331, H21333, H21334, H21555B, H21555C, H21555D", example: "西瓜不贵。", examplePinyin: "Xīguā bú guì.", exampleMeaning: "แตงโมไม่แพง" },
+            { id: 82, word: "南", pinyin: "nán", meaning: "ใต้ (ทิศ)", type: "คำนาม", freqTotal: 8, setsFound: "H21331, H21332", example: "我家在城南。", examplePinyin: "Wǒ jiā zài chéng nán.", exampleMeaning: "บ้านฉันอยู่ทางใต้ของเมือง" },
+            { id: 83, word: "踢足球", pinyin: "tī zúqiú", meaning: "เตะฟุตบอล", type: "คำกริยา", freqTotal: 8, setsFound: "H21331, H21332", example: "我最喜欢踢足球。", examplePinyin: "Wǒ zuì xǐhuan tī zúqiú.", exampleMeaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { id: 84, word: "打篮球", pinyin: "dǎ lánqiú", meaning: "เล่นบาสเก็ตบอล", type: "คำกริยา", freqTotal: 8, setsFound: "H21331, H21332", example: "每个星期六，我都去打篮球。", examplePinyin: "Měi ge xīngqīliù, wǒ dōu qù dǎ lánqiú.", exampleMeaning: "ทุกวันเสาร์ฉันไปเล่นบาสเก็ตบอล" },
+            { id: 85, word: "意思", pinyin: "yìsi", meaning: "ความหมาย / น่าสนใจ", type: "คำนาม", freqTotal: 8, setsFound: "H21331, H21332, H21333, H21334, H21555B", example: "这本书很有意思，你也看看。", examplePinyin: "Zhè běn shū hěn yǒu yìsi, nǐ yě kànkan.", exampleMeaning: "หนังสือเล่มนี้น่าสนใจมาก คุณลองอ่านดูสิ" },
+            { id: 86, word: "少", pinyin: "shǎo", meaning: "น้อย", type: "คำคุณศัพท์", freqTotal: 8, setsFound: "H21331, H21332, H21334, H21335, H21555B, H21555D", example: "你怎么穿这么少？", examplePinyin: "Nǐ zěnme chuān zhème shǎo?", exampleMeaning: "ทำไมคุณถึงใส่เสื้อผ้าน้อยจัง" },
+            { id: 87, word: "回答", pinyin: "huídá", meaning: "ตอบ", type: "คำกริยา", freqTotal: 8, setsFound: "H21331, H21332", example: "她笑着说：“我知道了。”", examplePinyin: "Tā xiàozhe shuō: “wǒ zhīdào le.”", exampleMeaning: "เธอยิ้มแล้วพูดว่า \"ฉันรู้แล้ว\"" },
+            { id: 88, word: "换", pinyin: "huàn", meaning: "เปลี่ยน", type: "คำกริยา", freqTotal: 8, setsFound: "H21331, H21332", example: "我们再换个羊肉？", examplePinyin: "Wǒmen zài huàn ge yángròu?", exampleMeaning: "พวกเราเปลี่ยนเป็นเนื้อแกะอีกจานไหม" },
+            { id: 89, word: "哭", pinyin: "kū", meaning: "ร้องไห้", type: "คำกริยา", freqTotal: 8, setsFound: "H21331, H21332", example: "她很忙，你别去找她。", examplePinyin: "Tā hěn máng, nǐ bié qù zhǎo tā.", exampleMeaning: "เธอยุ่งมาก คุณอย่าไปหาเธอเลย" },
+            { id: 90, word: "才", pinyin: "cái", meaning: "เพิ่ง / ถึงจะ", type: "คำวิเศษณ์", freqTotal: 8, setsFound: "H21331, H21332", example: "我们在这儿一块儿去。", examplePinyin: "Wǒmen zài zhèr yíkuàir qù.", exampleMeaning: "พวกเราไปด้วยกันตรงนี้" },
+            { id: 91, word: "向", pinyin: "xiàng", meaning: "ไปทาง", type: "คำบุพบท", freqTotal: 8, setsFound: "H21331, H21332", example: "喂，你往右看。", examplePinyin: "Wéi, nǐ wǎng yòu kàn.", exampleMeaning: "ฮัลโหล คุณมองไปทางขวา" },
+            { id: 92, word: "椅子", pinyin: "yǐzi", meaning: "เก้าอี้", type: "คำนาม", freqTotal: 8, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C, H21555D", example: "服务员，我们这桌少两个椅子。", examplePinyin: "Fúwùyuán, wǒmen zhè zhuō shǎo liǎng ge yǐzi.", exampleMeaning: "พนักงาน โต๊ะพวกเราขาดเก้าอี้สองตัว" },
+            { id: 93, word: "老师", pinyin: "lǎoshī", meaning: "ครู", type: "คำนาม", freqTotal: 8, setsFound: "H21331, H21332, H21333, H21334, H21555B, H21555C, H21555D", example: "白老师今天怎么没来上班？", examplePinyin: "Bái lǎoshī jīntiān zěnme méi lái shàngbān?", exampleMeaning: "ทำไมวันนี้อาจารย์ไป่ถึงไม่มาทำงาน" },
+            { id: 94, word: "出租车", pinyin: "chūzūchē", meaning: "แท็กซี่", type: "คำนาม", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D", example: "我在出租车上，就快到学校了！", examplePinyin: "Wǒ zài chūzūchē shàng, jiù kuài dào xuéxiào le!", exampleMeaning: "ฉันอยู่บนแท็กซี่แล้ว ใกล้จะถึงโรงเรียนแล้ว" },
+            { id: 95, word: "离", pinyin: "lí", meaning: "ห่างจาก", type: "คำบุพบท", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B", example: "我家就在学校旁边。", examplePinyin: "Wǒ jiā jiù zài xuéxiào pángbiān.", exampleMeaning: "บ้านฉันอยู่ข้างโรงเรียนเลย" },
+            { id: 96, word: "前面", pinyin: "qiánmiàn", meaning: "ข้างหน้า", type: "คำนาม", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B, H21555C", example: "前面卖西瓜，很便宜。", examplePinyin: "Qiánmiàn mài xīguā, hěn piányi.", exampleMeaning: "ข้างหน้าขายแตงโม ราคาถูกมาก" },
+            { id: 97, word: "右边", pinyin: "yòubian", meaning: "ด้านขวา", type: "คำนาม", freqTotal: 7, setsFound: "H21332, H21333, H21334, H21555C, H21555D", example: "你往右看，我的车就在你的右边。", examplePinyin: "Nǐ wǎng yòu kàn, wǒ de chē jiù zài nǐ de yòubian.", exampleMeaning: "คุณมองไปทางขวา รถของฉันอยู่ทางขวาของคุณเลย" },
+            { id: 98, word: "宾馆", pinyin: "bīnguǎn", meaning: "โรงแรม", type: "คำนาม", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21335", example: "我住的宾馆离你们公司很近。", examplePinyin: "Wǒ zhù de bīnguǎn lí nǐmen gōngsī hěn jìn.", exampleMeaning: "โรงแรมที่ฉันพักอยู่ใกล้กับบริษัทของพวกคุณมาก" },
+            { id: 99, word: "真", pinyin: "zhēn", meaning: "จริงๆ", type: "คำวิเศษณ์", freqTotal: 7, setsFound: "H21331, H21332, H21334, H21335, H21555B, H21555D", example: "住得这么近，真好！", examplePinyin: "Zhù de zhème jìn, zhēn hǎo!", exampleMeaning: "พักอยู่ใกล้ขนาดนี้ ดีจริงๆ" },
+            { id: 100, word: "懂", pinyin: "dǒng", meaning: "เข้าใจ", type: "คำกริยา", freqTotal: 7, setsFound: "H21331, H21332, H21334, H21335, H21555B, H21555C", example: "爸爸，您说得太快，我没听懂。", examplePinyin: "Bàba, nín shuōde tài kuài, wǒ méi tīngdǒng.", exampleMeaning: "คุณพ่อครับ คุณพูดเร็วเกินไป ฉันฟังไม่เข้าใจ" },
+            { id: 101, word: "帮助", pinyin: "bāngzhù", meaning: "ช่วยเหลือ", type: "คำกริยา", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555B", example: "小李帮助了他们。", examplePinyin: "Xiǎo Lǐ bāngzhùle tāmen.", exampleMeaning: "เสี่ยวหลี่ได้ช่วยเหลือพวกเขา" },
+            { id: 102, word: "从", pinyin: "cóng", meaning: "จาก / ตั้งแต่", type: "คำบุพบท", freqTotal: 7, setsFound: "H21332, H21333, H21555B, H21555C, H21555D", example: "我从11岁开始踢足球。", examplePinyin: "Wǒ cóng 11 suì kāishǐ tī zúqiú.", exampleMeaning: "ฉันเริ่มเตะฟุตบอลตั้งแต่อายุ 11 ขวบ" },
+            { id: 103, word: "件", pinyin: "jiàn", meaning: "ตัว / ชิ้น (ลักษณนาม)", type: "ลักษณนาม", freqTotal: 7, setsFound: "H21332, H21333, H21334, H21335, H21555B", example: "这件衣服不错，新买的？", examplePinyin: "Zhè jiàn yīfu búcuò, xīn mǎi de?", exampleMeaning: "เสื้อตัวนี้ไม่เลวเลย ซื้อใหม่เหรอ" },
+            { id: 104, word: "卖", pinyin: "mài", meaning: "ขาย", type: "คำกริยา", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21555B, H21555C", example: "前面的商店在卖水果。", examplePinyin: "Qiánmiàn de shāngdiàn zài mài shuǐguǒ.", exampleMeaning: "ร้านค้าข้างหน้ากำลังขายผลไม้" },
+            { id: 105, word: "茶", pinyin: "chá", meaning: "ชา", type: "คำนาม", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21555C", example: "我们去那个茶馆儿喝杯茶好不好？", examplePinyin: "Wǒmen qù nàge cháguǎnr hē bēi chá hǎobuhǎo?", exampleMeaning: "พวกเราไปดื่มชาที่ร้านน้ำชานั้นกันดีไหม" },
+            { id: 106, word: "鸡蛋", pinyin: "jīdàn", meaning: "ไข่ไก่", type: "คำนาม", freqTotal: 7, setsFound: "H21331, H21332, H21335, H21555B, H21555C, H21555D", example: "有米饭、鸡蛋，还有牛奶。", examplePinyin: "Yǒu mǐfàn, jīdàn, hái yǒu niúnǎi.", exampleMeaning: "มีข้าวสวย ไข่ต้ม และก็นมด้วย" },
+            { id: 107, word: "电脑", pinyin: "diànnǎo", meaning: "คอมพิวเตอร์", type: "คำนาม", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21555B, H21555C, H21555D", example: "我弟弟在一家电脑公司找了个工作。", examplePinyin: "Wǒ dìdi zài yì jiā diànnǎo gōngsī zhǎole ge gōngzuò.", exampleMeaning: "น้องชายฉันหางานทำที่บริษัทคอมพิวเตอร์แห่งหนึ่งได้แล้ว" },
+            { id: 108, word: "冷", pinyin: "lěng", meaning: "หนาว", type: "คำคุณศัพท์", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21334, H21555B, H21555C", example: "电视上说今天非常冷。", examplePinyin: "Diànshì shàng shuō jīntiān fēicháng lěng.", exampleMeaning: "ในทีวีบอกว่าวันนี้หนาวมาก" },
+            { id: 109, word: "日", pinyin: "rì", meaning: "วันที่", type: "คำนาม", freqTotal: 7, setsFound: "H21332, H21334, H21555B, H21555D", example: "12日、13日、18日。", examplePinyin: "12 rì, 13 rì, 18 rì.", exampleMeaning: "วันที่ 12, วันที่ 13, วันที่ 18" },
+            { id: 110, word: "姐姐", pinyin: "jiějie", meaning: "พี่สาว", type: "คำนาม", freqTotal: 7, setsFound: "H21332, H21333, H21335, H21555B, H21555C", example: "你姐姐呢？我想问她几个问题。", examplePinyin: "Nǐ jiějie ne? Wǒ xiǎng wèn tā jǐ ge wèntí.", exampleMeaning: "พี่สาวคุณล่ะ ฉันอยากถามคำถามเธอสักสองสามข้อ" },
+            { id: 111, word: "丈夫", pinyin: "zhàngfu", meaning: "สามี", type: "คำนาม", freqTotal: 7, setsFound: "H21331, H21332, H21333, H21335, H21555C, H21555D", example: "我和我丈夫20年前去那儿。", examplePinyin: "Wǒ hé wǒ zhàngfu 20 nián qián qù nàr.", exampleMeaning: "ฉันกับสามีไปที่นั่นเมื่อ 20 ปีที่แล้ว" },
+            { id: 112, word: "商店", pinyin: "shāngdiàn", meaning: "ร้านค้า", type: "คำนาม", freqTotal: 6, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D", example: "我去前面那家商店，很近。", examplePinyin: "Wǒ qù qiánmiàn nà jiā shāngdiàn, hěn jìn.", exampleMeaning: "ฉันไปร้านค้าที่อยู่ข้างหน้านั้น ใกล้มาก" },
+            { id: 113, word: "唱歌", pinyin: "chànggē", meaning: "ร้องเพลง", type: "คำกริยา", freqTotal: 6, setsFound: "H21331, H21333, H21334, H21335, H21555B, H21555C", example: "对不起，我下午有事，不能和你去唱歌了。", examplePinyin: "Duìbuqǐ, wǒ xiàwǔ yǒu shì, bù néng hé nǐ qù chànggē le.", exampleMeaning: "ขอโทษด้วย ช่วงบ่ายฉันมีธุระ ไม่สามารถไปร้องเพลงกับคุณได้แล้ว" },
+            { id: 114, word: "药", pinyin: "yào", meaning: "ยา", type: "คำนาม", freqTotal: 6, setsFound: "H21331, H21332, H21333, H21555B, H21555C, H21555D", example: "这个药饭后吃，一天两次。", examplePinyin: "Zhège yào fàn hòu chī, yì tiān liǎng cì.", exampleMeaning: "ยาตัวนี้กินหลังอาหาร วันละสองครั้ง" },
+            { id: 115, word: "身体", pinyin: "shēntǐ", meaning: "ร่างกาย", type: "คำนาม", freqTotal: 6, setsFound: "H21332, H21335, H21555C, H21555D", example: "医生说这样对身体好。", examplePinyin: "Yīshēng shuō zhèyàng duì shēntǐ hǎo.", exampleMeaning: "หมอบอกว่าแบบนี้ดีต่อร่างกาย" },
+            { id: 116, word: "慢", pinyin: "màn", meaning: "ช้า", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H21332, H21333, H21334, H21335, H21555C", example: "慢一点儿，你走得太快了。", examplePinyin: "Màn yīdiǎnr, nǐ zǒude tài kuài le.", exampleMeaning: "ช้าๆ หน่อย คุณเดินเร็วเกินไปแล้ว" },
+            { id: 117, word: "便宜", pinyin: "piányi", meaning: "ถูก (ราคา)", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H21331, H21332, H21333, H21335, H21555B, H21555D", example: "前面卖西瓜，很便宜，也很好吃。", examplePinyin: "Qiánmiàn mài xīguā, hěn piányi, yě hěn hǎochī.", exampleMeaning: "ข้างหน้าขายแตงโม ราคาถูกมากและก็อร่อยด้วย" },
+            { id: 118, word: "介绍", pinyin: "jièshào", meaning: "แนะนำ", type: "คำกริยา", freqTotal: 6, setsFound: "H21331, H21332, H21333, H21334, H21555B", example: "给你介绍一下，这是我妻子。", examplePinyin: "Gěi nǐ jièshào yíxià, zhè shì wǒ qīzi.", exampleMeaning: "ขอแนะนำให้รู้จักหน่อย นี่คือภรรยาของฉัน" },
+            { id: 119, word: "穿", pinyin: "chuān", meaning: "ใส่ (เสื้อผ้า)", type: "คำกริยา", freqTotal: 6, setsFound: "H21332, H21334, H21335, H21555B, H21555C", example: "你的衣服还没穿好呢。", examplePinyin: "Nǐ de yīfu hái méi chuānhǎo ne.", exampleMeaning: "เสื้อผ้าของคุณยังใส่ไม่เรียบร้อยเลย" },
+            { id: 120, word: "咖啡", pinyin: "kāfēi", meaning: "กาแฟ", type: "คำนาม", freqTotal: 6, setsFound: "H21331, H21332, H21334, H21335, H21555B", example: "服务员，请给我一杯咖啡。", examplePinyin: "Fúwùyuán, qǐng gěi wǒ yì bēi kāfēi.", exampleMeaning: "พนักงาน กรุณาให้กาแฟฉันหนึ่งแก้ว" },
+            { id: 121, word: "米饭", pinyin: "mǐfàn", meaning: "ข้าวสวย", type: "คำนาม", freqTotal: 6, setsFound: "H21331, H21332, H21333, H21334, H21335, H21555D", example: "米饭做好了，快来吃饭吧。", examplePinyin: "Mǐfàn zuòhǎo le, kuài lái chī fàn ba.", exampleMeaning: "ข้าวสวยทำเสร็จแล้ว รีบมากินข้าวกันเถอะ" },
+            { id: 122, word: "牛奶", pinyin: "niúnǎi", meaning: "นมวัว", type: "คำนาม", freqTotal: 6, setsFound: "H21331, H21334, H21335, H21555B, H21555D", example: "她喝完牛奶就睡觉了。", examplePinyin: "Tā hēwán niúnǎi jiù shuìjiào le.", exampleMeaning: "เธอดื่มนมเสร็จก็เข้านอนเลย" },
+            { id: 123, word: "电话", pinyin: "diànhuà", meaning: "โทรศัพท์", type: "คำนาม", freqTotal: 6, setsFound: "H21331, H21335, H21555B, H21555C, H21555D", example: "我已经帮你打电话问了。", examplePinyin: "Wǒ yǐjīng bāng nǐ dǎ diànhuà wèn le.", exampleMeaning: "ฉันโทรศัพท์ไปถามให้คุณแล้ว" },
+            { id: 124, word: "阴", pinyin: "yīn", meaning: "มีเมฆครึ้ม (สภาพอากาศ)", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H21331, H21334, H21335, H21555B, H21555C", example: "天阴了。", examplePinyin: "Tiān yīn le.", exampleMeaning: "ท้องฟ้าครึ้มแล้ว" },
+            { id: 125, word: "热", pinyin: "rè", meaning: "ร้อน", type: "คำคุณศัพท์", freqTotal: 6, setsFound: "H21331, H21332, H21334, H21335, H21555B, H21555D", example: "今年比去年热得早。", examplePinyin: "Jīnnián bǐ qùnián rède zǎo.", exampleMeaning: "ปีนี้ร้อนเร็วกว่าปีที่แล้ว" },
+            { id: 126, word: "妹妹", pinyin: "mèimei", meaning: "น้องสาว", type: "คำนาม", freqTotal: 6, setsFound: "H21331, H21333, H21334, H21555B, H21555C", example: "我妹妹明天有考试。", examplePinyin: "Wǒ mèimei míngtiān yǒu kǎoshì.", exampleMeaning: "น้องสาวฉันพรุ่งนี้มีสอบ" },
+            { id: 127, word: "飞机", pinyin: "fēijī", meaning: "เครื่องบิน", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21332, H21335, H21555B, H21555D", example: "我已经下飞机了，现在正往家里走呢。", examplePinyin: "Wǒ yǐjīng xià fēijī le, xiànzài zhèng wǎng jiā li zǒu ne.", exampleMeaning: "ฉันลงจากเครื่องบินแล้ว ตอนนี้กำลังเดินกลับบ้านอยู่" },
+            { id: 128, word: "路", pinyin: "lù", meaning: "ถนน / ทาง", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21332, H21334, H21335", example: "他不知道去火车站的路。", examplePinyin: "Tā bù zhīdào qù huǒchēzhàn de lù.", exampleMeaning: "เขาไม่รู้ทางไปสถานีรถไฟ" },
+            { id: 129, word: "近", pinyin: "jìn", meaning: "ใกล้", type: "คำคุณศัพท์", freqTotal: 5, setsFound: "H21331, H21332, H21333, H21335, H21555D", example: "住得这么近，真好！", examplePinyin: "Zhù de zhème jìn, zhēn hǎo!", exampleMeaning: "พักอยู่ใกล้ขนาดนี้ ดีจริงๆ" },
+            { id: 130, word: "后面", pinyin: "hòumiàn", meaning: "ด้านหลัง", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21335, H21555C, H21555D", example: "左边的是哥哥，右边这个是弟弟。", examplePinyin: "Zuǒbian shì gēge, yòubian zhège shì dìdi.", exampleMeaning: "ด้านซ้ายคือพี่ชาย ด้านขวานี้คือน้องชาย" },
+            { id: 131, word: "生病", pinyin: "shēngbìng", meaning: "ป่วย", type: "คำกริยา", freqTotal: 5, setsFound: "H21331, H21333, H21334, H21335, H21555B", example: "我昨天因为生病了，所以没来上课。", examplePinyin: "Wǒ zuótiān yīnwèi shēngbìng le, suǒyǐ méi lái shàngkè.", exampleMeaning: "เมื่อวานนี้ฉันป่วย จึงไม่ได้มาเข้าเรียน" },
+            { id: 132, word: "休息", pinyin: "xiūxi", meaning: "พักผ่อน", type: "คำกริยา", freqTotal: 5, setsFound: "H21331, H21332, H21333, H21334, H21335", example: "来，喝杯咖啡，休息一下。", examplePinyin: "Lái, hē bēi kāfēi, xiūxi yíxià.", exampleMeaning: "มา ดื่มกาแฟสักแก้ว พักผ่อนสักหน่อย" },
+            { id: 133, word: "高兴", pinyin: "gāoxìng", meaning: "ดีใจ / มีความสุข", type: "คำคุณศัพท์", freqTotal: 5, setsFound: "H21331, H21333, H21334, H21555C", example: "你们这次在中国玩儿得很高兴！", examplePinyin: "Nǐmen zhè cì zài Zhōngguó wánrde hěn gāoxìng!", exampleMeaning: "พวกคุณเที่ยวที่ประเทศจีนครั้งนี้สนุกมีความสุขมาก" },
+            { id: 134, word: "笑", pinyin: "xiào", meaning: "ยิ้ม / หัวเราะ", type: "คำกริยา", freqTotal: 5, setsFound: "H21332, H21333, H21334, H21335, H21555D", example: "大家看我这儿，笑一笑。", examplePinyin: "Dàjiā kàn wǒ zhèr, xiàoyixiào.", exampleMeaning: "ทุกคนมองมาที่ฉันตรงนี้ ยิ้มหน่อย" },
+            { id: 135, word: "希望", pinyin: "xīwàng", meaning: "หวัง", type: "คำกริยา", freqTotal: 5, setsFound: "H21332, H21333, H21334, H21555B", example: "真希望我们能多住几天再走。", examplePinyin: "Zhēn xīwàng wǒmen néng duō zhù jǐ tiān zài zǒu.", exampleMeaning: "หวังจริงๆ ว่าพวกเราจะพักอยู่ต่ออีกสักสองสามวันแล้วค่อยไป" },
+            { id: 136, word: "正在", pinyin: "zhèngzài", meaning: "กำลัง...อยู่", type: "คำวิเศษณ์", freqTotal: 5, setsFound: "H21334, H21335, H21555C, H21555D", example: "他正在北京旅游。", examplePinyin: "Tā zhèngzài Běijīng lǚyóu.", exampleMeaning: "เขากำลังท่องเที่ยวอยู่ที่ปักกิ่ง" },
+            { id: 137, word: "鱼", pinyin: "yú", meaning: "ปลา", type: "คำนาม", freqTotal: 5, setsFound: "H21333, H21334, H21335, H21555C", example: "右边的鱼比左边的多。", examplePinyin: "Yòubian de yú bǐ zuǒbian de duō.", exampleMeaning: "ปลาทางขวามีมากกว่าทางซ้าย" },
+            { id: 138, word: "手机", pinyin: "shǒujī", meaning: "โทรศัพท์มือถือ", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21333, H21335, H21555B", example: "这个手机还能便宜些吗？", examplePinyin: "Zhège shǒujī hái néng piányi xiē ma?", exampleMeaning: "โทรศัพท์มือถือเครื่องนี้ลดราคาลงอีกหน่อยได้ไหม" },
+            { id: 139, word: "手表", pinyin: "shǒubiǎo", meaning: "นาฬิกาข้อมือ", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21332, H21333, H21555B, H21555D", example: "我的手表怎么不走了？", examplePinyin: "Wǒ de shǒubiǎo zěnme bù zǒu le?", exampleMeaning: "นาฬิกาข้อมือของฉันทำไมไม่เดินแล้ว" },
+            { id: 140, word: "铅笔", pinyin: "qiānbǐ", meaning: "ดินสอ", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21332, H21333, H21334, H21555C", example: "哥，你那儿有黄色的铅笔吗？", examplePinyin: "Gē, nǐ nàr yǒu huángsè de qiānbǐ ma?", exampleMeaning: "พี่ครับ พี่มีดินสอสีเหลืองไหม" },
+            { id: 141, word: "报纸", pinyin: "bàozhǐ", meaning: "หนังสือพิมพ์", type: "คำนาม", freqTotal: 5, setsFound: "H21332, H21333, H21334, H21335, H21555C", example: "我想看看汉语报纸。", examplePinyin: "Wǒ xiǎng kànkan Hànyǔ bàozhǐ.", exampleMeaning: "ฉันอยากอ่านหนังสือพิมพ์ภาษาจีน" },
+            { id: 142, word: "桌子", pinyin: "zhuōzi", meaning: "โต๊ะ", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21334, H21555B", example: "服务员，还有大点儿的桌子吗？", examplePinyin: "Fúwùyuán, hái yǒu dà diǎnr de zhuōzi ma?", exampleMeaning: "พนักงาน มีโต๊ะที่ใหญ่กว่านี้อีกไหม" },
+            { id: 143, word: "晴", pinyin: "qíng", meaning: "แจ่มใส (สภาพอากาศ)", type: "คำคุณศัพท์", freqTotal: 5, setsFound: "H21331, H21332, H21333, H21335, H21555D", example: "天已经晴了。", examplePinyin: "Tiān yǐjīng qíng le.", exampleMeaning: "ท้องฟ้าแจ่มใสแล้ว" },
+            { id: 144, word: "先生", pinyin: "xiānsheng", meaning: "คุณผู้ชาย / สามี", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21332, H21333, H21334, H21335", example: "有个姓钱的先生找你。", examplePinyin: "Yǒu gè xìng Qián de xiānsheng zhǎo nǐ.", exampleMeaning: "มีคุณผู้ชายแซ่เฉียนมาหาคุณ" },
+            { id: 145, word: "小姐", pinyin: "xiǎojiě", meaning: "คุณผู้หญิง", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21333, H21335", example: "刘小姐生病了。", examplePinyin: "Liú xiǎojiě shēngbìng le.", exampleMeaning: "คุณหลิวป่วยแล้ว" },
+            { id: 146, word: "学生", pinyin: "xuésheng", meaning: "นักเรียน", type: "คำนาม", freqTotal: 5, setsFound: "H21332, H21334, H21335, H21555B, H21555D", example: "他是我的学生。", examplePinyin: "Tā shì wǒ de xuésheng.", exampleMeaning: "เขาคือนักเรียนของฉัน" },
+            { id: 147, word: "哥哥", pinyin: "gēge", meaning: "พี่ชาย", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21335, H21555B, H21555C, H21555D", example: "左边的是哥哥，右边这个是弟弟。", examplePinyin: "Zuǒbian shì gēge, yòubian zhège shì dìdi.", exampleMeaning: "ด้านซ้ายคือพี่ชาย ด้านขวานี้คือน้องชาย" },
+            { id: 148, word: "儿子", pinyin: "érzi", meaning: "ลูกชาย", type: "คำนาม", freqTotal: 5, setsFound: "H21331, H21332, H21334, H21555B, H21555D", example: "都快11点了，儿子可能已经睡了。", examplePinyin: "Dōu kuài 11 diǎn le, érzi kěnéng yǐjīng shuì le.", exampleMeaning: "ใกล้จะ 11 โมงแล้ว ลูกชายอาจจะหลับไปแล้ว" },
+            { id: 149, word: "女儿", pinyin: "nǚ'ér", meaning: "ลูกสาว", type: "คำนาม", freqTotal: 5, setsFound: "H21333, H21334, H21555B, H21555D", example: "女儿呢？还在看书吗？", examplePinyin: "Nǚ'ér ne? Hái zài kàn shū ma?", exampleMeaning: "ลูกสาวล่ะ ยังอ่านหนังสืออยู่ไหม" },
+            { id: 150, word: "妻子", pinyin: "qīzi", meaning: "ภรรยา", type: "คำนาม", freqTotal: 5, setsFound: "H21332, H21335, H21555B, H21555C", example: "妻子这几天很忙，所以我洗衣服。", examplePinyin: "Qīzi zhè jǐ tiān hěn máng, suǒyǐ wǒ xǐ yīfu.", exampleMeaning: "ช่วงนี้ภรรยายุ่งมาก ดังนั้นฉันจึงซักผ้าเอง" },
+            { id: 151, word: "妈妈", pinyin: "māma", meaning: "แม่", type: "คำนาม", freqTotal: 5, setsFound: "H21332, H21333, H21335, H21555D", example: "妈妈做了很多菜。", examplePinyin: "Māma zuòle hěn duō cài.", exampleMeaning: "แม่ทำกับข้าวไว้เยอะมาก" },
+            { id: 152, word: "东", pinyin: "dōng", meaning: "ตะวันออก (ทิศ)", type: "คำนาม", freqTotal: 4, setsFound: "H21331, H21334, H21555C, H21555D", example: "我们在这儿一块儿去。", examplePinyin: "Wǒmen zài zhèr yíkuàir qù.", exampleMeaning: "พวกเราไปด้วยกันตรงนี้" },
+            { id: 153, word: "旅游", pinyin: "lǚyóu", meaning: "ท่องเที่ยว", type: "คำกริยา", freqTotal: 4, setsFound: "H21332, H21333, H21335, H21555D", example: "他正在北京旅游。", examplePinyin: "Tā zhèngzài Běijīng lǚyóu.", exampleMeaning: "เขากำลังท่องเที่ยวอยู่ที่ปักกิ่ง" },
+            { id: 154, word: "累", pinyin: "lèi", meaning: "เหนื่อย", type: "คำคุณศัพท์", freqTotal: 4, setsFound: "H21331, H21332, H21334, H21555B", example: "我太累了，让我再睡几分钟。", examplePinyin: "Wǒ tài lèi le, ràng wǒ zài shuì jǐ fēnzhōng.", exampleMeaning: "ฉันเหนื่อยมาก ขอให้ฉันนอนต่ออีกสักสองสามนาที" },
+            { id: 155, word: "往", pinyin: "wǎng", meaning: "ไปทาง", type: "คำบุพบท", freqTotal: 4, setsFound: "H21332, H21333, H21335", example: "我已经下飞机了，现在正往家里走呢。", examplePinyin: "Wǒ yǐjīng xià fēijī le, xiànzài zhèng wǎng jiā li zǒu ne.", exampleMeaning: "ฉันลงจากเครื่องบินแล้ว ตอนนี้กำลังเดินกลับบ้านอยู่" },
+            { id: 156, word: "张", pinyin: "zhāng", meaning: "ใบ / แผ่น (ลักษณนาม)", type: "ลักษณนาม", freqTotal: 4, setsFound: "H21331, H21332, H21555D", example: "给你票，6号的。", examplePinyin: "Gěi nǐ piào, 6 hào de.", exampleMeaning: "ให้ตั๋วคุณ ของวันที่ 6" },
+            { id: 157, word: "苹果", pinyin: "píngguǒ", meaning: "แอปเปิ้ล", type: "คำนาม", freqTotal: 4, setsFound: "H21332, H21334, H21335, H21555D", example: "买些苹果。", examplePinyin: "Mǎi xiē píngguǒ.", exampleMeaning: "ซื้อแอปเปิ้ลสักหน่อย" },
+            { id: 158, word: "西瓜", pinyin: "xīguā", meaning: "แตงโม", type: "คำนาม", freqTotal: 4, setsFound: "H21331, H21333, H21555B", example: "前面卖西瓜，很便宜。", examplePinyin: "Qiánmiàn mài xīguā, hěn piányi.", exampleMeaning: "ข้างหน้าขายแตงโม ราคาถูกมาก" },
+            { id: 159, word: "天气", pinyin: "tiānqì", meaning: "อากาศ", type: "คำนาม", freqTotal: 4, setsFound: "H21332, H21333, H21334, H21335", example: "9月是北京天气最好的时候。", examplePinyin: "9 yuè shì Běijīng tiānqì zuì hǎo de shíhou.", exampleMeaning: "เดือนกันยายนเป็นช่วงที่อากาศที่ปักกิ่งดีที่สุด" },
+            { id: 160, word: "昨天", pinyin: "zuótiān", meaning: "เมื่อวานนี้", type: "คำนาม", freqTotal: 4, setsFound: "H21333, H21334, H21555C", example: "我昨天踢了一下午球。", examplePinyin: "Wǒ zuótiān tīle yí xiàwǔ qiú.", exampleMeaning: "เมื่อวานนี้ฉันเตะบอลไปทั้งบ่าย" },
+            { id: 161, word: "公共汽车", pinyin: "gōnggòngqìchē", meaning: "รถเมล์", type: "คำนาม", freqTotal: 3, setsFound: "H21331, H21333, H21555B", example: "坐公共汽车15分钟就到了。", examplePinyin: "Zuò gōnggòngqìchē 15 fēnzhōng jiù dào le.", exampleMeaning: "นั่งรถเมล์ 15 นาทีก็ถึงแล้ว" },
+            { id: 162, word: "跑步", pinyin: "pǎobù", meaning: "วิ่งออกกำลังกาย", type: "คำกริยา", freqTotal: 3, setsFound: "H21333, H21335, H21555B", example: "我姐姐不在家，她跑步去了。", examplePinyin: "Wǒ jiějie bú zài jiā, tā pǎobù qù le.", exampleMeaning: "พี่สาวฉันไม่อยู่บ้าน เธอไปวิ่งออกกำลังกายแล้ว" },
+            { id: 163, word: "面条儿", pinyin: "miàntiáor", meaning: "บะหมี่", type: "คำนาม", freqTotal: 3, setsFound: "H21331, H21332, H21333", example: "面条儿还很热。", examplePinyin: "Miàntiáor hái hěn rè.", exampleMeaning: "บะหมี่ยังร้อนอยู่" },
+            { id: 164, word: "爸爸", pinyin: "bàba", meaning: "พ่อ", type: "คำนาม", freqTotal: 3, setsFound: "H21334, H21555C", example: "爸爸，起床吧，我们去跑步。", examplePinyin: "Bàba, qǐchuáng ba, wǒmen qù pǎobù.", exampleMeaning: "พ่อ ตื่นนอนเถอะ พวกเราจะไปวิ่งกัน" },
+            { id: 165, word: "汉字", pinyin: "Hànzì", meaning: "อักษรจีน", type: "คำนาม", freqTotal: 1, setsFound: "H21334", example: "今天的汉字课就到这里。", examplePinyin: "Jīntiān de Hànzì kè jiù dào zhèli.", exampleMeaning: "คาบเรียนอักษรจีนวันนี้พอแค่นี้" }
         ];
 
         // คลังข้อสอบพาร์ท 2 ครบถ้วน 100 ข้อจริง
-        const realExamPool = [
-            { q: "\"我\" (wǒ) แปลว่าอะไร?", options: ["ฉัน / ผม", "คุณ / เธอ", "เขา (ผู้ชาย)", "พวกเรา"], correct: "ฉัน / ผม" },
-            { q: "\"你\" (nǐ) แปลว่าอะไร?", options: ["ฉัน / ผม", "คุณ / เธอ", "เขา (ผู้หญิง)", "พวกคุณ"], correct: "คุณ / เธอ" },
-            { q: "\"他\" (tā) มีอักษรตัวใดอยู่ด้านข้าง ซึ่งหมายถึงผู้ชาย?", options: ["女 (ผู้หญิง)", "亻 (คน)", "口 (ปาก)", "日 (ตะวัน)"], correct: "亻 (คน)" },
-            { q: "\"她\" (tā) มีอักษรตัวใดอยู่ด้านข้าง ซึ่งหมายถึงผู้หญิง?", options: ["女 (ผู้หญิง)", "亻 (คน)", "口 (ปาก)", "日 (ตะวัน)"], correct: "女 (ผู้หญิง)" },
-            { q: "\"我们\" (wǒmen) แปลว่าอะไร?", options: ["พวกคุณ", "พวกเรา", "พวกเขา", "ทุกคน"], correct: "พวกเรา" },
-            { q: "\"你们\" (nǐmen) แปลว่าอะไร?", options: ["พวกเรา", "พวกคุณ", "พวกเขา", "ใคร"], correct: "พวกคุณ" },
-            { q: "\"他们\" (tāmen) แปลว่าอะไร?", options: ["พวกเรา", "พวกคุณ", "พวกเขา", "ใคร"], correct: "พวกเขา" },
-            { q: "\"谁\" (shéi/shuí) แปลว่าอะไร?", options: ["อะไร", "ใคร", "ที่ไหน", "อย่างไร"], correct: "ใคร" },
-            { q: "\"什么\" (shénme) แปลว่าอะไร?", options: ["ใคร", "อะไร", "ที่ไหน", "อย่างไร"], correct: "อะไร" },
-            { q: "คำว่า \"哪儿 / 哪里\" แปลว่าอะไร?", options: ["ใคร", "อะไร", "ที่ไหน", "อย่างไร"], correct: "ที่ไหน" },
-            { q: "\"怎么\" (zěnme) แปลว่าอะไร?", options: ["อย่างไร / ทำไม", "เป็นอย่างไรบ้าง", "เท่าไหร่", "กี่"], correct: "อย่างไร / ทำไม" },
-            { q: "\"怎么样\" (zěnmeyàng) แปลว่าอะไร?", options: ["อย่างไร", "เป็นอย่างไรบ้าง", "เท่าไหร่", "อะไร"], correct: "เป็นอย่างไรบ้าง" },
-            { q: "\"多少\" (duōshao) ใช้ถามเรื่องใด?", options: ["เวลา", "จำนวน / ราคา (เท่าไหร่)", "สถานที่", "บุคคล"], correct: "จำนวน / ราคา (เท่าไหร่)" },
-            { q: "\"几\" (jǐ) แปลว่าอะไร?", options: ["เท่าไหร่", "กี่ / สองสาม", "อะไร", "ใคร"], correct: "กี่ / สองสาม" },
-            { q: "ประโยค \"你今年多大?\" คำว่า \"多\" แปลว่าอะไร?", options: ["มาก", "น้อย", "แค่ไหน / เท่าไร", "สูง"], correct: "แค่ไหน / เท่าไร" },
-            { q: "\"少\" (shǎo) แปลว่าอะไร?", options: ["มาก", "น้อย", "เล็ก", "ใหญ่"], correct: "น้อย" },
-            { q: "\"这 / 这儿\" (zhè / zhèr) แปลว่าอะไร?", options: ["ที่นั่น", "นี่ / ที่นี่", "ที่ไหน", "โน่น"], correct: "นี่ / ที่นี่" },
-            { q: "\"那 / 那儿\" (nà / nàr) แปลว่าอะไร?", options: ["นี่ / ที่นี่", "นั้น / ที่นั่น", "ที่ไหน", "อะไร"], correct: "นั้น / ที่นั่น" },
-            { q: "\"是\" (shì) มีความหมายตรงกับข้อใด?", options: ["มี", "เป็น / คือ / ใช่", "ทำ", "ไป"], correct: "เป็น / คือ / ใช่" },
-            { q: "\"有\" (yǒu) มีความหมายตรงกับข้อใด?", options: ["มี", "ไม่มี", "อยู่", "ไป"], correct: "มี" },
-            { q: "\"看\" (kàn) แปลว่าอะไร?", options: ["ฟัง", "พูด", "มอง / ดู / อ่าน", "เขียน"], correct: "มอง / ดู / อ่าน" },
-            { q: "\"看见\" (kànjiàn) แปลว่าอะไร?", options: ["มองไม่เห็น", "มองเห็น / ได้พบเห็น", "อยากดู", "กำลังดู"], correct: "มองเห็น / ได้พบเห็น" },
-            { q: "\"听\" (tīng) แปลว่าอะไร?", options: ["ฟัง", "พูด", "อ่าน", "เขียน"], correct: "ฟัง" },
-            { q: "\"听见\" (tīngjiàn) แปลว่าอะไร?", options: ["พูดคุย", "ไม่ได้ยิน", "ได้ยิน", "แอบฟัง"], correct: "ได้ยิน" },
-            { q: "\"说话\" (shuōhuà) แปลว่าอะไร?", options: ["เขียนหนังสือ", "พูดคุย / พูด", "ฟังเพลง", "อ่านออกเสียง"], correct: "พูดคุย / พูด" },
-            { q: "\"读\" (dú) แปลว่าอะไร?", options: ["เขียน", "อ่าน / เรียน", "พูด", "ฟัง"], correct: "อ่าน / เรียน" },
-            { q: "\"写\" (xiě) แปลว่าอะไร?", options: ["เขียน", "อ่าน", "วาด", "พิมพ์"], correct: "เขียน" },
-            { q: "\"买\" (mǎi) แปลว่าอะไร?", options: ["ขาย", "ซื้อ", "เช่า", "ให้"], correct: "ซื้อ" },
-            { q: "\"去\" (qù) แปลว่าอะไร?", options: ["มา", "ไป", "กลับ", "เข้า"], correct: "ไป" },
-            { q: "\"来\" (lái) แปลว่าอะไร?", options: ["ไป", "มา", "กลับ", "ออก"], correct: "มา" },
-            { q: "\"回\" (huí) แปลว่าอะไร?", options: ["ไป", "มา", "กลับ", "พัก"], correct: "กลับ" },
-            { q: "\"坐\" (zuò) มีความหมายว่าอย่างไร?", options: ["ยืน", "นอน", "นั่ง / โดยสาร", "เดิน"], correct: "นั่ง / โดยสาร" },
-            { q: "\"吃\" (chī) แปลว่าอะไร?", options: ["ดื่ม", "กิน", "ทำ", "ซื้อ"], correct: "กิน" },
-            { q: "\"喝\" (hē) แปลว่าอะไร?", options: ["กิน", "ดื่ม", "ล้าง", "เท"], correct: "ดื่ม" },
-            { q: "\"ทำ\" (zuò) แปลว่าอะไร?", options: ["ทำ", "นั่ง", "เป็น", "ไป"], correct: "ทำ" },
-            { q: "\"睡觉\" (shuìjiào) แปลว่าอะไร?", options: ["ตื่นนอน", "นอนหลับ", "อาบน้ำ", "พักผ่อน"], correct: "นอนหลับ" },
-            { q: "\"打电话\" (dǎ diànhuà) แปลว่าอะไร?", options: ["ตีแบดมินตัน", "โทรศัพท์", "เล่นเกม", "ดูทีวี"], correct: "โทรศัพท์" },
-            { q: "\"开车\" (kāichē) แปลว่าอะไร?", options: ["เปิด", "ปิด", "ขับ (รถ)", "ซ่อม"], correct: "ขับ (รถ)" },
-            { q: "\"叫\" (jiào) ในประโยค \"你叫什么名字?\" แปลว่าอะไร?", options: ["เรียก / ชื่อว่า", "ตะโกน", "ร้อง", "ถาม"], correct: "เรียก / ชื่อว่า" },
-            { q: "\"认识\" (rènshi) แปลว่าอะไร?", options: ["รู้จัก", "คิดถึง", "เข้าใจ", "เรียน"], correct: "รู้จัก" },
-            { q: "\"喜欢\" (xǐhuan) แปลว่าอะไร?", options: ["เกลียด", "ชอบ", "อยาก", "กลัว"], correct: "ชอบ" },
-            { q: "\"想\" (xiǎng) แปลว่าอะไร?", options: ["อยาก / คิด / คิดถึง", "สามารถ", "ต้อง", "ชอบ"], correct: "อยาก / คิด / คิดถึง" },
-            { q: "\"爱\" (ài) แปลว่าอะไร?", options: ["เกลียด", "รัก / ชอบ", "กลัว", "โกรธ"], correct: "รัก / ชอบ" },
-            { q: "\"会\" (huì) แปลว่าอะไร?", options: ["เป็น / สามารถ (จากการเรียนรู้)", "อยาก", "ชอบ", "ต้อง"], correct: "เป็น / สามารถ (จากการเรียนรู้)" },
-            { q: "\"能\" (néng) แปลว่าอะไร?", options: ["สามารถ / ได้", "เป็น", "อยาก", "ต้อง"], correct: "สามารถ / ได้" },
-            { q: "\"工作\" (gōngzuò) แปลว่าอะไร?", options: ["เรียน", "ทำงาน / งาน", "เล่น", "พักผ่อน"], correct: "ทำงาน / งาน" },
-            { q: "\"学习\" (xuéxí) แปลว่าอะไร?", options: ["ทำงาน", "ศึกษา / เรียน", "สอน", "สอบ"], correct: "ศึกษา / เรียน" },
-            { q: "\"请\" (qǐng) แปลว่าอะไร?", options: ["เชิญ / กรุณา / เลี้ยง", "ขอโทษ", "ขอบคุณ", "สั่ง"], correct: "เชิญ / กรุณา / เลี้ยง" },
-            { q: "\"住\" (zhù) แปลว่าอะไร?", options: ["อยู่ / อาศัย / พัก", "ไป", "ทำงาน", "นอน"], correct: "อยู่ / อาศัย / พัก" },
-            { q: "\"下雨\" (xiàyǔ) แปลว่าอะไร?", options: ["หิมะตก", "ฝนตก", "แดดออก", "ลมแรง"], correct: "ฝนตก" },
-            { q: "\"好\" (hǎo) แปลว่าอะไร?", options: ["แย่", "ดี", "ใหญ่", "เล็ก"], correct: "ดี" },
-            { q: "\"高\" (gāo) แปลว่าอะไร?", options: ["ต่ำ", "สูง", "สั้น", "ยาว"], correct: "สูง" },
-            { q: "\"大\" (dà) แปลว่าอะไร?", options: ["เล็ก", "ใหญ่ / อายุมาก", "สูง", "ต่ำ"], correct: "ใหญ่ / อายุมาก" },
-            { q: "\"小\" (xiǎo) แปลว่าอะไร?", options: ["ใหญ่", "เล็ก", "สูง", "ต่ำ"], correct: "เล็ก" },
-            { q: "\"冷\" (lěng) แปลว่าอะไร?", options: ["ร้อน", "หนาว", "อุ่น", "เย็น"], correct: "หนาว" },
-            { q: "\"热\" (rè) แปลว่าอะไร?", options: ["หนาว", "ร้อน", "อุ่น", "เย็น"], correct: "ร้อน" },
-            { q: "\"高兴\" (gāoxìng) แปลว่าอะไร?", options: ["เสียใจ", "ดีใจ / มีความสุข", "โกรธ", "เหนื่อย"], correct: "ดีใจ / มีความสุข" },
-            { q: "\"漂亮\" (piàoliang) แปลว่าอะไร?", options: ["หล่อ", "น่ารัก", "สวย", "สะอาด"], correct: "สวย" },
-            { q: "\"客气\" (kèqi) แปลว่าอะไร?", options: ["เกรงใจ", "สุภาพ", "ใจดี", "ยินดี"], correct: "เกรงใจ" },
-            { q: "\"很\" (hěn) เป็นคำวิเศษณ์ แปลว่าอะไร?", options: ["ไม่", "มาก", "เกินไป", "ทั้งหมด"], correct: "มาก" },
-            { q: "\"太\" (tài) ในโครงสร้าง \"太...了\" แปลว่าอะไร?", options: ["เกินไป / มาก", "น้อย", "ปานกลาง", "ที่สุด"], correct: "เกินไป / มาก" },
-            { q: "\"都\" (dōu) แปลว่าอะไร?", options: ["ล้วน / ทั้งหมด", "บางส่วน", "ไม่มี", "กำลัง"], correct: "ล้วน / ทั้งหมด" },
-            { q: "\"不\" (bù) ทำหน้าที่อะไรในประโยค?", options: ["แสดงคำถาม", "ปฏิเสธ (แปลว่า ไม่)", "แสดงความยินดี", "บอกอดีต"], correct: "ปฏิเสธ (แปลว่า ไม่)" },
-            { q: "\"没 / 没有\" แปลว่าอะไร?", options: ["มี", "ไม่มี / ไม่ได้", "มาก", "กำลัง"], correct: "ไม่มี / ไม่ได้" },
-            { q: "\"在\" (zài) เป็นคำบุพบท/วิเศษณ์ แปลว่าอะไร?", options: ["อยู่ / ที่ / กำลัง", "ของ / ที่", "แล้ว", "ไหม"], correct: "อยู่ / ที่ / กำลัง" },
-            { q: "\"和\" (hé) แปลว่าอะไร?", options: ["และ / กับ", "หรือ", "แต่", "เพราะ"], correct: "และ / กับ" },
-            { q: "\"的\" (de) ใช้ทำหน้าที่ตรงกับข้อใด?", options: ["ของ / ที่ (แสดงความเป็นเจ้าของ/ขยายความ)", "ไหม", "แล้ว", "ล่ะ"], correct: "ของ / ที่ (แสดงความเป็นเจ้าของ/ขยายความ)" },
-            { q: "\"了\" (le) มักใช้แสดงสิ่งใด?", options: ["การตั้งคำถาม", "การเปลี่ยนแปลงหรือกริยาที่เสร็จสิ้นแล้ว (แล้ว)", "การชักชวน", "การเปรียบเทียบ"], correct: "การเปลี่ยนแปลงหรือกริยาที่เสร็จสิ้นแล้ว (แล้ว)" },
-            { q: "\"吗\" (ma) ใช้ในประโยคประเภทใด?", options: ["ประโยคคำสั่ง", "ประโยคคำถาม (ไหม/หรือเปล่า)", "ประโยคบอกเล่า", "ประโยคปฏิเสธ"], correct: "ประโยคคำถาม (ไหม/หรือเปล่า)" },
-            { q: "\"呢\" (ne) วางท้ายประโยค แปลว่าอะไร?", options: ["ไหม", "แล้ว", "ล่ะ", "เถอะ"], correct: "ล่ะ" },
-            { q: "\"吧\" (ba) มักสื่อความหมายอย่างไร?", options: ["การเสนอแนะ / ชักชวน (เถอะ / สิ)", "การปฏิเสธ", "การตกใจ", "การถามราคา"], correct: "การเสนอแนะ / ชักชวน (เถอะ / สิ)" },
-            { q: "\"人\" (rén) แปลว่าอะไร?", options: ["สัตว์", "คน", "สิ่งของ", "สถานที่"], correct: "คน" },
-            { q: "\"爸爸\" (bàba) แปลว่าอะไร?", options: ["แม่", "พ่อ", "พี่ชาย", "น้องชาย"], correct: "พ่อ" },
-            { q: "\"妈妈\" (māma) แปลว่าอะไร?", options: ["ย่า", "แม่", "ยาย", "ป้า"], correct: "แม่" },
-            { q: "\"儿子\" (érzi) แปลว่าอะไร?", options: ["ลูกสาว", "ลูกชาย", "เด็ก", "เพื่อน"], correct: "ลูกชาย" },
-            { q: "\"女儿\" (nǚ'ér) แปลว่าอะไร?", options: ["ลูกสาว", "ลูกชาย", "ภรรยา", "แม่"], correct: "ลูกสาว" },
-            { q: "\"老师\" (lǎoshī) แปลว่าอะไร?", options: ["นักเรียน", "ครู / อาจารย์", "หมอ", "ผู้ใหญ่"], correct: "ครู / อาจารย์" },
-            { q: "\"学生\" (xuésheng) แปลว่าอะไร?", options: ["นักเรียน / นักศึกษา", "คุณครู", "เพื่อน", "เด็ก"], correct: "นักเรียน / นักศึกษา" },
-            { q: "\"同学\" (tóngxué) แปลว่าอะไร?", options: ["เพื่อนบ้าน", "เพื่อนนักเรียน / เพื่อนร่วมชั้น", "เพื่อนร่วมงาน", "ครู"], correct: "เพื่อนนักเรียน / เพื่อนร่วมชั้น" },
-            { q: "\"医生\" (yīshēng) แปลว่าอะไร?", options: ["พยาบาล", "แพทย์ / หมอ", "ครู", "ตำรวจ"], correct: "แพทย์ / หมอ" },
-            { q: "\"先生\" (xiānsheng) ใช้เรียกบุคคลอย่างไร?", options: ["คุณผู้หญิง", "คุณผู้ชาย / สามี", "เด็กชาย", "คุณครู"], correct: "คุณผู้ชาย / สามี" },
-            { q: "\"小姐\" (xiǎojiě) ใช้เรียกบุคคลอย่างไร?", options: ["คุณผู้หญิง / นางสาว", "คุณผู้ชาย", "เด็กหญิง", "แม่"], correct: "คุณผู้หญิง / นางสาว" },
-            { q: "\"朋友\" (péngyou) แปลว่าอะไร?", options: ["ญาติ", "เพื่อน", "คนรู้จัก", "แฟน"], correct: "เพื่อน" },
-            { q: "\"水\" (shuǐ) แปลว่าอะไร?", options: ["น้ำ", "ชา", "นม", "น้ำผลไม้"], correct: "น้ำ" },
-            { q: "\"菜\" (cài) แปลว่าอะไร?", options: ["ข้าว", "ผัก / กับข้าว / อาหาร", "ผลไม้", "น้ำซุป"], correct: "ผัก / กับข้าว / อาหาร" },
-            { q: "\"米饭\" (mǐfàn) แปลว่าอะไร?", options: ["ก๋วยเตี๋ยว", "ซาลาเปา", "ข้าวสวย", "ขนมปัง"], correct: "ข้าวสวย" },
-            { q: "\"水果\" (shuǐguǒ) แปลว่าอะไร?", options: ["ขนม", "ผลไม้", "ผักสด", "เครื่องดื่ม"], correct: "ผลไม้" },
-            { q: "\"苹果\" (píngguǒ) แปลว่าอะไร?", options: ["กล้วย", "ส้ม", "แอปเปิ้ล", "แตงโม"], correct: "แอปเปิ้ล" },
-            { q: "\"茶\" (chá) แปลว่าอะไร?", options: ["กาแฟ", "ชา", "นม", "น้ำเปล่า"], correct: "ชา" },
-            { q: "\"杯子\" (bēizi) แปลว่าอะไร?", options: ["จาน", "ชาม", "แก้วน้ำ / ถ้วย", "ขวด"], correct: "แก้วน้ำ / ถ้วย" },
-            { q: "\"书\" (shū) แปลว่าอะไร?", options: ["สมุด", "หนังสือ", "ปากกา", "โต๊ะ"], correct: "หนังสือ" },
-            { q: "\"桌子\" (zhuōzi) แปลว่าอะไร?", options: ["เก้าอี้", "โต๊ะ", "เตียง", "ตู้"], correct: "โต๊ะ" },
-            { q: "\"椅子\" (yǐzi) แปลว่าอะไร?", options: ["โต๊ะ", "เก้าอี้", "กระดาน", "ประตู"], correct: "เก้าอี้" },
-            { q: "\"电视\" (diànshì) แปลว่าอะไร?", options: ["โทรศัพท์", "โทรทัศน์ / ทีวี", "คอมพิวเตอร์", "วิทยุ"], correct: "โทรทัศน์ / ทีวี" },
-            { q: "\"电影\" (diànyǐng) แปลว่าอะไร?", options: ["ภาพยนตร์ / หนัง", "ละคร", "เพลง", "รูปภาพ"], correct: "ภาพยนตร์ / หนัง" },
-            { q: "\"电脑\" (diànnǎo) แปลว่าอะไร?", options: ["โทรศัพท์", "คอมพิวเตอร์", "ทีวี", "กล้อง"], correct: "คอมพิวเตอร์" },
-            { q: "\"电话\" (diànhuà) แปลว่าอะไร?", options: ["โทรศัพท์", "คอมพิวเตอร์", "ทีวี", "จดหมาย"], correct: "โทรศัพท์" },
-            { q: "\"猫\" (māo) แปลว่าอะไร?", options: ["สุนัข", "แมว", "นก", "กระต่าย"], correct: "แมว" },
-            { q: "\"狗\" (gǒu) แปลว่าอะไร?", options: ["สุนัข / หมา", "แมว", "หมู", "วัว"], correct: "สุนัข / หมา" },
-            { q: "\"学校\" (xuéxiào) แปลว่าอะไร?", options: ["โรงพยาบาล", "โรงเรียน", "ร้านค้า", "สถานีรถไฟ"], correct: "โรงเรียน" },
-            { q: "\"医院\" (yīyuàn) แปลว่าอะไร?", options: ["โรงเรียน", "โรงพยาบาล", "ร้านค้า", "โรงแรม"], correct: "โรงพยาบาล" },
-            { q: "\"商店\" (shāngdiàn) แปลว่าอะไร?", options: ["ร้านค้า", "โรงพยาบาล", "ตลาด", "ธนาคาร"], correct: "ร้านค้า" },
-            { q: "\"火车站\" (huǒchēzhàn) แปลว่าอะไร?", options: ["สถานีรถไฟ", "สนามบิน", "ป้ายรถเมล์", "ท่าเรือ"], correct: "สถานีรถไฟ" },
-            { q: "\"飞机\" (fēiji) แปลว่าอะไร?", options: ["รถไฟ", "เครื่องบิน", "รถแท็กซี่", "เรือ"], correct: "เครื่องบิน" },
-            { q: "\"出租车\" (chūzūchē) แปลว่าอะไร?", options: ["รถประจำทาง", "รถแท็กซี่", "รถจักรยาน", "รถส่วนตัว"], correct: "รถแท็กซี่" },
-            { q: "\"今天\" (jīntiān) แปลว่าอะไร?", options: ["เมื่อวาน", "วันนี้", "พรุ่งนี้", "ปีนี้"], correct: "วันนี้" },
-            { q: "\"明天\" (míngtiān) แปลว่าอะไร?", options: ["วันนี้", "พรุ่งนี้", "เมื่อวาน", "มะรืนนี้"], correct: "พรุ่งนี้" },
-            { q: "\"昨天\" (zuótiān) แปลว่าอะไร?", options: ["เมื่อวาน", "วันนี้", "พรุ่งนี้", "ปีที่แล้ว"], correct: "เมื่อวาน" },
-            { q: "\"现在\" (xiànzài) แปลว่าอะไร?", options: ["เมื่อก่อน", "ตอนนี้ / ขณะนี้", "อนาคต", "ทีหลัง"], correct: "ตอนนี้ / ขณะนี้" },
-            { q: "\"本\" (běn) เป็นลักษณนามใช้กับสิ่งใด?", options: ["คน", "แก้ว", "เล่ม (หนังสือ)", "คัน"], correct: "เล่ม (หนังสือ)" },
-            { q: "\"块\" (kuài) เป็นลักษณนามใช้กับสิ่งใด?", options: ["ชิ้น / ก้อน / หยวน", "ตัว", "เล่ม", "สาย"], correct: "ชิ้น / ก้อน / หยวน" },
-            { q: "\"岁\" (suì) แปลว่าอะไร?", options: ["ขวบ / ปี (อายุ)", "ครั้ง", "แผ่น", "คน"], correct: "ขวบ / ปี (อายุ)" },
-            { q: "\"些\" (xiē) แปลว่าอะไร?", options: ["บ้าง / จำนวนหนึ่ง", "ทั้งหมด", "คน", "อัน"], correct: "บ้าง / จำนวนหนึ่ง" },
-            { q: "\"个\" (gè) เป็นลักษณนาม แปลว่าอะไร?", options: ["คน / อัน / ชิ้น", "เล่ม", "ตัว", "แผ่น"], correct: "คน / อัน / ชิ้น" },
-            { q: "\"时候\" (shíhou) แปลว่าอะไร?", options: ["ตอนที่ / เวลา", "สถานที่", "บุคคล", "สาเหตุ"], correct: "ตอนที่ / เวลา" },
-            { q: "\"汉字\" (Hànzì) แปลว่าอะไร?", options: ["ภาษาจีน", "อักษรจีน", "คำศัพท์", "ประโยค"], correct: "อักษรจีน" },
-            { q: "\"汉语\" (Hànyǔ) แปลว่าอะไร?", options: ["ภาษาจีน", "อักษรจีน", "ประเทศจีน", "คนจีน"], correct: "ภาษาจีน" },
-            { q: "\"名字\" (míngzi) แปลว่าอะไร?", options: ["ชื่อ", "อายุ", "ที่อยู่", "เบอร์โทร"], correct: "ชื่อ" },
-            { q: "\"饭馆儿\" (fànguǎnr) แปลว่าอะไร?", options: ["โรงเรียน", "โรงพยาบาล", "ร้านอาหาร", "ร้านค้า"], correct: "ร้านอาหาร" },
-            { q: "\"大学\" (dàxué) แปลว่าอะไร?", options: ["โรงเรียน", "มหาวิทยาลัย", "โรงพยาบาล", "สถานีรถไฟ"], correct: "มหาวิทยาลัย" },
-            { q: "\"钱\" (qián) แปลว่าอะไร?", options: ["หนังสือ", "เงิน", "เวลา", "ราคา"], correct: "เงิน" },
-            { q: "\"东西\" (dōngxi) แปลว่าอะไร?", options: ["สิ่งของ", "อาหาร", "สถานที่", "เวลา"], correct: "สิ่งของ" },
-            { q: "\"字\" (zì) แปลว่าอะไร?", options: ["ตัวอักษร", "คำศัพท์", "ประโยค", "หนังสือ"], correct: "ตัวอักษร" },
-            { q: "\"电影\" (diànyǐng) แปลว่าอะไร?", options: ["ภาพยนตร์ / หนัง", "ละคร", "เพลง", "รูปภาพ"], correct: "ภาพยนตร์ / หนัง" },
-            { q: "\"衣服\" (yīfu) แปลว่าอะไร?", options: ["เสื้อผ้า", "รองเท้า", "หมวก", "กระเป๋า"], correct: "เสื้อผ้า" },
-            { q: "\"水果\" (shuǐguǒ) แปลว่าอะไร?", options: ["ผัก", "ผลไม้", "ข้าว", "เนื้อสัตว์"], correct: "ผลไม้" },
-            { q: "\"同学\" (tóngxué) แปลว่าอะไร?", options: ["เพื่อนบ้าน", "เพื่อนนักเรียน / เพื่อนร่วมชั้น", "เพื่อนร่วมงาน", "ครู"], correct: "เพื่อนนักเรียน / เพื่อนร่วมชั้น" },
-            { q: "\"工作\" (gōngzuò) แปลว่าอะไร?", options: ["เรียน", "ทำงาน / งาน", "เล่น", "พักผ่อน"], correct: "ทำงาน / งาน" },
-            { q: "\"学习\" (xuéxí) แปลว่าอะไร?", options: ["ทำงาน", "ศึกษา / เรียน", "สอน", "สอบ"], correct: "ศึกษา / เรียน" },
-            { q: "\"高兴\" (gāoxìng) แปลว่าอะไร?", options: ["เสียใจ", "ดีใจ / มีความสุข", "โกรธ", "เหนื่อย"], correct: "ดีใจ / มีความสุข" },
-            { q: "\"漂亮\" (piàoliang) แปลว่าอะไร?", options: ["หล่อ", "น่ารัก", "สวย", "สะอาด"], correct: "สวย" },
-            { q: "\"客气\" (kèqi) แปลว่าอะไร?", options: ["เกรงใจ", "สุภาพ", "ใจดี", "ยินดี"], correct: "เกรงใจ" },
-            { q: "\"爱\" (ài) แปลว่าอะไร?", options: ["เกลียด", "รัก / ชอบ", "กลัว", "โกรธ"], correct: "รัก / ชอบ" },
-            { q: "\"喜欢\" (xǐhuan) แปลว่าอะไร?", options: ["เกลียด", "ชอบ", "อยาก", "กลัว"], correct: "ชอบ" },
-            { q: "\"认识\" (rènshi) แปลว่าอะไร?", options: ["รู้จัก", "คิดถึง", "เข้าใจ", "เรียน"], correct: "รู้จัก" },
-            { q: "\"做\" (zuò) แปลว่าอะไร?", options: ["ทำ", "นั่ง", "เป็น", "ไป"], correct: "ทำ" },
-            { q: "\"睡觉\" (shuìjiào) แปลว่าอะไร?", options: ["ตื่นนอน", "นอนหลับ", "อาบน้ำ", "พักผ่อน"], correct: "นอนหลับ" },
-            { q: "\"吃\" (chī) แปลว่าอะไร?", options: ["ดื่ม", "กิน", "ทำ", "ซื้อ"], correct: "กิน" },
-            { q: "\"喝\" (hē) แปลว่าอะไร?", options: ["กิน", "ดื่ม", "ล้าง", "เท"], correct: "ดื่ม" },
-            { q: "\"住\" (zhù) แปลว่าอะไร?", options: ["อยู่ / อาศัย / พัก", "ไป", "ทำงาน", "นอน"], correct: "อยู่ / อาศัย / พัก" },
-            { q: "\"坐\" (zuò) มีความหมายว่าอย่างไร?", options: ["ยืน", "นอน", "นั่ง / โดยสาร", "เดิน"], correct: "นั่ง / โดยสาร" },
-            { q: "\"回\" (huí) แปลว่าอะไร?", options: ["ไป", "มา", "กลับ", "พัก"], correct: "กลับ" },
-            { q: "\"来\" (lái) แปลว่าอะไร?", options: ["ไป", "มา", "กลับ", "ออก"], correct: "มา" },
-            { q: "\"去\" (qù) แปลว่าอะไร?", options: ["มา", "ไป", "กลับ", "เข้า"], correct: "ไป" },
-            { q: "\"写\" (xiě) แปลว่าอะไร?", options: ["เขียน", "อ่าน", "วาด", "พิมพ์"], correct: "เขียน" },
-            { q: "\"读\" (dú) แปลว่าอะไร?", options: ["เขียน", "อ่าน / เรียน", "พูด", "ฟัง"], correct: "อ่าน / เรียน" },
-            { q: "\"说话\" (shuōhuà) แปลว่าอะไร?", options: ["เขียนหนังสือ", "พูดคุย / พูด", "ฟังเพลง", "อ่านออกเสียง"], correct: "พูดคุย / พูด" },
-            { q: "\"听见\" (tīngjiàn) แปลว่าอะไร?", options: ["พูดคุย", "ไม่ได้ยิน", "ได้ยิน", "แอบฟัง"], correct: "ได้ยิน" },
-            { q: "\"听\" (tīng) แปลว่าอะไร?", options: ["ฟัง", "พูด", "อ่าน", "เขียน"], correct: "ฟัง" },
-            { q: "\"看见\" (kànjiàn) แปลว่าอะไร?", options: ["มองไม่เห็น", "มองเห็น / ได้พบเห็น", "อยากดู", "กำลังดู"], correct: "มองเห็น / ได้พบเห็น" }
+        const fillBlankPool = [
+            { sentence: "我最喜欢踢（　）球。", options: ["足", "手", "篮", "排"], answer: "足", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { sentence: "小王的杯子是什么（　）色的？", options: ["颜", "红", "绿", "蓝"], answer: "颜", meaning: "แก้วของเสี่ยวหวังเป็นสีอะไร" },
+            { sentence: "你喜欢什么（　）动？", options: ["运", "活", "感", "劳"], answer: "运", meaning: "คุณชอบกีฬาอะไร" },
+            { sentence: "我下（　）机了。", options: ["飞", "手", "电", "汽"], answer: "飞", meaning: "ฉันลงจากเครื่องบินแล้ว" },
+            { sentence: "这个字是大的（　）思吗？", options: ["意", "想", "思", "像"], answer: "意", meaning: "อักษรตัวนี้มีความหมายว่า 'ใหญ่' ใช่ไหม" },
+            { sentence: "羊肉很好（　）。", options: ["吃", "喝", "看", "听"], answer: "吃", meaning: "เนื้อแกะอร่อยมาก" },
+            { sentence: "天气很（　）。", options: ["冷", "热", "高", "长"], answer: "冷", meaning: "อากาศหนาวมาก" },
+            { sentence: "这个题我不（　）。", options: ["会", "能", "想", "要"], answer: "会", meaning: "ข้อนี้ฉันทำไม่เป็น" },
+            { sentence: "他在哪（　）呢？", options: ["儿", "边", "面", "头"], answer: "儿", meaning: "เขาอยู่ที่ไหน" },
+            { sentence: "买了个新手（　）。", options: ["机", "表", "包", "车"], answer: "机", meaning: "ซื้อโทรศัพท์มือถือเครื่องใหม่มาหนึ่งเครื่อง" },
+            { sentence: "请在这儿写您的名（　）。", options: ["字", "片", "声", "人"], answer: "字", meaning: "กรุณาเขียนชื่อของคุณตรงนี้" },
+            { sentence: "一年有八千七百多个小（　）。", options: ["时", "钟", "分", "秒"], answer: "时", meaning: "หนึ่งปีมีมากกว่า 8,700 ชั่วโมง" },
+            { sentence: "手机在桌子上（　）。", options: ["呢", "吗", "吧", "啊"], answer: "呢", meaning: "โทรศัพท์มือถืออยู่บนโต๊ะ" },
+            { sentence: "这是去饭（　）的路吗？", options: ["店", "馆", "厅", "桌"], answer: "店", meaning: "นี่คือทางไปร้านอาหารใช่ไหม" },
+            { sentence: "让我看看里面是什么东（　）。", options: ["西", "南", "北", "方"], answer: "西", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นของอะไร" },
+            { sentence: "准备好（　）吗？", options: ["了", "过", "着", "在"], answer: "了", meaning: "เตรียมพร้อมแล้วหรือยัง" },
+            { sentence: "你喜欢（　）么运动？", options: ["什", "怎么", "谁", "哪"], answer: "什", meaning: "คุณชอบกีฬาอะไร" },
+            { sentence: "没关（　），电影还没开始呢。", options: ["系", "心", "事", "理"], answer: "系", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
+            { sentence: "那家饭店（　）做得不错。", options: ["鱼", "肉", "菜", "蛋"], answer: "鱼", meaning: "ปลาของร้านอาหารร้านนั้นทำได้ไม่เลว" },
+            { sentence: "买了很多（　）。", options: ["菜", "饭", "果", "水"], answer: "菜", meaning: "ซื้อผัก/กับข้าวมาเยอะมาก" },
+            { sentence: "我们都爱吃西（　）。", options: ["瓜", "果", "菜", "桃"], answer: "瓜", meaning: "พวกเราล้วนชอบกินแตงโม" },
+            { sentence: "晚上我们去（　）歌怎么样？", options: ["唱", "听", "跳", "玩"], answer: "唱", meaning: "ตอนเย็นพวกเราไปร้องเพลงกันเป็นไง" },
+            { sentence: "非常欢迎你来我们公（　）工作！", options: ["司", "园", "所", "厂"], answer: "司", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
+            { sentence: "这里有（　）个杯子。", options: ["几", "多", "少", "每"], answer: "几", meaning: "ที่นี่มีแก้วน้ำสองสามใบ" },
+            { sentence: "这个药饭后吃，每天吃三（　）。", options: ["次", "遍", "回", "下"], answer: "次", meaning: "ยาตัวนี้กินหลังอาหาร กินวันละ 3 ครั้ง" },
+            { sentence: "我和哥哥去商（　）买了很多菜。", options: ["店", "场", "业", "人"], answer: "店", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมาเยอะมาก" },
+            { sentence: "十五分钟（　）到了。", options: ["就", "才", "又", "还"], answer: "就", meaning: "อีก 15 นาทีก็ถึงแล้ว" },
+            { sentence: "这次考试她考（　）非常好。", options: ["得", "地", "的", "过"], answer: "得", meaning: "การสอบครั้งนี้เธอสอบได้ดีมาก" },
+            { sentence: "考试题太（　）了。", options: ["多", "少", "大", "小"], answer: "多", meaning: "โจทย์ข้อสอบเยอะเกินไปแล้ว" },
+            { sentence: "星期六也不休（　）。", options: ["息", "假", "班", "业"], answer: "息", meaning: "วันเสาร์ก็ไม่ได้พักผ่อน" },
+            { sentence: "苹果洗好了，来吃一（　）吧。", options: ["个", "只", "条", "件"], answer: "个", meaning: "ล้างแอปเปิ้ลเสร็จแล้ว มาทานสักลูกสิ" },
+            { sentence: "正在床上看电（　）呢。", options: ["视", "影", "脑", "话"], answer: "视", meaning: "กำลังดูทีวีอยู่บนเตียง" },
+            { sentence: "每天早上她都要慢（　）一小时。", options: ["跑", "走", "跳", "动"], answer: "跑", meaning: "ทุกเช้าเธอจะต้องวิ่งเหยาะๆ หนึ่งชั่วโมง" },
+            { sentence: "在哪（　）呢？", options: ["儿", "里", "边", "处"], answer: "儿", meaning: "อยู่ที่ไหน" },
+            { sentence: "因为我不知道怎（　）说。", options: ["么", "样", "么样", "哪"], answer: "么", meaning: "เพราะว่าฉันไม่รู้ว่าจะพูดอย่างไร" },
+            { sentence: "她笑着对我（　）。", options: ["说", "讲", "听", "看"], answer: "说", meaning: "เธอยิ้มและพูดกับฉัน" },
+            { sentence: "坐出租（　）去。", options: ["车", "机", "船", "飞"], answer: "车", meaning: "นั่งรถแท็กซี่ไป" },
+            { sentence: "打电（　）。", options: ["话", "报", "视", "脑"], answer: "话", meaning: "โทรศัพท์" },
+            { sentence: "您能等一（　）吗？", options: ["下", "回", "次", "时"], answer: "下", meaning: "คุณรอสักครู่ได้ไหม" },
+            { sentence: "最喜欢踢足（　）。", options: ["球", "篮", "排", "羽"], answer: "球", meaning: "ชอบเตะฟุตบอลที่สุด" },
+            { sentence: "弟弟比我（　）两岁。", options: ["小", "大", "高", "重"], answer: "小", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
+            { sentence: "他还在教室里学（　）。", options: ["习", "校", "生", "文"], answer: "习", meaning: "เขายังเรียนอยู่ในห้องเรียน" },
+            { sentence: "晴天，但是很（　）。", options: ["冷", "热", "暖", "高"], answer: "冷", meaning: "ท้องฟ้าโปร่ง แต่หนาวมาก" },
+            { sentence: "买这个电脑的（　）很少。", options: ["人", "家", "员", "者"], answer: "人", meaning: "คนที่ซื้อคอมพิวเตอร์เครื่องนี้น้อยมาก" },
+            { sentence: "现在是十一（　）三十分。", options: ["点", "分", "时", "刻"], answer: "点", meaning: "ตอนนี้เป็นเวลา 11 โมง 30 นาที" },
+            { sentence: "快坐下喝点儿（　）吧。", options: ["水", "茶", "酒", "奶"], answer: "水", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
+            { sentence: "外面已（　）下雨了。", options: ["经", "在", "常", "正"], answer: "经", meaning: "ข้างนอกฝนตกแล้ว" },
+            { sentence: "这个字我会（　）了。", options: ["写", "读", "说", "听"], answer: "写", meaning: "ตัวอักษรตัวนี้ฉันเขียนเป็นแล้ว" },
+            { sentence: "向前（　）。", options: ["走", "跑", "飞", "去"], answer: "走", meaning: "เดินไปข้างหน้า" },
+            { sentence: "我会跳（　）。", options: ["舞", "高", "远", "绳"], answer: "舞", meaning: "ฉันเต้นรำเป็น" },
+            { sentence: "可能要下（　）。", options: ["雪", "雨", "冰", "水"], answer: "雪", meaning: "หิมะอาจจะตก" },
+            { sentence: "你下午准备（　）什么？", options: ["做", "干", "办", "玩"], answer: "做", meaning: "ตอนบ่ายคุณเตรียมจะทำอะไร" },
+            { sentence: "外面的雪真（　）。", options: ["大", "小", "多", "深"], answer: "大", meaning: "หิมะข้างนอกตกหนักจริง" },
+            { sentence: "我（　）喜欢踢足球。", options: ["最", "很", "非常", "太"], answer: "最", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { sentence: "你再等一（　）。", options: ["下", "会儿", "刻", "秒"], answer: "下", meaning: "คุณรออีกสักครู่" },
+            { sentence: "那个名（　）很有意思。", options: ["字", "称", "声", "号"], answer: "字", meaning: "ชื่อนั้นน่าสนใจมาก" },
+            { sentence: "请告诉我您的电（　）是多少。", options: ["话", "脑", "视", "报"], answer: "话", meaning: "กรุณาบอกฉันว่าเบอร์โทรศัพท์ของคุณคืออะไร" },
+            { sentence: "可能快下（　）了。", options: ["雨", "雪", "雹", "水"], answer: "雨", meaning: "ฝนน่าจะใกล้ตกแล้ว" },
+            { sentence: "这儿的羊肉很好吃，但是也很（　）。", options: ["贵", "便宜", "多", "少"], answer: "贵", meaning: "เนื้อแกะที่นี่อร่อยมาก แต่ก็แพงมากด้วย" },
+            { sentence: "这次考试她考得非（　）好。", options: ["常", "特", "极", "太"], answer: "常", meaning: "การสอบครั้งนี้เธอสอบได้ดีอย่างยิ่ง" },
+            { sentence: "我和哥哥去商店买了很多（　）。", options: ["菜", "饭", "肉", "鱼"], answer: "菜", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมามากมาย" },
+            { sentence: "大家都准备（　）了吗？", options: ["好", "完", "到", "成"], answer: "好", meaning: "ทุกคนเตรียมพร้อมแล้วหรือยัง" },
+            { sentence: "明天天气怎（　）样？", options: ["么", "那", "这", "什"], answer: "么", meaning: "พรุ่งนี้อากาศเป็นอย่างไรบ้าง" },
+            { sentence: "你们听（　）我说的话了吗？", options: ["懂", "见", "到", "完"], answer: "懂", meaning: "พวกคุณฟังสิ่งที่ฉันพูดเข้าใจไหม" },
+            { sentence: "你什么时候能回（　）？", options: ["来", "去", "到", "家"], answer: "来", meaning: "คุณจะกลับมาได้เมื่อไหร่" },
+            { sentence: "别（　）了，手机在桌子上呢。", options: ["找", "看", "要", "想"], answer: "找", meaning: "ไม่ต้องหาแล้ว โทรศัพท์มือถืออยู่บนโต๊ะ" },
+            { sentence: "没关系，电影还没开（　）呢。", options: ["始", "门", "演", "动"], answer: "始", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
+            { sentence: "因为我不会游（　）。", options: ["泳", "水", "戏", "玩"], answer: "泳", meaning: "เพราะว่าฉันว่ายน้ำไม่เป็น" },
+            { sentence: "他在那儿和孩子们踢足（　）呢。", options: ["球", "篮", "排", "羽"], answer: "球", meaning: "เขาอยู่ที่นั่นกำลังเตะฟุตบอลกับเด็กๆ" },
+            { sentence: "晚上一起去跳（　），怎么样？", options: ["舞", "高", "绳", "远"], answer: "舞", meaning: "ตอนเย็นไปเต้นรำด้วยกันเป็นอย่างไร" },
+            { sentence: "想早点儿睡（　）。", options: ["觉", "床", "休息", "起"], answer: "觉", meaning: "อยากนอนหลับให้เร็วหน่อย" },
+            { sentence: "我知（　）她的名字。", options: ["道", "识", "名", "理"], answer: "道", meaning: "ฉันรู้ชื่อของเธอ" },
+            { sentence: "爸爸觉（　）茶不好喝。", options: ["得", "想", "知", "看"], answer: "得", meaning: "คุณพ่อรู้สึกว่าชาไม่อร่อย" },
+            { sentence: "大人一天可（　）吃4次。", options: ["以", "能", "会", "要"], answer: "以", meaning: "ผู้ใหญ่กินได้วันละ 4 ครั้ง" },
+            { sentence: "我想送他一个电（　）。", options: ["脑", "视", "话", "影"], answer: "脑", meaning: "ฉันอยากมอบคอมพิวเตอร์ให้เขาหนึ่งเครื่อง" },
+            { sentence: "学习汉（　）。", options: ["语", "字", "文", "话"], answer: "语", meaning: "เรียนภาษาจีน" },
+            { sentence: "非常欢迎你来我们公司工（　）！", options: ["作", "事", "业", "务"], answer: "作", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
+            { sentence: "听说读写一个都不能（　）。", options: ["少", "多", "小", "无"], answer: "少", meaning: "ฟัง พูด อ่าน เขียน ขาดไม่ได้สักอย่างเดียว" },
+            { sentence: "这儿的羊肉很好（　）。", options: ["吃", "喝", "看", "玩"], answer: "吃", meaning: "เนื้อแกะที่นี่อร่อยมาก" },
+            { sentence: "时间过得（　）快。", options: ["真", "很", "太", "最"], answer: "真", meaning: "เวลาผ่านไปเร็วจริงๆ" },
+            { sentence: "弟弟比我（　）两岁。", options: ["小", "大", "高", "重"], answer: "小", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
+            { sentence: "我有两个孩（　）。", options: ["子", "童", "人", "女"], answer: "子", meaning: "ฉันมีลูกสองคน" },
+            { sentence: "我和朋（　）去看电影。", options: ["友", "伴", "人", "辈"], answer: "友", meaning: "ฉันกับเพื่อนไปดูหนัง" },
+            { sentence: "快坐下喝点儿（　）吧。", options: ["水", "茶", "酒", "奶"], answer: "水", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
+            { sentence: "我和我丈夫2008年去过一次北（　）。", options: ["京", "海", "方", "边"], answer: "京", meaning: "ฉันกับสามีเคยไปปักกิ่งหนึ่งครั้งเมื่อปี 2008" },
+            { sentence: "还有时间，我再睡5分（　）。", options: ["钟", "时", "刻", "秒"], answer: "钟", meaning: "ยังมีเวลา ฉันนอนต่ออีก 5 นาที" },
+            { sentence: "十五分（　）就到了。", options: ["钟", "时", "刻", "秒"], answer: "钟", meaning: "15 นาทีก็ถึงแล้ว" },
+            { sentence: "今天太累（　）。", options: ["了", "过", "着", "在"], answer: "了", meaning: "วันนี้เหนื่อยมากแล้ว" },
+            { sentence: "让我看看里面是（　）么东西。", options: ["什", "怎", "多", "哪"], answer: "什", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นอะไร" },
+            { sentence: "唱歌是一件让人高兴的事（　）。", options: ["情", "务", "理", "件"], answer: "情", meaning: "การร้องเพลงเป็นเรื่องที่ทำให้คนมีความสุข" },
+            { sentence: "少买（　）。多买（　）。", options: ["些", "点", "个", "多"], answer: "些", meaning: "ซื้อน้อยหน่อย ซื้อเยอะหน่อย" },
+            { sentence: "你去过“一元店”（　）？", options: ["吗", "呢", "吧", "啊"], answer: "吗", meaning: "คุณเคยไปร้าน '1 หยวน' ไหม" },
+            { sentence: "这本汉语书是（　）的？", options: ["谁", "什么", "哪", "怎么"], answer: "谁", meaning: "หนังสือภาษาจีนเล่มนี้เป็นของใคร" },
+            { sentence: "前面那个小狗真好（　）儿。", options: ["玩", "看", "吃", "听"], answer: "玩", meaning: "สุนัขตัวเล็กข้างหน้าเล่นสนุกจริงๆ" },
+            { sentence: "没关系，有不懂的问题，你可以再来（　）我。", options: ["找", "看", "听", "问"], answer: "问", meaning: "ไม่เป็นไร มีปัญหาที่ไม่เข้าใจ คุณสามารถมาถามฉันอีกได้" },
+            { sentence: "小李帮（　）了它们。", options: ["助", "忙", "手", "力"], answer: "助", meaning: "เสี่ยวหลี่ช่วยเหลือพวกมัน" },
+            { sentence: "你喜欢什么运（　）？", options: ["动", "活", "感", "力"], answer: "动", meaning: "คุณชอบกีฬาอะไร" },
+            { sentence: "我还想介绍你们认（　）呢。", options: ["识", "知", "明", "理"], answer: "识", meaning: "ฉันยังอยากแนะนำให้พวกคุณรู้จักกันเลย" },
+            { sentence: "希（　）住得离公司近一些。", options: ["望", "想", "看", "要"], answer: "望", meaning: "หวังว่าจะได้อยู่อาศัยใกล้บริษัทขึ้นอีกหน่อย" },
+            { sentence: "你家离学校（　）吗？", options: ["远", "近", "大", "高"], answer: "远", meaning: "บ้านของคุณอยู่ไกลจากโรงเรียนไหม" }
         ];
 
-        // คลังข้อสอบพาร์ท 3: เรียงประโยค 100 ข้อเต็ม[cite: 3]
-        const sentencePool = [
-            { tokens: ["我", "去", "商店"], ans: "我去商店。" },
-            { tokens: ["我", "想", "买", "一些", "水果"], ans: "我想买一些水果。" },
-            { tokens: ["你", "能", "听见", "我", "说话", "吗"], ans: "你能听见我说话吗?" },
-            { tokens: ["你", "叫", "什么", "名字"], ans: "你叫什么名字?" },
-            { tokens: ["他", "是", "坐", "火车", "来", "的"], ans: "他是坐火车来的" },
-            { tokens: ["他们", "都", "是", "我", "的", "同学"], ans: "他们都是我的同学。" },
-            { tokens: ["他", "想", "学习", "开", "飞机"], ans: "他想学习开飞机" },
-            { tokens: ["他", "下午", "去", "哪里"], ans: "他下午去哪里?" },
-            { tokens: ["他", "在", "里面", "学习", "呢"], ans: "他在里面学习呢" },
-            { tokens: ["他", "是", "医院", "的", "医生"], ans: "他是医院的医生。" },
-            { tokens: ["她", "中午", "请", "朋友", "吃饭"], ans: "她中午请朋友吃饭。" },
-            { tokens: ["她", "多大", "了"], ans: "她多大了?" },
-            { tokens: ["我们", "什么时候", "去", "医院"], ans: "我们什么时候去医院?" },
-            { tokens: ["我们", "今天", "吃饭", "怎么样"], ans: "我们今天吃饭怎么样?" },
-            { tokens: ["我们", "2011年", "7月", "见"], ans: "我们2011年7月见。" },
-            { tokens: ["我们", "都", "坐", "飞机", "去"], ans: "我们都坐飞机去" },
-            { tokens: ["请", "在", "这儿", "写", "你们", "的", "名字"], ans: "请在这儿写你们的名字。" },
-            { tokens: ["你们", "现在", "住", "哪儿"], ans: "你们现在住哪儿?" },
-            { tokens: ["你们", "那儿", "下雨", "了", "吗"], ans: "你们那儿下雨了吗?" },
-            { tokens: ["你们", "谁", "会", "开车"], ans: "你们谁会开车?" },
-            { tokens: ["谁", "会", "说", "汉语"], ans: "谁会说汉语?" },
-            { tokens: ["中午", "谁", "来", "吃饭"], ans: "中午谁来吃饭?" },
-            { tokens: ["这些", "衣服", "是", "谁", "买", "的"], ans: "这些衣服是谁买的?" },
-            { tokens: ["那个", "小狗", "是", "谁", "的"], ans: "那个小狗是谁的?" },
-            { tokens: ["你", "想", "买", "什么"], ans: "你想买什么?" },
-            { tokens: ["他", "爸爸", "在", "哪儿", "工作"], ans: "他爸爸在哪儿工作?" },
-            { tokens: ["你", "想", "吃", "哪一个"], ans: "你想吃哪一个?" },
-            { tokens: ["你", "哪天", "回家"], ans: "你哪天回家?" },
-            { tokens: ["明天", "你", "怎么", "去", "医院"], ans: "明天你怎么去医院?" },
-            { tokens: ["你", "怎么", "来", "茶馆儿"], ans: "你怎么来茶馆儿?" },
-            { tokens: ["这", "几个", "字", "怎么", "读"], ans: "这几个字怎么读?" },
-            { tokens: ["昨天", "天气", "怎么样"], ans: "昨天天气怎么样?" },
-            { tokens: ["我", "做", "的", "菜", "怎么样"], ans: "我做的菜怎么样?" },
-            { tokens: ["这个", "桌子", "怎么样"], ans: "这个桌子怎么样?" },
-            { tokens: ["你", "家", "的", "电话", "是", "多少"], ans: "你家的电话是多少?" },
-            { tokens: ["这个", "菜", "多少", "钱"], ans: "这个菜多少钱?" },
-            { tokens: ["你", "会", "写", "多少", "个", "汉字"], ans: "你会写多少个汉字?" },
-            { tokens: ["你们", "学校", "有", "多少", "个", "学生"], ans: "你们学校有多少个学生?" },
-            { tokens: ["你", "去", "北京", "学习", "几天"], ans: "你去北京学习几天?" },
-            { tokens: ["中午", "有", "几个", "朋友", "来", "吃饭"], ans: "中午有几个朋友来吃饭。" },
-            { tokens: ["你", "几岁", "了"], ans: "你几岁了?" },
-            { tokens: ["我们", "少", "做", "几个", "菜"], ans: "我们少做几个菜。" },
-            { tokens: ["你", "今年", "多大", "了"], ans: "你今年多大了?" },
-            { tokens: ["我", "的", "东西", "不", "多"], ans: "我的东西不多。" },
-            { tokens: ["你", "女儿", "很", "漂亮"], ans: "你女儿很漂亮" },
-            { tokens: ["我", "很", "喜欢", "这", "本", "书"], ans: "我很喜欢这本书" },
-            { tokens: ["这儿", "太", "冷", "了"], ans: "这儿太冷了" },
-            { tokens: ["我", "朋友", "在", "前面", "那个", "商店"], ans: "我朋友在前面那个商店。" },
-            { tokens: ["那", "里面", "有", "什么"], ans: "那里面有什么?" },
-            { tokens: ["我", "15", "分钟", "后", "回去"], ans: "我15分钟后回去。" },
-            { tokens: ["她", "是", "我", "大学", "同学"], ans: "她是我大学同学。" },
-            { tokens: ["我", "妈妈", "是", "医生"], ans: "我妈妈是医生。" },
-            { tokens: ["他", "在", "医院", "工作"], ans: "他在医院工作。" },
-            { tokens: ["这儿", "有", "椅子", "请", "坐"], ans: "这儿有椅子,请坐。" },
-            { tokens: ["中午", "有", "雨"], ans: "中午有雨。" },
-            { tokens: ["我", "在", "家", "看", "电视", "了"], ans: "我在家看电视了。" },
-            { tokens: ["我", "不", "想", "要", "看", "电视"], ans: "我不想要看电视。" },
-            { tokens: ["你", "请", "我", "看", "电影"], ans: "你请我看电影。" },
-            { tokens: ["我", "看见", "了"], ans: "我看见了。" },
-            { tokens: ["我", "现在", "不", "想", "听", "你", "说话"], ans: "我现在不想听你说话。" },
-            { tokens: ["王", "小姐", "怎么", "说"], ans: "王小姐怎么说?" },
-            { tokens: ["这个", "字", "我", "不", "会", "写"], ans: "这个字我不会写。" },
-            { tokens: ["我", "的", "名字", "写", "哪儿"], ans: "我的名字写哪儿?" },
-            { tokens: ["我", "想", "买", "一些", "水果"], ans: "我想买一些水果。" },
-            { tokens: ["你", "什么", "时候", "回", "中国"], ans: "你什么时候回中国?" },
-            { tokens: ["你", "明天", "来", "北京"], ans: "你明天来北京。" },
-            { tokens: ["王", "老师", "回来", "了", "吗"], ans: "王老师回来了吗?" },
-            { tokens: ["她", "说", "下午", "能", "来"], ans: "她说下午能来" },
-            { tokens: ["明天", "下午", "坐", "飞机"], ans: "明天下午坐飞机" },
-            { tokens: ["请", "坐", "前面"], ans: "请坐前面。" },
-            { tokens: ["我", "妈妈", "喜欢", "吃", "中国", "菜"], ans: "我妈妈喜欢吃中国菜" },
-            { tokens: ["你", "爱", "吃", "苹果", "吗"], ans: "你爱吃苹果吗?" },
-            { tokens: ["喝", "点儿", "水", "吧"], ans: "喝点儿水吧。" },
-            { tokens: ["我", "想", "去", "睡觉"], ans: "我想去睡觉。" },
-            { tokens: ["她", "会", "打", "电话", "吗"], ans: "她会打电话吗?" },
-            { tokens: ["我", "打车", "去"], ans: "我打车去。" },
-            { tokens: ["很", "高兴", "认识", "你"], ans: "很高兴认识你。" },
-            { tokens: ["我", "一", "个", "人", "能", "做", "好"], ans: "我一个人能做好。" },
-            { tokens: ["在", "学习", "汉语"], ans: "在学习汉语。" },
-            { tokens: ["再见", "明天", "见"], ans: "再见,明天见。" },
-            { tokens: ["你", "中午", "住", "哪里"], ans: "你中午住哪里?" },
-            { tokens: ["下雨", "了", "你们", "冷", "吗"], ans: "下雨了,你们冷吗?" },
-            { tokens: ["天气", "很", "冷"], ans: "天气很冷。" },
-            { tokens: ["你", "太", "客气", "了"], ans: "你太客气了。" },
-            { tokens: ["我", "没", "去", "看", "电影"], ans: "我没去看电影" },
-            { tokens: ["这个", "杯子", "里", "没有", "水"], ans: "这个杯子里没有水" },
-            { tokens: ["她", "在", "床上", "看", "电视"], ans: "她在床上看电视。" },
-            { tokens: ["米饭", "在", "桌子", "上"], ans: "米饭在桌子上。" },
-            { tokens: ["儿子", "的", "老师"], ans: "儿子の老师。" },
-            { tokens: ["你", "看见", "我", "的", "汉语", "书", "了", "吗"], ans: "你看见我的汉语书了吗?" },
-            { tokens: ["你", "的", "电脑", "呢"], ans: "你的电脑呢?" },
-            { tokens: ["我", "的", "那", "块儿", "苹果", "呢"], ans: "我的那块儿苹果呢?" },
-            { tokens: ["写", "你们", "的", "名字"], ans: "写你们的名字。" },
-            { tokens: ["去", "商店"], ans: "去商店。" },
-            { tokens: ["在", "医院", "工作", "九", "年", "了"], ans: "在医院工作九年了。" },
-            { tokens: ["小狗", "在", "椅子", "后面"], ans: "小狗在椅子后面。" },
-            { tokens: ["买", "椅子", "的", "那个", "人", "是", "谁"], ans: "买椅子的那个人是谁?" },
-            { tokens: ["她", "是", "我", "妈妈", "的", "朋友"], ans: "她是我妈妈的朋友。" },
-            { tokens: ["他", "的", "女儿", "现在", "在", "火车站"], ans: "他的女儿现在在火车站。" },
-            { tokens: ["这", "几个", "字", "怎么", "读"], ans: "这几个字怎么读?" }
+        const wordOrderPool = [
+            { tokens: ["我", "最", "喜", "欢", "踢", "足", "球"], ans: "我最喜欢踢足球。", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { tokens: ["小", "王", "的", "杯", "子", "是", "什", "么", "颜", "色", "的"], ans: "小王的杯子是什么颜色的？", meaning: "แก้วของเสี่ยวหวังเป็นสีอะไร" },
+            { tokens: ["你", "喜", "欢", "什", "么", "运", "动"], ans: "你喜欢什么运动？", meaning: "คุณชอบกีฬาอะไร" },
+            { tokens: ["我", "下", "飞", "机", "了"], ans: "我下飞机了。", meaning: "ฉันลงจากเครื่องบินแล้ว" },
+            { tokens: ["这", "个", "字", "是", "大", "的", "意", "思", "吗"], ans: "这个字是大的意思吗？", meaning: "อักษรตัวนี้มีความหมายว่า 'ใหญ่' ใช่ไหม" },
+            { tokens: ["羊", "肉", "很", "好", "吃"], ans: "羊肉很好吃。", meaning: "เนื้อแกะอร่อยมาก" },
+            { tokens: ["天", "气", "很", "冷"], ans: "天气很冷。", meaning: "อากาศหนาวมาก" },
+            { tokens: ["这", "个", "题", "我", "不", "会"], ans: "这个题我不会。", meaning: "ข้อนี้ฉันทำไม่เป็น" },
+            { tokens: ["他", "在", "哪", "儿", "呢"], ans: "他在哪儿呢？", meaning: "เขาอยู่ที่ไหน" },
+            { tokens: ["买", "了", "个", "新", "手", "机"], ans: "买了个新手机。", meaning: "ซื้อโทรศัพท์มือถือเครื่องใหม่มาหนึ่งเครื่อง" },
+            { tokens: ["请", "在", "这", "儿", "写", "您", "的", "名", "字"], ans: "请在这儿写您的名字。", meaning: "กรุณาเขียนชื่อของคุณตรงนี้" },
+            { tokens: ["一", "年", "有", "八", "千", "七", "百", "多", "个", "小", "时"], ans: "一年有八千七百多个小时。", meaning: "หนึ่งปีมีมากกว่า 8,700 ชั่วโมง" },
+            { tokens: ["手", "机", "在", "桌", "子", "上", "呢"], ans: "手机在桌子上呢。", meaning: "โทรศัพท์มือถืออยู่บนโต๊ะ" },
+            { tokens: ["这", "是", "去", "饭", "店", "的", "路", "吗"], ans: "这是去饭店的路吗？", meaning: "นี่คือทางไปร้านอาหารใช่ไหม" },
+            { tokens: ["让", "我", "看", "看", "里", "面", "是", "什", "么", "东", "西"], ans: "让我看看里面是什么东西。", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นของอะไร" },
+            { tokens: ["准", "备", "好", "了", "吗"], ans: "准备好了吗？", meaning: "เตรียมพร้อมแล้วหรือยัง" },
+            { tokens: ["你", "喜", "欢", "什", "么", "运", "动"], ans: "你喜欢什么运动？", meaning: "คุณชอบกีฬาอะไร" },
+            { tokens: ["没", "关", "系", "，", "电", "影", "还", "没", "开", "始", "呢"], ans: "没关系，电影还没开始呢。", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
+            { tokens: ["那", "家", "饭", "店", "鱼", "做", "得", "不", "错"], ans: "那家饭店鱼做得不错。", meaning: "ปลาของร้านอาหารร้านนั้นทำได้ไม่เลว" },
+            { tokens: ["买", "了", "很", "多", "菜"], ans: "买了很多菜。", meaning: "ซื้อผัก/กับข้าวมาเยอะมาก" },
+            { tokens: ["我", "们", "都", "爱", "吃", "西", "瓜"], ans: "我们都爱吃西瓜。", meaning: "พวกเราล้วนชอบกินแตงโม" },
+            { tokens: ["晚", "上", "我", "们", "去", "唱", "歌", "怎", "么", "样"], ans: "晚上我们去唱歌怎么样？", meaning: "ตอนเย็นพวกเราไปร้องเพลงกันเป็นไง" },
+            { tokens: ["非", "常", "欢", "迎", "你", "来", "我", "们", "公", "司", "工", "作"], ans: "非常欢迎你来我们公司工作！", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
+            { tokens: ["这", "里", "有", "几", "个", "杯", "子"], ans: "这里有几个杯子。", meaning: "ที่นี่มีแก้วน้ำสองสามใบ" },
+            { tokens: ["这", "个", "药", "饭", "后", "吃", "，", "每", "天", "吃", "三", "次"], ans: "这个药饭后吃，每天吃三次。", meaning: "ยาตัวนี้กินหลังอาหาร กินวันละ 3 ครั้ง" },
+            { tokens: ["我", "和", "哥", "哥", "去", "商", "店", "买", "了", "很", "多", "菜"], ans: "我和哥哥去商店买了很多菜。", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมาเยอะมาก" },
+            { tokens: ["十", "五", "分", "钟", "就", "到", "了"], ans: "十五分钟就到了。", meaning: "อีก 15 นาทีก็ถึงแล้ว" },
+            { tokens: ["这", "次", "考", "试", "她", "考", "得", "非", "常", "好"], ans: "这次考试她考得非常好。", meaning: "การสอบครั้งนี้เธอสอบได้ดีมาก" },
+            { tokens: ["考", "试", "题", "太", "多", "了"], ans: "考试题太多了。", meaning: "โจทย์ข้อสอบเยอะเกินไปแล้ว" },
+            { tokens: ["星", "期", "六", "也", "不", "休", "息"], ans: "星期六也不休息。", meaning: "วันเสาร์ก็ไม่ได้พักผ่อน" },
+            { tokens: ["苹", "果", "洗", "好", "了", "，", "来", "吃", "一", "个", "吧"], ans: "苹果洗好了，来吃一个吧。", meaning: "ล้างแอปเปิ้ลเสร็จแล้ว มาทานสักลูกสิ" },
+            { tokens: ["正", "在", "床", "上", "看", "电", "视", "呢"], ans: "正在床上看电视呢。", meaning: "กำลังดูทีวีอยู่บนเตียง" },
+            { tokens: ["每", "天", "早", "上", "她", "都", "要", "慢", "跑", "一", "小", "时"], ans: "每天早上她都要慢跑一小时。", meaning: "ทุกเช้าเธอจะต้องวิ่งเหยาะๆ หนึ่งชั่วโมง" },
+            { tokens: ["在", "哪", "儿", "呢"], ans: "在哪儿呢？", meaning: "อยู่ที่ไหน" },
+            { tokens: ["因", "为", "我", "不", "知", "道", "怎", "么", "说"], ans: "因为我不知道怎么说。", meaning: "เพราะว่าฉันไม่รู้ว่าจะพูดอย่างไร" },
+            { tokens: ["她", "笑", "着", "对", "我", "说"], ans: "她笑着对我说。", meaning: "เธอยิ้มและพูดกับฉัน" },
+            { tokens: ["坐", "出", "租", "车", "去"], ans: "坐出租车去。", meaning: "นั่งรถแท็กซี่ไป" },
+            { tokens: ["打", "电", "话"], ans: "打电话。", meaning: "โทรศัพท์" },
+            { tokens: ["您", "能", "等", "一", "下", "吗"], ans: "您能等一下吗？", meaning: "คุณรอสักครู่ได้ไหม" },
+            { tokens: ["最", "喜", "欢", "踢", "足", "球"], ans: "最喜欢踢足球。", meaning: "ชอบเตะฟุตบอลที่สุด" },
+            { tokens: ["弟", "弟", "比", "我", "小", "两", "岁"], ans: "弟弟比我小两岁。", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
+            { tokens: ["他", "还", "在", "教", "室", "里", "学", "习"], ans: "他还在教室里学习。", meaning: "เขายังเรียนอยู่ในห้องเรียน" },
+            { tokens: ["晴", "天", "，", "但", "是", "很", "冷"], ans: "晴天，但是很冷。", meaning: "ท้องฟ้าโปร่ง แต่หนาวมาก" },
+            { tokens: ["买", "这", "个", "电", "脑", "的", "人", "很", "少"], ans: "买这个电脑的人很少。", meaning: "คนที่ซื้อคอมพิวเตอร์เครื่องนี้น้อยมาก" },
+            { tokens: ["现", "在", "是", "十", "一", "点", "三", "十", "分"], ans: "现在是十一点三十分。", meaning: "ตอนนี้เป็นเวลา 11 โมง 30 นาที" },
+            { tokens: ["快", "坐", "下", "喝", "点", "儿", "水", "吧"], ans: "快坐下喝点儿水吧。", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
+            { tokens: ["外", "面", "已", "经", "下", "雨", "了"], ans: "外面已经下雨了。", meaning: "ข้างนอกฝนตกแล้ว" },
+            { tokens: ["这", "个", "字", "我", "会", "写", "了"], ans: "这个字我会写了。", meaning: "ตัวอักษรตัวนี้ฉันเขียนเป็นแล้ว" },
+            { tokens: ["向", "前", "走"], ans: "向前走。", meaning: "เดินไปข้างหน้า" },
+            { tokens: ["我", "会", "跳", "舞"], ans: "我会跳舞。", meaning: "ฉันเต้นรำเป็น" },
+            { tokens: ["可", "能", "要", "下", "雪"], ans: "可能要下雪。", meaning: "หิมะอาจจะตก" },
+            { tokens: ["你", "下", "午", "准", "备", "做", "什", "么"], ans: "你下午准备做什么？", meaning: "ตอนบ่ายคุณเตรียมจะทำอะไร" },
+            { tokens: ["外", "面", "的", "雪", "真", "大"], ans: "外面的雪真大。", meaning: "หิมะข้างนอกตกหนักจริง" },
+            { tokens: ["我", "最", "喜", "欢", "踢", "足", "球"], ans: "我最喜欢踢足球。", meaning: "ฉันชอบเตะฟุตบอลที่สุด" },
+            { tokens: ["你", "再", "等", "一", "下"], ans: "你再等一下。", meaning: "คุณรออีกสักครู่" },
+            { tokens: ["那", "个", "名", "字", "很", "有", "意", "思"], ans: "那个名字很有意思。", meaning: "ชื่อนั้นน่าสนใจมาก" },
+            { tokens: ["请", "告", "诉", "我", "您", "的", "电", "话", "是", "多", "少"], ans: "请告诉我您的电话是多少。", meaning: "กรุณาบอกฉันว่าเบอร์โทรศัพท์ของคุณคืออะไร" },
+            { tokens: ["可", "能", "快", "下", "雨", "了"], ans: "可能快下雨了。", meaning: "ฝนน่าจะใกล้ตกแล้ว" },
+            { tokens: ["这", "儿", "的", "羊", "肉", "很", "好", "吃", "，", "但", "是", "也", "很", "贵"], ans: "这儿的羊肉很好吃，但是也很贵。", meaning: "เนื้อแกะที่นี่อร่อยมาก แต่ก็แพงมากด้วย" },
+            { tokens: ["这", "次", "考", "试", "她", "考", "得", "非", "常", "好"], ans: "这次考试她考得非常好。", meaning: "การสอบครั้งนี้เธอสอบได้ดีอย่างยิ่ง" },
+            { tokens: ["我", "和", "哥", "哥", "去", "商", "店", "买", "了", "很", "多", "菜"], ans: "我和哥哥去商店买了很多菜。", meaning: "ฉันกับพี่ชายไปร้านค้าซื้อกับข้าวมามากมาย" },
+            { tokens: ["大", "家", "都", "准", "备", "好", "了", "吗"], ans: "大家都准备好了吗？", meaning: "ทุกคนเตรียมพร้อมแล้วหรือยัง" },
+            { tokens: ["明", "天", "天", "气", "怎", "么", "样"], ans: "明天天气怎么样？", meaning: "พรุ่งนี้อากาศเป็นอย่างไรบ้าง" },
+            { tokens: ["你", "们", "听", "懂", "我", "说", "的", "话", "了", "吗"], ans: "你们听懂我说的话了吗？", meaning: "พวกคุณฟังสิ่งที่ฉันพูดเข้าใจไหม" },
+            { tokens: ["你", "什", "么", "时", "候", "能", "回", "来"], ans: "你什么时候能回来？", meaning: "คุณจะกลับมาได้เมื่อไหร่" },
+            { tokens: ["别", "找", "了", "，", "手", "机", "在", "桌", "子", "上", "呢"], ans: "别找了，手机在桌子上呢。", meaning: "ไม่ต้องหาแล้ว โทรศัพท์มือถืออยู่บนโต๊ะ" },
+            { tokens: ["没", "关", "系", "，", "电", "影", "还", "没", "开", "始", "呢"], ans: "没关系，电影还没开始呢。", meaning: "ไม่เป็นไร หนังยังไม่เริ่ม" },
+            { tokens: ["因", "为", "我", "不", "会", "游", "泳"], ans: "因为我不会游泳。", meaning: "เพราะว่าฉันว่ายน้ำไม่เป็น" },
+            { tokens: ["他", "在", "那", "儿", "和", "孩", "子", "们", "踢", "足", "球", "呢"], ans: "他在那儿和孩子们踢足球呢。", meaning: "เขาอยู่ที่นั่นกำลังเตะฟุตบอลกับเด็กๆ" },
+            { tokens: ["晚", "上", "一", "起", "去", "跳", "舞", "，", "怎", "么", "样"], ans: "晚上一起去跳舞，怎么样？", meaning: "ตอนเย็นไปเต้นรำด้วยกันเป็นอย่างไร" },
+            { tokens: ["想", "早", "点", "儿", "睡", "觉"], ans: "想早点儿睡觉。", meaning: "อยากนอนหลับให้เร็วหน่อย" },
+            { tokens: ["我", "知", "道", "她", "的", "名", "字"], ans: "我知道她的名字。", meaning: "ฉันรู้ชื่อของเธอ" },
+            { tokens: ["爸", "爸", "觉", "得", "茶", "不", "好", "喝"], ans: "爸爸觉得茶不好喝。", meaning: "คุณพ่อรู้สึกว่าชาไม่อร่อย" },
+            { tokens: ["大", "人", "一", "天", "可", "以", "吃", "4", "次"], ans: "大人一天可以吃4次。", meaning: "ผู้ใหญ่กินได้วันละ 4 ครั้ง" },
+            { tokens: ["我", "想", "送", "他", "一", "个", "电", "脑"], ans: "我想送他一个电脑。", meaning: "ฉันอยากมอบคอมพิวเตอร์ให้เขาหนึ่งเครื่อง" },
+            { tokens: ["学", "习", "汉", "语"], ans: "学习汉语。", meaning: "เรียนภาษาจีน" },
+            { tokens: ["非", "常", "欢", "迎", "你", "来", "我", "们", "公", "司", "工", "作"], ans: "非常欢迎你来我们公司工作！", meaning: "ยินดีต้อนรับคุณมาทำงานที่บริษัทของเราอย่างยิ่ง" },
+            { tokens: ["听", "说", "读", "写", "一", "个", "都", "不", "能", "少"], ans: "听说读写一个都不能少。", meaning: "ฟัง พูด อ่าน เขียน ขาดไม่ได้สักอย่างเดียว" },
+            { tokens: ["这", "儿", "的", "羊", "肉", "很", "好", "吃"], ans: "这儿的羊肉很好吃。", meaning: "เนื้อแกะที่นี่อร่อยมาก" },
+            { tokens: ["时", "间", "过", "得", "真", "快"], ans: "时间过得真快。", meaning: "เวลาผ่านไปเร็วจริงๆ" },
+            { tokens: ["弟", "弟", "比", "我", "小", "两", "岁"], ans: "弟弟比我小两岁。", meaning: "น้องชายอายุน้อยกว่าฉันสองปี" },
+            { tokens: ["我", "有", "两", "个", "孩", "子"], ans: "我有两个孩子。", meaning: "ฉันมีลูกสองคน" },
+            { tokens: ["我", "和", "朋", "友", "去", "看", "电", "影"], ans: "我和朋友去看电影。", meaning: "ฉันกับเพื่อนไปดูหนัง" },
+            { tokens: ["快", "坐", "下", "喝", "点", "儿", "水", "吧"], ans: "快坐下喝点儿水吧。", meaning: "รีบนั่งลงดื่มน้ำสักหน่อยสิ" },
+            { tokens: ["我", "和", "我", "丈", "夫", "2008", "年", "去", "过", "一", "次", "北", "京"], ans: "我和我丈夫2008年去过一次北京。", meaning: "ฉันกับสามีเคยไปปักกิ่งหนึ่งครั้งเมื่อปี 2008" },
+            { tokens: ["还", "有", "时", "间", "，", "我", "再", "睡", "5", "分", "钟"], ans: "还有时间，我再睡5分钟。", meaning: "ยังมีเวลา ฉันนอนต่ออีก 5 นาที" },
+            { tokens: ["十", "五", "分", "钟", "就", "到", "了"], ans: "十五分钟就到了。", meaning: "15 นาทีก็ถึงแล้ว" },
+            { tokens: ["今", "天", "太", "累", "了"], ans: "今天太累了。", meaning: "วันนี้เหนื่อยมากแล้ว" },
+            { tokens: ["让", "我", "看", "看", "里", "面", "是", "什", "么", "东", "西"], ans: "让我看看里面是什么东西。", meaning: "ให้ฉันดูหน่อยว่าข้างในเป็นอะไร" },
+            { tokens: ["唱", "歌", "是", "一", "件", "让", "人", "高", "兴", "的", "事", "情"], ans: "唱歌是一件让人高兴的事情。", meaning: "การร้องเพลงเป็นเรื่องที่ทำให้คนมีความสุข" },
+            { tokens: ["少", "买", "些", "多", "买", "些"], ans: "少买些。多买些。", meaning: "ซื้อน้อยหน่อย ซื้อเยอะหน่อย" },
+            { tokens: ["你", "去", "过", "“", "一", "元", "店", "”", "吗"], ans: "你去过“一元店”吗？", meaning: "คุณเคยไปร้าน '1 หยวน' ไหม" },
+            { tokens: ["这", "本", "汉", "语", "书", "是", "谁", "的"], ans: "这本汉语书是谁的？", meaning: "หนังสือภาษาจีนเล่มนี้เป็นของใคร" },
+            { tokens: ["前", "面", "那", "个", "小", "狗", "真", "好", "玩", "儿"], ans: "前面那个小狗真好玩儿。", meaning: "สุนัขตัวเล็กข้างหน้าเล่นสนุกจริงๆ" },
+            { tokens: ["没", "关", "系", "，", "有", "不", "懂", "的", "问", "题", "，", "你", "可", "以", "再", "来", "找", "我"], ans: "没关系，有不懂的问题，你可以再来找我。", meaning: "ไม่เป็นไร มีปัญหาที่ไม่เข้าใจ คุณสามารถมาหาฉันอีกได้" },
+            { tokens: ["小", "李", "帮", "助", "了", "它", "们"], ans: "小李帮助了它们。", meaning: "เสี่ยวหลี่ช่วยเหลือพวกมัน" },
+            { tokens: ["你", "喜", "欢", "什", "么", "运", "动"], ans: "你喜欢什么运动？", meaning: "คุณชอบกีฬาอะไร" },
+            { tokens: ["我", "还", "想", "介", "绍", "你", "们", "认", "识", "呢"], ans: "我还想介绍你们认识呢。", meaning: "ฉันยังอยากแนะนำให้พวกคุณรู้จักกันเลย" },
+            { tokens: ["希", "望", "住", "得", "离", "公", "司", "近", "一", "些"], ans: "希望住得离公司近一些。", meaning: "หวังว่าจะได้อยู่อาศัยใกล้บริษัทขึ้นอีกหน่อย" },
+            { tokens: ["你", "家", "离", "学", "校", "远", "吗"], ans: "你家离学校远吗？", meaning: "บ้านของคุณอยู่ไกลจากโรงเรียนไหม" }
         ];
 
-        // คลังข้อสอบพาร์ท 4: เติมคำ 100 ข้อเต็ม พร้อมแปลไทย[cite: 2]
-        const blankPool = [
-            { sentence: "_____ 去商店，我想买一些水果。", meaning: "ฉันไปร้านค้า ฉันอยากซื้อผลไม้", answer: "我", options: ["你", "我", "他", "她"] },
-            { sentence: "_____ 好！", meaning: "สวัสดี!", answer: "你", options: ["我", "他", "你", "谁"] },
-            { sentence: "_____ 是坐火车来的。", meaning: "เขาเดินทางมาโดยรถไฟ", answer: "他", options: ["我", "你", "他", "谁"] },
-            { sentence: "中午请朋友 _____ 饭。", meaning: "ตอนเที่ยงเธอเลี้ยงข้าวเพื่อน", answer: "吃", options: ["喝", "吃", "买", "做"] },
-            { sentence: "我们什么时候去 _____ ？", meaning: "พวกเราจะไปโรงพยาบาลเมื่อไหร่", answer: "医院", options: ["学校", "医院", "商店", "家"] },
-            { sentence: "请在这儿写 _____ 的名字。", meaning: "กรุณาเขียนชื่อของพวกคุณตรงนี้", answer: "你们", options: ["我们", "你们", "他们", "谁"] },
-            { sentence: "_____ 会说汉语？", meaning: "ใครพูดภาษาจีนได้บ้าง", answer: "谁", options: ["什么", "哪儿", "谁", "怎么"] },
-            { sentence: "你想买 _____ ？", meaning: "คุณอยากซื้ออะไร", answer: "什么", options: ["谁", "什么", "哪儿", "怎么"] },
-            { sentence: "昨天天气 _____ ？", meaning: "อากาศเมื่อวานเป็นอย่างไรบ้าง", answer: "怎么样", options: ["怎么", "怎么样", "多少", "几"] },
-            { sentence: "这个菜多少 _____ ？", meaning: "กับข้าวนี้ราคาเท่าไหร่", answer: "钱", options: ["岁", "个", "本", "钱"] },
-            { sentence: "她下午去 _____ ？", meaning: "ช่วงบ่ายเธอไปไหน", answer: "哪里", options: ["来", "去", "回", "哪里"] },
-            { sentence: "你明天 _____ 北京？", meaning: "พรุ่งนี้คุณจะมาปักกิ่งไหม", answer: "来", options: ["去", "来", "回", "坐"] },
-            { sentence: "你什么时候 _____ 中国？", meaning: "คุณจะกลับประเทศจีนเมื่อไหร่", answer: "回", options: ["去", "来", "回", "坐"] },
-            { sentence: "我们 _____ 吃饭吧。", meaning: "พวกเรากินข้าวกันเถอะ", answer: "吃", options: ["吃", "喝", "买", "做"] },
-            { sentence: "这儿太 _____ 了。", meaning: "ที่นี่หนาวเกินไปแล้ว", answer: "冷", options: ["热", "冷", "大", "高"] },
-            { sentence: "她下午去 _____ 呢？", meaning: "ช่วงบ่ายเธอไปไหนล่ะ", answer: "哪儿", options: ["什么", "哪儿", "谁", "怎么"] },
-            { sentence: "我 _____ 去看电影。", meaning: "ฉันไม่ได้ไปดูภาพยนตร์", answer: "没", options: ["不", "没", "很", "太"] },
-            { sentence: "这个杯子里没有 _____。", meaning: "ในแก้วนี้ไม่มีน้ำ", answer: "水", options: ["水", "茶", "牛奶", "果汁"] },
-            { sentence: "我的东西不多，很 _____。", meaning: "ของของฉันมีไม่มาก น้อยมาก", answer: "少", options: ["多", "少", "小", "大"] },
-            { sentence: "这儿太 _____ 了。", meaning: "ที่นี่หนาวเกินไปแล้ว", answer: "冷", options: ["冷", "热", "高", "好"] },
-            { sentence: "请坐 _____。", meaning: "เชิญนั่งด้านหน้า", answer: "前面", options: ["前面", "后面", "左边", "右边"] },
-            { sentence: "他爸爸在 _____ 工作？", meaning: "พ่อของเขาทำงานอยู่ที่ไหน", answer: "哪儿", options: ["什么", "哪儿", "谁", "怎么"] },
-            { sentence: "你是坐 _____ 来的。", meaning: "คุณเดินทางมาโดยรถไฟ", answer: "火车", options: ["飞机", "火车", "汽车", "船"] },
-            { sentence: "我很喜欢这 _____ 书。", meaning: "ฉันชอบหนังสือเล่มนี้มาก", answer: "本", options: ["个", "本", "些", "块"] },
-            { sentence: "我们都坐 _____ 去。", meaning: "พวกเราล้วนโดยสารเครื่องบินไป", answer: "飞机", options: ["火车", "飞机", "出租车", "汽车"] },
-            { sentence: "买椅子的那个 _____ 是谁？", meaning: "คนที่ซื้อเก้าอี้คือนั้นใคร", answer: "人", options: ["人", "朋友", "老师", "学生"] },
-            { sentence: "她是我 _____ 的朋友。", meaning: "เธอเป็นเพื่อนของแม่ฉัน", answer: "妈妈", options: ["爸爸", "妈妈", "老师", "医生"] },
-            { sentence: "他 _____ 现在在火车站。", meaning: "ลูกสาวของเขาตอนนี้อยู่ที่สถานีรถไฟ", answer: "女儿", options: ["儿子", "女儿", "朋友", "同学"] },
-            { sentence: "这几个 _____ 怎么读？", meaning: "ตัวอักษรเหล่านี้อ่านอย่างไร", answer: "字", options: ["字", "书", "名字", "汉语"] },
-            { sentence: "你叫什么 _____ ？", meaning: "คุณชื่ออะไร", answer: "名字", options: ["名字", "字", "汉语", "书"] },
-            { sentence: "妈妈喜欢吃中国 _____。", meaning: "แม่ของฉันชอบกินอาหารจีน", answer: "菜", options: ["菜", "水果", "苹果", "米饭"] },
-            { sentence: "爸爸吃 _____。", meaning: "คุณพ่อกินแอปเปิ้ล", answer: "苹果", options: ["苹果", "米饭", "水", "茶"] },
-            { sentence: "米饭在 _____ 上。", meaning: "ข้าวสวยอยู่บนโต๊ะ", answer: "桌子上", options: ["桌子上", "椅子上", "床上", "门上"] },
-            { sentence: "小狗在椅子 _____。", meaning: "สุนัขตัวน้อยอยู่ด้านหลังเก้าอี้", answer: "后面", options: ["前面", "后面", "上面", "下面"] },
-            { sentence: "谁会说 _____ ？", meaning: "ใครพูดภาษาจีนได้บ้าง", answer: "汉语", options: ["汉语", "汉字", "字", "书"] },
-            { sentence: "你会写多少个 _____ ？", meaning: "คุณเขียนอักษรจีนได้กี่ตัว", answer: "汉字", options: ["汉字", "汉语", "字", "书"] },
-            { sentence: "这个 _____ 我不会写。", meaning: "ตัวอักษรนี้ฉันเขียนไม่เป็น", answer: "字", options: ["字", "汉语", "书", "名字"] },
-            { sentence: "她们买了很 _____ 东西。", meaning: "พวกเธอซื้อสิ่งของไว้มากมาย", answer: "多", options: ["多", "少", "大", "小"] },
-            { sentence: "这本书多少 _____ ？", meaning: "หนังสือเล่มนี้ราคาเท่าไหร่", answer: "钱", options: ["钱", "岁", "个", "本"] },
-            { sentence: "我现在去 _____。", meaning: "ตอนนี้ฉันไปโรงเรียน", answer: "学校", options: ["学校", "医院", "商店", "饭馆儿"] },
-            { sentence: "明天你怎么去 _____ ？", meaning: "พรุ่งนี้คุณไปโรงพยาบาลอย่างไร", answer: "医院", options: ["医院", "学校", "商店", "火车站"] },
-            { sentence: "我去 _____，我想买一些水果。", meaning: "ฉันไปร้านค้า ฉันอยากซื้อผลไม้", answer: "商店", options: ["商店", "医院", "学校", "饭馆儿"] },
-            { sentence: "你什么时候回 _____ ？", meaning: "คุณจะกลับประเทศจีนเมื่อไหร่", answer: "中国", options: ["中国", "北京", "学校", "医院"] },
-            { sentence: "你 _____ 写多少个汉字？", meaning: "คุณเขียนอักษรจีนได้กี่ตัว", answer: "会", options: ["会", "能", "想", "喜欢"] },
-            { sentence: "我 _____ 买一些水果。", meaning: "ฉันอยากซื้อผลไม้บางส่วน", answer: "想", options: ["想", "会", "能", "爱"] },
-            { sentence: "你爱吃 _____ 吗？", meaning: "คุณชอบกินแอปเปิ้ลไหม", answer: "苹果", options: ["苹果", "米饭", "菜", "水"] },
-            { sentence: "谁会 _____ 汉语？", meaning: "ใครพูดภาษาจีนได้บ้าง", answer: "说", options: ["说", "听", "读", "写"] },
-            { sentence: "你 _____ 听见我说话吗？", meaning: "คุณได้ยินที่ฉันพูดไหม", answer: "能", options: ["能", "会", "想", "喜欢"] },
-            { sentence: "他爸爸在哪儿 _____ ？", meaning: "พ่อของเขาทำงานอยู่ที่ไหน", answer: "工作", options: ["工作", "学习", "睡觉", "吃饭"] },
-            { sentence: "你去北京 _____ 几天？", meaning: "คุณไปเรียนที่ปักกิ่งกี่วัน", answer: "学习", options: ["学习", "工作", "睡觉", "吃饭"] },
-            { sentence: "他 _____ 坐火车来的。", meaning: "เขามาโดยรถไฟ", answer: "是", options: ["是", "有", "看", "去"] },
-            { sentence: "我 _____ 看电视了。", meaning: "ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว", answer: "在家", options: ["在家", "去医院", "买东西", "学习"] },
-            { sentence: "你能听见我 _____ 吗？", meaning: "คุณได้ยินที่ฉันพูดไหม", answer: "说话", options: ["说话", "看书", "写字", "睡觉"] },
-            { sentence: "王小姐怎么 _____ ？", meaning: "คุณผู้หญิงหวังว่าอย่างไร", answer: "说", options: ["说", "听", "读", "写"] },
-            { sentence: "这几个字怎么 _____ ？", meaning: "ตัวอักษรเหล่านี้อ่านอย่างไร", answer: "读", options: ["读", "写", "说", "听"] },
-            { sentence: "明天你怎么去 _____ ？", meaning: "พรุ่งนี้คุณไปโรงพยาบาลอย่างไร", answer: "医院", options: ["医院", "学校", "商店", "火车站"] },
-            { sentence: "他是 _____ 火车来的。", meaning: "เขามาโดยรถไฟ", answer: "坐", options: ["坐", "开", "骑", "走"] },
-            { sentence: "你什么时候回 _____ ？", meaning: "คุณจะกลับประเทศจีนเมื่อไหร่", answer: "中国", options: ["中国", "北京", "学校", "医院"] },
-            { sentence: "你们现在住 _____ ？", meaning: "ตอนนี้พวกคุณพักอยู่ที่ไหน", answer: "哪儿", options: ["哪儿", "什么", "谁", "怎么"] },
-            { sentence: "你 _____ 水吗？", meaning: "คุณดื่มน้ำไหม", answer: "喝", options: ["喝", "吃", "买", "做"] },
-            { sentence: "我们今天吃 _____ 怎么样？", meaning: "พวกเรากินข้าวสวยกันวันนี้เป็นอย่างไร", answer: "米饭", options: ["米饭", "菜", "水果", "苹果"] },
-            { sentence: "我想去 _____。", meaning: "ฉันอยากไปนอนหลับ", answer: "睡觉", options: ["睡觉", "学习", "工作", "吃饭"] },
-            { sentence: "你开车去 _____ ？", meaning: "คุณขับรถไปที่นั่นเหรอ", answer: "那儿", options: ["那儿", "这儿", "哪儿", "北京"] },
-            { sentence: "我 _____ 的菜怎么样？", meaning: "กับข้าวที่ฉันทำเป็นอย่างไรบ้าง", answer: "做", options: ["做", "买", "吃", "喝"] },
-            { sentence: "你叫什么 _____ ？", meaning: "คุณชื่ออะไร", answer: "名字", options: ["名字", "字", "汉语", "书"] },
-            { sentence: "很高兴 _____ 你。", meaning: "ยินดีที่ได้รู้จักคุณ", answer: "认识", options: ["认识", "知道", "学习", "喜欢"] },
-            { sentence: "我很喜欢这 _____ 书。", meaning: "ฉันชอบหนังสือเล่มนี้มาก", answer: "本", options: ["本", "个", "些", "块"] },
-            { sentence: "下雨了，你们 _____ 吗？", meaning: "ฝนตกแล้ว พวกคุณหนาวไหม", answer: "冷", options: ["冷", "热", "高", "大"] },
-            { sentence: "你今年多 _____ 了？", meaning: "ปีนี้คุณอายุเท่าไหร่แล้ว", answer: "大", options: ["大", "小", "多", "少"] },
-            { sentence: "天气很 _____。", meaning: "อากาศหนาวมาก", answer: "冷", options: ["冷", "热", "高", "大"] },
-            { sentence: "很 _____。", meaning: "ร้อนมาก", answer: "热", options: ["热", "冷", "高", "大"] },
-            { sentence: "太 _____，请坐前面。", meaning: "หนาวเกินไป เชิญนั่งด้านหน้า", answer: "冷", options: ["冷", "热", "高", "大"] },
-            { sentence: "我们都坐 _____ 去。", meaning: "พวกเราล้วนโดยสารเครื่องบินไป", answer: "飞机", options: ["飞机", "火车", "汽车", "船"] },
-            { sentence: "这个字我不会 _____。", meaning: "ตัวอักษรนี้ฉันเขียนไม่เป็น", answer: "写", options: ["写", "读", "说", "听"] },
-            { sentence: "我没去 _____ 电影。", meaning: "ฉันไม่ได้ไปดูภาพยนตร์", answer: "看", options: ["看", "听", "买", "去"] },
-            { sentence: "我在 _____ 看电视了。", meaning: "ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว", answer: "家", options: ["家", "学校", "医院", "商店"] },
-            { sentence: "下个月，她和 _____ 去。", meaning: "เดือนหน้า เธอและเพื่อนจะไป", answer: "朋友", options: ["朋友", "老师", "学生", "同学"] },
-            { sentence: "她是我 _____ 同学。", meaning: "เธอเป็นเพื่อนร่วมมหาวิทยาลัยของฉัน", answer: "大学", options: ["大学", "中学", "小学", "汉字"] },
-            { sentence: "我 _____ 看电视了。", meaning: "ฉันดูโทรทัศน์อยู่ที่บ้านแล้ว", answer: "在家", options: ["在家", "去 school", "买东西", "学习"] },
-            { sentence: "你家 _____ 电话是多少呢？", meaning: "เบอร์โทรศัพท์บ้านของคุณคือเบอร์อะไรล่ะ", answer: "的", options: ["的", "le", "吗", "呢"] }
-        ];
-
-        // อ่านออกเสียงคำศัพท์จีน
-        function speakWord(word) {
-            if (!('speechSynthesis' in window)) {
-                alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');
-                return;
-            }
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(word);
-            utterance.lang = 'zh-CN';
-            utterance.rate = 0.85;
-            window.speechSynthesis.speak(utterance);
-        }
-
-        let currentFilteredData = [...hsk1Data];
-
+        let currentFilteredData = [...hsk2Data];
         function renderVocab(data) {
             const grid = document.getElementById('vocabGrid');
             if(!grid) return;
@@ -806,7 +797,7 @@
                 const card = document.createElement('div');
                 card.className = "bg-white p-6 rounded-3xl border border-stone-200/80 shadow-md hover:border-red-600 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer";
                 card.onclick = () => {
-                    window.location.href = `hsk1-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(item.freqTotal)}&setsFound=${encodeURIComponent(item.setsFound)}&example=${encodeURIComponent(item.example)}`;
+                    window.location.href = `hsk2-detail.html?word=${encodeURIComponent(item.word)}&pinyin=${encodeURIComponent(item.pinyin)}&meaning=${encodeURIComponent(item.meaning)}&type=${encodeURIComponent(item.type)}&freqTotal=${encodeURIComponent(item.freqTotal)}&setsFound=${encodeURIComponent(item.setsFound)}&example=${encodeURIComponent(item.example)}`;
                 };
                 card.innerHTML = `
                     <div>
@@ -833,16 +824,16 @@
             const searchInput = document.getElementById('searchInput');
             if(!searchInput) return;
             const query = searchInput.value.toLowerCase();
-            currentFilteredData = hsk1Data.filter(item => item.word.toLowerCase().includes(query) || item.pinyin.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query));
+            currentFilteredData = hsk2Data.filter(item => item.word.toLowerCase().includes(query) || item.pinyin.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query));
             renderVocab(currentFilteredData);
         }
 
         function filterByType(type, e) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200 transition");
             if(e && e.target) {
-                event.target.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition";
+                e.target.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white transition";
             }
-            currentFilteredData = type === 'all' ? [...hsk1Data] : hsk1Data.filter(i => i.type.includes(type));
+            currentFilteredData = type === 'all' ? [...hsk2Data] : hsk2Data.filter(i => i.type.includes(type));
             renderVocab(currentFilteredData);
         }
 
@@ -898,260 +889,359 @@
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'zh-CN';
-                utterance.rate = 0.9;
+                utterance.rate = 0.72;
                 window.speechSynthesis.speak(utterance);
             }
         }
 
-
-        // --- เกมจับคู่คำศัพท์จีน-ไทย ---
-        let matchState = {
-            pairs: [],
-            selectedChinese: null,
-            selectedMeaning: null,
-            matched: new Set(),
-            score: 0
-        };
-
-        function initMatchGame() {
-            const chineseCol = document.getElementById('matchChineseCol');
-            const meaningCol = document.getElementById('matchMeaningCol');
-            const msg = document.getElementById('matchMsgArea');
-            if (!chineseCol || !meaningCol) return;
-
-            const pairs = [...hsk1Data]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 10)
-                .map((item, i) => ({
-                    id: i,
-                    word: item.word,
-                    meaning: item.meaning
-                }));
-
-            matchState = {
-                pairs,
-                selectedChinese: null,
-                selectedMeaning: null,
-                matched: new Set(),
-                score: 0
-            };
-
-            chineseCol.innerHTML = pairs.map(p => `
-                <button type="button" id="match-c-${p.id}"
-                    onclick="chooseMatchChinese(${p.id})"
-                    class="w-full p-3 bg-white border border-stone-200 rounded-xl font-bold text-lg hover:border-red-500 hover:bg-red-50 transition">
-                    ${p.word}
-                </button>
-            `).join('');
-
-            meaningCol.innerHTML = [...pairs]
-                .sort(() => Math.random() - 0.5)
-                .map(p => `
-                <button type="button" id="match-m-${p.id}"
-                    onclick="chooseMatchMeaning(${p.id})"
-                    class="w-full p-3 bg-white border border-stone-200 rounded-xl font-semibold text-sm hover:border-red-500 hover:bg-red-50 transition text-left">
-                    ${p.meaning}
-                </button>
-            `).join('');
-
-            if (msg) {
-                msg.innerHTML = `
-                    <div class="mb-3 text-sm font-bold text-stone-600" id="matchScore">จับคู่แล้ว 0 / 10</div>
-                    <button type="button" onclick="initMatchGame()"
-                        class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">
-                        เริ่มเกมใหม่ ↺
-                    </button>
-                `;
-            }
+        function speakWord(word) {
+            speakText(word);
         }
 
-        function chooseMatchChinese(id) {
-            if (matchState.matched.has(id)) return;
-            matchState.selectedChinese = id;
-            document.querySelectorAll('#matchChineseCol button').forEach(b => {
-                b.classList.remove('ring-2','ring-red-500','bg-red-50');
-            });
-            const btn = document.getElementById(`match-c-${id}`);
-            if (btn) btn.classList.add('ring-2','ring-red-500','bg-red-50');
-            checkMatchPair();
+        // --- QUIZ: ทดสอบความหมายคำศัพท์ ---
+        let quizScore = 0;
+        let quizStep = 0;
+        const totalQuiz = 10;
+        let currentQuizItem = null;
+        let quizPool = [];
+
+        function resetQuizView() {
+            const sec = document.getElementById('sectionQuiz');
+            if (!sec) return;
+            sec.innerHTML = `
+                <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span id="quizProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">คำถามที่ 1 / ${totalQuiz}</span>
+                        <span id="quizScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <p class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">เลือกความหมายที่ถูกต้องของคำศัพท์นี้</p>
+                        <div id="quizWord" class="text-7xl font-black text-stone-900 mb-2">我</div>
+                        <div id="quizPinyin" class="text-lg font-bold text-red-600">-</div>
+                    </div>
+                    <div id="quizOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                    <button id="nextQuizBtn" type="button" onclick="nextQuizQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+                </div>
+            `;
         }
 
-        function chooseMatchMeaning(id) {
-            if (matchState.matched.has(id)) return;
-            matchState.selectedMeaning = id;
-            document.querySelectorAll('#matchMeaningCol button').forEach(b => {
-                b.classList.remove('ring-2','ring-red-500','bg-red-50');
-            });
-            const btn = document.getElementById(`match-m-${id}`);
-            if (btn) btn.classList.add('ring-2','ring-red-500','bg-red-50');
-            checkMatchPair();
+        function startQuiz() {
+            quizScore = 0;
+            quizStep = 0;
+            currentQuizItem = null;
+            // สุ่มคำศัพท์ 10 คำจากคลัง HSK1 โดยไม่ซ้ำกันในรอบเดียว
+            quizPool = [...hsk2Data].sort(() => Math.random() - 0.5).slice(0, totalQuiz);
+            resetQuizView();
+            nextQuizQuestion();
         }
 
-        function checkMatchPair() {
-            if (matchState.selectedChinese === null || matchState.selectedMeaning === null) return;
-
-            const c = matchState.selectedChinese;
-            const m = matchState.selectedMeaning;
-            const cBtn = document.getElementById(`match-c-${c}`);
-            const mBtn = document.getElementById(`match-m-${m}`);
-
-            if (c === m) {
-                matchState.matched.add(c);
-                matchState.score++;
-
-                [cBtn, mBtn].forEach(btn => {
-                    if (btn) {
-                        btn.disabled = true;
-                        btn.classList.remove('ring-2','ring-red-500','bg-red-50');
-                        btn.classList.add('bg-green-100','border-green-500','text-green-700');
-                    }
-                });
-
-                const scoreEl = document.getElementById('matchScore');
-                if (scoreEl) scoreEl.textContent = `จับคู่แล้ว ${matchState.score} / 10`;
-
-                if (matchState.score === 10) {
-                    const msg = document.getElementById('matchMsgArea');
-                    if (msg) {
-                        msg.innerHTML = `
-                            <div class="text-lg font-black text-green-600 mb-3">🎉 เก่งมาก! จับคู่ครบ 10 คู่</div>
-                            <button type="button" onclick="initMatchGame()"
-                                class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">
-                                เล่นใหม่ ↺
-                            </button>
-                        `;
-                    }
-                }
-            } else {
-                [cBtn, mBtn].forEach(btn => {
-                    if (btn) btn.classList.add('bg-red-100','border-red-500');
-                });
-                setTimeout(() => {
-                    [cBtn, mBtn].forEach(btn => {
-                        if (btn) btn.classList.remove('bg-red-100','border-red-500','ring-2','ring-red-500','bg-red-50');
-                    });
-                }, 500);
-            }
-
-            matchState.selectedChinese = null;
-            matchState.selectedMeaning = null;
-        }
-
-        // --- ฝึกเลือกพินอินจากตัวจีน ---
-        let writingState = {
-            questions: [],
-            index: 0,
-            score: 0,
-            answered: false
-        };
-
-        function startWritingQuiz() {
-            writingState.questions = [...hsk1Data]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 10);
-            writingState.index = 0;
-            writingState.score = 0;
-            writingState.answered = false;
-            renderWritingQuestion();
-        }
-
-        function renderWritingQuestion() {
-            const item = writingState.questions[writingState.index];
-            const wordEl = document.getElementById('writeWordDisplay');
-            const typeEl = document.getElementById('writeTypeDisplay');
-            const progressEl = document.getElementById('writeProgress');
-            const scoreEl = document.getElementById('writeScore');
-            const optionsEl = document.getElementById('writeOptions');
-            const nextBtn = document.getElementById('nextWriteBtn');
-
-            if (!item || !optionsEl) return;
-
-            writingState.answered = false;
-            if (wordEl) wordEl.textContent = item.word;
-            if (typeEl) typeEl.textContent = item.type || '';
-            if (progressEl) progressEl.textContent = `ข้อที่ ${writingState.index + 1} / 10`;
-            if (scoreEl) scoreEl.textContent = `คะแนน: ${writingState.score}`;
-            if (nextBtn) nextBtn.classList.add('hidden');
-
-            const wrongs = [...hsk1Data]
-                .filter(v => v.id !== item.id)
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 3)
-                .map(v => v.pinyin);
-
-            const options = [item.pinyin, ...wrongs].sort(() => Math.random() - 0.5);
-
-            optionsEl.innerHTML = options.map((pinyin, i) => `
-                <button type="button"
-                    id="writeOpt_${i}"
-                    onclick="checkWritingChoice(${JSON.stringify(pinyin)}, ${i})"
-                    class="w-full p-4 bg-white border-2 border-stone-200 rounded-2xl text-lg font-bold hover:border-red-500 hover:bg-red-50 transition">
-                    ${pinyin}
-                </button>
-            `).join('');
-        }
-
-        function checkWritingChoice(answer, optionIndex) {
-            if (writingState.answered) return;
-            const item = writingState.questions[writingState.index];
-            if (!item) return;
-
-            writingState.answered = true;
-            const buttons = document.querySelectorAll('#writeOptions button');
-            const chosen = buttons[optionIndex];
-
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                if (btn.textContent.trim() === item.pinyin) {
-                    btn.classList.remove('border-stone-200');
-                    btn.classList.add('border-green-500','bg-green-100','text-green-700');
-                }
-            });
-
-            if (answer === item.pinyin) {
-                writingState.score++;
-                if (chosen) {
-                    chosen.classList.remove('border-stone-200');
-                    chosen.classList.add('border-green-500','bg-green-100','text-green-700');
-                }
-            } else if (chosen) {
-                chosen.classList.remove('border-stone-200');
-                chosen.classList.add('border-red-500','bg-red-100','text-red-700');
-            }
-
-            const scoreEl = document.getElementById('writeScore');
-            if (scoreEl) scoreEl.textContent = `คะแนน: ${writingState.score}`;
-
-            const nextBtn = document.getElementById('nextWriteBtn');
-            if (nextBtn) nextBtn.classList.remove('hidden');
-        }
-
-        function nextWritingQuestion() {
-            if (writingState.index >= writingState.questions.length - 1) {
-                const optionsEl = document.getElementById('writeOptions');
-                const nextBtn = document.getElementById('nextWriteBtn');
-                if (optionsEl) {
-                    optionsEl.innerHTML = `
-                        <div class="p-6 bg-green-50 border border-green-200 rounded-2xl text-center">
-                            <div class="text-4xl mb-2">🎉</div>
-                            <div class="text-xl font-black text-stone-900">ฝึกครบ 10 ข้อแล้ว</div>
-                            <div class="text-lg font-bold text-red-600 mt-2">คะแนน ${writingState.score} / 10</div>
+        function nextQuizQuestion() {
+            if (quizStep >= totalQuiz) {
+                const sec = document.getElementById('sectionQuiz');
+                if (sec) {
+                    sec.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
+                            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                            <div class="text-5xl pt-4">🏆</div>
+                            <h3 class="text-2xl font-black">สรุปผลทดสอบความหมาย</h3>
+                            <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${quizScore}</span> / ${totalQuiz} คะแนน</p>
+                            <button type="button" onclick="startQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">ทำแบบทดสอบใหม่อีกครั้ง ↺</button>
                         </div>
                     `;
-                }
-                if (nextBtn) {
-                    nextBtn.textContent = 'เริ่มใหม่อีกครั้ง ↺';
-                    nextBtn.classList.remove('hidden');
-                    nextBtn.onclick = startWritingQuiz;
                 }
                 return;
             }
 
-            writingState.index++;
-            renderWritingQuestion();
+            currentQuizItem = quizPool[quizStep];
+            quizStep++;
+
+            const prog = document.getElementById('quizProgress');
+            if (prog) prog.innerText = `คำถามที่ ${quizStep} / ${totalQuiz}`;
+            const scoreEl = document.getElementById('quizScore');
+            if (scoreEl) scoreEl.innerText = `คะแนน: ${quizScore}`;
+            const nextBtn = document.getElementById('nextQuizBtn');
+            if (nextBtn) nextBtn.classList.add('hidden');
+
+            const wordDisp = document.getElementById('quizWord');
+            if (wordDisp) wordDisp.innerText = currentQuizItem.word;
+            const pinyinDisp = document.getElementById('quizPinyin');
+            if (pinyinDisp) pinyinDisp.innerText = currentQuizItem.pinyin;
+
+            const options = [currentQuizItem.meaning];
+            const candidates = [...hsk2Data]
+                .filter(item => item.id !== currentQuizItem.id)
+                .sort(() => Math.random() - 0.5);
+            for (const item of candidates) {
+                if (!options.includes(item.meaning)) options.push(item.meaning);
+                if (options.length === 4) break;
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('quizOptions');
+            if (!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = "w-full py-4 px-4 rounded-2xl border border-stone-200 font-bold text-base text-stone-700 bg-stone-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-center shadow-sm";
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizChoice(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
         }
 
-        // --- ระบบสุ่มข้อสอบ 4 พาร์ท (สุ่มจาก 100 ข้อต่อพาร์ท ไม่ซ้ำกันในทุกรอบ) ---
+        function checkQuizChoice(selected, btnElement) {
+            if (!currentQuizItem) return;
+            const container = document.getElementById('quizOptions');
+            if (!container) return;
+            const allBtns = container.getElementsByTagName('button');
+            for (const b of allBtns) {
+                b.disabled = true;
+                if (b.innerText === currentQuizItem.meaning) {
+                    b.className = "w-full py-4 px-4 rounded-2xl border-2 border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
+                }
+            }
+
+            if (selected === currentQuizItem.meaning) {
+                quizScore++;
+                btnElement.className = "w-full py-4 px-4 rounded-2xl border-2 border-green-500 font-bold text-base text-green-700 bg-green-50 text-center shadow-sm";
+                if (typeof speakWord === 'function') speakWord(currentQuizItem.word);
+            } else {
+                btnElement.className = "w-full py-4 px-4 rounded-2xl border-2 border-red-500 font-bold text-base text-red-700 bg-red-50 text-center shadow-sm";
+            }
+
+            const scoreEl = document.getElementById('quizScore');
+            if (scoreEl) scoreEl.innerText = `คะแนน: ${quizScore}`;
+            const nextBtn = document.getElementById('nextQuizBtn');
+            if (nextBtn) nextBtn.classList.remove('hidden');
+        }
+
+        // --- เกมจับคู่คำศัพท์จีน-ไทย ---
+        let matchPool = [];
+        let matchSelectedLeft = null;
+        let matchSelectedRight = null;
+        let matchFoundCount = 0;
+        const totalMatch = 10;
+
+        function initMatchGame() {
+            matchPool = [...hsk2Data].sort(() => Math.random() - 0.5).slice(0, totalMatch);
+            matchSelectedLeft = null;
+            matchSelectedRight = null;
+            matchFoundCount = 0;
+
+            const leftCol = document.getElementById('matchChineseCol');
+            const rightCol = document.getElementById('matchMeaningCol');
+            const msgArea = document.getElementById('matchMsgArea');
+            if (!leftCol || !rightCol) return;
+
+            const leftItems = [...matchPool].sort(() => Math.random() - 0.5);
+            const rightItems = [...matchPool].sort(() => Math.random() - 0.5);
+
+            leftCol.innerHTML = '';
+            leftItems.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = "match-item w-full text-left px-4 py-3 bg-white border border-stone-200 rounded-xl font-bold text-lg text-stone-800 hover:border-red-500 hover:bg-red-50 transition shadow-sm";
+                btn.innerHTML = `${item.word} <span class="text-xs font-medium text-stone-400 block">${item.pinyin}</span>`;
+                btn.onclick = () => selectMatchItem('left', item, btn);
+                leftCol.appendChild(btn);
+            });
+
+            rightCol.innerHTML = '';
+            rightItems.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = "match-item w-full text-left px-4 py-3 bg-white border border-stone-200 rounded-xl font-semibold text-sm text-stone-700 hover:border-red-500 hover:bg-red-50 transition shadow-sm";
+                btn.innerText = item.meaning;
+                btn.onclick = () => selectMatchItem('right', item, btn);
+                rightCol.appendChild(btn);
+            });
+
+            if (msgArea) {
+                msgArea.innerHTML = `<p class="text-xs font-bold text-stone-500">จับคู่ได้แล้ว <span id="matchProgress" class="text-red-600">0</span> / ${totalMatch} คู่</p>`;
+            }
+        }
+
+        function selectMatchItem(side, item, btnEl) {
+            if (btnEl.disabled) return;
+
+            if (side === 'left') {
+                if (matchSelectedLeft && matchSelectedLeft.btn) {
+                    matchSelectedLeft.btn.classList.remove('ring-2', 'ring-red-500', 'bg-red-50');
+                }
+                matchSelectedLeft = { item, btn: btnEl };
+                btnEl.classList.add('ring-2', 'ring-red-500', 'bg-red-50');
+            } else {
+                if (matchSelectedRight && matchSelectedRight.btn) {
+                    matchSelectedRight.btn.classList.remove('ring-2', 'ring-red-500', 'bg-red-50');
+                }
+                matchSelectedRight = { item, btn: btnEl };
+                btnEl.classList.add('ring-2', 'ring-red-500', 'bg-red-50');
+            }
+
+            if (matchSelectedLeft && matchSelectedRight) {
+                const left = matchSelectedLeft;
+                const right = matchSelectedRight;
+
+                if (left.item.id === right.item.id) {
+                    left.btn.className = "match-item w-full text-left px-4 py-3 bg-green-50 border-2 border-green-500 rounded-xl font-bold text-lg text-green-700 shadow-sm cursor-default";
+                    right.btn.className = "match-item w-full text-left px-4 py-3 bg-green-50 border-2 border-green-500 rounded-xl font-semibold text-sm text-green-700 shadow-sm cursor-default";
+                    left.btn.disabled = true;
+                    right.btn.disabled = true;
+                    matchFoundCount++;
+
+                    const prog = document.getElementById('matchProgress');
+                    if (prog) prog.innerText = matchFoundCount;
+
+                    matchSelectedLeft = null;
+                    matchSelectedRight = null;
+
+                    if (matchFoundCount >= totalMatch) {
+                        const msgArea = document.getElementById('matchMsgArea');
+                        if (msgArea) {
+                            msgArea.innerHTML = `
+                                <p class="text-sm font-bold text-red-600 mb-3">🎉 เยี่ยมมาก! จับคู่ครบทั้ง ${totalMatch} คู่แล้ว</p>
+                                <button type="button" onclick="initMatchGame()" class="px-6 py-2.5 bg-black text-white rounded-xl font-bold text-xs hover:bg-red-600 transition">เล่นใหม่อีกครั้ง ↺</button>
+                            `;
+                        }
+                    }
+                } else {
+                    left.btn.classList.add('bg-red-100', 'border-red-400');
+                    right.btn.classList.add('bg-red-100', 'border-red-400');
+                    const badLeft = left.btn, badRight = right.btn;
+                    setTimeout(() => {
+                        badLeft.classList.remove('ring-2', 'ring-red-500', 'bg-red-50', 'bg-red-100', 'border-red-400');
+                        badRight.classList.remove('ring-2', 'ring-red-500', 'bg-red-50', 'bg-red-100', 'border-red-400');
+                    }, 500);
+                    matchSelectedLeft = null;
+                    matchSelectedRight = null;
+                }
+            }
+        }
+
+        // --- WRITING / PINYIN CHOICE QUIZ ---
+        // แสดงตัวอักษรจีน แล้วให้ผู้เรียนเลือกพินอินที่ถูกต้อง
+        let writeScore = 0;
+        let writeStep = 0;
+        const totalWrite = 10;
+        let currentWriteItem = null;
+        let writingPool = [];
+
+        function resetWritingView() {
+            const sec = document.getElementById('sectionWriting');
+            if (!sec) return;
+            sec.innerHTML = `
+                <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span id="writeProgress" class="text-xs font-bold px-3 py-1 bg-stone-100 text-stone-600 rounded-full">ข้อที่ 1 / 10</span>
+                        <span id="writeScore" class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">คะแนน: 0</span>
+                    </div>
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-black text-stone-900 mb-1">✍️ ฝึกเลือกพินอิน</h3>
+                        <p class="text-sm text-stone-500 mb-4">ดูตัวอักษรจีน แล้วเลือกพินอินที่ถูกต้อง</p>
+                        <div class="text-7xl font-extrabold text-red-600 mb-2" id="writeWordDisplay">-</div>
+                        <div class="text-sm font-semibold text-stone-400 mb-4" id="writeTypeDisplay">-</div>
+                    </div>
+                    <div id="writeOptions" class="grid grid-cols-1 gap-3 mb-6"></div>
+                    <button id="nextWriteBtn" type="button" onclick="nextWritingQuestion()" class="w-full py-3.5 bg-black text-white rounded-2xl font-bold hidden hover:bg-red-600 transition shadow-lg">ข้อถัดไป →</button>
+                </div>
+            `;
+        }
+
+        function startWritingQuiz() {
+            writeScore = 0;
+            writeStep = 0;
+            currentWriteItem = null;
+            // สุ่มคำศัพท์ 10 คำจากคลัง HSK2 โดยไม่ซ้ำกันในรอบเดียว
+            writingPool = [...hsk2Data].sort(() => Math.random() - 0.5).slice(0, totalWrite);
+            resetWritingView();
+            nextWritingQuestion();
+        }
+
+        function nextWritingQuestion() {
+            if (writeStep >= totalWrite) {
+                const sec = document.getElementById('sectionWriting');
+                if (sec) {
+                    sec.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-xl relative overflow-hidden text-center space-y-4">
+                            <div class="absolute top-0 left-0 w-full h-3 bg-red-600"></div>
+                            <div class="text-5xl pt-4">🏆</div>
+                            <h3 class="text-2xl font-black">สรุปผลการฝึกเลือกพินอิน</h3>
+                            <p class="text-stone-600">คุณทำคะแนนได้ <span class="text-red-600 font-extrabold text-2xl">${writeScore}</span> / ${totalWrite} คะแนน</p>
+                            <button type="button" onclick="startWritingQuiz()" class="w-full py-3.5 bg-red-600 text-white rounded-2xl font-bold shadow-lg hover:bg-red-700 transition">เริ่มฝึกใหม่อีกครั้ง ↺</button>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            currentWriteItem = writingPool[writeStep];
+            writeStep++;
+
+            const prog = document.getElementById('writeProgress');
+            if (prog) prog.innerText = `ข้อที่ ${writeStep} / ${totalWrite}`;
+            const scoreEl = document.getElementById('writeScore');
+            if (scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if (nextBtn) nextBtn.classList.add('hidden');
+
+            const wordDisp = document.getElementById('writeWordDisplay');
+            if (wordDisp) wordDisp.innerText = currentWriteItem.word;
+            const typeDisp = document.getElementById('writeTypeDisplay');
+            if (typeDisp) typeDisp.innerText = `ประเภท: ${currentWriteItem.type}`;
+
+            const options = [currentWriteItem.pinyin];
+            const candidates = [...hsk2Data]
+                .filter(item => item.id !== currentWriteItem.id)
+                .sort(() => Math.random() - 0.5);
+            for (const item of candidates) {
+                if (!options.includes(item.pinyin)) options.push(item.pinyin);
+                if (options.length === 4) break;
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('writeOptions');
+            if (!optionsContainer) return;
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = "w-full py-4 px-4 rounded-2xl border border-stone-200 font-bold text-lg text-stone-700 bg-stone-50 hover:bg-red-50 hover:border-red-500 hover:text-red-600 transition text-center shadow-sm";
+                btn.innerText = opt;
+                btn.onclick = () => checkWritingChoice(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkWritingChoice(selected, btnElement) {
+            if (!currentWriteItem) return;
+            const container = document.getElementById('writeOptions');
+            if (!container) return;
+            const allBtns = container.getElementsByTagName('button');
+            for (const b of allBtns) {
+                b.disabled = true;
+                if (b.innerText === currentWriteItem.pinyin) {
+                    b.className = "w-full py-4 px-4 rounded-2xl border-2 border-green-500 font-bold text-lg text-green-700 bg-green-50 text-center shadow-sm";
+                }
+            }
+
+            if (selected === currentWriteItem.pinyin) {
+                writeScore++;
+                btnElement.className = "w-full py-4 px-4 rounded-2xl border-2 border-green-500 font-bold text-lg text-green-700 bg-green-50 text-center shadow-sm";
+                if (typeof speakWord === 'function') speakWord(currentWriteItem.word);
+            } else {
+                btnElement.className = "w-full py-4 px-4 rounded-2xl border-2 border-red-500 font-bold text-lg text-red-700 bg-red-50 text-center shadow-sm";
+            }
+
+            const scoreEl = document.getElementById('writeScore');
+            if (scoreEl) scoreEl.innerText = `คะแนน: ${writeScore}`;
+            const nextBtn = document.getElementById('nextWriteBtn');
+            if (nextBtn) nextBtn.classList.remove('hidden');
+        }
+
+        // --- ระบบสุ่มข้อสอบ 4 พาร์ท (พาร์ท 2-3 สุ่มจากคลังข้อสอบจริง 100 ข้อ/พาร์ท, พาร์ท 1 และ 4 สุ่มจากคำศัพท์ทางการ 165 คำ ไม่ซ้ำกันในทุกรอบ) ---
         let examQuestions = [];
         let userAnswers = {};
         let sentenceStates = {};
@@ -1160,15 +1250,15 @@
             userAnswers = {};
             sentenceStates = {};
 
-            // พาร์ท 1: ฟังเสียง (สุ่ม 10 ข้อจาก 115 คำใน hsk1Data)[cite: 4]
+            // พาร์ท 1: ฟังเสียง (สุ่ม 10 ข้อจาก 165 คำใน hsk2Data)
             let part1 = [];
-            let shuffledVocab = [...hsk1Data].sort(() => 0.5 - Math.random()).slice(0, 10);
+            let shuffledVocab = [...hsk2Data].sort(() => 0.5 - Math.random()).slice(0, 10);
             shuffledVocab.forEach((item) => {
-                let wrongs = hsk1Data.filter(v => v.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(v => v.meaning);
+                let wrongs = hsk2Data.filter(v => v.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(v => v.meaning);
                 let options = [item.meaning, ...wrongs].sort(() => 0.5 - Math.random());
                 part1.push({
                     type: 'audio',
-                    title: "พาร์ท 1: ฟังประโยคและเลือกตอบ",
+                    title: "พาร์ท 1: ฟังคำศัพท์และเลือกความหมาย",
                     wordToSpeak: item.word,
                     question: `ฟังเสียงแล้วเลือกความหมายที่ถูกต้องของคำที่ได้ยิน`,
                     options: options,
@@ -1176,35 +1266,41 @@
                 });
             });
 
-            // พาร์ท 2: ช้อยส์ 4 ตัวเลือก (สุ่ม 10 ข้อจากคลัง 100 ข้อจริง)[cite: 1]
-            let part2 = [...realExamPool].sort(() => 0.5 - Math.random()).slice(0, 10).map(q => ({
-                type: 'choice',
-                title: "พาร์ท 2: ช้อยส์ 4 ตัวเลือก",
-                question: q.q,
-                options: [...q.options].sort(() => 0.5 - Math.random()),
-                correct: q.correct
+            // พาร์ท 2: เลือกคำตอบเติมช่องว่าง (สุ่ม 10 ข้อ ไม่ซ้ำกัน จากคลังข้อสอบจริง 100 ข้อ ที่ผู้ใช้แนบมา)
+            let part2 = [...fillBlankPool].sort(() => 0.5 - Math.random()).slice(0, 10).map(b => ({
+                type: 'blank',
+                title: "พาร์ท 2: เลือกคำตอบเติมช่องว่างให้ถูกต้อง",
+                question: `จงเลือกคำตอบที่ถูกต้องมาเติมลงในช่องว่าง: <br><span class="text-red-600 font-extrabold text-2xl mt-2 block tracking-wide">${b.sentence}</span><span class="exam-thai-meaning">${b.meaning}</span>`,
+                options: [...b.options].sort(() => 0.5 - Math.random()),
+                correct: b.answer
             }));
 
-            // พาร์ท 3: เรียงประโยค (สุ่ม 10 ข้อจากคลัง 100 ข้อจริง)[cite: 3]
-            let part3 = [...sentencePool].sort(() => 0.5 - Math.random()).slice(0, 10).map((s) => {
+            // พาร์ท 3: เรียงประโยค (สุ่ม 10 ข้อ ไม่ซ้ำกัน จากคลังข้อสอบจริง 100 ข้อ ที่ผู้ใช้แนบมา)
+            let part3 = [...wordOrderPool].sort(() => 0.5 - Math.random()).slice(0, 10).map((s) => {
                 let shuffledTokens = [...s.tokens].sort(() => 0.5 - Math.random());
                 return {
                     type: 'order',
                     title: "พาร์ท 3: เรียงประโยคให้ถูกต้องตามหลักไวยากรณ์",
-                    question: "คลิกคำศัพท์ด้านล่างเพื่อเรียงเป็นประโยคที่ถูกต้อง:",
+                    question: "คลิกตัวอักษรด้านล่างเพื่อเรียงเป็นประโยคที่ถูกต้อง:",
                     tokens: shuffledTokens,
                     correct: s.ans
                 };
             });
 
-            // พาร์ท 4: เติมคำในช่องว่าง (สุ่ม 10 ข้อจากคลัง 100 ข้อจริง)[cite: 2]
-            let part4 = [...blankPool].sort(() => 0.5 - Math.random()).slice(0, 10).map(b => ({
-                type: 'blank',
-                title: "พาร์ท 4: เติมคำในช่องว่างให้สมบูรณ์",
-                question: `จงเลือกคำตอบที่ถูกต้องมาเติมลงในช่องว่าง: <br><span class="text-red-600 font-extrabold text-2xl mt-2 block tracking-wide">${b.sentence}</span><span class="text-xs text-stone-500 font-semibold mt-1 block">${b.meaning}</span>`,
-                options: [...b.options].sort(() => 0.5 - Math.random()),
-                correct: b.answer
-            }));
+            // พาร์ท 4: อ่านประโยคตัวอย่างจริง แล้วเลือกคำแปลไทยที่ถูกต้อง (สุ่ม 10 ข้อจาก 165 คำใน hsk2Data)
+            let vocabWithExample = hsk2Data.filter(v => v.example && v.exampleMeaning);
+            let shuffledReading = [...vocabWithExample].sort(() => 0.5 - Math.random()).slice(0, 10);
+            let part4 = shuffledReading.map((item) => {
+                let wrongs = vocabWithExample.filter(v => v.id !== item.id).sort(() => 0.5 - Math.random()).slice(0, 3).map(v => v.exampleMeaning);
+                let options = [item.exampleMeaning, ...wrongs].sort(() => 0.5 - Math.random());
+                return {
+                    type: 'choice',
+                    title: "พาร์ท 4: อ่านประโยคภาษาจีน แล้วเลือกคำแปลไทยที่ถูกต้อง",
+                    question: `<span class="zh-display text-red-600 font-extrabold text-2xl mt-2 block tracking-wide">${item.example}</span><span class="exam-thai-meaning" style="color:#8A8177; font-style:italic;">${item.examplePinyin}</span>`,
+                    options: options,
+                    correct: item.exampleMeaning
+                };
+            });
 
             examQuestions = [...part1, ...part2, ...part3, ...part4];
             renderExam();
@@ -1324,7 +1420,10 @@
                 let selected = (userAnswers[idx] || "").trim();
                 let correct = q.correct.trim();
                 if(q.type === 'order') {
-                    if(selected.replace(/[\s\。]/g, '') === correct.replace(/[\s\。]/g, '')) score++;
+                    // เดิมเทียบเฉพาะช่องว่างกับ 。 ทำให้ประโยคที่ลงท้ายด้วย ？！ หรือมีจุลภาคกลางประโยค
+                    // ตรวจให้ผิดทั้งที่เรียงถูก จึงขยายให้ตัดเครื่องหมายวรรคตอนที่พบบ่อยทั้งหมดออกก่อนเทียบ
+                    const norm = s => s.replace(/[\s。？！，]/g, '');
+                    if(norm(selected) === norm(correct)) score++;
                 } else {
                     if(selected === correct) score++;
                 }
@@ -1346,13 +1445,17 @@
         let fcIndex = 0, isFlipped = false;
         function initFlashcard() { fcIndex = 0; isFlipped = false; updateFlashcardUI(); }
         function updateFlashcardUI() {
-            const item = hsk1Data[fcIndex];
+            const item = hsk2Data[fcIndex];
             document.getElementById('fcType').innerText = item.type;
             document.getElementById('fcCurrent').innerText = fcIndex + 1;
             document.getElementById('fcWord').innerText = item.word;
             document.getElementById('fcPinyin').innerText = item.pinyin;
+            document.getElementById('fcBackWord').innerText = item.word;
+            document.getElementById('fcBackPinyin').innerText = item.pinyin;
             document.getElementById('fcMeaning').innerText = item.meaning;
-            document.getElementById('fcExample').innerText = `ตัวอย่าง: ${item.example || '-'}`;
+            document.getElementById('fcExample').innerText = item.example || '-';
+            document.getElementById('fcExamplePinyin').innerText = item.examplePinyin || '-';
+            document.getElementById('fcExampleMeaning').innerText = item.exampleMeaning ? `แปล: ${item.exampleMeaning}` : '-';
 
             const inner = document.getElementById('flashcardInner');
             if(inner) {
@@ -1368,11 +1471,11 @@
                 else inner.classList.remove('rotate-y-180'); 
             }
         }
-        function nextCard() { isFlipped = false; fcIndex = (fcIndex + 1) % hsk1Data.length; updateFlashcardUI(); }
-        function prevCard() { isFlipped = false; fcIndex = (fcIndex - 1 + hsk1Data.length) % hsk1Data.length; updateFlashcardUI(); }
+        function nextCard() { isFlipped = false; fcIndex = (fcIndex + 1) % hsk2Data.length; updateFlashcardUI(); }
+        function prevCard() { isFlipped = false; fcIndex = (fcIndex - 1 + hsk2Data.length) % hsk2Data.length; updateFlashcardUI(); }
 
-        // เริ่มต้นเรนเดอร์หน้าตารางคำศัพท์หลักทันทีเมื่อเปิดเว็บ
-        renderVocab(hsk1Data);
+                // เริ่มต้นเรนเดอร์หน้าตารางคำศัพท์หลักทันทีเมื่อเปิดเว็บ
+        renderVocab(hsk2Data);
     </script>
 </body>
 </html>
